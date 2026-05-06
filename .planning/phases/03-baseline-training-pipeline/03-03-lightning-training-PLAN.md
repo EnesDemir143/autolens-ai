@@ -1,6 +1,7 @@
 ---
 phase: 3
 phase_name: Baseline Training Pipeline
+branch: feat/baseline-training-pipeline
 plan_id: 03-03
 objective: Implement Lightning module, callbacks, checkpointing, and MPS/CPU handling
 wave: 2

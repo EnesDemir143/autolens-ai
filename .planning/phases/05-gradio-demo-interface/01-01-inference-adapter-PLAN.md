@@ -1,6 +1,7 @@
 ---
 phase: 5
 phase_name: Gradio Demo Interface
+branch: feat/gradio-demo-interface
 plan_id: 05-01
 objective: Create final model loading and prediction adapter
 wave: 1

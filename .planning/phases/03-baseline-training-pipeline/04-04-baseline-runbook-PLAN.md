@@ -1,6 +1,7 @@
 ---
 phase: 3
 phase_name: Baseline Training Pipeline
+branch: feat/baseline-training-pipeline
 plan_id: 03-04
 objective: Add baseline experiment configs and runbook for the three CNN models
 wave: 2

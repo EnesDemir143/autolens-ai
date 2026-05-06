@@ -1,6 +1,7 @@
 ---
 phase: 2
 phase_name: Dataset Research and Curation
+branch: feat/dataset-research-and-curation
 plan_id: 02-04
 objective: Generate manifest, balance audit, dedup report, and split files
 wave: 2
@@ -17,7 +18,7 @@ Generate manifest, balance audit, dedup report, and split files
 </objective>
 
 <must_haves>
-- Covers requirement IDs: DATA-04, DATA-05, DATA-06.
+- Covers requirement IDs: DATA-04, DATA-05, DATA-06. Audit must report target-vs-actual counts for the ~4k/class, ~32k clean final dataset goal.
 - Covers phase decisions: D-01, D-02, D-03, D-04, D-05 where relevant to this plan.
 - Produces concrete evidence for downstream phases.
 </must_haves>

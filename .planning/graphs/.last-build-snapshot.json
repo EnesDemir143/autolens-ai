@@ -376,7 +376,7 @@
       "label": "02-02-model-factory-PLAN",
       "file_type": "plan",
       "source_file": ".planning/phases/03-baseline-training-pipeline/02-02-model-factory-PLAN.md",
-      "description": "Implement CNN model factory for MobileNetV4, EfficientNet-B2, and ResNet",
+      "description": "Implement CNN baseline model factory for MobileNetV4, EfficientNet-B2, and ResNet",
       "community": 3,
       "norm_label": "02-02-model-factory-plan"
     },
@@ -427,7 +427,7 @@
     },
     {
       "id": "phase_4_model_comparison_and_selection",
-      "label": "Phase 4: Model Comparison and Selection",
+      "label": "Phase 4: Main DINOv3 Model and Selection",
       "file_type": "phase",
       "source_file": ".planning/phases/04-model-comparison-and-selection",
       "description": "GSD phase 4 ready to execute",
@@ -439,7 +439,7 @@
       "label": "Phase 4 CONTEXT",
       "file_type": "document",
       "source_file": ".planning/phases/04-model-comparison-and-selection/04-CONTEXT.md",
-      "description": "Context artifact for Model Comparison and Selection",
+      "description": "Context artifact for Main DINOv3 Model and Selection",
       "community": 4,
       "norm_label": "phase 4 context"
     },
@@ -448,7 +448,7 @@
       "label": "Phase 4 RESEARCH",
       "file_type": "document",
       "source_file": ".planning/phases/04-model-comparison-and-selection/04-RESEARCH.md",
-      "description": "Research artifact for Model Comparison and Selection",
+      "description": "Research artifact for Main DINOv3 Model and Selection",
       "community": 4,
       "norm_label": "phase 4 research"
     },
@@ -457,7 +457,7 @@
       "label": "Phase 4 VALIDATION",
       "file_type": "document",
       "source_file": ".planning/phases/04-model-comparison-and-selection/04-VALIDATION.md",
-      "description": "Validation artifact for Model Comparison and Selection",
+      "description": "Validation artifact for Main DINOv3 Model and Selection",
       "community": 4,
       "norm_label": "phase 4 validation"
     },
@@ -520,7 +520,7 @@
       "label": "02-02-dinov3-path-PLAN",
       "file_type": "plan",
       "source_file": ".planning/phases/04-model-comparison-and-selection/02-02-dinov3-path-PLAN.md",
-      "description": "Implement DINOv3 non-LoRA evaluation path with gated-access fallback",
+      "description": "Implement main DINOv3 non-LoRA evaluation path with gated-access fallback",
       "community": 4,
       "norm_label": "02-02-dinov3-path-plan"
     },
@@ -547,7 +547,7 @@
       "label": "03-03-model-benchmark-PLAN",
       "file_type": "plan",
       "source_file": ".planning/phases/04-model-comparison-and-selection/03-03-model-benchmark-PLAN.md",
-      "description": "Benchmark all candidate models by macro F1, size, and latency",
+      "description": "Benchmark main DINOv3 against baseline models by macro F1, size, and latency",
       "community": 4,
       "norm_label": "03-03-model-benchmark-plan"
     },
@@ -574,7 +574,7 @@
       "label": "04-04-final-selection-PLAN",
       "file_type": "plan",
       "source_file": ".planning/phases/04-model-comparison-and-selection/04-04-final-selection-PLAN.md",
-      "description": "Write final model selection artifact and report-ready rationale",
+      "description": "Write DINOv3-first final model selection artifact and report-ready rationale",
       "community": 4,
       "norm_label": "04-04-final-selection-plan"
     },
@@ -826,7 +826,7 @@
       "label": "MobileNetV4 Conv Medium",
       "file_type": "model",
       "source_file": ".planning/ROADMAP.md",
-      "description": "Candidate model: MobileNetV4 Conv Medium",
+      "description": "Baseline/comparison model: MobileNetV4 Conv Medium",
       "community": 3,
       "norm_label": "mobilenetv4 conv medium"
     },
@@ -835,7 +835,7 @@
       "label": "EfficientNet-B2",
       "file_type": "model",
       "source_file": ".planning/ROADMAP.md",
-      "description": "Candidate model: EfficientNet-B2",
+      "description": "Baseline/comparison model: EfficientNet-B2",
       "community": 3,
       "norm_label": "efficientnet-b2"
     },
@@ -844,7 +844,7 @@
       "label": "ResNet baseline",
       "file_type": "model",
       "source_file": ".planning/ROADMAP.md",
-      "description": "Candidate model: ResNet baseline",
+      "description": "Baseline/control model: ResNet baseline",
       "community": 3,
       "norm_label": "resnet baseline"
     },
@@ -853,7 +853,7 @@
       "label": "DINOv3 ViT-S/16",
       "file_type": "model",
       "source_file": ".planning/ROADMAP.md",
-      "description": "Candidate model: DINOv3 ViT-S/16",
+      "description": "Main model: DINOv3 ViT-S/16",
       "community": 4,
       "norm_label": "dinov3 vit-s/16"
     },

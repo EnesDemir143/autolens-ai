@@ -12,12 +12,12 @@ The system must generalize to unseen presentation/test images and return the cor
 
 ### Validated
 
-(None yet — ship to validate)
+- ENV-01, ENV-02, ENV-03 validated in Phase 1: uv/Python 3.12 foundation, dependency documentation, and quality gates verified on 2026-05-06.
 
 ### Active
 
-- [ ] Build a documented 8-class custom dataset using Kaggle and Hugging Face sources.
-- [ ] Train and compare MobileNetV4 Conv Medium, DINOv3 ViT-S/16, EfficientNet-B2, and one ResNet baseline.
+- [ ] Build a documented, near-balanced 8-class custom dataset from public sources: target 36k–40k raw candidates and approximately 32k clean images (about 4k/class).
+- [ ] Use DINOv3 ViT-S/16 as the intended main model path; train MobileNetV4 Conv Medium, EfficientNet-B2, and one ResNet only as baseline/comparison models.
 - [ ] Optimize for macro F1 first, then Accuracy, Precision, and Recall.
 - [ ] Keep final deployable model artifact under the 95 MB submission limit.
 - [ ] Provide a modern Gradio web UI with upload, preview, prediction, confidence score, and class probability chart.
@@ -27,13 +27,13 @@ The system must generalize to unseen presentation/test images and return the cor
 ### Out of Scope
 
 - Mobile application — web UI is required and sufficient for the project demo.
-- Heavy end-to-end transformer-only production path — DINOv3 will be evaluated, but a smaller model may be selected if size/speed/generalization are better.
+- Treating CNN baselines as the intended final model by default — MobileNetV4, EfficientNet-B2, and ResNet are baseline/comparison models unless DINOv3 access, size, or latency blocks the main path.
 - Test-set leakage — instructor-provided final test data must never be used during training or tuning.
 - New dependencies beyond the planned stack unless a phase explicitly justifies them.
 
 ## Context
 
-The assignment requires an 8-class car body type classifier: SUV, VAN, STATION WAGON, MİCRO, AÇIK TEKERLEKLİ / F1 vehicles, SEDAN, HATCHBACK, and PICK UP. The training data must be custom-created from public sources such as Kaggle and Hugging Face, with sources documented for the report and presentation. The final demo will be tested on unseen images, so generalization and anti-overfitting practices matter more than memorizing a single dataset.
+The assignment requires an 8-class car body type classifier: SUV, VAN, STATION WAGON, MİCRO, AÇIK TEKERLEKLİ / F1 vehicles, SEDAN, HATCHBACK, and PICK UP. The training data must be custom-created from public sources such as Kaggle and Hugging Face, with sources documented for the report and presentation. The current dataset target is 36k–40k raw candidate images, filtered into about 32k clean, near-balanced images across the 8 classes. The final demo will be tested on unseen images, so generalization and anti-overfitting practices matter more than memorizing a single dataset.
 
 The project will use uv with Python 3.12. The planned stack comes from `docs/plan.md`: PyTorch, torchvision, PyTorch Lightning, timm, albumentations, OpenCV, Pillow, torchmetrics, W&B, scikit-learn, NumPy, pandas, matplotlib, seaborn, grad-cam, Gradio, safetensors, ONNX/ONNX Runtime/onnxsim, torchinfo, Kaggle CLI, tqdm, Optuna, Hydra, dotenv, ruff, mypy, pre-commit, pytest, PyYAML, rich/loguru, Hugging Face Hub/datasets, and transformers.
 
@@ -57,7 +57,7 @@ Karpathy-guideline constraints apply: keep implementation small and explainable,
 | Use uv + Python 3.12 | Modern reproducible Python workflow; user requested it explicitly. | — Pending |
 | Use Standard GSD granularity with sequential execution | User requested 5-8 phases and sequential planning. | — Pending |
 | Commit `.planning/` docs | User requested planning docs in git. | — Pending |
-| Compare four model families | MobileNetV4, DINOv3, EfficientNet-B2, and ResNet cover efficient CNN, transformer features, strong CNN baseline, and classic baseline. | — Pending |
+| Make DINOv3 the intended main model | DINOv3 ViT-S/16 is the primary architecture target; MobileNetV4, EfficientNet-B2, and ResNet remain baselines for comparison, fallback, and report evidence. | — Pending |
 | Use Gradio for UI | Fast demo delivery while satisfying web UI requirements. | — Pending |
 | Generate report at the end with LaTeX skill | Final report should reflect actual implemented evidence, metrics, and UI screenshots/placeholders. | — Pending |
 
@@ -79,4 +79,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-06 after initialization*
+*Last updated: 2026-05-06 after Phase 1 verification*

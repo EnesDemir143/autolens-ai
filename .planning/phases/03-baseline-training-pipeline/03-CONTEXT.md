@@ -1,4 +1,5 @@
 # Phase 3: Baseline Training Pipeline - Context
+**Branch:** `feat/baseline-training-pipeline`
 
     **Gathered:** 2026-05-06
     **Status:** Ready for planning
@@ -27,7 +28,7 @@
 - Use shared preprocessing/augmentation configuration to keep train/validation behavior explainable.
 
 ### D-05
-- Do not add DINOv3 in Phase 3; it belongs to Phase 4.
+- Do not add DINOv3 in Phase 3; DINOv3 is the intended main model and belongs to Phase 4. Phase 3 CNNs are baselines/comparison only.
 
     ### the agent's Discretion
     - Exact filenames and helper function names may be chosen during execution if they remain simple, testable, and consistent with prior phases.
@@ -53,7 +54,7 @@
     <specifics>
     ## Specific Ideas
 
-    - Requirement IDs for this phase: TRN-01, TRN-02, TRN-03, TRN-06, TRN-07.
+    - Requirement IDs for this phase: TRN-01, TRN-02, TRN-03, TRN-06, TRN-07. TRN-01..TRN-03 are baseline/comparison requirements, not the main model path.
     - Execute sequentially, preserving outputs from prior phases.
     - Write evidence files that later phases and the final report can consume.
 

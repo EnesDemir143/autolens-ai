@@ -1,6 +1,7 @@
 ---
 phase: 3
 phase_name: Baseline Training Pipeline
+branch: feat/baseline-training-pipeline
 plan_id: 03-01
 objective: Implement dataset class/datamodule and preprocessing config
 wave: 1

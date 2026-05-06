@@ -7,18 +7,22 @@
 
 ## Overview
 
-| # | Phase | Goal | Requirements | Success Criteria |
-|---|-------|------|--------------|------------------|
-| 1 | Project Foundation | Create reproducible uv/Python 3.12 project skeleton and quality gates | ENV-01, ENV-02, ENV-03 | 4 |
-| 2 | Dataset Research and Curation | Build documented 8-class dataset pipeline from Kaggle + Hugging Face sources | DATA-01..DATA-06 | 5 |
-| 3 | Baseline Training Pipeline | Train explainable CNN baselines with Lightning and MPS/CPU support | TRN-01, TRN-02, TRN-03, TRN-06, TRN-07 | 5 |
-| 4 | Model Comparison and Selection | Evaluate DINOv3 plus all baselines, select final model by F1/size/speed | TRN-04, TRN-05, EVAL-01..EVAL-07 | 6 |
-| 5 | Gradio Demo Interface | Deliver modern presentation-ready web UI for live classification | UI-01..UI-07 | 5 |
-| 6 | Final Evidence and IEEE Report | Package plots, metrics, final model, and LaTeX IEEE report | RPT-01..RPT-03 | 5 |
+| # | Phase | Branch | Goal | Requirements | Success Criteria |
+|---|-------|--------|------|--------------|------------------|
+| 1 | Project Foundation | `main` | Create reproducible uv/Python 3.12 project skeleton and quality gates | ENV-01, ENV-02, ENV-03 | 4 |
+| 2 | Dataset Research and Curation | `feat/dataset-research-and-curation` | Build documented near-balanced 8-class dataset pipeline from public sources | DATA-01..DATA-06 | 5 |
+| 3 | Baseline Training Pipeline | `feat/baseline-training-pipeline` | Train explainable CNN baseline/comparison models with Lightning and MPS/CPU support | TRN-01, TRN-02, TRN-03, TRN-06, TRN-07 | 5 |
+| 4 | Main DINOv3 Model and Selection | `feat/model-comparison-and-selection` | Implement the intended main DINOv3 path, compare against baselines, and select by F1/size/speed | TRN-04, TRN-05, EVAL-01..EVAL-07 | 6 |
+| 5 | Gradio Demo Interface | `feat/gradio-demo-interface` | Deliver modern presentation-ready web UI for live classification | UI-01..UI-07 | 5 |
+| 6 | Final Evidence and IEEE Report | `feat/final-evidence-and-ieee-report` | Package plots, metrics, final model, and LaTeX IEEE report | RPT-01..RPT-03 | 5 |
 
 ## Phase Details
 
 ### Phase 1: Project Foundation
+
+**Status:** Complete — verified 2026-05-06
+
+**Branch:** `main`
 
 **Goal:** Create a clean, reproducible Python 3.12 project using uv and the agreed ML stack.
 
@@ -36,25 +40,30 @@
 
 ### Phase 2: Dataset Research and Curation
 
-**Goal:** Convert public Kaggle/Hugging Face sources into a documented 8-class training/validation dataset.
+**Branch:** `feat/dataset-research-and-curation`
+
+**Goal:** Convert public Kaggle/Hugging Face/metadata-backed sources into a documented near-balanced 8-class dataset: 36k–40k raw candidates, approximately 32k clean images, about 4k/class.
 
 **Requirements:** DATA-01, DATA-02, DATA-03, DATA-04, DATA-05, DATA-06
 
 **Success criteria:**
 1. Candidate sources are downloaded or documented with exact IDs/URLs.
 2. Raw labels are mapped into the 8 required assignment classes.
-3. A manifest records source, class mapping, counts, known gaps, and license notes.
-4. Train/validation split is created without final-test leakage.
-5. Class imbalance report identifies weak classes such as MICRO, STATION WAGON, and OPEN WHEEL/F1.
+3. A manifest records source, class mapping, counts, known gaps, license notes, and target-vs-actual counts.
+4. Train/validation/internal-test split is created without final-test leakage.
+5. Class imbalance report checks the approximate 4k/class target and identifies weak classes such as MICRO, STATION WAGON, OPEN WHEEL/F1, and PICK_UP.
 
 **Implementation notes:**
 - Start with assignment-referenced Kaggle datasets.
-- Use Hugging Face candidates to fill body-style gaps where possible.
+- Use metadata/CSV-backed sources such as Car Model Variants, CompCars, Stanford/VMMR/BoxCars lookup, and F1 datasets to reach 30–40k scale.
+- Do not blindly map ambiguous labels: `City Car`, generic `Truck`, `Crossover`, `MPV/Minibus`, and `Coupe` require filtering or exclusion.
 - Keep manual review hooks for mislabeled/ambiguous images.
 
 ### Phase 3: Baseline Training Pipeline
 
-**Goal:** Build the reusable training/evaluation path and train MobileNetV4 Conv Medium, EfficientNet-B2, and ResNet baseline.
+**Branch:** `feat/baseline-training-pipeline`
+
+**Goal:** Build the reusable training/evaluation path and train MobileNetV4 Conv Medium, EfficientNet-B2, and ResNet strictly as baseline/comparison models.
 
 **Requirements:** TRN-01, TRN-02, TRN-03, TRN-06, TRN-07
 
@@ -70,25 +79,30 @@
 - Use torchvision/timm for ResNet baseline.
 - If MobileNetV4 Conv Medium name is unavailable in timm, phase must document the closest supported timm model and rationale before substitution.
 
-### Phase 4: Model Comparison and Selection
+### Phase 4: Main DINOv3 Model and Selection
 
-**Goal:** Evaluate DINOv3 ViT-S/16 and compare all models by macro F1, per-class behavior, artifact size, and speed.
+**Branch:** `feat/model-comparison-and-selection`
+
+**Goal:** Implement/evaluate DINOv3 ViT-S/16 as the intended main model, then compare it against baseline models by macro F1, per-class behavior, artifact size, and speed.
 
 **Requirements:** TRN-04, TRN-05, EVAL-01, EVAL-02, EVAL-03, EVAL-04, EVAL-05, EVAL-06, EVAL-07
 
 **Success criteria:**
-1. DINOv3 access is validated; if gated access blocks use, the fallback is documented.
-2. DINOv3 non-LoRA path is evaluated before any optional LoRA extension.
+1. DINOv3 access is validated early because it is the intended main model path; if gated access blocks use, the fallback is documented.
+2. DINOv3 non-LoRA path is implemented/evaluated before any optional LoRA extension.
 3. Every model has Accuracy, Precision, Recall, F1, macro/weighted averages, and per-class metrics.
 4. Required plots are generated: loss, accuracy, normalized confusion matrix.
 5. Final model candidate is under 95 MB or has a clear compression/export path.
 6. Final selection rationale is written in report-ready language.
 
 **Implementation notes:**
+- DINOv3 is the intended main model; baselines exist to quantify benefit and provide fallback evidence.
 - F1-score is the primary ranking metric.
-- Use artifact-size and latency checks before declaring the winner.
+- Use artifact-size and latency checks before declaring the final deployable model.
 
 ### Phase 5: Gradio Demo Interface
+
+**Branch:** `feat/gradio-demo-interface`
 
 **Goal:** Provide a clean, modern web UI that satisfies every assignment interface requirement.
 
@@ -107,6 +121,8 @@
 - Include sample images only if licensing/source is documented.
 
 ### Phase 6: Final Evidence and IEEE Report
+
+**Branch:** `feat/final-evidence-and-ieee-report`
 
 **Goal:** Prepare final submission evidence and generate the IEEE-format LaTeX report using the local report creator skill.
 

@@ -1,4 +1,5 @@
-# Phase 4: Model Comparison and Selection - Context
+# Phase 4: Main DINOv3 Model and Selection - Context
+**Branch:** `feat/model-comparison-and-selection`
 
     **Gathered:** 2026-05-06
     **Status:** Ready for planning
@@ -7,7 +8,7 @@
     <domain>
     ## Phase Boundary
 
-    Model Comparison and Selection delivers only the capabilities mapped to requirement IDs: TRN-04, TRN-05, EVAL-01, EVAL-02, EVAL-03, EVAL-04, EVAL-05, EVAL-06, EVAL-07. Work outside these IDs is deferred to the appropriate roadmap phase.
+    Main DINOv3 Model and Selection delivers only the capabilities mapped to requirement IDs: TRN-04, TRN-05, EVAL-01, EVAL-02, EVAL-03, EVAL-04, EVAL-05, EVAL-06, EVAL-07. Work outside these IDs is deferred to the appropriate roadmap phase.
 
     </domain>
 
@@ -15,13 +16,13 @@
     ## Implementation Decisions
 
     ### D-01
-- Validate gated Hugging Face access for facebook/dinov3-vits16-pretrain-lvd1689m before planning DINOv3 training assumptions.
+- Treat DINOv3 ViT-S/16 as the intended main model and validate gated Hugging Face access for facebook/dinov3-vits16-pretrain-lvd1689m before planning training assumptions.
 
 ### D-02
 - Evaluate DINOv3 without LoRA first; LoRA is optional only after non-LoRA works.
 
 ### D-03
-- Rank models by macro F1 first, then artifact size and latency.
+- Rank DINOv3 against baselines by macro F1 first, then artifact size and latency; baselines are fallback/comparison evidence, not the default target.
 
 ### D-04
 - Generate all required assignment plots as reproducible artifacts.

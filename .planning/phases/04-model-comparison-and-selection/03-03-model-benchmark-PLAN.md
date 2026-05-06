@@ -1,8 +1,9 @@
 ---
 phase: 4
-phase_name: Model Comparison and Selection
+phase_name: Main DINOv3 Model and Selection
+branch: feat/model-comparison-and-selection
 plan_id: 04-03
-objective: Benchmark all candidate models by macro F1, size, and latency
+objective: Benchmark main DINOv3 against baseline models by macro F1, size, and latency
 wave: 2
 depends_on: ['04-01', '04-02']
 requirements_addressed: ['EVAL-06', 'EVAL-07']
@@ -10,14 +11,14 @@ files_modified: ['src/autolens_ai/evaluation/', 'artifacts/evaluation/', 'docs/m
 autonomous: true
 ---
 
-# Plan 03 — Benchmark all candidate models by macro F1, size, and latency
+# Plan 03 — Benchmark main DINOv3 against baseline models by macro F1, size, and latency
 
 <objective>
-Benchmark all candidate models by macro F1, size, and latency
+Benchmark main DINOv3 against baseline models by macro F1, size, and latency
 </objective>
 
 <must_haves>
-- Covers requirement IDs: EVAL-06, EVAL-07.
+- Covers requirement IDs: EVAL-06, EVAL-07. DINOv3 is the intended main model; baseline results quantify benefit and provide fallback if needed.
 - Covers phase decisions: D-01, D-02, D-03, D-04, D-05 where relevant to this plan.
 - Produces concrete evidence for downstream phases.
 </must_haves>
@@ -37,7 +38,7 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `.planning/ROADMAP.md`
   </read_first>
   <action>
-    Create or update the minimal files needed for this plan objective: `Benchmark all candidate models by macro F1, size, and latency`. Keep names explicit and avoid hidden behavior. Preserve outputs from earlier phases.
+    Create or update the minimal files needed for this plan objective: `Benchmark main DINOv3 against baseline models by macro F1, size, and latency`. Keep names explicit and avoid hidden behavior. Preserve outputs from earlier phases.
   </action>
   <acceptance_criteria>
     - `test -d .planning/phases/04-model-comparison-and-selection` exits 0.
@@ -52,7 +53,7 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `AGENTS.md`
   </read_first>
   <action>
-    Implement the smallest working slice for `Benchmark all candidate models by macro F1, size, and latency`. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
+    Implement the smallest working slice for `Benchmark main DINOv3 against baseline models by macro F1, size, and latency`. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
   </action>
   <acceptance_criteria>
     - Output references all requirement IDs: EVAL-06, EVAL-07.

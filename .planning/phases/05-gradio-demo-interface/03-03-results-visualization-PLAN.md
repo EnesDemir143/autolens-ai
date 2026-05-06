@@ -1,6 +1,7 @@
 ---
 phase: 5
 phase_name: Gradio Demo Interface
+branch: feat/gradio-demo-interface
 plan_id: 05-03
 objective: Add predicted class, confidence, and 8-class probability chart
 wave: 2

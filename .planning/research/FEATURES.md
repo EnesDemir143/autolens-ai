@@ -7,7 +7,7 @@
 - Dataset audit showing source, class count, image count, and imbalance.
 - Train/validation split with no final test leakage.
 - Augmentation and preprocessing pipeline for 224x224 or model-specific input size.
-- Multiple model training/evaluation runs.
+- Main DINOv3 training/evaluation path plus baseline model training/evaluation runs.
 - Macro and weighted metrics: F1, Accuracy, Precision, Recall.
 - Per-class classification report.
 - Training/validation loss graph, accuracy graph, normalized 8x8 confusion matrix.
@@ -20,7 +20,7 @@
 - ONNX export and ONNX Runtime inference for faster UI prediction.
 - Optuna tuning for learning rate, dropout, weight decay, augmentation strength.
 - W&B experiment tracking for report-ready plots.
-- DINOv3 frozen-feature and optional LoRA fine-tuning comparison.
+- DINOv3 frozen-feature main path and optional LoRA fine-tuning extension; CNN models remain baselines.
 
 ## Anti-Features
 

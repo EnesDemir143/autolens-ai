@@ -1,4 +1,5 @@
 # Phase 2: Dataset Research and Curation - Context
+**Branch:** `feat/dataset-research-and-curation`
 
     **Gathered:** 2026-05-06
     **Status:** Ready for planning
@@ -21,13 +22,13 @@
 - Normalize all labels into exactly 8 assignment classes.
 
 ### D-03
-- Create source manifest, class mapping, counts, known gaps, and license notes before training.
+- Create source manifest, class mapping, counts, known gaps, license notes, and target-vs-actual counts before training. Target 36k–40k raw candidates and about 32k clean near-balanced images (~4k/class).
 
 ### D-04
 - Prevent leakage with hash/dedup and train/validation split scripts.
 
 ### D-05
-- Treat MICRO, STATION WAGON, and OPEN WHEEL/F1 as likely gap classes requiring targeted collection.
+- Treat MICRO, STATION WAGON, OPEN WHEEL/F1, and clean PICK_UP as likely gap/risk classes requiring targeted collection and audit.
 
     ### the agent's Discretion
     - Exact filenames and helper function names may be chosen during execution if they remain simple, testable, and consistent with prior phases.
@@ -53,7 +54,7 @@
     <specifics>
     ## Specific Ideas
 
-    - Requirement IDs for this phase: DATA-01, DATA-02, DATA-03, DATA-04, DATA-05, DATA-06.
+    - Requirement IDs for this phase: DATA-01, DATA-02, DATA-03, DATA-04, DATA-05, DATA-06. Dataset scale target: 36k–40k raw candidates -> ~32k clean images, about 4k/class.
     - Execute sequentially, preserving outputs from prior phases.
     - Write evidence files that later phases and the final report can consume.
 

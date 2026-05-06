@@ -1,6 +1,7 @@
 ---
 phase: 6
 phase_name: Final Evidence and IEEE Report
+branch: feat/final-evidence-and-ieee-report
 plan_id: 06-04
 objective: Prepare final submission README/package checklist
 wave: 2

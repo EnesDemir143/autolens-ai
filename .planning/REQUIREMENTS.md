@@ -7,26 +7,26 @@
 
 ### Environment
 
-- [ ] **ENV-01**: Developer can initialize the project with uv and Python 3.12.
-- [ ] **ENV-02**: Developer can install all planned runtime and dev dependencies with documented `uv add` commands.
-- [ ] **ENV-03**: Developer can run lint, type checks, and tests through documented commands.
+- [x] **ENV-01**: Developer can initialize the project with uv and Python 3.12.
+- [x] **ENV-02**: Developer can install all planned runtime and dev dependencies with documented `uv add` commands.
+- [x] **ENV-03**: Developer can run lint, type checks, and tests through documented commands.
 
 ### Dataset
 
 - [ ] **DATA-01**: Developer can download or ingest candidate Kaggle datasets for car body type classification.
 - [ ] **DATA-02**: Developer can download or ingest candidate Hugging Face datasets for car/vehicle classification.
 - [ ] **DATA-03**: Developer can map raw labels into exactly 8 target classes: SUV, VAN, STATION WAGON, MICRO, OPEN WHEEL, SEDAN, HATCHBACK, PICK UP.
-- [ ] **DATA-04**: Developer can produce a dataset manifest listing source, license/URL, class mapping, image counts, and known gaps.
+- [ ] **DATA-04**: Developer can produce a dataset manifest listing source, license/URL, class mapping, image counts, known gaps, and target-vs-actual counts for the 36k–40k raw / ~32k clean dataset goal.
 - [ ] **DATA-05**: Developer can create train/validation splits without using instructor final test images.
-- [ ] **DATA-06**: Developer can audit class balance and identify classes requiring additional collection.
+- [ ] **DATA-06**: Developer can audit class balance against an approximate 4k-clean-images-per-class target and identify classes requiring additional collection.
 
 ### Training
 
-- [ ] **TRN-01**: Developer can train MobileNetV4 Conv Medium on the curated dataset.
-- [ ] **TRN-02**: Developer can train EfficientNet-B2 on the curated dataset.
-- [ ] **TRN-03**: Developer can train one ResNet baseline on the curated dataset.
-- [ ] **TRN-04**: Developer can evaluate DINOv3 ViT-S/16 using `facebook/dinov3-vits16-pretrain-lvd1689m` when gated access is available.
-- [ ] **TRN-05**: Developer can run DINOv3 without LoRA first and keep LoRA as an optional extension.
+- [ ] **TRN-01**: Developer can train MobileNetV4 Conv Medium as a baseline/comparison model on the curated dataset.
+- [ ] **TRN-02**: Developer can train EfficientNet-B2 as a baseline/comparison model on the curated dataset.
+- [ ] **TRN-03**: Developer can train one ResNet baseline as a classic control model on the curated dataset.
+- [ ] **TRN-04**: Developer can run the intended main DINOv3 ViT-S/16 path using `facebook/dinov3-vits16-pretrain-lvd1689m` when gated access is available.
+- [ ] **TRN-05**: Developer can run DINOv3 without LoRA first as the main-path implementation and keep LoRA as an optional extension.
 - [ ] **TRN-06**: Training supports MPS when available and CPU fallback when not available.
 - [ ] **TRN-07**: Training uses augmentation, normalization, early stopping, and checkpointing to reduce overfitting.
 
@@ -64,7 +64,7 @@
 - **OPT-02**: Developer can simplify ONNX graph with onnxsim.
 - **OPT-03**: Developer can run Optuna hyperparameter tuning after all baseline models work.
 - **OPT-04**: Developer can add Grad-CAM visualizations for supported CNN models.
-- **OPT-05**: Developer can add LoRA fine-tuning for DINOv3 if time and access allow.
+- **OPT-05**: Developer can add LoRA fine-tuning for the main DINOv3 path if time and access allow.
 
 ## Out of Scope
 
@@ -80,9 +80,9 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| ENV-01 | Phase 1 | Pending |
-| ENV-02 | Phase 1 | Pending |
-| ENV-03 | Phase 1 | Pending |
+| ENV-01 | Phase 1 | Complete — Phase 1 verified 2026-05-06 |
+| ENV-02 | Phase 1 | Complete — Phase 1 verified 2026-05-06 |
+| ENV-03 | Phase 1 | Complete — Phase 1 verified 2026-05-06 |
 | DATA-01 | Phase 2 | Pending |
 | DATA-02 | Phase 2 | Pending |
 | DATA-03 | Phase 2 | Pending |

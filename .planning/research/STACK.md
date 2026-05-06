@@ -34,12 +34,12 @@ Checked against PyPI on 2026-05-06. Use these as planning anchors, but allow uv 
 
 ## Model Stack
 
-1. MobileNetV4 Conv Medium via timm when available in the installed timm build.
-2. DINOv3 ViT-S/16 through Hugging Face `facebook/dinov3-vits16-pretrain-lvd1689m` and transformers; model is gated, so access must be validated early.
-3. EfficientNet-B2 via timm.
-4. ResNet baseline via torchvision or timm.
+1. **Main model:** DINOv3 ViT-S/16 through Hugging Face `facebook/dinov3-vits16-pretrain-lvd1689m` and transformers; model is gated, so access must be validated early.
+2. **Baseline/comparison:** MobileNetV4 Conv Medium via timm when available in the installed timm build.
+3. **Baseline/comparison:** EfficientNet-B2 via timm.
+4. **Baseline/control:** ResNet via torchvision or timm.
 
-DINOv3 metadata from Hugging Face: image feature extraction model, `dinov3_vit` architecture, about 21.6M parameters, gated repository. This means the project must include a fallback path if access is unavailable.
+DINOv3 metadata from Hugging Face: image feature extraction model, `dinov3_vit` architecture, about 21.6M parameters, gated repository. DINOv3 is the intended main architecture, but the project must include baseline fallback evidence if gated access, final artifact size, or demo latency blocks deployment.
 
 ## Developer Practices
 

@@ -1,8 +1,9 @@
 ---
 phase: 3
 phase_name: Baseline Training Pipeline
+branch: feat/baseline-training-pipeline
 plan_id: 03-02
-objective: Implement CNN model factory for MobileNetV4, EfficientNet-B2, and ResNet
+objective: Implement CNN baseline model factory for MobileNetV4, EfficientNet-B2, and ResNet
 wave: 1
 depends_on: []
 requirements_addressed: ['TRN-01', 'TRN-02', 'TRN-03']
@@ -10,14 +11,14 @@ files_modified: ['src/autolens_ai/training/', 'src/autolens_ai/models/', 'config
 autonomous: true
 ---
 
-# Plan 02 — Implement CNN model factory for MobileNetV4, EfficientNet-B2, and ResNet
+# Plan 02 — Implement CNN baseline model factory for MobileNetV4, EfficientNet-B2, and ResNet
 
 <objective>
-Implement CNN model factory for MobileNetV4, EfficientNet-B2, and ResNet
+Implement CNN baseline model factory for MobileNetV4, EfficientNet-B2, and ResNet
 </objective>
 
 <must_haves>
-- Covers requirement IDs: TRN-01, TRN-02, TRN-03.
+- Covers requirement IDs: TRN-01, TRN-02, TRN-03. These are baseline/comparison models; DINOv3 is the intended main model in Phase 4.
 - Covers phase decisions: D-01, D-02, D-03, D-04, D-05 where relevant to this plan.
 - Produces concrete evidence for downstream phases.
 </must_haves>
@@ -37,7 +38,7 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `.planning/ROADMAP.md`
   </read_first>
   <action>
-    Create or update the minimal files needed for this plan objective: `Implement CNN model factory for MobileNetV4, EfficientNet-B2, and ResNet`. Keep names explicit and avoid hidden behavior. Preserve outputs from earlier phases.
+    Create or update the minimal files needed for this plan objective: `Implement CNN baseline model factory for MobileNetV4, EfficientNet-B2, and ResNet`. Keep names explicit and avoid hidden behavior. Preserve outputs from earlier phases.
   </action>
   <acceptance_criteria>
     - `test -d .planning/phases/03-baseline-training-pipeline` exits 0.
@@ -52,7 +53,7 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `AGENTS.md`
   </read_first>
   <action>
-    Implement the smallest working slice for `Implement CNN model factory for MobileNetV4, EfficientNet-B2, and ResNet`. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
+    Implement the smallest working slice for `Implement CNN baseline model factory for MobileNetV4, EfficientNet-B2, and ResNet`. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
   </action>
   <acceptance_criteria>
     - Output references all requirement IDs: TRN-01, TRN-02, TRN-03.

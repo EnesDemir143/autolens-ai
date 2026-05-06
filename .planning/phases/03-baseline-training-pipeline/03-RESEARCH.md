@@ -1,4 +1,5 @@
 # Phase 3 Research: Baseline Training Pipeline
+**Branch:** `feat/baseline-training-pipeline`
 
     ## Research Question
 
@@ -6,7 +7,7 @@
 
     ## Training Research Notes
 
-Use Lightning to keep training code explainable: Datamodule -> Model factory -> LightningModule -> callbacks/checkpoints. Use Albumentations for train augmentation and deterministic validation preprocessing. Device selection must prefer `mps` when available and fall back to CPU. Keep model factory small: MobileNetV4 Conv Medium, EfficientNet-B2, and ResNet baseline only.
+Use Lightning to keep training code explainable: Datamodule -> Model factory -> LightningModule -> callbacks/checkpoints. Use Albumentations for train augmentation and deterministic validation preprocessing. Device selection must prefer `mps` when available and fall back to CPU. Keep model factory small: MobileNetV4 Conv Medium, EfficientNet-B2, and ResNet baseline/comparison models only. Do not treat these CNNs as the intended final architecture by default; DINOv3 is the main path in Phase 4.
 
 
     ## Validation Architecture

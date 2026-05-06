@@ -2,6 +2,7 @@
 
 **Phase:** 3 — Baseline Training Pipeline
 **Created:** 2026-05-06
+**Branch:** `feat/baseline-training-pipeline`
 
 ## Required Evidence
 

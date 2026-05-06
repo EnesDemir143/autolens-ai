@@ -2,7 +2,7 @@
 
 ## Stack
 
-Use uv + Python 3.12 with PyTorch/Lightning/timm/transformers for training and Gradio for UI. Keep ONNX optional until a working PyTorch inference path exists. Use the package list from `docs/plan.md` plus `transformers` for DINOv3.
+Use uv + Python 3.12 with PyTorch/Lightning/timm/transformers for training and Gradio for UI. DINOv3 ViT-S/16 is the intended main model path; MobileNetV4, EfficientNet-B2, and ResNet are baselines/comparators. Keep ONNX optional until a working PyTorch inference path exists. Use the package list from `docs/plan.md` plus `transformers` for DINOv3.
 
 ## Dataset Sources to Investigate
 
@@ -18,7 +18,7 @@ Primary Hugging Face candidates:
 - `kitrofimov/cbsc` — Car Body Style Classification, 595 rows, labels include SUV, van, pickup, sedan, hatchback and others.
 - `rebrowser/carfax-dataset` and `rebrowser/carscom-dataset` — large metadata datasets with bodyStyle distributions; useful for research/label strategy, not necessarily image training.
 
-Critical gap: open-wheel/F1 and station wagon/micro may require targeted collection or additional sources beyond the assignment reference datasets.
+Critical gap: open-wheel/F1, station wagon, micro, and clean pickup may require targeted collection or additional sources beyond the assignment reference datasets. Final dataset target is 36k–40k raw candidates and about 32k clean images (roughly 4k/class); ambiguous `City Car` and generic `Truck` labels must not be mapped directly without filtering.
 
 ## Watch Outs
 

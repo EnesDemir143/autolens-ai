@@ -1,6 +1,7 @@
 ---
 phase: 4
-phase_name: Model Comparison and Selection
+phase_name: Main DINOv3 Model and Selection
+branch: feat/model-comparison-and-selection
 plan_id: 04-01
 objective: Create metrics, classification report, and plot generation suite
 wave: 1

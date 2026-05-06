@@ -1,6 +1,7 @@
 ---
 phase: 2
 phase_name: Dataset Research and Curation
+branch: feat/dataset-research-and-curation
 plan_id: 02-03
 objective: Map raw labels and curate the 8-class dataset
 wave: 2
@@ -17,7 +18,7 @@ Map raw labels and curate the 8-class dataset
 </objective>
 
 <must_haves>
-- Covers requirement IDs: DATA-03, DATA-05.
+- Covers requirement IDs: DATA-03, DATA-05. Curation target is approximately 32k clean images, about 4k/class, from 36k–40k raw candidates.
 - Covers phase decisions: D-01, D-02, D-03, D-04, D-05 where relevant to this plan.
 - Produces concrete evidence for downstream phases.
 </must_haves>
@@ -52,7 +53,7 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `AGENTS.md`
   </read_first>
   <action>
-    Implement the smallest working slice for `Map raw labels and curate the 8-class dataset`. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
+    Implement the smallest working slice for `Map raw labels and curate the 8-class dataset`. The label mapping must avoid unsafe direct mappings: `City Car` must be filtered before `MICRO`/`HATCHBACK`, generic `Truck` must be filtered before `PICK_UP`, and `Crossover`/`MPV`/`Coupe` must not be blindly mapped. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
   </action>
   <acceptance_criteria>
     - Output references all requirement IDs: DATA-03, DATA-05.

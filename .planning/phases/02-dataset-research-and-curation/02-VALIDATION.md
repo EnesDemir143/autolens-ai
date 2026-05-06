@@ -2,6 +2,7 @@
 
 **Phase:** 2 — Dataset Research and Curation
 **Created:** 2026-05-06
+**Branch:** `feat/dataset-research-and-curation`
 
 ## Required Evidence
 

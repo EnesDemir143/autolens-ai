@@ -1,6 +1,7 @@
 ---
 phase: 6
 phase_name: Final Evidence and IEEE Report
+branch: feat/final-evidence-and-ieee-report
 plan_id: 06-01
 objective: Collect final evidence inventory and reproducibility artifacts
 wave: 1

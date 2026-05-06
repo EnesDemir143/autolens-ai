@@ -1,6 +1,7 @@
 ---
 phase: 5
 phase_name: Gradio Demo Interface
+branch: feat/gradio-demo-interface
 plan_id: 05-04
 objective: Add UI smoke test/run docs and latency evidence
 wave: 2
