@@ -1,0 +1,1035 @@
+{
+  "file name" : "Yazlab 2- Proje 3.pdf",
+  "number of pages" : 7,
+  "author" : null,
+  "title" : "Yazlab 2- Proje 3.docx",
+  "creation date" : null,
+  "modification date" : null,
+  "kids" : [ {
+    "type" : "heading",
+    "id" : 1,
+    "level" : "Doctitle",
+    "page number" : 1,
+    "bounding box" : [ 136.125, 651.696, 475.875, 719.235 ],
+    "heading level" : 1,
+    "font" : "TimesNewRomanPS-BoldMT",
+    "font size" : 18.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "KOCAELİ ÜNİVERSİTESİ BİLGİSAYAR MÜHENDİSLİĞİ BÖLÜMÜ YAZILIM LABORATUVARI-II"
+  }, {
+    "type" : "heading",
+    "id" : 2,
+    "level" : "Subtitle",
+    "page number" : 1,
+    "bounding box" : [ 263.742, 609.379, 348.258, 629.313 ],
+    "heading level" : 1,
+    "font" : "TimesNewRomanPS-BoldMT",
+    "font size" : 18.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "PROJE III"
+  }, {
+    "type" : "heading",
+    "id" : 3,
+    "level" : "Subtitle",
+    "page number" : 1,
+    "bounding box" : [ 121.803, 564.073, 490.199, 581.792 ],
+    "heading level" : 2,
+    "font" : "TimesNewRomanPS-BoldMT",
+    "font size" : 16.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "ARABA GÖVDE TİPİ SINIFLANDIRMA PROJESİ"
+  }, {
+    "type" : "paragraph",
+    "id" : 4,
+    "page number" : 1,
+    "bounding box" : [ 212.783, 526.701, 399.221, 542.205 ],
+    "font" : "TimesNewRomanPS-BoldMT",
+    "font size" : 14.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "Proje Teslim Tarihi: 30.05.2026"
+  }, {
+    "type" : "heading",
+    "id" : 5,
+    "level" : "Subtitle",
+    "page number" : 1,
+    "bounding box" : [ 72.0, 489.675, 164.119, 505.178 ],
+    "heading level" : 3,
+    "font" : "TimesNewRomanPS-BoldMT",
+    "font size" : 14.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "1. Proje Tanımı"
+  }, {
+    "type" : "paragraph",
+    "id" : 6,
+    "page number" : 1,
+    "bounding box" : [ 72.0, 413.855, 539.766, 474.75 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "Bu projede, farklı araba gövde tiplerine ait görüntülerden oluşan bir veri seti kullanılarak çoklu sınıflandırma problemi çözülecektir. Projede toplam 8 farklı araba gövde tipi sınıfı bulunmaktadır. Kendi oluşturacağınız veri setleri ile eğitilecek yapay zeka modelleri sonrasında daha önce hiç görülmemiş test verileriyle modelin performansı değerlendirilecektir."
+  }, {
+    "type" : "heading",
+    "id" : 7,
+    "level" : "Subtitle",
+    "page number" : 1,
+    "bounding box" : [ 83.25, 385.986, 448.717, 399.275 ],
+    "heading level" : 5,
+    "font" : "TimesNewRomanPS-BoldMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "Proje kapsamında aşağıdaki adımların tamamlanması beklenmektedir:"
+  }, {
+    "type" : "list",
+    "id" : 8,
+    "level" : "1",
+    "page number" : 1,
+    "bounding box" : [ 90.0, 220.665, 508.523, 360.728 ],
+    "numbering style" : "unknown style",
+    "number of list items" : 7,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 1,
+      "bounding box" : [ 90.0, 333.237, 505.213, 360.728 ],
+      "font" : "ArialMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "● Çeşitli kaynaklardan (Kaggle, Hugging Face vb.) ham görseller toplayarak 8 sınıfa uygun özelleştirilmiş (customize) bir veri seti oluşturmak",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 1,
+      "bounding box" : [ 90.0, 319.153, 427.582, 332.612 ],
+      "font" : "ArialMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "● Veri setine uygun ön işleme (preprocessing) adımlarını uygulamak",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 1,
+      "bounding box" : [ 90.0, 305.068, 394.4, 318.527 ],
+      "font" : "ArialMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "● Yapay zeka model mimarisi oluşturulması ve model eğitimi",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 1,
+      "bounding box" : [ 90.0, 290.983, 508.096, 304.442 ],
+      "font" : "ArialMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "● Modelin performansını Accuracy, Precision, Recall, F1-Score metrikleri ile ölçmek",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 1,
+      "bounding box" : [ 90.0, 262.866, 472.125, 290.357 ],
+      "font" : "ArialMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "● Sonuçları Training/Validation Loss grafiği, Accuracy grafiği ve Normalized Confusion Matrix ile görselleştirmek",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 1,
+      "bounding box" : [ 90.0, 234.749, 508.523, 262.241 ],
+      "font" : "ArialMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "● Eğitilmiş modeli kaydederek bir web arayüzüne entegre edip canlı tahmin yapabilir hale getirmek",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 1,
+      "bounding box" : [ 90.0, 220.665, 364.898, 234.124 ],
+      "font" : "ArialMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "● Tüm süreci IEEE formatında bir rapor ile belgelemek",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 9,
+    "page number" : 1,
+    "bounding box" : [ 72.0, 163.357, 518.531, 204.709 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "ÖNEMLİ NOT: Sunum sırasında modeliniz, eğitim sürecinde hiç görmediği tamamen yeni test görüntüleri ile denenecektir. Bu nedenle modelinizin genelleme (generalization) yeteneği büyük önem taşımaktadır."
+  }, {
+    "type" : "heading",
+    "id" : 158,
+    "level" : "Doctitle",
+    "page number" : 2,
+    "bounding box" : [ 72.0, 704.68, 177.804, 716.199 ],
+    "heading level" : 1,
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "2. Proje Hedefleri"
+  }, {
+    "type" : "paragraph",
+    "id" : 159,
+    "page number" : 2,
+    "bounding box" : [ 108.0, 675.534, 521.52, 685.408 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Değerlendirme Metrikleri: Modelin performansı aşağıdaki metriklerle ölçülmelidir:"
+  }, {
+    "type" : "paragraph",
+    "id" : 160,
+    "page number" : 2,
+    "bounding box" : [ 108.0, 659.666, 224.203, 669.54 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Doğruluk (Accuracy)"
+  }, {
+    "type" : "paragraph",
+    "id" : 161,
+    "page number" : 2,
+    "bounding box" : [ 108.0, 643.797, 217.564, 653.671 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Kesinlik (Precision)"
+  }, {
+    "type" : "paragraph",
+    "id" : 162,
+    "page number" : 2,
+    "bounding box" : [ 108.0, 627.928, 212.215, 637.802 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Duyarlılık (Recall)"
+  }, {
+    "type" : "paragraph",
+    "id" : 163,
+    "page number" : 2,
+    "bounding box" : [ 108.0, 612.06, 221.572, 621.934 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "F1-Skoru (F1-Score)"
+  }, {
+    "type" : "paragraph",
+    "id" : 164,
+    "page number" : 2,
+    "bounding box" : [ 108.0, 596.191, 457.184, 606.065 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Normalize Edilmiş Karışıklık Matrisi (Normalized Confusion Matrix)"
+  }, {
+    "type" : "paragraph",
+    "id" : 165,
+    "page number" : 2,
+    "bounding box" : [ 108.0, 564.454, 523.348, 590.196 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Bu  metriklerin  hem  sınıf  bazlı  (per-class)  hem  de  ortalama  (macro  average  ve weighted average) değerleri hesaplanmalıdır."
+  }, {
+    "type" : "paragraph",
+    "id" : 166,
+    "page number" : 2,
+    "bounding box" : [ 108.0, 548.585, 470.01, 558.459 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "NOT: F1 skoru 1. öncelikli performans metriği olarak değerlendirilecektir."
+  }, {
+    "type" : "paragraph",
+    "id" : 167,
+    "page number" : 2,
+    "bounding box" : [ 108.0, 500.979, 522.791, 526.722 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Görselleştirme: Eğitim sürecini ve model performansını gösteren grafikler hazırlanmalıdır:"
+  }, {
+    "type" : "paragraph",
+    "id" : 168,
+    "page number" : 2,
+    "bounding box" : [ 108.0, 485.111, 427.418, 494.984 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Training & Validation Loss grafiği (epoch bazlı kayıp değişimi)"
+  }, {
+    "type" : "paragraph",
+    "id" : 169,
+    "page number" : 2,
+    "bounding box" : [ 108.0, 469.242, 467.385, 479.116 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Training & Validation Accuracy grafiği (epoch bazlı doğruluk değişimi)"
+  }, {
+    "type" : "paragraph",
+    "id" : 170,
+    "page number" : 2,
+    "bounding box" : [ 108.0, 453.373, 339.193, 463.247 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Normalized Confusion Matrix (8x8 heatmap)"
+  }, {
+    "type" : "paragraph",
+    "id" : 171,
+    "page number" : 2,
+    "bounding box" : [ 108.0, 437.505, 418.248, 447.379 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Bu grafikler hem raporda hem de sunum sırasında sunulacaktır."
+  }, {
+    "type" : "paragraph",
+    "id" : 172,
+    "page number" : 2,
+    "bounding box" : [ 108.0, 358.161, 523.383, 415.641 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Arayüz: Eğitimini  tamamlayıp  kaydettiğiniz  modelinizi  canlı  test  edebileceğiniz, vereceğimiz test görüntülerini alıp tahmin döndürebilen bir web arayüzü geliştirilmelidir.  Arayüz  kullanıcı  dostu  olmalı,  görüntü yükleme, tahmin sonucu ve güven skoru gösterimi içermelidir."
+  }, {
+    "type" : "heading",
+    "id" : 173,
+    "level" : "Subtitle",
+    "page number" : 2,
+    "bounding box" : [ 72.0, 324.235, 179.772, 335.755 ],
+    "heading level" : 1,
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "3. Proje Adımları"
+  }, {
+    "type" : "heading",
+    "id" : 174,
+    "level" : "Subtitle",
+    "page number" : 2,
+    "bounding box" : [ 72.0, 294.816, 201.847, 305.513 ],
+    "heading level" : 1,
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Kullanılacak Veri Seti:"
+  }, {
+    "type" : "paragraph",
+    "id" : 175,
+    "page number" : 2,
+    "bounding box" : [ 72.0, 234.982, 542.807, 276.594 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Öğrenciler kendi veri setlerini oluşturacaklardır. Aşağıdaki Kaggle veri setleri yalnızca referans ve  ilham  kaynağı  olarak  verilmiştir.  Bu  veri  setlerini  doğrudan  kullanmak  zorunda  değilsiniz, ancak veri toplama sürecinde faydalanabilirsiniz."
+  }, {
+    "type" : "heading",
+    "id" : 176,
+    "level" : "Subtitle",
+    "page number" : 2,
+    "bounding box" : [ 72.0, 191.245, 542.824, 216.988 ],
+    "heading level" : 1,
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "ÖNEMLİ:  Oluşturacak  olduğunuz  veri  seti  kaynağının  hem  sunum  sırasında  hem  de raporda belirtilmesi gerekmektedir."
+  }, {
+    "type" : "paragraph",
+    "id" : 177,
+    "page number" : 2,
+    "bounding box" : [ 90.0, 163.241, 348.779, 173.842 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Referans Veri Seti 1 - Cars Body Type Cropped:"
+  }, {
+    "type" : "paragraph",
+    "id" : 178,
+    "page number" : 2,
+    "bounding box" : [ 72.0, 135.447, 428.795, 145.321 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "https://www.kaggle.com/datasets/ademboukhris/cars-body-type-cropped"
+  }, {
+    "type" : "paragraph",
+    "id" : 179,
+    "page number" : 2,
+    "bounding box" : [ 90.0, 107.443, 369.762, 118.044 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Referans Veri Seti 2 - Stanford Car Body Type Data:"
+  }, {
+    "type" : "paragraph",
+    "id" : 180,
+    "page number" : 2,
+    "bounding box" : [ 72.0, 79.649, 457.189, 89.523 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "https://www.kaggle.com/datasets/mayurmahurkar/stanford-car-body-type-data"
+  }, {
+    "type" : "paragraph",
+    "id" : 181,
+    "page number" : 3,
+    "bounding box" : [ 72.0, 675.131, 542.707, 716.742 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Farklı açık kaynaklardan topladığınız görselleri aşağıdaki 8 sınıfa göre klasörlere ayırarak kendi özelleştirilmiş veri setinizi oluşturmanız gerekmektedir. Her sınıfta yeterli sayıda  görsel bulunmalıdır."
+  }, {
+    "type" : "paragraph",
+    "id" : 182,
+    "page number" : 3,
+    "bounding box" : [ 72.0, 647.262, 356.918, 657.136 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Projede tahmin edilecek 8 araba gövde tipi sınıfı şunlardır:"
+  }, {
+    "type" : "paragraph",
+    "id" : 183,
+    "page number" : 3,
+    "bounding box" : [ 90.0, 621.463, 141.006, 631.337 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "SUV"
+  }, {
+    "type" : "paragraph",
+    "id" : 184,
+    "page number" : 3,
+    "bounding box" : [ 90.0, 607.665, 141.451, 617.539 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "VAN"
+  }, {
+    "type" : "paragraph",
+    "id" : 185,
+    "page number" : 3,
+    "bounding box" : [ 90.0, 593.866, 213.697, 603.74 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "   STATION WAGON"
+  }, {
+    "type" : "paragraph",
+    "id" : 186,
+    "page number" : 3,
+    "bounding box" : [ 90.0, 580.067, 156.34, 589.941 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "   MİCRO"
+  }, {
+    "type" : "paragraph",
+    "id" : 187,
+    "page number" : 3,
+    "bounding box" : [ 90.0, 566.268, 310.646, 576.142 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "   AÇIK TEKERLEKLİ (F1 ARAÇLARI)"
+  }, {
+    "type" : "paragraph",
+    "id" : 188,
+    "page number" : 3,
+    "bounding box" : [ 90.0, 552.469, 157.002, 562.343 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "   SEDAN"
+  }, {
+    "type" : "paragraph",
+    "id" : 189,
+    "page number" : 3,
+    "bounding box" : [ 90.0, 538.67, 190.342, 548.544 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "   HATCHBACK"
+  }, {
+    "type" : "paragraph",
+    "id" : 190,
+    "page number" : 3,
+    "bounding box" : [ 90.0, 524.872, 162.68, 534.746 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "PICK UP"
+  }, {
+    "type" : "paragraph",
+    "id" : 191,
+    "page number" : 3,
+    "bounding box" : [ 72.0, 499.073, 323.602, 508.947 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Her sınıfa ait örnek görseller aşağıda sunulmuştur:"
+  }, {
+    "type" : "image",
+    "id" : 192,
+    "page number" : 3,
+    "bounding box" : [ 85.308, 393.821, 206.997, 476.167 ],
+    "source" : "Yazlab 2- Proje 3_images/imageFile1.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 194,
+    "page number" : 3,
+    "bounding box" : [ 245.997, 451.405, 273.003, 461.279 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "SUV"
+  }, {
+    "type" : "image",
+    "id" : 196,
+    "page number" : 3,
+    "bounding box" : [ 79.926, 293.958, 224.233, 366.778 ],
+    "source" : "Yazlab 2- Proje 3_images/imageFile2.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 198,
+    "page number" : 3,
+    "bounding box" : [ 240.507, 330.357, 295.743, 354.029 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "STATION WAGON"
+  }, {
+    "type" : "image",
+    "id" : 193,
+    "page number" : 3,
+    "bounding box" : [ 317.971, 387.131, 436.277, 476.295 ],
+    "source" : "Yazlab 2- Proje 3_images/imageFile5.png"
+  }, {
+    "type" : "image",
+    "id" : 197,
+    "page number" : 3,
+    "bounding box" : [ 317.982, 287.944, 436.561, 366.698 ],
+    "source" : "Yazlab 2- Proje 3_images/imageFile6.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 195,
+    "page number" : 3,
+    "bounding box" : [ 477.524, 451.405, 504.976, 461.279 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "VAN"
+  }, {
+    "type" : "paragraph",
+    "id" : 199,
+    "page number" : 3,
+    "bounding box" : [ 468.419, 344.155, 514.081, 354.029 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "MİCRO"
+  }, {
+    "type" : "image",
+    "id" : 200,
+    "page number" : 3,
+    "bounding box" : [ 80.182, 183.951, 188.216, 265.306 ],
+    "source" : "Yazlab 2- Proje 3_images/imageFile3.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 202,
+    "page number" : 3,
+    "bounding box" : [ 208.611, 230.607, 291.639, 254.279 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "AÇIK TEKERLEKLİ"
+  }, {
+    "type" : "image",
+    "id" : 201,
+    "page number" : 3,
+    "bounding box" : [ 318.025, 187.845, 459.043, 260.802 ],
+    "source" : "Yazlab 2- Proje 3_images/imageFile7.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 203,
+    "page number" : 3,
+    "bounding box" : [ 480.662, 244.405, 524.338, 254.279 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "SEDAN"
+  }, {
+    "type" : "image",
+    "id" : 205,
+    "page number" : 3,
+    "bounding box" : [ 86.817, 95.544, 213.137, 147.019 ],
+    "source" : "Yazlab 2- Proje 3_images/imageFile4.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 206,
+    "page number" : 3,
+    "bounding box" : [ 222.858, 140.905, 303.642, 150.779 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "HATCHBACK"
+  }, {
+    "type" : "image",
+    "id" : 204,
+    "page number" : 3,
+    "bounding box" : [ 318.37, 82.497, 452.259, 162.214 ],
+    "source" : "Yazlab 2- Proje 3_images/imageFile8.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 207,
+    "page number" : 3,
+    "bounding box" : [ 473.127, 140.905, 525.123, 150.779 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "PICK UP"
+  }, {
+    "type" : "paragraph",
+    "id" : 12,
+    "page number" : 4,
+    "bounding box" : [ 72.0, 662.464, 539.561, 719.49 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "NOT: Veri setinizi kendiniz oluşturacağınız için sınıflar arasındaki dengeye dikkat ediniz. Bir sınıfta çok fazla, diğerinde çok az görsel olması modelin performansını olumsuz etkileyecektir. Test Seti hakkında önemli bilgi:"
+  }, {
+    "type" : "list",
+    "id" : 13,
+    "level" : "2",
+    "page number" : 4,
+    "bounding box" : [ 72.0, 475.515, 539.947, 647.884 ],
+    "numbering style" : "unknown style",
+    "number of list items" : 5,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 78.0, 634.595, 383.654, 647.884 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "○ Test verisi eğitim sürecinde hiçbir şekilde kullanılmayacaktır.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 72.0, 590.858, 539.607, 620.016 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "○ Test seti, sunum sırasında tarafımızdan sağlanacak olup modelinizin daha önce hiç görmediği tamamen yeni görüntülerden oluşacaktır.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 78.0, 562.989, 477.152, 576.278 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "○ Modelinizin nihai başarısı bu görülmemiş test görüntüleri üzerinden ölçülecektir.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 72.0, 519.252, 539.947, 548.41 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "○ Bu nedenle modelinizin genelleme (generalization) kapasitesi çok önemlidir. Eğitim setine aşırı uyum sağlamış bir model test setinde düşük performans gösterecektir.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 72.0, 475.515, 539.344, 504.672 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "○ Modelinizi geliştirirken farklı açılardan, farklı ışık koşullarında ve farklı arka planlardan çekilmiş araç görüntülerini veri setinize dahil etmeniz, genelleme kapasitesini artıracaktır.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 14,
+    "level" : "Subtitle",
+    "page number" : 4,
+    "bounding box" : [ 72.0, 446.496, 182.462, 460.893 ],
+    "heading level" : 4,
+    "font" : "TimesNewRomanPS-BoldMT",
+    "font size" : 13.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "Ön İşleme Adımları"
+  }, {
+    "type" : "paragraph",
+    "id" : 15,
+    "page number" : 4,
+    "bounding box" : [ 72.0, 402.586, 539.637, 431.744 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "Modelin başarısını artırmak için veri setine uygun ön işlemleri gerçekleştirebilirsiniz. Uygulanabilecek ön işlemler:"
+  }, {
+    "type" : "list",
+    "id" : 16,
+    "level" : "2",
+    "page number" : 4,
+    "bounding box" : [ 78.0, 291.112, 497.479, 388.007 ],
+    "numbering style" : "unknown style",
+    "number of list items" : 4,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 78.0, 374.718, 403.857, 388.007 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "○ Boyutlandırma (224x224 veya modelin gerektirdiği giriş boyutu),",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 78.0, 346.849, 161.561, 360.138 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "○ Normalizasyon",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 78.0, 318.98, 497.479, 332.27 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "○ Histogram eşitleme, filtreleme, gürültü giderme gibi çeşitli görüntü işleme teknikleri,",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 78.0, 291.112, 260.52, 304.401 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "○ Veri çoğaltma (Data Augmentation)",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 17,
+    "level" : "Subtitle",
+    "page number" : 4,
+    "bounding box" : [ 72.0, 262.093, 151.774, 276.49 ],
+    "heading level" : 4,
+    "font" : "TimesNewRomanPS-BoldMT",
+    "font size" : 13.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "Model Eğitimi"
+  }, {
+    "type" : "paragraph",
+    "id" : 18,
+    "page number" : 4,
+    "bounding box" : [ 72.0, 202.315, 539.701, 247.341 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "Model mimarisi kısıtlaması yoktur. CNN tabanlı modeller (ResNet, EfficientNet, ConvNeXt, MobileNet vb.) veya transformer tabanlı modeller (Vision Transformer (ViT), Data-efficient Image Transformer (DeiT), Swin Transformer, BEiT vb.) kullanabilirsiniz."
+  }, {
+    "type" : "paragraph",
+    "id" : 19,
+    "page number" : 4,
+    "bounding box" : [ 72.0, 126.84, 539.889, 187.735 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "ÖNEMLİ: Hangi model mimarisini seçerseniz seçin, yazdığınız kodun tamamından siz sorumlusunuz. Demo sırasında modelin mimarisi, katman yapısı, neden bu modeli tercih ettiğiniz, her bir kod bloğunun ne işe yaradığı gibi konularda detaylı sorular sorulacaktır. Kodunuzun her satırını açıklayabilmeniz beklenmektedir."
+  }, {
+    "type" : "paragraph",
+    "id" : 20,
+    "page number" : 5,
+    "bounding box" : [ 72.0, 674.464, 539.607, 719.49 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "Batch size, epoch, dropout oranı, öğrenme oranı (learning rate) gibi hiperparametrelerin seçimini modelinize uygun olacak şekilde kendiniz belirlemelisiniz. Bu hiperparametrelerin kullanım amacını sunum sırasında açıklayabilmeniz beklenmektedir."
+  }, {
+    "type" : "paragraph",
+    "id" : 21,
+    "page number" : 5,
+    "bounding box" : [ 72.0, 602.858, 539.379, 659.884 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "Overfitting'i önlemek için EarlyStopping gibi yöntemler kullanmanız önerilir. Test verisi eğitim sürecinde hiçbir şekilde kullanılmamalıdır. Test seti yalnızca modelin son performansını değerlendirmek için kullanılacaktır."
+  }, {
+    "type" : "heading",
+    "id" : 22,
+    "level" : "Subtitle",
+    "page number" : 5,
+    "bounding box" : [ 72.0, 573.839, 220.346, 588.236 ],
+    "heading level" : 4,
+    "font" : "TimesNewRomanPS-BoldMT",
+    "font size" : 13.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "Modelin Değerlendirilmesi"
+  }, {
+    "type" : "paragraph",
+    "id" : 23,
+    "page number" : 5,
+    "bounding box" : [ 72.0, 529.93, 539.561, 559.087 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "Modelinizin başarısının değerlendirilmesinde öncelik sırasına göre F1-skoru (F1-score), doğruluk (Accuracy), kesinlik (Precision), duyarlılık (Recall) metriklerini kullanılacaktır."
+  }, {
+    "type" : "paragraph",
+    "id" : 24,
+    "page number" : 5,
+    "bounding box" : [ 72.0, 454.455, 539.584, 515.35 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "Modelin test edilebilmesi ve performans sonuçları için tarafımızdan bir test scripti paylaşılacaktır. Modelinizin paylaşılacak bu script ile birlikte çalışabilir şekilde entegre edilmesi ve script tarafından istenen parametrelerin (örnek adı, tahmin kategori) doğru ve uyumlu biçimde verilmesi gerekmektedir."
+  }, {
+    "type" : "paragraph",
+    "id" : 25,
+    "page number" : 5,
+    "bounding box" : [ 72.0, 426.586, 277.934, 439.875 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "Aşağıda beklenen grafik türleri verilmiştir:"
+  }, {
+    "type" : "paragraph",
+    "id" : 26,
+    "level" : "3",
+    "page number" : 5,
+    "bounding box" : [ 90.0, 351.051, 377.209, 412.124 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "● GRAFİK ALANI 1: Training & Validation Loss Grafiği X ekseni: Epoch sayısı Y ekseni: Loss değeri İki çizgi: Training Loss ve Validation Loss"
+  }, {
+    "type" : "paragraph",
+    "id" : 27,
+    "page number" : 5,
+    "bounding box" : [ 90.0, 319.313, 429.258, 348.471 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "Bu grafik, modelin öğrenme sürecini ve overfitting durumunu gösterir. Training loss ile validation loss arasındaki fark (gap) küçük olmalıdır."
+  }, {
+    "type" : "paragraph",
+    "id" : 28,
+    "level" : "3",
+    "page number" : 5,
+    "bounding box" : [ 90.0, 239.91, 400.506, 300.982 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "● GRAFİK ALANI 2: Training & Validation Accuracy Grafiği X ekseni: Epoch sayısı Y ekseni: Accuracy (%) İki çizgi: Training Accuracy ve Validation Accuracy"
+  }, {
+    "type" : "paragraph",
+    "id" : 29,
+    "page number" : 5,
+    "bounding box" : [ 90.0, 224.041, 475.406, 237.33 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "Bu grafik, modelin doğruluk performansının epoch'lara göre değişimini gösterir."
+  }, {
+    "type" : "paragraph",
+    "id" : 30,
+    "level" : "3",
+    "page number" : 5,
+    "bounding box" : [ 90.0, 112.9, 419.572, 205.71 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "● GRAFİK ALANI 3: Normalized Confusion Matrix (8x8) Satırlar: Gerçek sınıflar Sütunlar: Tahmin edilen sınıflar Her hücrede normalize edilmiş oran (0.00 - 1.00) gösterilmelidir. Diyagonal değerler yüksek olmalıdır (doğru tahminler). Renk haritası (heatmap) kullanılmalıdır."
+  }, {
+    "type" : "heading",
+    "id" : 31,
+    "level" : "Subtitle",
+    "page number" : 6,
+    "bounding box" : [ 72.0, 705.051, 246.731, 719.448 ],
+    "heading level" : 4,
+    "font" : "TimesNewRomanPS-BoldMT",
+    "font size" : 13.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "Modelin Arayüzle Kullanılması"
+  }, {
+    "type" : "paragraph",
+    "id" : 32,
+    "page number" : 6,
+    "bounding box" : [ 72.0, 647.263, 539.789, 692.29 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "Eğitimini tamamlayıp kaydettiğiniz modeli geliştireceğiniz web arayüzünde kullanmalısınız. Arayüz web ortamında geliştirilmelidir (Flask, Django, Streamlit, Gradio vb. kullanılabilir). Arayüz için programlama dili kısıtı bulunmamaktadır."
+  }, {
+    "type" : "paragraph",
+    "id" : 33,
+    "page number" : 6,
+    "bounding box" : [ 72.0, 571.789, 539.906, 632.684 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "Sunum esnasında, daha önce hiç görmediğiniz test görüntüleri tarafımızdan verilecek ve arayüz üzerinden canlı olarak test edilecektir. Doğru sonuç vermesi proje puanınızı doğrudan etkileyecektir. Sizinle paylaşacağımız test scriptinin arayüze entegre edilerek sonuçların gösterilmesi son derece önemlidir."
+  }, {
+    "type" : "paragraph",
+    "id" : 34,
+    "page number" : 6,
+    "bounding box" : [ 72.0, 496.314, 539.895, 557.209 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "ÖNEMLİ: Arayüz üzerinden gerçekleştirilecek tahminlerde, modelin bir görüntüyü sınıflandırma süresinin kullanıcı deneyimi açısından kabul edilebilir süreyi aşması durumunda puan kırımı uygulanacaktır. Modelin hız ve performans süresi de değerlendirme kriterlerinden biri olarak dikkate alınacaktır."
+  }, {
+    "type" : "paragraph",
+    "id" : 35,
+    "page number" : 6,
+    "bounding box" : [ 72.0, 440.577, 369.592, 481.734 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "Web arayüzünde aşağıdaki bileşenler ve çıktılar bulunmalıdır: Arayüz Bölümü 1: Görüntü Yükleme Alanı"
+  }, {
+    "type" : "list",
+    "id" : 36,
+    "level" : "2",
+    "page number" : 6,
+    "bounding box" : [ 72.0, 197.89, 539.789, 425.997 ],
+    "numbering style" : "unknown style",
+    "number of list items" : 5,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 72.0, 396.839, 539.437, 425.997 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "○ Kullanıcının bilgisayarından bir araba görseli seçip yükleyebileceği bir dosya yükleme (file upload) butonu veya sürükle-bırak (drag & drop) alanı.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 78.0, 341.102, 414.82, 382.26 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "○ Yüklenen görüntünün ekranda önizlemesi (preview) gösterilmelidir. Arayüz Bölümü 2: Tahmin Butonu",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 78.0, 285.365, 461.408, 326.522 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "○ \"Tahmin Yap\" / \"Sınıflandır\" butonu ile modelin çalıştırılması tetiklenmelidir. Arayüz Bölümü 3: Tahmin Sonucu Çıktısı",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 72.0, 241.627, 539.373, 270.785 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "○ Tahmin edilen araba gövde tipi sınıfı (örn: \"SEDAN\", \"SUV\" vb.) büyük ve belirgin şekilde gösterilmelidir.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 72.0, 197.89, 539.789, 227.048 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "○ Tüm sınıflar için olasılık dağılımı çubuk grafik (bar chart) olarak gösterilmelidir. Böylece modelin hangi sınıflara ne kadar olasılık verdiği görsel olarak anlaşılabilir.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 37,
+    "page number" : 6,
+    "bounding box" : [ 78.0, 170.021, 348.199, 183.311 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "Arayüz Bölümü 4: Yüklenen Görsel ve Sonuç Yan Yana"
+  }, {
+    "type" : "paragraph",
+    "id" : 38,
+    "level" : "3",
+    "page number" : 6,
+    "bounding box" : [ 78.0, 142.153, 524.801, 155.442 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "○ Yüklenen orijinal görüntü ile tahmin sonucu yan yana veya üst-alt düzende gösterilmelidir."
+  }, {
+    "type" : "paragraph",
+    "id" : 39,
+    "page number" : 6,
+    "bounding box" : [ 72.0, 82.547, 539.766, 127.573 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "Not: Oluşturduğunuz ve eğiterek hazırladığınız modelin toplam nihai boyutu e-desteğe yüklenebilmesi için 95 MB'yi aşmamalıdır. Model seçimi ve eğitim sonrası ulaştığı boyutu buna göre kontrol edilerek önceden planlanmalıdır."
+  }, {
+    "type" : "heading",
+    "id" : 208,
+    "level" : "Doctitle",
+    "page number" : 7,
+    "bounding box" : [ 72.0, 704.68, 226.947, 716.199 ],
+    "heading level" : 1,
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Ödev Teslimi ve Kurallar"
+  }, {
+    "type" : "paragraph",
+    "id" : 209,
+    "page number" : 7,
+    "bounding box" : [ 90.0, 630.689, 542.982, 688.82 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Proje  raporu  sadece  LaTeX  kullanılarak  yazılmalı  ve  pdf  formatında  sisteme yüklenmelidir. Sisteme ayrıca LaTeX eklentileri de yüklenmelidir. Proje raporunu sadece pdf formatında yükleyen öğrencilerin proje raporu puanı 0 (sıfır) olarak değerlendirilecektir."
+  }, {
+    "type" : "paragraph",
+    "id" : 210,
+    "page number" : 7,
+    "bounding box" : [ 90.0, 614.685, 299.953, 625.285 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Proje grupları en fazla 2 kişilik olabilir."
+  }, {
+    "type" : "paragraph",
+    "id" : 211,
+    "page number" : 7,
+    "bounding box" : [ 90.0, 598.755, 406.242, 609.356 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Her öğrenci kendi öğretim türü içerisinde grup oluşturacaktır."
+  }, {
+    "type" : "paragraph",
+    "id" : 212,
+    "page number" : 7,
+    "bounding box" : [ 90.0, 582.826, 399.217, 593.427 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Proje raporu IEEE formatında en az 4 sayfa hazırlanmalıdır."
+  }, {
+    "type" : "paragraph",
+    "id" : 213,
+    "page number" : 7,
+    "bounding box" : [ 90.0, 566.897, 513.539, 577.498 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Dersin takibi ve proje teslimi edestek2.kocaeli.edu.tr sistemi üzerinden yapılacaktır."
+  }, {
+    "type" : "paragraph",
+    "id" : 214,
+    "page number" : 7,
+    "bounding box" : [ 90.0, 535.173, 542.619, 561.568 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Proje ile  ilgili  sorular  yalnızca  edestek2.kocaeli.edu.tr  sitesindeki  forum  üzerinden Arş. Gör. Abdurrahman Gün ve Arş. Gör. Kadir Kesimal'a sorulabilir."
+  }, {
+    "type" : "paragraph",
+    "id" : 215,
+    "page number" : 7,
+    "bounding box" : [ 90.0, 519.17, 437.221, 529.771 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Proje teslim tarihine 3 gün kala gelen sorular yanıtlanmayacaktır."
+  }, {
+    "type" : "paragraph",
+    "id" : 216,
+    "page number" : 7,
+    "bounding box" : [ 90.0, 503.24, 368.941, 513.841 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Sunum tarih ve saat bilgisi daha sonra duyurulacaktır."
+  }, {
+    "type" : "paragraph",
+    "id" : 217,
+    "page number" : 7,
+    "bounding box" : [ 90.0, 455.648, 542.572, 497.912 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Her öğrenci projeden bireysel olarak sorumludur. Proje sunumunda  kullandığınız herhangi  bir  satır  kodu  açıklamanız  ya  da  değiştirerek  hocalarımızın  yanında  tekrar çalıştırmanız istenebilir. Sorulacak sorular puanlamaya dahil olacaktır."
+  }, {
+    "type" : "paragraph",
+    "id" : 218,
+    "page number" : 7,
+    "bounding box" : [ 90.0, 423.85, 542.549, 450.245 ],
+    "font" : null,
+    "font size" : 12.0,
+    "content" : "Projede arayüzün isterlerin açıkça görülebileceği seviyede tasarlanmasına özen gösterilmelidir."
+  } ]
+}

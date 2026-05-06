@@ -29,10 +29,22 @@ Read or query these before broad reasoning, architecture changes, phase handoffs
 - `.planning/graphs/graph.json`
 - `.planning/graphs/graph.html` when visual inspection helps
 
-Preferred query command:
+Before every Graphify read/query/use, refresh the graph from the current workspace state:
+
+```fish
+node "$HOME/.codex/get-shit-done/bin/gsd-tools.cjs" graphify build .
+```
+
+Preferred query command after the update:
 
 ```fish
 node "$HOME/.codex/get-shit-done/bin/gsd-tools.cjs" graphify query "<term>"
+```
+
+Shortcut through the project Makefile:
+
+```fish
+make graphify-update
 ```
 
 Useful terms:
@@ -45,7 +57,7 @@ Useful terms:
 - `IEEE LaTeX report`
 - `95 MB model limit`
 
-If implementation code is later added, rebuild/refresh the graph so source-code relationships augment the current planning graph.
+Do not rely on stale graph output: run `graphify build .` first, then read/query graph artifacts so source-code and planning relationships are current.
 
 ## 3. Always Apply Karpathy Guidelines
 
@@ -145,7 +157,46 @@ Do not add new dependencies unless:
 
 If adding a dependency, document why and where it is used.
 
-## 8. Dataset Safety Rules
+
+## 8. Experiment Tracking and Artifact Logging Rules
+
+Weights & Biases (W&B) is the primary experiment tracking system for AutoLens AI. Treat it as the project MLflow-equivalent experiment ledger.
+
+Decision: Use W&B as the primary tracker. Do not add MLflow, MLflow tracking abstractions, or duplicate experiment-tracking code unless W&B becomes blocked by access/quota/sync/export/policy issues or the user explicitly requests an MLflow migration.
+
+Use W&B for all training, evaluation, model-comparison, and final-selection runs starting from the first executable training phase.
+
+Required W&B setup:
+
+- Do not hardcode API keys or tokens in source, configs, notebooks, or docs.
+- Authenticate locally with `uv run wandb login` or provide `WANDB_API_KEY` through the environment.
+- Keep `.env` untracked; use `.env.example` only for placeholder variable names.
+- Prefer a stable project name such as `autolens-ai` unless the user explicitly changes it.
+
+Every training/evaluation run must log:
+
+- Run identity: phase, plan ID when relevant, model name, dataset version/manifest path, split version, git commit or dirty-worktree note, seed, device (`mps` or `cpu`), and config file path.
+- Hyperparameters: learning rate, optimizer, scheduler, batch size, image size, epochs, augmentations, early-stopping settings, class weights/sampling settings if used.
+- Required metrics: Accuracy, Precision, Recall, macro F1, weighted F1, per-class metrics, validation loss, validation accuracy, and final selected ranking metric.
+- Required plots/artifacts: training/validation loss curve, training/validation accuracy curve, normalized 8x8 confusion matrix, class distribution/balance report, and model-size/latency comparison when available.
+- Dataset evidence: source manifest, class mapping, split files/checksums, dedup/balance audit outputs, and notes for weak classes such as MICRO, STATION WAGON, and OPEN WHEEL/F1.
+- Model artifacts: checkpoints or exported artifacts needed to reproduce the run, final class mapping, preprocessing config, and artifact-size measurement. Do not upload private instructor final test data.
+- UI/final demo evidence in later phases: selected model artifact, inference preprocessing metadata, representative non-private sample predictions, and probability outputs used for the final report.
+
+Rules for W&B artifacts:
+
+- Store report-relevant generated files under local `artifacts/`, `outputs/`, or phase-specific evidence directories first, then log them to W&B.
+- Name artifacts with model, dataset/split version, phase, and date where practical.
+- Mark the final candidate model explicitly in W&B and verify it remains under the 95 MB submission limit before treating it as deployable.
+- Never log credentials, `.env`, Kaggle tokens, Hugging Face tokens, instructor-provided final test images, or private raw data.
+
+If W&B is unavailable:
+
+- Do not block local training solely because W&B is offline.
+- Use W&B offline mode or write local evidence files, then document the exact blocker in the phase summary/report.
+- Sync/log later when credentials or network are available.
+
+## 9. Dataset Safety Rules
 
 - Never use instructor-provided final test images during training or tuning.
 - Record every dataset source, URL/ID, license note, class mapping, and image count.
@@ -153,7 +204,7 @@ If adding a dependency, document why and where it is used.
 - Deduplicate and split before training.
 - Keep source manifests report-ready.
 
-## 9. Verification Before Completion
+## 10. Verification Before Completion
 
 For any phase execution, completion requires evidence from that phase's `NN-VALIDATION.md`.
 
@@ -164,14 +215,28 @@ Minimum expectations:
 - Update phase evidence/docs so Phase 6 can build the final report.
 - Do not claim a phase is complete only because files were created; verify behavior or document blockers.
 
-## 10. Git and Documentation Hygiene
+## 11. Phase Report Hygiene
+
+After every GSD phase is completed or handed off, create/update that phase's report under `docs/phase_reports/` using:
+
+- `docs/phase_reports/_TEMPLATE_PHASE_REPORT.md`
+
+Rules:
+
+- Use the template structure as the required report format.
+- Name reports consistently by phase, e.g. `docs/phase_reports/phase_01_project_foundation.md`.
+- Include the phase status, short outcome summary, commits, changed/added files, validation commands and results, extra work outside the original plan, notes, and next step.
+- Do not mark the phase report as complete without evidence from the phase `NN-VALIDATION.md` checks or clearly documented blockers.
+- Keep the phase report factual and evidence-based so Phase 6 can reuse it for the final IEEE report.
+
+## 12. Git and Documentation Hygiene
 
 - Keep planning docs and phase artifacts committed when changed.
 - Use the repository Lore commit protocol from AGENTS.md for commit messages.
 - Do not commit `.DS_Store`, credentials, raw private datasets, or instructor final test data.
 - Keep README and docs aligned with actual commands that work in fish.
 
-## 11. When Unsure
+## 13. When Unsure
 
 Use this order:
 
