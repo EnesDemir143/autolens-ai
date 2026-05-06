@@ -1,0 +1,4604 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "generated_at": "2026-05-06T18:42:16.043327+00:00",
+    "hyperedges": [
+      {
+        "id": "phase_1_plan_bundle",
+        "label": "Phase 1 plan bundle",
+        "nodes": [
+          "phase_1_project_foundation",
+          "01_scaffold_uv_project_plan",
+          "02_dependency_documentation_plan",
+          "03_quality_gates_plan"
+        ],
+        "relation": "bundles",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": ".planning/phases/01-project-foundation"
+      },
+      {
+        "id": "phase_2_plan_bundle",
+        "label": "Phase 2 plan bundle",
+        "nodes": [
+          "phase_2_dataset_research_and_curation",
+          "01_01_source_catalog_plan",
+          "02_02_ingestion_scripts_plan",
+          "03_03_label_curation_plan",
+          "04_04_audit_splits_plan"
+        ],
+        "relation": "bundles",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": ".planning/phases/02-dataset-research-and-curation"
+      },
+      {
+        "id": "phase_3_plan_bundle",
+        "label": "Phase 3 plan bundle",
+        "nodes": [
+          "phase_3_baseline_training_pipeline",
+          "01_01_data_module_plan",
+          "02_02_model_factory_plan",
+          "03_03_lightning_training_plan",
+          "04_04_baseline_runbook_plan"
+        ],
+        "relation": "bundles",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": ".planning/phases/03-baseline-training-pipeline"
+      },
+      {
+        "id": "phase_4_plan_bundle",
+        "label": "Phase 4 plan bundle",
+        "nodes": [
+          "phase_4_model_comparison_and_selection",
+          "01_01_evaluation_suite_plan",
+          "02_02_dinov3_path_plan",
+          "03_03_model_benchmark_plan",
+          "04_04_final_selection_plan"
+        ],
+        "relation": "bundles",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": ".planning/phases/04-model-comparison-and-selection"
+      },
+      {
+        "id": "phase_5_plan_bundle",
+        "label": "Phase 5 plan bundle",
+        "nodes": [
+          "phase_5_gradio_demo_interface",
+          "01_01_inference_adapter_plan",
+          "02_02_gradio_layout_plan",
+          "03_03_results_visualization_plan",
+          "04_04_ui_smoke_docs_plan"
+        ],
+        "relation": "bundles",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": ".planning/phases/05-gradio-demo-interface"
+      },
+      {
+        "id": "phase_6_plan_bundle",
+        "label": "Phase 6 plan bundle",
+        "nodes": [
+          "phase_6_final_evidence_and_ieee_report",
+          "01_01_evidence_freeze_plan",
+          "02_02_report_input_map_plan",
+          "03_03_latex_report_plan",
+          "04_04_final_package_plan"
+        ],
+        "relation": "bundles",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": ".planning/phases/06-final-evidence-and-ieee-report"
+      },
+      {
+        "id": "model_comparison_set",
+        "label": "Model comparison set",
+        "nodes": [
+          "mobilenetv4_conv_medium",
+          "efficientnet_b2",
+          "resnet_baseline",
+          "dinov3_vit_s_16",
+          "f1_first_evaluation",
+          "95_mb_model_limit"
+        ],
+        "relation": "compared_by",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": ".planning/ROADMAP.md"
+      },
+      {
+        "id": "dataset_source_set",
+        "label": "Dataset source set",
+        "nodes": [
+          "ademboukhris_cars_body_type_cropped",
+          "mayurmahurkar_stanford_car_body_type_data",
+          "kitrofimov_cbsc",
+          "drbimmer_vehicle_classification",
+          "8_target_classes"
+        ],
+        "relation": "feeds",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": ".planning/research/SUMMARY.md"
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "autolens_ai",
+      "label": "AutoLens AI",
+      "file_type": "project",
+      "source_file": ".planning/PROJECT.md",
+      "description": "8-class car body type classifier for Yazlab 2 Project III",
+      "community": 0,
+      "norm_label": "autolens ai"
+    },
+    {
+      "id": "roadmap_md",
+      "label": "ROADMAP.md",
+      "file_type": "document",
+      "source_file": ".planning/ROADMAP.md",
+      "description": "Six-phase GSD roadmap",
+      "community": 0,
+      "norm_label": "roadmap.md"
+    },
+    {
+      "id": "requirements_md",
+      "label": "REQUIREMENTS.md",
+      "file_type": "document",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "33 v1 requirements and traceability",
+      "community": 0,
+      "norm_label": "requirements.md"
+    },
+    {
+      "id": "state_md",
+      "label": "STATE.md",
+      "file_type": "document",
+      "source_file": ".planning/STATE.md",
+      "description": "All six phases ready to execute",
+      "community": 0,
+      "norm_label": "state.md"
+    },
+    {
+      "id": "config_json",
+      "label": "config.json",
+      "file_type": "document",
+      "source_file": ".planning/config.json",
+      "description": "GSD config: standard, sequential, commit docs, graphify enabled",
+      "community": 0,
+      "norm_label": "config.json"
+    },
+    {
+      "id": "8_target_classes",
+      "label": "8 target classes",
+      "file_type": "concept",
+      "source_file": "docs/Yazlab 2- Proje 3.md",
+      "description": "SUV, VAN, STATION WAGON, MICRO, OPEN WHEEL/F1, SEDAN, HATCHBACK, PICK UP",
+      "community": 1,
+      "norm_label": "8 target classes"
+    },
+    {
+      "id": "f1_first_evaluation",
+      "label": "F1-first evaluation",
+      "file_type": "concept",
+      "source_file": "docs/Yazlab 2- Proje 3.md",
+      "description": "F1 primary; Accuracy, Precision, Recall and normalized confusion matrix required",
+      "community": 4,
+      "norm_label": "f1-first evaluation"
+    },
+    {
+      "id": "95_mb_model_limit",
+      "label": "95 MB model limit",
+      "file_type": "constraint",
+      "source_file": "docs/Yazlab 2- Proje 3.md",
+      "description": "Final model artifact must stay under 95 MB",
+      "community": 4,
+      "norm_label": "95 mb model limit"
+    },
+    {
+      "id": "gradio_modern_ui",
+      "label": "Gradio modern UI",
+      "file_type": "concept",
+      "source_file": ".planning/ROADMAP.md",
+      "description": "Upload, preview, prediction, confidence, probability chart",
+      "community": 5,
+      "norm_label": "gradio modern ui"
+    },
+    {
+      "id": "ieee_latex_report",
+      "label": "IEEE LaTeX report",
+      "file_type": "concept",
+      "source_file": ".agents/skills/latex-report-creator/SKILL.md",
+      "description": "Final IEEE report generated with awesome-ieee-report skill",
+      "community": 6,
+      "norm_label": "ieee latex report"
+    },
+    {
+      "id": "phase_1_project_foundation",
+      "label": "Phase 1: Project Foundation",
+      "file_type": "phase",
+      "source_file": ".planning/phases/01-project-foundation",
+      "description": "GSD phase 1 ready to execute",
+      "community": 1,
+      "norm_label": "phase 1: project foundation"
+    },
+    {
+      "id": "phase_1_context",
+      "label": "Phase 1 CONTEXT",
+      "file_type": "document",
+      "source_file": ".planning/phases/01-project-foundation/01-CONTEXT.md",
+      "description": "Context artifact for Project Foundation",
+      "community": 1,
+      "norm_label": "phase 1 context"
+    },
+    {
+      "id": "phase_1_research",
+      "label": "Phase 1 RESEARCH",
+      "file_type": "document",
+      "source_file": ".planning/phases/01-project-foundation/01-RESEARCH.md",
+      "description": "Research artifact for Project Foundation",
+      "community": 1,
+      "norm_label": "phase 1 research"
+    },
+    {
+      "id": "phase_1_validation",
+      "label": "Phase 1 VALIDATION",
+      "file_type": "document",
+      "source_file": ".planning/phases/01-project-foundation/01-VALIDATION.md",
+      "description": "Validation artifact for Project Foundation",
+      "community": 1,
+      "norm_label": "phase 1 validation"
+    },
+    {
+      "id": "01_scaffold_uv_project_plan",
+      "label": "01-scaffold-uv-project-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/01-project-foundation/01-scaffold-uv-project-PLAN.md",
+      "description": "Initialize the uv/Python 3.12 project skeleton and minimal importable package.",
+      "community": 1,
+      "norm_label": "01-scaffold-uv-project-plan"
+    },
+    {
+      "id": "env_01",
+      "label": "ENV-01",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement ENV-01",
+      "community": 1,
+      "norm_label": "env-01"
+    },
+    {
+      "id": "02_dependency_documentation_plan",
+      "label": "02-dependency-documentation-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/01-project-foundation/02-dependency-documentation-PLAN.md",
+      "description": "Document the approved uv dependency installation groups for the full ML/UI/reporting stack.",
+      "community": 1,
+      "norm_label": "02-dependency-documentation-plan"
+    },
+    {
+      "id": "env_02",
+      "label": "ENV-02",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement ENV-02",
+      "community": 1,
+      "norm_label": "env-02"
+    },
+    {
+      "id": "03_quality_gates_plan",
+      "label": "03-quality-gates-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/01-project-foundation/03-quality-gates-PLAN.md",
+      "description": "Configure practical lint, type, test, and pre-commit gates for the project foundation.",
+      "community": 1,
+      "norm_label": "03-quality-gates-plan"
+    },
+    {
+      "id": "env_03",
+      "label": "ENV-03",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement ENV-03",
+      "community": 1,
+      "norm_label": "env-03"
+    },
+    {
+      "id": "phase_2_dataset_research_and_curation",
+      "label": "Phase 2: Dataset Research and Curation",
+      "file_type": "phase",
+      "source_file": ".planning/phases/02-dataset-research-and-curation",
+      "description": "GSD phase 2 ready to execute",
+      "community": 2,
+      "norm_label": "phase 2: dataset research and curation"
+    },
+    {
+      "id": "phase_2_context",
+      "label": "Phase 2 CONTEXT",
+      "file_type": "document",
+      "source_file": ".planning/phases/02-dataset-research-and-curation/02-CONTEXT.md",
+      "description": "Context artifact for Dataset Research and Curation",
+      "community": 2,
+      "norm_label": "phase 2 context"
+    },
+    {
+      "id": "phase_2_research",
+      "label": "Phase 2 RESEARCH",
+      "file_type": "document",
+      "source_file": ".planning/phases/02-dataset-research-and-curation/02-RESEARCH.md",
+      "description": "Research artifact for Dataset Research and Curation",
+      "community": 2,
+      "norm_label": "phase 2 research"
+    },
+    {
+      "id": "phase_2_validation",
+      "label": "Phase 2 VALIDATION",
+      "file_type": "document",
+      "source_file": ".planning/phases/02-dataset-research-and-curation/02-VALIDATION.md",
+      "description": "Validation artifact for Dataset Research and Curation",
+      "community": 2,
+      "norm_label": "phase 2 validation"
+    },
+    {
+      "id": "01_01_source_catalog_plan",
+      "label": "01-01-source-catalog-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/02-dataset-research-and-curation/01-01-source-catalog-PLAN.md",
+      "description": "Catalog candidate Kaggle/HF sources and legal/source metadata",
+      "community": 2,
+      "norm_label": "01-01-source-catalog-plan"
+    },
+    {
+      "id": "data_01",
+      "label": "DATA-01",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement DATA-01",
+      "community": 2,
+      "norm_label": "data-01"
+    },
+    {
+      "id": "data_02",
+      "label": "DATA-02",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement DATA-02",
+      "community": 2,
+      "norm_label": "data-02"
+    },
+    {
+      "id": "data_04",
+      "label": "DATA-04",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement DATA-04",
+      "community": 2,
+      "norm_label": "data-04"
+    },
+    {
+      "id": "02_02_ingestion_scripts_plan",
+      "label": "02-02-ingestion-scripts-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/02-dataset-research-and-curation/02-02-ingestion-scripts-PLAN.md",
+      "description": "Create source download/ingestion command surfaces",
+      "community": 2,
+      "norm_label": "02-02-ingestion-scripts-plan"
+    },
+    {
+      "id": "03_03_label_curation_plan",
+      "label": "03-03-label-curation-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/02-dataset-research-and-curation/03-03-label-curation-PLAN.md",
+      "description": "Map raw labels and curate the 8-class dataset",
+      "community": 2,
+      "norm_label": "03-03-label-curation-plan"
+    },
+    {
+      "id": "data_03",
+      "label": "DATA-03",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement DATA-03",
+      "community": 2,
+      "norm_label": "data-03"
+    },
+    {
+      "id": "data_05",
+      "label": "DATA-05",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement DATA-05",
+      "community": 2,
+      "norm_label": "data-05"
+    },
+    {
+      "id": "04_04_audit_splits_plan",
+      "label": "04-04-audit-splits-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/02-dataset-research-and-curation/04-04-audit-splits-PLAN.md",
+      "description": "Generate manifest, balance audit, dedup report, and split files",
+      "community": 2,
+      "norm_label": "04-04-audit-splits-plan"
+    },
+    {
+      "id": "data_06",
+      "label": "DATA-06",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement DATA-06",
+      "community": 2,
+      "norm_label": "data-06"
+    },
+    {
+      "id": "phase_3_baseline_training_pipeline",
+      "label": "Phase 3: Baseline Training Pipeline",
+      "file_type": "phase",
+      "source_file": ".planning/phases/03-baseline-training-pipeline",
+      "description": "GSD phase 3 ready to execute",
+      "community": 3,
+      "norm_label": "phase 3: baseline training pipeline"
+    },
+    {
+      "id": "phase_3_context",
+      "label": "Phase 3 CONTEXT",
+      "file_type": "document",
+      "source_file": ".planning/phases/03-baseline-training-pipeline/03-CONTEXT.md",
+      "description": "Context artifact for Baseline Training Pipeline",
+      "community": 3,
+      "norm_label": "phase 3 context"
+    },
+    {
+      "id": "phase_3_research",
+      "label": "Phase 3 RESEARCH",
+      "file_type": "document",
+      "source_file": ".planning/phases/03-baseline-training-pipeline/03-RESEARCH.md",
+      "description": "Research artifact for Baseline Training Pipeline",
+      "community": 3,
+      "norm_label": "phase 3 research"
+    },
+    {
+      "id": "phase_3_validation",
+      "label": "Phase 3 VALIDATION",
+      "file_type": "document",
+      "source_file": ".planning/phases/03-baseline-training-pipeline/03-VALIDATION.md",
+      "description": "Validation artifact for Baseline Training Pipeline",
+      "community": 3,
+      "norm_label": "phase 3 validation"
+    },
+    {
+      "id": "01_01_data_module_plan",
+      "label": "01-01-data-module-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/03-baseline-training-pipeline/01-01-data-module-PLAN.md",
+      "description": "Implement dataset class/datamodule and preprocessing config",
+      "community": 3,
+      "norm_label": "01-01-data-module-plan"
+    },
+    {
+      "id": "trn_06",
+      "label": "TRN-06",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement TRN-06",
+      "community": 3,
+      "norm_label": "trn-06"
+    },
+    {
+      "id": "trn_07",
+      "label": "TRN-07",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement TRN-07",
+      "community": 3,
+      "norm_label": "trn-07"
+    },
+    {
+      "id": "02_02_model_factory_plan",
+      "label": "02-02-model-factory-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/03-baseline-training-pipeline/02-02-model-factory-PLAN.md",
+      "description": "Implement CNN model factory for MobileNetV4, EfficientNet-B2, and ResNet",
+      "community": 3,
+      "norm_label": "02-02-model-factory-plan"
+    },
+    {
+      "id": "trn_01",
+      "label": "TRN-01",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement TRN-01",
+      "community": 3,
+      "norm_label": "trn-01"
+    },
+    {
+      "id": "trn_02",
+      "label": "TRN-02",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement TRN-02",
+      "community": 3,
+      "norm_label": "trn-02"
+    },
+    {
+      "id": "trn_03",
+      "label": "TRN-03",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement TRN-03",
+      "community": 3,
+      "norm_label": "trn-03"
+    },
+    {
+      "id": "03_03_lightning_training_plan",
+      "label": "03-03-lightning-training-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/03-baseline-training-pipeline/03-03-lightning-training-PLAN.md",
+      "description": "Implement Lightning module, callbacks, checkpointing, and MPS/CPU handling",
+      "community": 3,
+      "norm_label": "03-03-lightning-training-plan"
+    },
+    {
+      "id": "04_04_baseline_runbook_plan",
+      "label": "04-04-baseline-runbook-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/03-baseline-training-pipeline/04-04-baseline-runbook-PLAN.md",
+      "description": "Add baseline experiment configs and runbook for the three CNN models",
+      "community": 3,
+      "norm_label": "04-04-baseline-runbook-plan"
+    },
+    {
+      "id": "phase_4_model_comparison_and_selection",
+      "label": "Phase 4: Model Comparison and Selection",
+      "file_type": "phase",
+      "source_file": ".planning/phases/04-model-comparison-and-selection",
+      "description": "GSD phase 4 ready to execute",
+      "community": 4,
+      "norm_label": "phase 4: model comparison and selection"
+    },
+    {
+      "id": "phase_4_context",
+      "label": "Phase 4 CONTEXT",
+      "file_type": "document",
+      "source_file": ".planning/phases/04-model-comparison-and-selection/04-CONTEXT.md",
+      "description": "Context artifact for Model Comparison and Selection",
+      "community": 4,
+      "norm_label": "phase 4 context"
+    },
+    {
+      "id": "phase_4_research",
+      "label": "Phase 4 RESEARCH",
+      "file_type": "document",
+      "source_file": ".planning/phases/04-model-comparison-and-selection/04-RESEARCH.md",
+      "description": "Research artifact for Model Comparison and Selection",
+      "community": 4,
+      "norm_label": "phase 4 research"
+    },
+    {
+      "id": "phase_4_validation",
+      "label": "Phase 4 VALIDATION",
+      "file_type": "document",
+      "source_file": ".planning/phases/04-model-comparison-and-selection/04-VALIDATION.md",
+      "description": "Validation artifact for Model Comparison and Selection",
+      "community": 4,
+      "norm_label": "phase 4 validation"
+    },
+    {
+      "id": "01_01_evaluation_suite_plan",
+      "label": "01-01-evaluation-suite-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/04-model-comparison-and-selection/01-01-evaluation-suite-PLAN.md",
+      "description": "Create metrics, classification report, and plot generation suite",
+      "community": 4,
+      "norm_label": "01-01-evaluation-suite-plan"
+    },
+    {
+      "id": "eval_01",
+      "label": "EVAL-01",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement EVAL-01",
+      "community": 4,
+      "norm_label": "eval-01"
+    },
+    {
+      "id": "eval_02",
+      "label": "EVAL-02",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement EVAL-02",
+      "community": 4,
+      "norm_label": "eval-02"
+    },
+    {
+      "id": "eval_03",
+      "label": "EVAL-03",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement EVAL-03",
+      "community": 4,
+      "norm_label": "eval-03"
+    },
+    {
+      "id": "eval_04",
+      "label": "EVAL-04",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement EVAL-04",
+      "community": 4,
+      "norm_label": "eval-04"
+    },
+    {
+      "id": "eval_05",
+      "label": "EVAL-05",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement EVAL-05",
+      "community": 4,
+      "norm_label": "eval-05"
+    },
+    {
+      "id": "02_02_dinov3_path_plan",
+      "label": "02-02-dinov3-path-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/04-model-comparison-and-selection/02-02-dinov3-path-PLAN.md",
+      "description": "Implement DINOv3 non-LoRA evaluation path with gated-access fallback",
+      "community": 4,
+      "norm_label": "02-02-dinov3-path-plan"
+    },
+    {
+      "id": "trn_04",
+      "label": "TRN-04",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement TRN-04",
+      "community": 4,
+      "norm_label": "trn-04"
+    },
+    {
+      "id": "trn_05",
+      "label": "TRN-05",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement TRN-05",
+      "community": 4,
+      "norm_label": "trn-05"
+    },
+    {
+      "id": "03_03_model_benchmark_plan",
+      "label": "03-03-model-benchmark-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/04-model-comparison-and-selection/03-03-model-benchmark-PLAN.md",
+      "description": "Benchmark all candidate models by macro F1, size, and latency",
+      "community": 4,
+      "norm_label": "03-03-model-benchmark-plan"
+    },
+    {
+      "id": "eval_06",
+      "label": "EVAL-06",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement EVAL-06",
+      "community": 4,
+      "norm_label": "eval-06"
+    },
+    {
+      "id": "eval_07",
+      "label": "EVAL-07",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement EVAL-07",
+      "community": 4,
+      "norm_label": "eval-07"
+    },
+    {
+      "id": "04_04_final_selection_plan",
+      "label": "04-04-final-selection-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/04-model-comparison-and-selection/04-04-final-selection-PLAN.md",
+      "description": "Write final model selection artifact and report-ready rationale",
+      "community": 4,
+      "norm_label": "04-04-final-selection-plan"
+    },
+    {
+      "id": "phase_5_gradio_demo_interface",
+      "label": "Phase 5: Gradio Demo Interface",
+      "file_type": "phase",
+      "source_file": ".planning/phases/05-gradio-demo-interface",
+      "description": "GSD phase 5 ready to execute",
+      "community": 5,
+      "norm_label": "phase 5: gradio demo interface"
+    },
+    {
+      "id": "phase_5_context",
+      "label": "Phase 5 CONTEXT",
+      "file_type": "document",
+      "source_file": ".planning/phases/05-gradio-demo-interface/05-CONTEXT.md",
+      "description": "Context artifact for Gradio Demo Interface",
+      "community": 5,
+      "norm_label": "phase 5 context"
+    },
+    {
+      "id": "phase_5_research",
+      "label": "Phase 5 RESEARCH",
+      "file_type": "document",
+      "source_file": ".planning/phases/05-gradio-demo-interface/05-RESEARCH.md",
+      "description": "Research artifact for Gradio Demo Interface",
+      "community": 5,
+      "norm_label": "phase 5 research"
+    },
+    {
+      "id": "phase_5_validation",
+      "label": "Phase 5 VALIDATION",
+      "file_type": "document",
+      "source_file": ".planning/phases/05-gradio-demo-interface/05-VALIDATION.md",
+      "description": "Validation artifact for Gradio Demo Interface",
+      "community": 5,
+      "norm_label": "phase 5 validation"
+    },
+    {
+      "id": "phase_5_ui_spec",
+      "label": "Phase 5 UI-SPEC",
+      "file_type": "document",
+      "source_file": ".planning/phases/05-gradio-demo-interface/05-UI-SPEC.md",
+      "description": "UI design contract for Gradio demo",
+      "community": 5,
+      "norm_label": "phase 5 ui-spec"
+    },
+    {
+      "id": "01_01_inference_adapter_plan",
+      "label": "01-01-inference-adapter-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/05-gradio-demo-interface/01-01-inference-adapter-PLAN.md",
+      "description": "Create final model loading and prediction adapter",
+      "community": 5,
+      "norm_label": "01-01-inference-adapter-plan"
+    },
+    {
+      "id": "ui_03",
+      "label": "UI-03",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement UI-03",
+      "community": 5,
+      "norm_label": "ui-03"
+    },
+    {
+      "id": "ui_04",
+      "label": "UI-04",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement UI-04",
+      "community": 5,
+      "norm_label": "ui-04"
+    },
+    {
+      "id": "ui_07",
+      "label": "UI-07",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement UI-07",
+      "community": 5,
+      "norm_label": "ui-07"
+    },
+    {
+      "id": "02_02_gradio_layout_plan",
+      "label": "02-02-gradio-layout-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/05-gradio-demo-interface/02-02-gradio-layout-PLAN.md",
+      "description": "Build modern Gradio Blocks layout with upload and preview",
+      "community": 5,
+      "norm_label": "02-02-gradio-layout-plan"
+    },
+    {
+      "id": "ui_01",
+      "label": "UI-01",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement UI-01",
+      "community": 5,
+      "norm_label": "ui-01"
+    },
+    {
+      "id": "ui_02",
+      "label": "UI-02",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement UI-02",
+      "community": 5,
+      "norm_label": "ui-02"
+    },
+    {
+      "id": "ui_06",
+      "label": "UI-06",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement UI-06",
+      "community": 5,
+      "norm_label": "ui-06"
+    },
+    {
+      "id": "03_03_results_visualization_plan",
+      "label": "03-03-results-visualization-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/05-gradio-demo-interface/03-03-results-visualization-PLAN.md",
+      "description": "Add predicted class, confidence, and 8-class probability chart",
+      "community": 5,
+      "norm_label": "03-03-results-visualization-plan"
+    },
+    {
+      "id": "ui_05",
+      "label": "UI-05",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement UI-05",
+      "community": 5,
+      "norm_label": "ui-05"
+    },
+    {
+      "id": "04_04_ui_smoke_docs_plan",
+      "label": "04-04-ui-smoke-docs-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/05-gradio-demo-interface/04-04-ui-smoke-docs-PLAN.md",
+      "description": "Add UI smoke test/run docs and latency evidence",
+      "community": 5,
+      "norm_label": "04-04-ui-smoke-docs-plan"
+    },
+    {
+      "id": "phase_6_final_evidence_and_ieee_report",
+      "label": "Phase 6: Final Evidence and IEEE Report",
+      "file_type": "phase",
+      "source_file": ".planning/phases/06-final-evidence-and-ieee-report",
+      "description": "GSD phase 6 ready to execute",
+      "community": 6,
+      "norm_label": "phase 6: final evidence and ieee report"
+    },
+    {
+      "id": "phase_6_context",
+      "label": "Phase 6 CONTEXT",
+      "file_type": "document",
+      "source_file": ".planning/phases/06-final-evidence-and-ieee-report/06-CONTEXT.md",
+      "description": "Context artifact for Final Evidence and IEEE Report",
+      "community": 6,
+      "norm_label": "phase 6 context"
+    },
+    {
+      "id": "phase_6_research",
+      "label": "Phase 6 RESEARCH",
+      "file_type": "document",
+      "source_file": ".planning/phases/06-final-evidence-and-ieee-report/06-RESEARCH.md",
+      "description": "Research artifact for Final Evidence and IEEE Report",
+      "community": 6,
+      "norm_label": "phase 6 research"
+    },
+    {
+      "id": "phase_6_validation",
+      "label": "Phase 6 VALIDATION",
+      "file_type": "document",
+      "source_file": ".planning/phases/06-final-evidence-and-ieee-report/06-VALIDATION.md",
+      "description": "Validation artifact for Final Evidence and IEEE Report",
+      "community": 6,
+      "norm_label": "phase 6 validation"
+    },
+    {
+      "id": "01_01_evidence_freeze_plan",
+      "label": "01-01-evidence-freeze-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/06-final-evidence-and-ieee-report/01-01-evidence-freeze-PLAN.md",
+      "description": "Collect final evidence inventory and reproducibility artifacts",
+      "community": 6,
+      "norm_label": "01-01-evidence-freeze-plan"
+    },
+    {
+      "id": "rpt_01",
+      "label": "RPT-01",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement RPT-01",
+      "community": 6,
+      "norm_label": "rpt-01"
+    },
+    {
+      "id": "rpt_03",
+      "label": "RPT-03",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement RPT-03",
+      "community": 6,
+      "norm_label": "rpt-03"
+    },
+    {
+      "id": "02_02_report_input_map_plan",
+      "label": "02-02-report-input-map-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/06-final-evidence-and-ieee-report/02-02-report-input-map-PLAN.md",
+      "description": "Map requirements/evidence into IEEE report sections",
+      "community": 6,
+      "norm_label": "02-02-report-input-map-plan"
+    },
+    {
+      "id": "rpt_02",
+      "label": "RPT-02",
+      "file_type": "requirement",
+      "source_file": ".planning/REQUIREMENTS.md",
+      "description": "Requirement RPT-02",
+      "community": 6,
+      "norm_label": "rpt-02"
+    },
+    {
+      "id": "03_03_latex_report_plan",
+      "label": "03-03-latex-report-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/06-final-evidence-and-ieee-report/03-03-latex-report-PLAN.md",
+      "description": "Generate IEEE LaTeX report with the local report creator skill",
+      "community": 6,
+      "norm_label": "03-03-latex-report-plan"
+    },
+    {
+      "id": "04_04_final_package_plan",
+      "label": "04-04-final-package-PLAN",
+      "file_type": "plan",
+      "source_file": ".planning/phases/06-final-evidence-and-ieee-report/04-04-final-package-PLAN.md",
+      "description": "Prepare final submission README/package checklist",
+      "community": 6,
+      "norm_label": "04-04-final-package-plan"
+    },
+    {
+      "id": "mobilenetv4_conv_medium",
+      "label": "MobileNetV4 Conv Medium",
+      "file_type": "model",
+      "source_file": ".planning/ROADMAP.md",
+      "description": "Candidate model: MobileNetV4 Conv Medium",
+      "community": 3,
+      "norm_label": "mobilenetv4 conv medium"
+    },
+    {
+      "id": "efficientnet_b2",
+      "label": "EfficientNet-B2",
+      "file_type": "model",
+      "source_file": ".planning/ROADMAP.md",
+      "description": "Candidate model: EfficientNet-B2",
+      "community": 3,
+      "norm_label": "efficientnet-b2"
+    },
+    {
+      "id": "resnet_baseline",
+      "label": "ResNet baseline",
+      "file_type": "model",
+      "source_file": ".planning/ROADMAP.md",
+      "description": "Candidate model: ResNet baseline",
+      "community": 3,
+      "norm_label": "resnet baseline"
+    },
+    {
+      "id": "dinov3_vit_s_16",
+      "label": "DINOv3 ViT-S/16",
+      "file_type": "model",
+      "source_file": ".planning/ROADMAP.md",
+      "description": "Candidate model: DINOv3 ViT-S/16",
+      "community": 4,
+      "norm_label": "dinov3 vit-s/16"
+    },
+    {
+      "id": "ademboukhris_cars_body_type_cropped",
+      "label": "ademboukhris/cars-body-type-cropped",
+      "file_type": "dataset",
+      "source_file": ".planning/research/SUMMARY.md",
+      "description": "Candidate dataset source: ademboukhris/cars-body-type-cropped",
+      "community": 2,
+      "norm_label": "ademboukhris/cars-body-type-cropped"
+    },
+    {
+      "id": "mayurmahurkar_stanford_car_body_type_data",
+      "label": "mayurmahurkar/stanford-car-body-type-data",
+      "file_type": "dataset",
+      "source_file": ".planning/research/SUMMARY.md",
+      "description": "Candidate dataset source: mayurmahurkar/stanford-car-body-type-data",
+      "community": 2,
+      "norm_label": "mayurmahurkar/stanford-car-body-type-data"
+    },
+    {
+      "id": "kitrofimov_cbsc",
+      "label": "kitrofimov/cbsc",
+      "file_type": "dataset",
+      "source_file": ".planning/research/SUMMARY.md",
+      "description": "Candidate dataset source: kitrofimov/cbsc",
+      "community": 2,
+      "norm_label": "kitrofimov/cbsc"
+    },
+    {
+      "id": "drbimmer_vehicle_classification",
+      "label": "DrBimmer/vehicle-classification",
+      "file_type": "dataset",
+      "source_file": ".planning/research/SUMMARY.md",
+      "description": "Candidate dataset source: DrBimmer/vehicle-classification",
+      "community": 2,
+      "norm_label": "drbimmer/vehicle-classification"
+    }
+  ],
+  "edges": [
+    {
+      "source": "autolens_ai",
+      "target": "roadmap_md",
+      "relation": "defined_by",
+      "label": "defined_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "requirements_md",
+      "relation": "specified_by",
+      "label": "specified_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "state_md",
+      "relation": "tracked_by",
+      "label": "tracked_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "config_json",
+      "relation": "configured_by",
+      "label": "configured_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "8_target_classes",
+      "relation": "predicts",
+      "label": "predicts",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "f1_first_evaluation",
+      "relation": "optimized_for",
+      "label": "optimized_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "95_mb_model_limit",
+      "relation": "constrained_by",
+      "label": "constrained_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "gradio_modern_ui",
+      "relation": "delivers",
+      "label": "delivers",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "ieee_latex_report",
+      "relation": "documents",
+      "label": "documents",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "phase_1_project_foundation",
+      "relation": "has_phase",
+      "label": "has_phase",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "roadmap_md",
+      "target": "phase_1_project_foundation",
+      "relation": "contains",
+      "label": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_1_project_foundation",
+      "target": "phase_1_context",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_1_project_foundation",
+      "target": "phase_1_research",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_1_project_foundation",
+      "target": "phase_1_validation",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_1_project_foundation",
+      "target": "01_scaffold_uv_project_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "env_01",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_scaffold_uv_project_plan",
+      "target": "env_01",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_1_project_foundation",
+      "target": "02_dependency_documentation_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "env_02",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_dependency_documentation_plan",
+      "target": "env_02",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_1_project_foundation",
+      "target": "03_quality_gates_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "env_03",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "03_quality_gates_plan",
+      "target": "env_03",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "phase_2_dataset_research_and_curation",
+      "relation": "has_phase",
+      "label": "has_phase",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "roadmap_md",
+      "target": "phase_2_dataset_research_and_curation",
+      "relation": "contains",
+      "label": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_1_project_foundation",
+      "target": "phase_2_dataset_research_and_curation",
+      "relation": "precedes",
+      "label": "precedes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/phases/02-dataset-research-and-curation"
+    },
+    {
+      "source": "phase_2_dataset_research_and_curation",
+      "target": "phase_2_context",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_2_dataset_research_and_curation",
+      "target": "phase_2_research",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_2_dataset_research_and_curation",
+      "target": "phase_2_validation",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_2_dataset_research_and_curation",
+      "target": "01_01_source_catalog_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "data_01",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_source_catalog_plan",
+      "target": "data_01",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "data_02",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_source_catalog_plan",
+      "target": "data_02",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "data_04",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_source_catalog_plan",
+      "target": "data_04",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_2_dataset_research_and_curation",
+      "target": "02_02_ingestion_scripts_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "data_01",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_ingestion_scripts_plan",
+      "target": "data_01",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "data_02",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_ingestion_scripts_plan",
+      "target": "data_02",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_2_dataset_research_and_curation",
+      "target": "03_03_label_curation_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "data_03",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "03_03_label_curation_plan",
+      "target": "data_03",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "data_05",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "03_03_label_curation_plan",
+      "target": "data_05",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_2_dataset_research_and_curation",
+      "target": "04_04_audit_splits_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "data_04",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_audit_splits_plan",
+      "target": "data_04",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "data_05",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_audit_splits_plan",
+      "target": "data_05",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "data_06",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_audit_splits_plan",
+      "target": "data_06",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "phase_3_baseline_training_pipeline",
+      "relation": "has_phase",
+      "label": "has_phase",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "roadmap_md",
+      "target": "phase_3_baseline_training_pipeline",
+      "relation": "contains",
+      "label": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_2_dataset_research_and_curation",
+      "target": "phase_3_baseline_training_pipeline",
+      "relation": "precedes",
+      "label": "precedes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/phases/03-baseline-training-pipeline"
+    },
+    {
+      "source": "phase_3_baseline_training_pipeline",
+      "target": "phase_3_context",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_3_baseline_training_pipeline",
+      "target": "phase_3_research",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_3_baseline_training_pipeline",
+      "target": "phase_3_validation",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_3_baseline_training_pipeline",
+      "target": "01_01_data_module_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_06",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_data_module_plan",
+      "target": "trn_06",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_07",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_data_module_plan",
+      "target": "trn_07",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_3_baseline_training_pipeline",
+      "target": "02_02_model_factory_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_01",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_model_factory_plan",
+      "target": "trn_01",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_02",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_model_factory_plan",
+      "target": "trn_02",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_03",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_model_factory_plan",
+      "target": "trn_03",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_3_baseline_training_pipeline",
+      "target": "03_03_lightning_training_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_06",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "03_03_lightning_training_plan",
+      "target": "trn_06",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_07",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "03_03_lightning_training_plan",
+      "target": "trn_07",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_3_baseline_training_pipeline",
+      "target": "04_04_baseline_runbook_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_01",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_baseline_runbook_plan",
+      "target": "trn_01",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_02",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_baseline_runbook_plan",
+      "target": "trn_02",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_03",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_baseline_runbook_plan",
+      "target": "trn_03",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "phase_4_model_comparison_and_selection",
+      "relation": "has_phase",
+      "label": "has_phase",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "roadmap_md",
+      "target": "phase_4_model_comparison_and_selection",
+      "relation": "contains",
+      "label": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_3_baseline_training_pipeline",
+      "target": "phase_4_model_comparison_and_selection",
+      "relation": "precedes",
+      "label": "precedes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/phases/04-model-comparison-and-selection"
+    },
+    {
+      "source": "phase_4_model_comparison_and_selection",
+      "target": "phase_4_context",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_4_model_comparison_and_selection",
+      "target": "phase_4_research",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_4_model_comparison_and_selection",
+      "target": "phase_4_validation",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_4_model_comparison_and_selection",
+      "target": "01_01_evaluation_suite_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "eval_01",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_evaluation_suite_plan",
+      "target": "eval_01",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "eval_02",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_evaluation_suite_plan",
+      "target": "eval_02",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "eval_03",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_evaluation_suite_plan",
+      "target": "eval_03",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "eval_04",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_evaluation_suite_plan",
+      "target": "eval_04",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "eval_05",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_evaluation_suite_plan",
+      "target": "eval_05",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_4_model_comparison_and_selection",
+      "target": "02_02_dinov3_path_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_04",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_dinov3_path_plan",
+      "target": "trn_04",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_05",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_dinov3_path_plan",
+      "target": "trn_05",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_4_model_comparison_and_selection",
+      "target": "03_03_model_benchmark_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "eval_06",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "03_03_model_benchmark_plan",
+      "target": "eval_06",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "eval_07",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "03_03_model_benchmark_plan",
+      "target": "eval_07",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_4_model_comparison_and_selection",
+      "target": "04_04_final_selection_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "eval_06",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_final_selection_plan",
+      "target": "eval_06",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "eval_07",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_final_selection_plan",
+      "target": "eval_07",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "phase_5_gradio_demo_interface",
+      "relation": "has_phase",
+      "label": "has_phase",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "roadmap_md",
+      "target": "phase_5_gradio_demo_interface",
+      "relation": "contains",
+      "label": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_4_model_comparison_and_selection",
+      "target": "phase_5_gradio_demo_interface",
+      "relation": "precedes",
+      "label": "precedes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/phases/05-gradio-demo-interface"
+    },
+    {
+      "source": "phase_5_gradio_demo_interface",
+      "target": "phase_5_context",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_5_gradio_demo_interface",
+      "target": "phase_5_research",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_5_gradio_demo_interface",
+      "target": "phase_5_validation",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_5_gradio_demo_interface",
+      "target": "phase_5_ui_spec",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_5_gradio_demo_interface",
+      "target": "01_01_inference_adapter_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "ui_03",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_inference_adapter_plan",
+      "target": "ui_03",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "ui_04",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_inference_adapter_plan",
+      "target": "ui_04",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "ui_07",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_inference_adapter_plan",
+      "target": "ui_07",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_5_gradio_demo_interface",
+      "target": "02_02_gradio_layout_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "ui_01",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_gradio_layout_plan",
+      "target": "ui_01",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "ui_02",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_gradio_layout_plan",
+      "target": "ui_02",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "ui_06",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_gradio_layout_plan",
+      "target": "ui_06",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_5_gradio_demo_interface",
+      "target": "03_03_results_visualization_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "ui_04",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "03_03_results_visualization_plan",
+      "target": "ui_04",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "ui_05",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "03_03_results_visualization_plan",
+      "target": "ui_05",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_5_gradio_demo_interface",
+      "target": "04_04_ui_smoke_docs_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "ui_06",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_ui_smoke_docs_plan",
+      "target": "ui_06",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "ui_07",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_ui_smoke_docs_plan",
+      "target": "ui_07",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "phase_6_final_evidence_and_ieee_report",
+      "relation": "has_phase",
+      "label": "has_phase",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "roadmap_md",
+      "target": "phase_6_final_evidence_and_ieee_report",
+      "relation": "contains",
+      "label": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_5_gradio_demo_interface",
+      "target": "phase_6_final_evidence_and_ieee_report",
+      "relation": "precedes",
+      "label": "precedes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/phases/06-final-evidence-and-ieee-report"
+    },
+    {
+      "source": "phase_6_final_evidence_and_ieee_report",
+      "target": "phase_6_context",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_6_final_evidence_and_ieee_report",
+      "target": "phase_6_research",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_6_final_evidence_and_ieee_report",
+      "target": "phase_6_validation",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_6_final_evidence_and_ieee_report",
+      "target": "01_01_evidence_freeze_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "rpt_01",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_evidence_freeze_plan",
+      "target": "rpt_01",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "rpt_03",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_evidence_freeze_plan",
+      "target": "rpt_03",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_6_final_evidence_and_ieee_report",
+      "target": "02_02_report_input_map_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "rpt_02",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_report_input_map_plan",
+      "target": "rpt_02",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "rpt_03",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_report_input_map_plan",
+      "target": "rpt_03",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_6_final_evidence_and_ieee_report",
+      "target": "03_03_latex_report_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "rpt_02",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "03_03_latex_report_plan",
+      "target": "rpt_02",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "rpt_03",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "03_03_latex_report_plan",
+      "target": "rpt_03",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_6_final_evidence_and_ieee_report",
+      "target": "04_04_final_package_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "rpt_01",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_final_package_plan",
+      "target": "rpt_01",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "rpt_03",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_final_package_plan",
+      "target": "rpt_03",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "mobilenetv4_conv_medium",
+      "relation": "evaluates",
+      "label": "evaluates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "mobilenetv4_conv_medium",
+      "target": "f1_first_evaluation",
+      "relation": "scored_by",
+      "label": "scored_by",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "mobilenetv4_conv_medium",
+      "target": "95_mb_model_limit",
+      "relation": "checked_against",
+      "label": "checked_against",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "efficientnet_b2",
+      "relation": "evaluates",
+      "label": "evaluates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "efficientnet_b2",
+      "target": "f1_first_evaluation",
+      "relation": "scored_by",
+      "label": "scored_by",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "efficientnet_b2",
+      "target": "95_mb_model_limit",
+      "relation": "checked_against",
+      "label": "checked_against",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "resnet_baseline",
+      "relation": "evaluates",
+      "label": "evaluates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "resnet_baseline",
+      "target": "f1_first_evaluation",
+      "relation": "scored_by",
+      "label": "scored_by",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "resnet_baseline",
+      "target": "95_mb_model_limit",
+      "relation": "checked_against",
+      "label": "checked_against",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "dinov3_vit_s_16",
+      "relation": "evaluates",
+      "label": "evaluates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "dinov3_vit_s_16",
+      "target": "f1_first_evaluation",
+      "relation": "scored_by",
+      "label": "scored_by",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "dinov3_vit_s_16",
+      "target": "95_mb_model_limit",
+      "relation": "checked_against",
+      "label": "checked_against",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "ademboukhris_cars_body_type_cropped",
+      "relation": "uses_candidate_dataset",
+      "label": "uses_candidate_dataset",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "ademboukhris_cars_body_type_cropped",
+      "target": "8_target_classes",
+      "relation": "maps_to",
+      "label": "maps_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": ".planning/research/SUMMARY.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "mayurmahurkar_stanford_car_body_type_data",
+      "relation": "uses_candidate_dataset",
+      "label": "uses_candidate_dataset",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "mayurmahurkar_stanford_car_body_type_data",
+      "target": "8_target_classes",
+      "relation": "maps_to",
+      "label": "maps_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": ".planning/research/SUMMARY.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "kitrofimov_cbsc",
+      "relation": "uses_candidate_dataset",
+      "label": "uses_candidate_dataset",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "kitrofimov_cbsc",
+      "target": "8_target_classes",
+      "relation": "maps_to",
+      "label": "maps_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": ".planning/research/SUMMARY.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "drbimmer_vehicle_classification",
+      "relation": "uses_candidate_dataset",
+      "label": "uses_candidate_dataset",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "drbimmer_vehicle_classification",
+      "target": "8_target_classes",
+      "relation": "maps_to",
+      "label": "maps_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": ".planning/research/SUMMARY.md"
+    }
+  ],
+  "links": [
+    {
+      "source": "autolens_ai",
+      "target": "roadmap_md",
+      "relation": "defined_by",
+      "label": "defined_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "requirements_md",
+      "relation": "specified_by",
+      "label": "specified_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "state_md",
+      "relation": "tracked_by",
+      "label": "tracked_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "config_json",
+      "relation": "configured_by",
+      "label": "configured_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "8_target_classes",
+      "relation": "predicts",
+      "label": "predicts",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "f1_first_evaluation",
+      "relation": "optimized_for",
+      "label": "optimized_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "95_mb_model_limit",
+      "relation": "constrained_by",
+      "label": "constrained_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "gradio_modern_ui",
+      "relation": "delivers",
+      "label": "delivers",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "ieee_latex_report",
+      "relation": "documents",
+      "label": "documents",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "phase_1_project_foundation",
+      "relation": "has_phase",
+      "label": "has_phase",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "roadmap_md",
+      "target": "phase_1_project_foundation",
+      "relation": "contains",
+      "label": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_1_project_foundation",
+      "target": "phase_1_context",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_1_project_foundation",
+      "target": "phase_1_research",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_1_project_foundation",
+      "target": "phase_1_validation",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_1_project_foundation",
+      "target": "01_scaffold_uv_project_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "env_01",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_scaffold_uv_project_plan",
+      "target": "env_01",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_1_project_foundation",
+      "target": "02_dependency_documentation_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "env_02",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_dependency_documentation_plan",
+      "target": "env_02",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_1_project_foundation",
+      "target": "03_quality_gates_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "env_03",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "03_quality_gates_plan",
+      "target": "env_03",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "phase_2_dataset_research_and_curation",
+      "relation": "has_phase",
+      "label": "has_phase",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "roadmap_md",
+      "target": "phase_2_dataset_research_and_curation",
+      "relation": "contains",
+      "label": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_1_project_foundation",
+      "target": "phase_2_dataset_research_and_curation",
+      "relation": "precedes",
+      "label": "precedes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/phases/02-dataset-research-and-curation"
+    },
+    {
+      "source": "phase_2_dataset_research_and_curation",
+      "target": "phase_2_context",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_2_dataset_research_and_curation",
+      "target": "phase_2_research",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_2_dataset_research_and_curation",
+      "target": "phase_2_validation",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_2_dataset_research_and_curation",
+      "target": "01_01_source_catalog_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "data_01",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_source_catalog_plan",
+      "target": "data_01",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "data_02",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_source_catalog_plan",
+      "target": "data_02",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "data_04",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_source_catalog_plan",
+      "target": "data_04",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_2_dataset_research_and_curation",
+      "target": "02_02_ingestion_scripts_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "data_01",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_ingestion_scripts_plan",
+      "target": "data_01",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "data_02",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_ingestion_scripts_plan",
+      "target": "data_02",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_2_dataset_research_and_curation",
+      "target": "03_03_label_curation_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "data_03",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "03_03_label_curation_plan",
+      "target": "data_03",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "data_05",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "03_03_label_curation_plan",
+      "target": "data_05",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_2_dataset_research_and_curation",
+      "target": "04_04_audit_splits_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "data_04",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_audit_splits_plan",
+      "target": "data_04",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "data_05",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_audit_splits_plan",
+      "target": "data_05",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "data_06",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_audit_splits_plan",
+      "target": "data_06",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "phase_3_baseline_training_pipeline",
+      "relation": "has_phase",
+      "label": "has_phase",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "roadmap_md",
+      "target": "phase_3_baseline_training_pipeline",
+      "relation": "contains",
+      "label": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_2_dataset_research_and_curation",
+      "target": "phase_3_baseline_training_pipeline",
+      "relation": "precedes",
+      "label": "precedes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/phases/03-baseline-training-pipeline"
+    },
+    {
+      "source": "phase_3_baseline_training_pipeline",
+      "target": "phase_3_context",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_3_baseline_training_pipeline",
+      "target": "phase_3_research",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_3_baseline_training_pipeline",
+      "target": "phase_3_validation",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_3_baseline_training_pipeline",
+      "target": "01_01_data_module_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_06",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_data_module_plan",
+      "target": "trn_06",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_07",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_data_module_plan",
+      "target": "trn_07",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_3_baseline_training_pipeline",
+      "target": "02_02_model_factory_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_01",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_model_factory_plan",
+      "target": "trn_01",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_02",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_model_factory_plan",
+      "target": "trn_02",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_03",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_model_factory_plan",
+      "target": "trn_03",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_3_baseline_training_pipeline",
+      "target": "03_03_lightning_training_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_06",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "03_03_lightning_training_plan",
+      "target": "trn_06",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_07",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "03_03_lightning_training_plan",
+      "target": "trn_07",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_3_baseline_training_pipeline",
+      "target": "04_04_baseline_runbook_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_01",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_baseline_runbook_plan",
+      "target": "trn_01",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_02",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_baseline_runbook_plan",
+      "target": "trn_02",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_03",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_baseline_runbook_plan",
+      "target": "trn_03",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "phase_4_model_comparison_and_selection",
+      "relation": "has_phase",
+      "label": "has_phase",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "roadmap_md",
+      "target": "phase_4_model_comparison_and_selection",
+      "relation": "contains",
+      "label": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_3_baseline_training_pipeline",
+      "target": "phase_4_model_comparison_and_selection",
+      "relation": "precedes",
+      "label": "precedes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/phases/04-model-comparison-and-selection"
+    },
+    {
+      "source": "phase_4_model_comparison_and_selection",
+      "target": "phase_4_context",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_4_model_comparison_and_selection",
+      "target": "phase_4_research",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_4_model_comparison_and_selection",
+      "target": "phase_4_validation",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_4_model_comparison_and_selection",
+      "target": "01_01_evaluation_suite_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "eval_01",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_evaluation_suite_plan",
+      "target": "eval_01",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "eval_02",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_evaluation_suite_plan",
+      "target": "eval_02",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "eval_03",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_evaluation_suite_plan",
+      "target": "eval_03",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "eval_04",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_evaluation_suite_plan",
+      "target": "eval_04",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "eval_05",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_evaluation_suite_plan",
+      "target": "eval_05",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_4_model_comparison_and_selection",
+      "target": "02_02_dinov3_path_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_04",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_dinov3_path_plan",
+      "target": "trn_04",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "trn_05",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_dinov3_path_plan",
+      "target": "trn_05",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_4_model_comparison_and_selection",
+      "target": "03_03_model_benchmark_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "eval_06",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "03_03_model_benchmark_plan",
+      "target": "eval_06",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "eval_07",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "03_03_model_benchmark_plan",
+      "target": "eval_07",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_4_model_comparison_and_selection",
+      "target": "04_04_final_selection_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "eval_06",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_final_selection_plan",
+      "target": "eval_06",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "eval_07",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_final_selection_plan",
+      "target": "eval_07",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "phase_5_gradio_demo_interface",
+      "relation": "has_phase",
+      "label": "has_phase",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "roadmap_md",
+      "target": "phase_5_gradio_demo_interface",
+      "relation": "contains",
+      "label": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_4_model_comparison_and_selection",
+      "target": "phase_5_gradio_demo_interface",
+      "relation": "precedes",
+      "label": "precedes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/phases/05-gradio-demo-interface"
+    },
+    {
+      "source": "phase_5_gradio_demo_interface",
+      "target": "phase_5_context",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_5_gradio_demo_interface",
+      "target": "phase_5_research",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_5_gradio_demo_interface",
+      "target": "phase_5_validation",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_5_gradio_demo_interface",
+      "target": "phase_5_ui_spec",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_5_gradio_demo_interface",
+      "target": "01_01_inference_adapter_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "ui_03",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_inference_adapter_plan",
+      "target": "ui_03",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "ui_04",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_inference_adapter_plan",
+      "target": "ui_04",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "ui_07",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_inference_adapter_plan",
+      "target": "ui_07",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_5_gradio_demo_interface",
+      "target": "02_02_gradio_layout_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "ui_01",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_gradio_layout_plan",
+      "target": "ui_01",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "ui_02",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_gradio_layout_plan",
+      "target": "ui_02",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "ui_06",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_gradio_layout_plan",
+      "target": "ui_06",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_5_gradio_demo_interface",
+      "target": "03_03_results_visualization_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "ui_04",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "03_03_results_visualization_plan",
+      "target": "ui_04",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "ui_05",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "03_03_results_visualization_plan",
+      "target": "ui_05",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_5_gradio_demo_interface",
+      "target": "04_04_ui_smoke_docs_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "ui_06",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_ui_smoke_docs_plan",
+      "target": "ui_06",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "ui_07",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_ui_smoke_docs_plan",
+      "target": "ui_07",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "phase_6_final_evidence_and_ieee_report",
+      "relation": "has_phase",
+      "label": "has_phase",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "roadmap_md",
+      "target": "phase_6_final_evidence_and_ieee_report",
+      "relation": "contains",
+      "label": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_5_gradio_demo_interface",
+      "target": "phase_6_final_evidence_and_ieee_report",
+      "relation": "precedes",
+      "label": "precedes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/phases/06-final-evidence-and-ieee-report"
+    },
+    {
+      "source": "phase_6_final_evidence_and_ieee_report",
+      "target": "phase_6_context",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_6_final_evidence_and_ieee_report",
+      "target": "phase_6_research",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_6_final_evidence_and_ieee_report",
+      "target": "phase_6_validation",
+      "relation": "has_artifact",
+      "label": "has_artifact",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_6_final_evidence_and_ieee_report",
+      "target": "01_01_evidence_freeze_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "rpt_01",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_evidence_freeze_plan",
+      "target": "rpt_01",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "rpt_03",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "01_01_evidence_freeze_plan",
+      "target": "rpt_03",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_6_final_evidence_and_ieee_report",
+      "target": "02_02_report_input_map_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "rpt_02",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_report_input_map_plan",
+      "target": "rpt_02",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "rpt_03",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "02_02_report_input_map_plan",
+      "target": "rpt_03",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_6_final_evidence_and_ieee_report",
+      "target": "03_03_latex_report_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "rpt_02",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "03_03_latex_report_plan",
+      "target": "rpt_02",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "rpt_03",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "03_03_latex_report_plan",
+      "target": "rpt_03",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "phase_6_final_evidence_and_ieee_report",
+      "target": "04_04_final_package_plan",
+      "relation": "has_plan",
+      "label": "has_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "rpt_01",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_final_package_plan",
+      "target": "rpt_01",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "requirements_md",
+      "target": "rpt_03",
+      "relation": "defines",
+      "label": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "04_04_final_package_plan",
+      "target": "rpt_03",
+      "relation": "addresses",
+      "label": "addresses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "mobilenetv4_conv_medium",
+      "relation": "evaluates",
+      "label": "evaluates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "mobilenetv4_conv_medium",
+      "target": "f1_first_evaluation",
+      "relation": "scored_by",
+      "label": "scored_by",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "mobilenetv4_conv_medium",
+      "target": "95_mb_model_limit",
+      "relation": "checked_against",
+      "label": "checked_against",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "efficientnet_b2",
+      "relation": "evaluates",
+      "label": "evaluates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "efficientnet_b2",
+      "target": "f1_first_evaluation",
+      "relation": "scored_by",
+      "label": "scored_by",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "efficientnet_b2",
+      "target": "95_mb_model_limit",
+      "relation": "checked_against",
+      "label": "checked_against",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "resnet_baseline",
+      "relation": "evaluates",
+      "label": "evaluates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "resnet_baseline",
+      "target": "f1_first_evaluation",
+      "relation": "scored_by",
+      "label": "scored_by",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "resnet_baseline",
+      "target": "95_mb_model_limit",
+      "relation": "checked_against",
+      "label": "checked_against",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "dinov3_vit_s_16",
+      "relation": "evaluates",
+      "label": "evaluates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "dinov3_vit_s_16",
+      "target": "f1_first_evaluation",
+      "relation": "scored_by",
+      "label": "scored_by",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "dinov3_vit_s_16",
+      "target": "95_mb_model_limit",
+      "relation": "checked_against",
+      "label": "checked_against",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "ademboukhris_cars_body_type_cropped",
+      "relation": "uses_candidate_dataset",
+      "label": "uses_candidate_dataset",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "ademboukhris_cars_body_type_cropped",
+      "target": "8_target_classes",
+      "relation": "maps_to",
+      "label": "maps_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": ".planning/research/SUMMARY.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "mayurmahurkar_stanford_car_body_type_data",
+      "relation": "uses_candidate_dataset",
+      "label": "uses_candidate_dataset",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "mayurmahurkar_stanford_car_body_type_data",
+      "target": "8_target_classes",
+      "relation": "maps_to",
+      "label": "maps_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": ".planning/research/SUMMARY.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "kitrofimov_cbsc",
+      "relation": "uses_candidate_dataset",
+      "label": "uses_candidate_dataset",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "kitrofimov_cbsc",
+      "target": "8_target_classes",
+      "relation": "maps_to",
+      "label": "maps_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": ".planning/research/SUMMARY.md"
+    },
+    {
+      "source": "autolens_ai",
+      "target": "drbimmer_vehicle_classification",
+      "relation": "uses_candidate_dataset",
+      "label": "uses_candidate_dataset",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "source": "drbimmer_vehicle_classification",
+      "target": "8_target_classes",
+      "relation": "maps_to",
+      "label": "maps_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": ".planning/research/SUMMARY.md"
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "phase_1_plan_bundle",
+      "label": "Phase 1 plan bundle",
+      "nodes": [
+        "phase_1_project_foundation",
+        "01_scaffold_uv_project_plan",
+        "02_dependency_documentation_plan",
+        "03_quality_gates_plan"
+      ],
+      "relation": "bundles",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/phases/01-project-foundation"
+    },
+    {
+      "id": "phase_2_plan_bundle",
+      "label": "Phase 2 plan bundle",
+      "nodes": [
+        "phase_2_dataset_research_and_curation",
+        "01_01_source_catalog_plan",
+        "02_02_ingestion_scripts_plan",
+        "03_03_label_curation_plan",
+        "04_04_audit_splits_plan"
+      ],
+      "relation": "bundles",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/phases/02-dataset-research-and-curation"
+    },
+    {
+      "id": "phase_3_plan_bundle",
+      "label": "Phase 3 plan bundle",
+      "nodes": [
+        "phase_3_baseline_training_pipeline",
+        "01_01_data_module_plan",
+        "02_02_model_factory_plan",
+        "03_03_lightning_training_plan",
+        "04_04_baseline_runbook_plan"
+      ],
+      "relation": "bundles",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/phases/03-baseline-training-pipeline"
+    },
+    {
+      "id": "phase_4_plan_bundle",
+      "label": "Phase 4 plan bundle",
+      "nodes": [
+        "phase_4_model_comparison_and_selection",
+        "01_01_evaluation_suite_plan",
+        "02_02_dinov3_path_plan",
+        "03_03_model_benchmark_plan",
+        "04_04_final_selection_plan"
+      ],
+      "relation": "bundles",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/phases/04-model-comparison-and-selection"
+    },
+    {
+      "id": "phase_5_plan_bundle",
+      "label": "Phase 5 plan bundle",
+      "nodes": [
+        "phase_5_gradio_demo_interface",
+        "01_01_inference_adapter_plan",
+        "02_02_gradio_layout_plan",
+        "03_03_results_visualization_plan",
+        "04_04_ui_smoke_docs_plan"
+      ],
+      "relation": "bundles",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/phases/05-gradio-demo-interface"
+    },
+    {
+      "id": "phase_6_plan_bundle",
+      "label": "Phase 6 plan bundle",
+      "nodes": [
+        "phase_6_final_evidence_and_ieee_report",
+        "01_01_evidence_freeze_plan",
+        "02_02_report_input_map_plan",
+        "03_03_latex_report_plan",
+        "04_04_final_package_plan"
+      ],
+      "relation": "bundles",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/phases/06-final-evidence-and-ieee-report"
+    },
+    {
+      "id": "model_comparison_set",
+      "label": "Model comparison set",
+      "nodes": [
+        "mobilenetv4_conv_medium",
+        "efficientnet_b2",
+        "resnet_baseline",
+        "dinov3_vit_s_16",
+        "f1_first_evaluation",
+        "95_mb_model_limit"
+      ],
+      "relation": "compared_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/ROADMAP.md"
+    },
+    {
+      "id": "dataset_source_set",
+      "label": "Dataset source set",
+      "nodes": [
+        "ademboukhris_cars_body_type_cropped",
+        "mayurmahurkar_stanford_car_body_type_data",
+        "kitrofimov_cbsc",
+        "drbimmer_vehicle_classification",
+        "8_target_classes"
+      ],
+      "relation": "feeds",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning/research/SUMMARY.md"
+    }
+  ]
+}
