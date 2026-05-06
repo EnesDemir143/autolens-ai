@@ -125,7 +125,7 @@
 
 ## Requirement Coverage Validation
 
-All 31 v1 requirements are mapped to exactly one roadmap phase.
+All 33 v1 requirements are mapped to exactly one roadmap phase.
 
 ---
 *Roadmap created: 2026-05-06*
