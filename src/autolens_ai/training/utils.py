@@ -39,6 +39,8 @@ def create_trainer(
     use_wandb: bool = False,
     wandb_project: str = "autolens-ai",
     wandb_name: str | None = None,
+    gradient_clip_val: float | None = None,
+    precision: str = "32-true",
     **trainer_kwargs: Any,
 ) -> pl.Trainer:
     """Create a Lightning Trainer with standard callbacks.
@@ -122,6 +124,8 @@ def create_trainer(
         enable_progress_bar=True,
         enable_model_summary=True,
         log_every_n_steps=10,
+        gradient_clip_val=gradient_clip_val,
+        precision=precision,
         **trainer_kwargs,
     )
     

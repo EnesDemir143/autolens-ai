@@ -29,6 +29,11 @@ learning_rate: 0.001
 weight_decay: 0.0001
 seed: 42  # Random seed for reproducibility
 
+# Training stability & performance
+gradient_clip_val: 1.0  # Gradient clipping for stability
+precision: "32-true"  # "16-mixed" or "bf16-mixed" for faster training on supported hardware
+label_smoothing: 0.0  # Label smoothing (0.0 = no smoothing, 0.1 = 10% smoothing)
+
 # Class imbalance handling
 use_weighted_sampler: false
 use_class_weights: true
