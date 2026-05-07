@@ -19,6 +19,9 @@ help:
 		'Dataset preparation:' \
 		'  make compute-stats   Compute mean/std from train split for normalization' \
 		'' \
+		'Model analysis:' \
+		'  make check-model-size   Check if model checkpoints are under 95 MB limit' \
+		'' \
 		'Training commands (Phase 3):' \
 		'  make train-baseline-0       Train all 3 models with Baseline 0 (no augmentation)' \
 		'  make train-baseline-1       Train ResNet18 with Baseline 1 (light augmentation)' \
@@ -73,6 +76,11 @@ compute-stats:
 		uv run python scripts/compute_dataset_stats.py --output artifacts/dataset/stats.json; \
 		echo "Stats saved to artifacts/dataset/stats.json"; \
 	fi
+
+# Model analysis
+check-model-size:
+	@echo "Checking model checkpoint sizes..."
+	uv run python scripts/check_model_size.py checkpoints/
 
 # Training targets
 WANDB ?=
