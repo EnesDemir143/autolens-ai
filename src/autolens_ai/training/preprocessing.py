@@ -20,8 +20,9 @@ class PreprocessConfig:
     
     resize_size: int = 256
     crop_size: int = 224
-    mean: tuple[float, float, float] = (0.485, 0.456, 0.406)  # ImageNet defaults, will be computed from train split
-    std: tuple[float, float, float] = (0.229, 0.224, 0.225)   # ImageNet defaults, will be computed from train split
+    # ImageNet defaults - override with dataset-specific values for better performance
+    mean: tuple[float, float, float] = (0.485, 0.456, 0.406)
+    std: tuple[float, float, float] = (0.229, 0.224, 0.225)
     
     def get_train_transform(self, augment: bool = False) -> Any:
         """Get training transform.

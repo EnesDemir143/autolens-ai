@@ -14,6 +14,15 @@ uv run python -c "from autolens_ai.training import print_device_info; print_devi
 # Should detect MPS on Apple Silicon
 ```
 
+3. (Optional but recommended) Compute dataset-specific mean/std:
+```bash
+make compute-stats
+# This computes mean/std from train split for better normalization
+# Update configs/experiments/*.yaml with the output values
+```
+
+**Note:** Configs currently use ImageNet defaults. For better performance, run `make compute-stats` and update the `dataset_mean` and `dataset_std` values in all config files.
+
 ## Training Commands
 
 ### Option 1: Using Makefile (Recommended)

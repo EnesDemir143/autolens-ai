@@ -1,5 +1,5 @@
 .PHONY: help sync import test lint format typecheck check pre-commit graphify-update graphify-report clean
-.PHONY: train-baseline-0 train-baseline-1 train-baseline-2 train-all-baselines
+.PHONY: compute-stats train-baseline-0 train-baseline-1 train-baseline-2 train-all-baselines
 
 help:
 	@printf '%s\n' \
@@ -15,6 +15,9 @@ help:
 		'  make graphify-update Refresh the project knowledge graph' \
 		'  make graphify-report Show the current graph report' \
 		'  make clean           Remove local test/cache artifacts' \
+		'' \
+		'Dataset preparation:' \
+		'  make compute-stats   Compute mean/std from train split for normalization' \
 		'' \
 		'Training commands (Phase 3):' \
 		'  make train-baseline-0       Train all 3 models with Baseline 0 (no augmentation)' \
@@ -56,6 +59,11 @@ graphify-report:
 
 clean:
 	rm -rf .pytest_cache .ruff_cache .mypy_cache
+
+# Dataset preparation
+compute-stats:
+	@echo "Computing mean and std from training split..."
+	uv run python scripts/compute_dataset_stats.py
 
 # Training targets
 WANDB ?=

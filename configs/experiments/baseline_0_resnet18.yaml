@@ -12,6 +12,9 @@ test_csv: artifacts/dataset/splits/internal_test.csv
 resize_size: 256
 crop_size: 224
 use_augmentation: false
+# Dataset normalization (ImageNet defaults - run scripts/compute_dataset_stats.py to compute from train split)
+dataset_mean: [0.485, 0.456, 0.406]
+dataset_std: [0.229, 0.224, 0.225]
 
 # Model
 model_name: resnet18  # Start with ResNet18 as the control model
