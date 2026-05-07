@@ -9,6 +9,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import json
 from pathlib import Path
 
 import yaml
@@ -26,6 +27,26 @@ def load_config(config_path: str | Path) -> dict:
     """Load experiment config from YAML file."""
     with open(config_path) as f:
         return yaml.safe_load(f)
+
+
+def load_dataset_stats(stats_path: str | Path = "artifacts/dataset/stats.json") -> tuple[list[float], list[float]]:
+    """Load dataset statistics from JSON file.
+    
+    Returns:
+        (mean, std) lists for RGB channels, or ImageNet defaults if file not found
+    """
+    stats_path = Path(stats_path)
+    if stats_path.exists():
+        with open(stats_path) as f:
+            stats = json.load(f)
+        print(f"Loaded dataset stats from: {stats_path}")
+        print(f"  Mean: {stats['mean']}")
+        print(f"  Std:  {stats['std']}")
+        return stats["mean"], stats["std"]
+    else:
+        print(f"Dataset stats not found at {stats_path}, using ImageNet defaults")
+        print("  Run 'make compute-stats' to compute dataset-specific values")
+        return [0.485, 0.456, 0.406], [0.229, 0.224, 0.225]
 
 
 def main() -> None:
@@ -58,12 +79,18 @@ def main() -> None:
     # Print device info
     print_device_info()
     
+    # Load dataset stats (from JSON or config or defaults)
+    mean, std = load_dataset_stats()
+    # Override with config values if present
+    mean = config.get("dataset_mean", mean)
+    std = config.get("dataset_std", std)
+    
     # Create preprocessing config
     preprocess_config = PreprocessConfig(
         resize_size=config["resize_size"],
         crop_size=config["crop_size"],
-        mean=tuple(config.get("dataset_mean", [0.485, 0.456, 0.406])),
-        std=tuple(config.get("dataset_std", [0.229, 0.224, 0.225])),
+        mean=tuple(mean),
+        std=tuple(std),
     )
     
     # Compute class weights if needed
