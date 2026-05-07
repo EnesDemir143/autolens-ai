@@ -35,6 +35,9 @@ class AutoLensClassifier(pl.LightningModule):
         class_weights: torch.Tensor | None = None,
         pretrained: bool = True,
         label_smoothing: float = 0.0,
+        use_focal_loss: bool = False,
+        focal_alpha: float = 1.0,
+        focal_gamma: float = 2.0,
     ):
         """Initialize Lightning module.
         
@@ -46,6 +49,9 @@ class AutoLensClassifier(pl.LightningModule):
             class_weights: Optional class weights for loss
             pretrained: Whether to use pretrained weights
             label_smoothing: Label smoothing factor (0.0 = no smoothing, 0.1 = 10% smoothing)
+            use_focal_loss: Use Focal Loss instead of CrossEntropy
+            focal_alpha: Focal loss alpha parameter
+            focal_gamma: Focal loss gamma parameter
         """
         super().__init__()
         self.save_hyperparameters(ignore=["class_weights"])
@@ -60,8 +66,14 @@ class AutoLensClassifier(pl.LightningModule):
         # Loss function
         self.class_weights = class_weights
         self.label_smoothing = label_smoothing
+        self.use_focal_loss = use_focal_loss
         if class_weights is not None:
             self.register_buffer("_class_weights", class_weights)
+        
+        # Focal loss
+        if use_focal_loss:
+            from autolens_ai.training.focal_loss import FocalLoss
+            self.focal_loss_fn = FocalLoss(alpha=focal_alpha, gamma=focal_gamma)
         
         # Metrics
         self.train_acc = Accuracy(task="multiclass", num_classes=num_classes)
@@ -84,8 +96,10 @@ class AutoLensClassifier(pl.LightningModule):
         return self.model(x)
     
     def _compute_loss(self, logits: torch.Tensor, targets: torch.Tensor) -> torch.Tensor:
-        """Compute loss with optional class weights and label smoothing."""
-        if self.class_weights is not None:
+        """Compute loss with optional class weights, label smoothing, or focal loss."""
+        if self.use_focal_loss:
+            return self.focal_loss_fn(logits, targets)
+        elif self.class_weights is not None:
             return F.cross_entropy(
                 logits, 
                 targets, 

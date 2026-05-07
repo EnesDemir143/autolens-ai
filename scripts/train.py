@@ -118,6 +118,16 @@ def main() -> None:
         default=None,
         help="Random seed for reproducibility (default: from config or 42)",
     )
+    parser.add_argument(
+        "--find-lr",
+        action="store_true",
+        help="Run learning rate finder before training",
+    )
+    parser.add_argument(
+        "--find-batch-size",
+        action="store_true",
+        help="Run batch size finder before training",
+    )
     args = parser.parse_args()
     
     # Load config
@@ -212,6 +222,9 @@ def main() -> None:
         class_weights=class_weights,
         pretrained=config["pretrained"],
         label_smoothing=config.get("label_smoothing", 0.0),
+        use_focal_loss=config.get("use_focal_loss", False),
+        focal_alpha=config.get("focal_alpha", 1.0),
+        focal_gamma=config.get("focal_gamma", 2.0),
     )
     
     # Create trainer
@@ -227,13 +240,37 @@ def main() -> None:
         wandb_name=config["experiment_name"],
         # Stability & performance
         gradient_clip_val=config.get("gradient_clip_val", 1.0),
-        precision=config.get("precision", "32-true"),  # "16-mixed" for faster training
+        precision=config.get("precision", "bf16-mixed"),
+        # Advanced features
+        use_ema=config.get("use_ema", False),
+        ema_decay=config.get("ema_decay", 0.999),
     )
     
     # Train
     print("\nStarting training...")
     if resume_ckpt:
         print(f"Resuming from checkpoint: {resume_ckpt}")
+    
+    # Optional: Find optimal learning rate
+    if args.find_lr:
+        print("\nRunning learning rate finder...")
+        lr_finder = trainer.tuner.lr_find(model, datamodule)
+        if lr_finder:
+            fig = lr_finder.plot(suggest=True)
+            fig.savefig(f"{checkpoint_dir}/lr_finder.png")
+            print(f"Suggested LR: {lr_finder.suggestion()}")
+            print(f"LR finder plot saved to: {checkpoint_dir}/lr_finder.png")
+            print("Update config with suggested LR and re-run training")
+            return
+    
+    # Optional: Find optimal batch size
+    if args.find_batch_size:
+        print("\nRunning batch size finder...")
+        trainer.tuner.scale_batch_size(model, datamodule, mode="power")
+        print(f"Optimal batch size: {datamodule.batch_size}")
+        print("Update config with suggested batch size and re-run training")
+        return
+    
     trainer.fit(model, datamodule, ckpt_path=resume_ckpt)
     
     # Test with best checkpoint
