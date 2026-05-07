@@ -26,10 +26,33 @@ from autolens_ai.training import (
 
 
 def set_seed(seed: int) -> None:
-    """Set random seed for reproducibility."""
+    """Set random seed for reproducibility across all libraries."""
+    import random
+    import numpy as np
+    
+    # Python random
+    random.seed(seed)
+    
+    # NumPy
+    np.random.seed(seed)
+    
+    # PyTorch
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    
+    # PyTorch Lightning
     pl.seed_everything(seed, workers=True)
+    
+    # CuDNN
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
+    
+    # MPS (Apple Silicon)
+    if torch.backends.mps.is_available():
+        torch.mps.manual_seed(seed)
+    
+    print(f"✓ Random seed set to {seed} (Python, NumPy, PyTorch, Lightning)")
 
 
 def load_config(config_path: str | Path) -> dict:

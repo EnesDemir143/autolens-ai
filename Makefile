@@ -17,7 +17,11 @@ help:
 		'  make clean           Remove local test/cache artifacts' \
 		'' \
 		'Dataset preparation:' \
+		'  make create-splits   Create stratified train/val/test splits (seed=42, 80/10/10)' \
 		'  make compute-stats   Compute mean/std from train split for normalization' \
+		'' \
+		'Custom split ratios:' \
+		'  make create-splits TRAIN_RATIO=0.7 VAL_RATIO=0.15 TEST_RATIO=0.15 SEED=123' \
 		'' \
 		'Model analysis:' \
 		'  make check-model-size   Check if model checkpoints are under 95 MB limit' \
@@ -67,6 +71,19 @@ clean:
 	rm -rf .pytest_cache .ruff_cache .mypy_cache
 
 # Dataset preparation
+TRAIN_RATIO ?= 0.8
+VAL_RATIO ?= 0.1
+TEST_RATIO ?= 0.1
+SEED ?= 42
+
+create-splits:
+	@echo "Creating stratified train/val/test splits with seed..."
+	uv run python scripts/create_splits.py \
+		--train $(TRAIN_RATIO) \
+		--val $(VAL_RATIO) \
+		--test $(TEST_RATIO) \
+		--seed $(SEED)
+
 compute-stats:
 	@if [ -f artifacts/dataset/stats.json ]; then \
 		echo "✓ Dataset stats already exist (artifacts/dataset/stats.json)"; \

@@ -123,6 +123,10 @@ class AutoLensDataModule(pl.LightningDataModule):
             )
             shuffle = False  # Sampler handles shuffling
         
+        # Create generator for reproducibility
+        generator = torch.Generator()
+        generator.manual_seed(42)  # Will be set by pl.seed_everything
+        
         return DataLoader(
             self.train_dataset,
             batch_size=self.batch_size,
@@ -130,6 +134,8 @@ class AutoLensDataModule(pl.LightningDataModule):
             sampler=sampler,
             num_workers=self.num_workers,
             pin_memory=True,
+            generator=generator,
+            persistent_workers=True if self.num_workers > 0 else False,
         )
     
     def val_dataloader(self) -> DataLoader:
