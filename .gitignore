@@ -246,3 +246,8 @@ graphify-out/
 .agents/skills/andrej-karpathy-skills/
 .agents/skills/architecture-diagram-generator/
 .agents/skills/latex-report-creator/
+
+# Plane local credentials
+.env.plane.local
+
+!.env.plane.local.example
