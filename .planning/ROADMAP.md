@@ -66,7 +66,7 @@
 
 **Branch:** `feat/baseline-training-pipeline`
 
-**Goal:** Build the reusable training/evaluation path and train MobileNetV4 Conv Medium, EfficientNet-B2, and ResNet strictly as baseline/comparison models.
+**Goal:** Build the reusable training/evaluation path and train MobileNetV4 Conv Medium, EfficientNet-B2, and ResNet18 strictly as baseline/comparison models. These three Phase 3 baselines feed the final four-model-family comparison once DINOv3 is added in Phase 4.
 
 **Requirements:** TRN-01, TRN-02, TRN-03, TRN-06, TRN-07
 
@@ -79,21 +79,21 @@
 
 **Implementation notes:**
 - Use timm for MobileNetV4/EfficientNet where possible.
-- Use torchvision/timm for ResNet baseline.
+- Use torchvision/timm for ResNet18 baseline to keep the classic control model safely below the 95 MB artifact limit.
 - If MobileNetV4 Conv Medium name is unavailable in timm, phase must document the closest supported timm model and rationale before substitution.
 
 ### Phase 4: Main DINOv3 Model and Selection
 
 **Branch:** `feat/model-comparison-and-selection`
 
-**Goal:** Implement/evaluate DINOv3 ViT-S/16 as the intended main model, then compare it against baseline models by macro F1, per-class behavior, artifact size, and speed.
+**Goal:** Implement/evaluate DINOv3 ViT-S/16 as the intended main model, then compare the four model families — MobileNetV4 Conv Medium, EfficientNet-B2, ResNet18, and DINOv3 — by macro F1, per-class behavior, artifact size, and speed.
 
 **Requirements:** TRN-04, TRN-05, EVAL-01, EVAL-02, EVAL-03, EVAL-04, EVAL-05, EVAL-06, EVAL-07
 
 **Success criteria:**
 1. DINOv3 access is validated early because it is the intended main model path; if gated access blocks use, the fallback is documented.
-2. DINOv3 non-LoRA path is implemented/evaluated before any optional LoRA extension.
-3. Every model has Accuracy, Precision, Recall, F1, macro/weighted averages, and per-class metrics.
+2. DINOv3 non-LoRA path is implemented/evaluated before the separate optional LoRA fine-tuning variant.
+3. Every model has Accuracy, balanced accuracy, MCC, Precision, Recall, F1, macro/weighted averages, and per-class metrics.
 4. Required plots are generated: loss, accuracy, normalized confusion matrix.
 5. Final model candidate is under 95 MB or has a clear compression/export path.
 6. Final selection rationale is written in report-ready language.

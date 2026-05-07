@@ -134,8 +134,8 @@ Hard project decisions:
 - Model candidates:
   - MobileNetV4 Conv Medium
   - EfficientNet-B2
-  - ResNet baseline
-  - DINOv3 ViT-S/16 (`facebook/dinov3-vits16-pretrain-lvd1689m`) with non-LoRA first and LoRA optional.
+  - ResNet18 baseline
+  - DINOv3 ViT-S/16 (`facebook/dinov3-vits16-pretrain-lvd1689m`) as the fourth model family, with non-LoRA first and LoRA fine-tuning as a separate optional variant after the non-LoRA path works.
 - UI is Gradio Blocks with a clean modern presentation-ready layout.
 
 ## 7. Dependency Rules
@@ -177,7 +177,7 @@ Every training/evaluation run must log:
 
 - Run identity: phase, plan ID when relevant, model name, dataset version/manifest path, split version, git commit or dirty-worktree note, seed, device (`mps` or `cpu`), and config file path.
 - Hyperparameters: learning rate, optimizer, scheduler, batch size, image size, epochs, augmentations, early-stopping settings, class weights/sampling settings if used.
-- Required metrics: Accuracy, Precision, Recall, macro F1, weighted F1, per-class metrics, validation loss, validation accuracy, and final selected ranking metric.
+- Required metrics: Accuracy, balanced accuracy, MCC, Precision, Recall, macro F1, weighted F1, per-class metrics, validation loss, validation accuracy, and final selected ranking metric.
 - Required plots/artifacts: training/validation loss curve, training/validation accuracy curve, normalized 8x8 confusion matrix, class distribution/balance report, and model-size/latency comparison when available.
 - Dataset evidence: source manifest, class mapping, split files/checksums, dedup/balance audit outputs, and notes for weak classes such as MICRO, STATION WAGON, and OPEN WHEEL/F1.
 - Model artifacts: checkpoints or exported artifacts needed to reproduce the run, final class mapping, preprocessing config, and artifact-size measurement. Do not upload private instructor final test data.

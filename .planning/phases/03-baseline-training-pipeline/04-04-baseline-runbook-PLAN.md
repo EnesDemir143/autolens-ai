@@ -3,7 +3,7 @@ phase: 3
 phase_name: Baseline Training Pipeline
 branch: feat/baseline-training-pipeline
 plan_id: 03-04
-objective: Add baseline experiment configs and runbook for the three CNN models
+objective: Add baseline experiment configs and runbook for the CNN baseline models
 wave: 2
 depends_on: ['03-01', '03-02']
 requirements_addressed: ['TRN-01', 'TRN-02', 'TRN-03']
@@ -11,10 +11,10 @@ files_modified: ['src/autolens_ai/training/', 'src/autolens_ai/models/', 'config
 autonomous: true
 ---
 
-# Plan 04 — Add baseline experiment configs and runbook for the three CNN models
+# Plan 04 — Add baseline experiment configs and runbook for the CNN baseline models
 
 <objective>
-Add baseline experiment configs and runbook for the three CNN models
+Add baseline experiment configs and runbook for the CNN baseline models
 </objective>
 
 <must_haves>
@@ -38,7 +38,7 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `.planning/ROADMAP.md`
   </read_first>
   <action>
-    Create or update the minimal files needed for this plan objective: `Add baseline experiment configs and runbook for the three CNN models`. Keep names explicit and avoid hidden behavior. Preserve outputs from earlier phases.
+    Create or update the minimal files needed for this plan objective: `Add baseline experiment configs and runbook for the CNN baseline models`. Keep names explicit and avoid hidden behavior. Preserve outputs from earlier phases.
   </action>
   <acceptance_criteria>
     - `test -d .planning/phases/03-baseline-training-pipeline` exits 0.
@@ -53,7 +53,7 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `AGENTS.md`
   </read_first>
   <action>
-    Implement the smallest working slice for `Add baseline experiment configs and runbook for the three CNN models`. The runbook must define the experiment order: Baseline 0 no augmentation with class-weighted CrossEntropy on the Phase 2 outlier-unfiltered split; Baseline 1 light augmentation comparison; Baseline 2 class-weighted loss versus weighted sampler; optional low-priority Baseline 3 outlier/near-duplicate filtered split comparison only if earlier results or leakage review justify the extra data loss. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
+    Implement the smallest working slice for `Add baseline experiment configs and runbook for the CNN baseline models`. The runbook must define the experiment order for MobileNetV4 Conv Medium, EfficientNet-B2, and ResNet18: Baseline 0 no augmentation with class-weighted CrossEntropy on the Phase 2 outlier-unfiltered split; Baseline 1 light augmentation comparison; Baseline 2 class-weighted loss versus weighted sampler; optional low-priority Baseline 3 outlier/near-duplicate filtered split comparison only if earlier results or leakage review justify the extra data loss. It must also state that Phase 4 adds DINOv3 non-LoRA and optional LoRA as the fourth model family for final comparison. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
   </action>
   <acceptance_criteria>
     - Output references all requirement IDs: TRN-01, TRN-02, TRN-03.

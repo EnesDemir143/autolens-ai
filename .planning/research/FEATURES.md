@@ -8,7 +8,7 @@
 - Train/validation split with no final test leakage.
 - Augmentation and preprocessing pipeline for 224x224 or model-specific input size.
 - Main DINOv3 training/evaluation path plus baseline model training/evaluation runs.
-- Macro and weighted metrics: F1, Accuracy, Precision, Recall.
+- Macro and weighted metrics: F1, Accuracy, balanced accuracy, MCC, Precision, Recall.
 - Per-class classification report.
 - Training/validation loss graph, accuracy graph, normalized 8x8 confusion matrix.
 - Saved model artifact under 95 MB.
@@ -20,7 +20,7 @@
 - ONNX export and ONNX Runtime inference for faster UI prediction.
 - Optuna tuning for learning rate, dropout, weight decay, augmentation strength.
 - W&B experiment tracking for report-ready plots.
-- DINOv3 frozen-feature main path and optional LoRA fine-tuning extension; CNN models remain baselines.
+- DINOv3 non-LoRA main path and optional LoRA fine-tuning extension; CNN models remain baselines.
 
 ## Anti-Features
 

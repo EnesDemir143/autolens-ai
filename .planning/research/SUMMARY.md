@@ -2,7 +2,7 @@
 
 ## Stack
 
-Use uv + Python 3.12 with PyTorch/Lightning/timm/transformers for training and Gradio for UI. DINOv3 ViT-S/16 is the intended main model path; MobileNetV4, EfficientNet-B2, and ResNet are baselines/comparators. Keep ONNX optional until a working PyTorch inference path exists. Use the package list from `docs/plan.md` plus `transformers` for DINOv3.
+Use uv + Python 3.12 with PyTorch/Lightning/timm/transformers for training and Gradio for UI. The overall comparison has four model families: MobileNetV4 Conv Medium, EfficientNet-B2, ResNet18, and DINOv3 ViT-S/16. DINOv3 is the intended main model path and must run non-LoRA before optional LoRA. Keep ONNX optional until a working PyTorch inference path exists. Use the package list from `docs/plan.md` plus `transformers` for DINOv3.
 
 ## Dataset Sources to Investigate
 
