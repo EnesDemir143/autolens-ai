@@ -41,6 +41,8 @@ def create_trainer(
     wandb_name: str | None = None,
     gradient_clip_val: float | None = None,
     precision: str = "32-true",
+    use_ema: bool = False,
+    ema_decay: float = 0.999,
     **trainer_kwargs: Any,
 ) -> pl.Trainer:
     """Create a Lightning Trainer with standard callbacks.
@@ -100,6 +102,12 @@ def create_trainer(
         # Rich progress bar
         RichProgressBar(),
     ]
+    
+    # Optional: EMA
+    if use_ema:
+        from autolens_ai.training.ema import EMA
+        callbacks.append(EMA(decay=ema_decay))
+        print(f"✓ EMA enabled (decay={ema_decay})")
     
     # Logger
     logger: Any = True  # Default CSV logger

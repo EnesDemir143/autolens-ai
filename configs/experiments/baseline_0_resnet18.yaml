@@ -31,8 +31,15 @@ seed: 42  # Random seed for reproducibility
 
 # Training stability & performance
 gradient_clip_val: 1.0  # Gradient clipping for stability
-precision: "32-true"  # "16-mixed" or "bf16-mixed" for faster training on supported hardware
+precision: "bf16-mixed"  # bf16 for Apple Silicon MPS, "16-mixed" for CUDA, "32-true" for CPU
 label_smoothing: 0.0  # Label smoothing (0.0 = no smoothing, 0.1 = 10% smoothing)
+
+# Advanced training features
+use_ema: false  # Exponential Moving Average of weights (improves generalization)
+ema_decay: 0.999  # EMA decay rate
+use_focal_loss: false  # Use Focal Loss instead of CrossEntropy (for severe imbalance)
+focal_alpha: 1.0  # Focal loss alpha
+focal_gamma: 2.0  # Focal loss gamma (higher = more focus on hard examples)
 
 # Class imbalance handling (Baseline 0: class-weighted loss)
 use_weighted_sampler: false
