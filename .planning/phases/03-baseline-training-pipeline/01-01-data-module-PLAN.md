@@ -53,7 +53,7 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `AGENTS.md`
   </read_first>
   <action>
-    Implement the smallest working slice for `Implement dataset class/datamodule and preprocessing config`. The first preprocessing config must define Baseline 0 with no train augmentation: resize 256, center crop 224, tensor conversion, and ImageNet normalization for train/validation/internal-test. It must consume Phase 2 split CSVs rather than raw folders directly. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
+    Implement the smallest working slice for `Implement dataset class/datamodule and preprocessing config`. The first preprocessing config must define Baseline 0 with no train augmentation: resize 256, center crop 224, tensor conversion, and normalization using mean/std computed from the training split only, then reused unchanged for train/validation/internal-test. It must consume Phase 2 split CSVs rather than raw folders directly. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
   </action>
   <acceptance_criteria>
     - Output references all requirement IDs: TRN-06, TRN-07.
