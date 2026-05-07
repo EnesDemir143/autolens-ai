@@ -75,6 +75,11 @@ def main() -> None:
         default=None,
         help="Optional run ID suffix for checkpoint dir",
     )
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="Resume training from last checkpoint (requires --run-id)",
+    )
     args = parser.parse_args()
     
     # Load config
@@ -82,9 +87,22 @@ def main() -> None:
     print(f"Loaded config from: {args.config}")
     print(f"Experiment: {config['experiment_name']}")
     
-    # Add run ID to checkpoint dir if provided, otherwise use timestamp
+    # Handle checkpoint directory and resume
     checkpoint_dir = config["checkpoint_dir"]
-    if args.run_id:
+    resume_ckpt = None
+    
+    if args.resume:
+        if not args.run_id:
+            print("ERROR: --resume requires --run-id to specify which run to resume")
+            return
+        checkpoint_dir = f"{checkpoint_dir}_{args.run_id}"
+        last_ckpt = Path(checkpoint_dir) / "last.ckpt"
+        if last_ckpt.exists():
+            resume_ckpt = str(last_ckpt)
+            print(f"Resuming from: {resume_ckpt}")
+        else:
+            print(f"WARNING: No checkpoint found at {last_ckpt}, starting fresh")
+    elif args.run_id:
         checkpoint_dir = f"{checkpoint_dir}_{args.run_id}"
     else:
         from datetime import datetime
@@ -167,7 +185,9 @@ def main() -> None:
     
     # Train
     print("\nStarting training...")
-    trainer.fit(model, datamodule)
+    if resume_ckpt:
+        print(f"Resuming from checkpoint: {resume_ckpt}")
+    trainer.fit(model, datamodule, ckpt_path=resume_ckpt)
     
     # Test with best checkpoint
     print("\nRunning test evaluation with best checkpoint...")
