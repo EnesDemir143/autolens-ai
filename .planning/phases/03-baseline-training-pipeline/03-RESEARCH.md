@@ -13,6 +13,8 @@ Preprocessing/augmentation research decision: start with a deterministic no-augm
 
 Class imbalance decision: because MICRO and STATION WAGON are weak classes, the first baseline should use class-weighted CrossEntropy rather than silently oversampling. Compute class weights from the training split only with inverse-frequency balancing, e.g. `weight_c = train_total / (num_classes * train_count_c)`, then apply a configurable max cap (default target: 5.0, tune only if unstable) so MICRO does not dominate the gradients. WeightedRandomSampler should be implemented/configurable as a follow-up comparison, not mixed into the first baseline by default.
 
+Optional later imbalance-loss comparison: if weighted CrossEntropy plus sampler comparisons still leave minority classes weak, Focal Loss is a reasonable next candidate because it focuses more on hard examples. It should stay a later experiment, not the first baseline loss.
+
 Outlier decision: the first baseline must train on the Phase 2 outlier-unfiltered split. Because MICRO and STATION WAGON already have limited data, outlier/near-duplicate filtering is a low-priority optional comparison, not a required early training task. If time remains or leakage/quality evidence warrants it, generate a separate filtered artifact variant near the end and compare it against Baseline 0 using class counts, source coverage, macro/weighted F1, per-class F1, and normalized confusion matrix. Outlier filtering must not silently replace the baseline split.
 
 

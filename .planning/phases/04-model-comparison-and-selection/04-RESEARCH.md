@@ -7,7 +7,7 @@
 
     ## Comparison Research Notes
 
-DINOv3 model `facebook/dinov3-vits16-pretrain-lvd1689m` is the intended main model path. It is a gated Hugging Face model with about 21.6M parameters and transformers support, so planning must include early access validation plus fallback if access/size/latency blocks deployment. The overall comparison has four model families: MobileNetV4 Conv Medium, EfficientNet-B2, ResNet18, and DINOv3. DINOv3 must be evaluated without LoRA first; a LoRA fine-tuning variant is a separate optional comparison after non-LoRA works. All models must be scored by macro F1, weighted F1, balanced accuracy, MCC, per-class metrics, artifact size, and latency.
+DINOv3 model `facebook/dinov3-vits16-pretrain-lvd1689m` is the intended main model path. It is a gated Hugging Face model with about 21.6M parameters and transformers support, so planning must include early access validation plus fallback if access/size/latency blocks deployment. The overall comparison has four model families: MobileNetV4 Conv Medium, EfficientNet-B2, ResNet18, and DINOv3. DINOv3 must be evaluated without LoRA first; a LoRA fine-tuning variant is a separate optional comparison after non-LoRA works. All models must be scored by macro F1, weighted F1, balanced accuracy, MCC, per-class metrics, artifact size, and latency. Optional supporting diagnostics from the imbalance notebooks include per-class specificity, ECE, Brier score, Cohen's kappa, and reliability curves; these are helpful for confidence interpretation but are not required core assignment metrics.
 
 
     ## Validation Architecture
