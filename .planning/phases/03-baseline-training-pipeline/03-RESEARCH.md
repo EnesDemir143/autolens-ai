@@ -13,7 +13,7 @@ Preprocessing/augmentation research decision: start with a deterministic no-augm
 
 Class imbalance decision: because MICRO and STATION WAGON are weak classes, the first baseline should use class-weighted CrossEntropy rather than silently oversampling. WeightedRandomSampler should be implemented/configurable as a follow-up comparison, not mixed into the first baseline by default.
 
-Outlier decision: the first baseline must train on the Phase 2 outlier-unfiltered split. A separate outlier/near-duplicate filtered artifact variant should be generated later and compared against Baseline 0 using class counts, source coverage, macro/weighted F1, per-class F1, and normalized confusion matrix. Outlier filtering must not silently replace the baseline split.
+Outlier decision: the first baseline must train on the Phase 2 outlier-unfiltered split. Because MICRO and STATION WAGON already have limited data, outlier/near-duplicate filtering is a low-priority optional comparison, not a required early training task. If time remains or leakage/quality evidence warrants it, generate a separate filtered artifact variant near the end and compare it against Baseline 0 using class counts, source coverage, macro/weighted F1, per-class F1, and normalized confusion matrix. Outlier filtering must not silently replace the baseline split.
 
 
     ## Validation Architecture
@@ -24,4 +24,4 @@ Outlier decision: the first baseline must train on the Phase 2 outlier-unfiltere
 3. Lightning trainer config has early stopping/checkpointing.
 4. MPS/CPU fallback code exists.
 5. baseline runbook exists.
-6. baseline runbook records Baseline 0 no-augmentation config and follow-up variants for light augmentation, weighted sampler, and outlier-filtered comparison.
+6. baseline runbook records Baseline 0 no-augmentation config, required follow-up variants for light augmentation and weighted sampler, and outlier-filtered comparison as low-priority optional work.

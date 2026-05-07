@@ -47,7 +47,7 @@ uv run mypy src
 
 ## Handoff to Phase 3
 
-Phase 3 should consume `artifacts/dataset/splits/all_splits.csv`, apply class balancing or weighted sampling, and avoid training directly from raw dataset folders. Weak classes need targeted manual audit or supplementary collection before final model selection. Outlier removal must be run as an explicit before/after experiment: keep pre-outlier counts and metrics, create a post-outlier artifact version, then compare class counts, source coverage, and validation metrics before selecting the training manifest.
+Phase 3 should consume `artifacts/dataset/splits/all_splits.csv`, apply class balancing or weighted sampling, and avoid training directly from raw dataset folders. Weak classes need targeted manual audit or supplementary collection before final model selection. Because usable data is limited, outlier removal is low priority; if later baseline metrics or leakage review justify it, run it as an explicit before/after experiment: keep pre-outlier counts and metrics, create a post-outlier artifact version, then compare class counts, source coverage, and validation metrics before selecting the training manifest.
 
 ## Extra MICRO model-name audit
 
@@ -66,7 +66,7 @@ MICRO is not sourced from generic `City Car`. It is populated only from the user
 
 ## Perceptual near-duplicate audit
 
-Phase 2 now computes a lightweight 64-bit average perceptual hash (`ahash64`) for accepted images and exports cross-source near-duplicate candidates. This is a conservative review signal, not an automatic deletion rule. Evidence files: `artifacts/dataset/eda/near_duplicate_candidates.csv`, `near_duplicate_group_counts.csv`, and `near_duplicate_label_source_counts.csv`. Current audit found 196 candidate rows across 38 cross-source aHash groups after excluding `stanford-car-body-type-data`; these should be reviewed or used in the pre/post comparison gate before final training selection.
+Phase 2 now computes a lightweight 64-bit average perceptual hash (`ahash64`) for accepted images and exports cross-source near-duplicate candidates. This is a conservative review signal, not an automatic deletion rule. Evidence files: `artifacts/dataset/eda/near_duplicate_candidates.csv`, `near_duplicate_group_counts.csv`, and `near_duplicate_label_source_counts.csv`. Current audit found 196 candidate rows across 38 cross-source aHash groups after excluding `stanford-car-body-type-data`; these are low-priority optional review inputs and should be used in a pre/post comparison only if baseline results or leakage evidence justify the data loss.
 
 ## Final class counts after Stanford body-type exclusion
 
@@ -80,4 +80,3 @@ Phase 2 now computes a lightweight 64-bit average perceptual hash (`ahash64`) fo
 | SEDAN | 8,351 |
 | HATCHBACK | 2,651 |
 | PICK UP | 2,679 |
-

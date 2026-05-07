@@ -57,7 +57,7 @@ Per-source manifests are written to `artifacts/dataset/manifests/`. Each row con
 
 ## Curation policy
 
-Unsafe label mappings are not forced. `City Car` is not automatically MICRO, generic `Truck` is not PICK UP, and `Crossover`/`MPV`/`Coupe`/`Convertible` labels are routed to review or exclusion. Phase 3 must use the split files plus this decision note rather than raw folders directly. Outlier removal must preserve a pre-outlier baseline and compare it against the post-outlier dataset before changing the training manifest.
+Unsafe label mappings are not forced. `City Car` is not automatically MICRO, generic `Truck` is not PICK UP, and `Crossover`/`MPV`/`Coupe`/`Convertible` labels are routed to review or exclusion. Phase 3 must use the split files plus this decision note rather than raw folders directly. Because usable data is limited, outlier removal is low priority; if it is attempted later, it must preserve a pre-outlier baseline and compare it against the post-outlier dataset before changing the training manifest.
 
 ## Model-name MICRO candidate artifact
 
@@ -76,7 +76,7 @@ MICRO is not sourced from generic `City Car`. It is populated only from the user
 
 ## Perceptual near-duplicate audit
 
-Phase 2 now computes a lightweight 64-bit average perceptual hash (`ahash64`) for accepted images and exports cross-source near-duplicate candidates. This is a conservative review signal, not an automatic deletion rule. Evidence files: `artifacts/dataset/eda/near_duplicate_candidates.csv`, `near_duplicate_group_counts.csv`, and `near_duplicate_label_source_counts.csv`. Current audit found 196 candidate rows across 38 cross-source aHash groups after excluding `stanford-car-body-type-data`; these should be reviewed or used in the pre/post comparison gate before final training selection.
+Phase 2 now computes a lightweight 64-bit average perceptual hash (`ahash64`) for accepted images and exports cross-source near-duplicate candidates. This is a conservative review signal, not an automatic deletion rule. Evidence files: `artifacts/dataset/eda/near_duplicate_candidates.csv`, `near_duplicate_group_counts.csv`, and `near_duplicate_label_source_counts.csv`. Current audit found 196 candidate rows across 38 cross-source aHash groups after excluding `stanford-car-body-type-data`; these are low-priority optional review inputs and should be used in a pre/post comparison only if baseline results or leakage evidence justify the data loss.
 
 ## Final class counts after Stanford body-type exclusion
 
@@ -90,4 +90,3 @@ Phase 2 now computes a lightweight 64-bit average perceptual hash (`ahash64`) fo
 | SEDAN | 8,351 |
 | HATCHBACK | 2,651 |
 | PICK UP | 2,679 |
-

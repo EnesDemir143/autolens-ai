@@ -53,12 +53,12 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `AGENTS.md`
   </read_first>
   <action>
-    Implement the smallest working slice for `Add baseline experiment configs and runbook for the three CNN models`. The runbook must define the experiment order: Baseline 0 no augmentation with class-weighted CrossEntropy on the Phase 2 outlier-unfiltered split; Baseline 1 light augmentation comparison; Baseline 2 class-weighted loss versus weighted sampler; Baseline 3 outlier/near-duplicate filtered split comparison. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
+    Implement the smallest working slice for `Add baseline experiment configs and runbook for the three CNN models`. The runbook must define the experiment order: Baseline 0 no augmentation with class-weighted CrossEntropy on the Phase 2 outlier-unfiltered split; Baseline 1 light augmentation comparison; Baseline 2 class-weighted loss versus weighted sampler; optional low-priority Baseline 3 outlier/near-duplicate filtered split comparison only if earlier results or leakage review justify the extra data loss. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
   </action>
   <acceptance_criteria>
     - Output references all requirement IDs: TRN-01, TRN-02, TRN-03.
     - Output contains no instructor final test data.
-    - The runbook separates no-augmentation, augmentation, imbalance, and outlier-filtered variants instead of mixing them in one baseline.
+    - The runbook separates no-augmentation, augmentation, imbalance, and optional outlier-filtered variants instead of mixing them in one baseline.
     - The runbook names macro F1, weighted F1, per-class F1, and normalized confusion matrix as comparison evidence.
     - Any external dependency blocker is documented with the exact command or resource ID.
   </acceptance_criteria>

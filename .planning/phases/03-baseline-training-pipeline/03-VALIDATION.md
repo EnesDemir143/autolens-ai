@@ -12,4 +12,4 @@
 - MPS/CPU fallback code exists.
 - baseline runbook exists.
 - Baseline 0 config uses no train augmentation and deterministic resize 256 + center crop 224 + train-split mean/std normalization.
-- Follow-up configs/runbook entries separate light augmentation, weighted sampler comparison, and outlier-filtered comparison from the first baseline.
+- Follow-up configs/runbook entries separate light augmentation and weighted sampler comparison from the first baseline, and mark outlier-filtered comparison as low-priority optional work.

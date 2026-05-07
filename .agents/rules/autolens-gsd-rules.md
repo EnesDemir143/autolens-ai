@@ -229,14 +229,27 @@ Rules:
 - Do not mark the phase report as complete without evidence from the phase `NN-VALIDATION.md` checks or clearly documented blockers.
 - Keep the phase report factual and evidence-based so Phase 6 can reuse it for the final IEEE report.
 
-## 12. Git and Documentation Hygiene
+## 12. Plane Phase Status Hygiene
+
+After every GSD phase is completed or handed off, update the corresponding Plane item/status if Plane is available for the project.
+
+Plane update requirements:
+
+- Move the phase item to the correct status such as completed, blocked, or ready for next phase.
+- Add a concise completion note covering what was done, key files/artifacts produced, and any scope changes.
+- Include validation evidence: exact test/check commands, whether they passed or failed, and important metric/results summaries when available.
+- Record known risks, blockers, deferred work, and the next recommended phase/action.
+- Keep Plane consistent with `.planning/STATE.md`, the phase `NN-VERIFICATION.md` or summary file, and `docs/phase_reports/`.
+- If Plane is unavailable, document that blocker in the phase report or summary instead of silently skipping status hygiene.
+
+## 13. Git and Documentation Hygiene
 
 - Keep planning docs and phase artifacts committed when changed.
 - Use the repository Lore commit protocol from AGENTS.md for commit messages.
 - Do not commit `.DS_Store`, credentials, raw private datasets, or instructor final test data.
 - Keep README and docs aligned with actual commands that work in fish.
 
-## 13. When Unsure
+## 14. When Unsure
 
 Use this order:
 

@@ -34,7 +34,7 @@
 - Start with a no-augmentation preprocessing baseline so dataset/model issues are observable before augmentation effects are introduced. Baseline 0 must use deterministic train/validation/internal-test preprocessing: resize to 256, center crop to 224, convert to tensor, and train-split mean/std normalization.
 
 ### D-07
-- Treat augmentation and imbalance handling as explicit experiment variants, not hidden defaults. After Baseline 0, compare a light augmentation variant, class-weighted loss versus weighted sampling, and an outlier-filtered dataset variant against the non-filtered baseline.
+- Treat augmentation and imbalance handling as explicit experiment variants, not hidden defaults. After Baseline 0, compare a light augmentation variant and class-weighted loss versus weighted sampling. Outlier/near-duplicate filtering is low priority because weak classes already have limited data; run it only near the end if baseline metrics, leakage evidence, or time remaining justify the extra comparison.
 
     ### the agent's Discretion
     - Exact filenames and helper function names may be chosen during execution if they remain simple, testable, and consistent with prior phases.
@@ -73,7 +73,7 @@
         1. Baseline 0: no augmentation, class-weighted loss, outlier-unfiltered split.
         2. Baseline 1: light augmentation only, compared against Baseline 0.
         3. Baseline 2: weighted sampler versus class-weighted loss.
-        4. Baseline 3: outlier/near-duplicate filtered artifact variant versus the original Phase 2 split.
+        4. Optional low-priority Baseline 3: outlier/near-duplicate filtered artifact variant versus the original Phase 2 split, only if earlier results or leakage review make it worth the data loss.
 
     </specifics>
 

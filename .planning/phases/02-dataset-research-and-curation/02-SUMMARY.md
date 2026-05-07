@@ -26,7 +26,7 @@
 - `MICRO`, `STATION WAGON`, `HATCHBACK`, and `PICK UP` remain below the 4k/class target.
 - F1 images are source-biased to Formula 1 team folders.
 - Phase 3 should use class balancing/sampling and revisit weak-class collection before final model selection.
-- Outlier handling is a comparison gate, not a silent deletion step: preserve the current pre-outlier dataset counts, then after manual/outlier removal create a second artifact version and compare class counts, source coverage, and Phase 3 metrics before deciding which version to use.
+- Outlier handling is a low-priority optional comparison gate, not a silent deletion step: preserve the current pre-outlier dataset counts, and only if later metrics/leakage review justify the data loss create a second manual/outlier-filtered artifact version and compare class counts, source coverage, and Phase 3 metrics before deciding whether to use it.
 
 ## Extra MICRO model-name audit
 
@@ -45,7 +45,7 @@ MICRO is not sourced from generic `City Car`. It is populated only from the user
 
 ## Perceptual near-duplicate audit
 
-Phase 2 now computes a lightweight 64-bit average perceptual hash (`ahash64`) for accepted images and exports cross-source near-duplicate candidates. This is a conservative review signal, not an automatic deletion rule. Evidence files: `artifacts/dataset/eda/near_duplicate_candidates.csv`, `near_duplicate_group_counts.csv`, and `near_duplicate_label_source_counts.csv`. Current audit found 196 candidate rows across 38 cross-source aHash groups after excluding `stanford-car-body-type-data`; these should be reviewed or used in the pre/post comparison gate before final training selection.
+Phase 2 now computes a lightweight 64-bit average perceptual hash (`ahash64`) for accepted images and exports cross-source near-duplicate candidates. This is a conservative review signal, not an automatic deletion rule. Evidence files: `artifacts/dataset/eda/near_duplicate_candidates.csv`, `near_duplicate_group_counts.csv`, and `near_duplicate_label_source_counts.csv`. Current audit found 196 candidate rows across 38 cross-source aHash groups after excluding `stanford-car-body-type-data`; because weak classes have limited data, use these for low-priority optional review or a later pre/post comparison only if baseline results or leakage evidence make it worthwhile.
 
 ## Final class counts after Stanford body-type exclusion
 
@@ -59,4 +59,3 @@ Phase 2 now computes a lightweight 64-bit average perceptual hash (`ahash64`) fo
 | SEDAN | 8,351 |
 | HATCHBACK | 2,651 |
 | PICK UP | 2,679 |
-

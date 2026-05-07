@@ -26,7 +26,7 @@ uv run mypy src
 
 ## Result
 
-Phase 2 artifacts were generated and code quality gates passed. The phase is usable for Phase 3, with documented data gaps for MICRO, STATION WAGON, HATCHBACK, and PICK UP. Outlier removal must be evaluated as a before/after comparison, not applied silently.
+Phase 2 artifacts were generated and code quality gates passed. The phase is usable for Phase 3, with documented data gaps for MICRO, STATION WAGON, HATCHBACK, and PICK UP. Outlier removal is low-priority optional work because usable data is limited; if it is attempted later, it must be evaluated as a before/after comparison and not applied silently.
 
 ## MICRO model-name audit evidence
 
@@ -42,4 +42,4 @@ MICRO is not sourced from generic `City Car`. It is populated only from the user
 
 - [x] Perceptual hash column exists in manifests: `ahash64`.
 - [x] Cross-source near-duplicate candidates exist: `artifacts/dataset/eda/near_duplicate_candidates.csv`.
-- [x] Near-duplicate group/count summaries exist for pre/post comparison before final training selection.
+- [x] Near-duplicate group/count summaries exist for optional low-priority pre/post comparison if later results justify it.
