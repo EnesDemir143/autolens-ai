@@ -211,6 +211,7 @@ def main() -> None:
         weight_decay=config["weight_decay"],
         class_weights=class_weights,
         pretrained=config["pretrained"],
+        label_smoothing=config.get("label_smoothing", 0.0),
     )
     
     # Create trainer
@@ -224,6 +225,9 @@ def main() -> None:
         use_wandb=args.wandb,
         wandb_project=args.wandb_project,
         wandb_name=config["experiment_name"],
+        # Stability & performance
+        gradient_clip_val=config.get("gradient_clip_val", 1.0),
+        precision=config.get("precision", "32-true"),  # "16-mixed" for faster training
     )
     
     # Train

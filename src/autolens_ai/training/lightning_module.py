@@ -34,6 +34,7 @@ class AutoLensClassifier(pl.LightningModule):
         weight_decay: float = 1e-4,
         class_weights: torch.Tensor | None = None,
         pretrained: bool = True,
+        label_smoothing: float = 0.0,
     ):
         """Initialize Lightning module.
         
@@ -44,6 +45,7 @@ class AutoLensClassifier(pl.LightningModule):
             weight_decay: Weight decay for optimizer
             class_weights: Optional class weights for loss
             pretrained: Whether to use pretrained weights
+            label_smoothing: Label smoothing factor (0.0 = no smoothing, 0.1 = 10% smoothing)
         """
         super().__init__()
         self.save_hyperparameters(ignore=["class_weights"])
@@ -57,6 +59,7 @@ class AutoLensClassifier(pl.LightningModule):
         
         # Loss function
         self.class_weights = class_weights
+        self.label_smoothing = label_smoothing
         if class_weights is not None:
             self.register_buffer("_class_weights", class_weights)
         
@@ -81,10 +84,15 @@ class AutoLensClassifier(pl.LightningModule):
         return self.model(x)
     
     def _compute_loss(self, logits: torch.Tensor, targets: torch.Tensor) -> torch.Tensor:
-        """Compute loss with optional class weights."""
+        """Compute loss with optional class weights and label smoothing."""
         if self.class_weights is not None:
-            return F.cross_entropy(logits, targets, weight=self._class_weights)  # type: ignore[arg-type]
-        return F.cross_entropy(logits, targets)
+            return F.cross_entropy(
+                logits, 
+                targets, 
+                weight=self._class_weights,  # type: ignore[arg-type]
+                label_smoothing=self.label_smoothing,
+            )
+        return F.cross_entropy(logits, targets, label_smoothing=self.label_smoothing)
     
     def training_step(self, batch: tuple[torch.Tensor, torch.Tensor], batch_idx: int) -> torch.Tensor:
         """Training step."""
