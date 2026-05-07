@@ -12,6 +12,8 @@ import argparse
 import json
 from pathlib import Path
 
+import pytorch_lightning as pl
+import torch
 import yaml
 
 from autolens_ai.training import (
@@ -21,6 +23,13 @@ from autolens_ai.training import (
     create_trainer,
     print_device_info,
 )
+
+
+def set_seed(seed: int) -> None:
+    """Set random seed for reproducibility."""
+    pl.seed_everything(seed, workers=True)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
 
 
 def load_config(config_path: str | Path) -> dict:
@@ -80,12 +89,23 @@ def main() -> None:
         action="store_true",
         help="Resume training from last checkpoint (requires --run-id)",
     )
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=None,
+        help="Random seed for reproducibility (default: from config or 42)",
+    )
     args = parser.parse_args()
     
     # Load config
     config = load_config(args.config)
     print(f"Loaded config from: {args.config}")
     print(f"Experiment: {config['experiment_name']}")
+    
+    # Set seed for reproducibility
+    seed = args.seed if args.seed is not None else config.get("seed", 42)
+    set_seed(seed)
+    print(f"Random seed: {seed}")
     
     # Handle checkpoint directory and resume
     checkpoint_dir = config["checkpoint_dir"]
