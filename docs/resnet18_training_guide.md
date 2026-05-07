@@ -212,7 +212,14 @@ make train-baseline-1 WANDB=--wandb
      --config configs/experiments/baseline_0_resnet18.yaml \
      --find-lr
    
+   # Check results
+   cat checkpoints/baseline_0_resnet18_*/tune_results.json
+   # Shows: {"learning_rate": {"suggested": 0.00123, ...}}
+   
    # Update config with suggested LR
+   # Edit: configs/experiments/baseline_0_resnet18.yaml
+   # Change: learning_rate: 0.00123
+   
    # Re-train
    ```
 
