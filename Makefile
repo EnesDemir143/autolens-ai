@@ -1,4 +1,5 @@
 .PHONY: help sync import test lint format typecheck check pre-commit graphify-update graphify-report clean
+.PHONY: train-baseline-0 train-baseline-1 train-baseline-2 train-all-baselines
 
 help:
 	@printf '%s\n' \
@@ -13,7 +14,16 @@ help:
 		'  make pre-commit      Run all pre-commit hooks' \
 		'  make graphify-update Refresh the project knowledge graph' \
 		'  make graphify-report Show the current graph report' \
-		'  make clean           Remove local test/cache artifacts'
+		'  make clean           Remove local test/cache artifacts' \
+		'' \
+		'Training commands (Phase 3):' \
+		'  make train-baseline-0       Train all 3 models with Baseline 0 (no augmentation)' \
+		'  make train-baseline-1       Train ResNet18 with Baseline 1 (light augmentation)' \
+		'  make train-baseline-2       Train ResNet18 with Baseline 2 (weighted sampler)' \
+		'  make train-all-baselines    Run all baseline experiments sequentially' \
+		'' \
+		'Add --wandb flag for W&B logging:' \
+		'  make train-baseline-0 WANDB=--wandb'
 
 sync:
 	uv sync
@@ -46,3 +56,28 @@ graphify-report:
 
 clean:
 	rm -rf .pytest_cache .ruff_cache .mypy_cache
+
+# Training targets
+WANDB ?=
+
+train-baseline-0:
+	@echo "Training Baseline 0: ResNet18 (no augmentation)..."
+	uv run python scripts/train.py --config configs/experiments/baseline_0_resnet18.yaml $(WANDB)
+	@echo ""
+	@echo "Training Baseline 0: MobileNetV4 Conv Medium..."
+	uv run python scripts/train.py --config configs/experiments/baseline_0_mobilenetv4.yaml $(WANDB)
+	@echo ""
+	@echo "Training Baseline 0: EfficientNet-B2..."
+	uv run python scripts/train.py --config configs/experiments/baseline_0_efficientnet_b2.yaml $(WANDB)
+
+train-baseline-1:
+	@echo "Training Baseline 1: ResNet18 (light augmentation)..."
+	uv run python scripts/train.py --config configs/experiments/baseline_1_resnet18_augmented.yaml $(WANDB)
+
+train-baseline-2:
+	@echo "Training Baseline 2: ResNet18 (weighted sampler)..."
+	uv run python scripts/train.py --config configs/experiments/baseline_2_resnet18_weighted_sampler.yaml $(WANDB)
+
+train-all-baselines: train-baseline-0 train-baseline-1 train-baseline-2
+	@echo ""
+	@echo "All baseline experiments complete!"

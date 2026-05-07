@@ -11,7 +11,8 @@ from typing import Any
 
 import pytorch_lightning as pl
 import torch
-from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint, LearningRateMonitor
+from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint, LearningRateMonitor, RichProgressBar
+from pytorch_lightning.loggers import WandbLogger
 
 
 def get_device() -> str:
@@ -35,6 +36,9 @@ def create_trainer(
     early_stopping_patience: int = 10,
     monitor_metric: str = "val/loss",
     monitor_mode: str = "min",
+    use_wandb: bool = False,
+    wandb_project: str = "autolens-ai",
+    wandb_name: str | None = None,
     **trainer_kwargs: Any,
 ) -> pl.Trainer:
     """Create a Lightning Trainer with standard callbacks.
@@ -46,6 +50,9 @@ def create_trainer(
         early_stopping_patience: Patience for early stopping
         monitor_metric: Metric to monitor for checkpointing/early stopping
         monitor_mode: 'min' or 'max' for the monitored metric
+        use_wandb: Whether to use W&B logging
+        wandb_project: W&B project name
+        wandb_name: W&B run name
         **trainer_kwargs: Additional arguments for pl.Trainer
         
     Returns:
@@ -60,15 +67,24 @@ def create_trainer(
     
     # Callbacks
     callbacks = [
-        # Model checkpointing
+        # Model checkpointing - save top 3 and last
         ModelCheckpoint(
             dirpath=checkpoint_dir,
-            filename="{epoch:02d}-{val_loss:.4f}",
-            monitor=monitor_metric,
-            mode=monitor_mode,
+            filename="best-{epoch:02d}-{val_f1_macro:.4f}",
+            monitor="val/f1_macro",
+            mode="max",
             save_top_k=3,
             save_last=True,
-            verbose=True,
+            auto_insert_metric_name=False,
+        ),
+        # Also save best by loss
+        ModelCheckpoint(
+            dirpath=checkpoint_dir,
+            filename="best_loss-{epoch:02d}-{val_loss:.4f}",
+            monitor=monitor_metric,
+            mode=monitor_mode,
+            save_top_k=1,
+            auto_insert_metric_name=False,
         ),
         # Early stopping
         EarlyStopping(
@@ -79,7 +95,22 @@ def create_trainer(
         ),
         # Learning rate monitoring
         LearningRateMonitor(logging_interval="epoch"),
+        # Rich progress bar
+        RichProgressBar(),
     ]
+    
+    # Logger
+    logger: Any = True  # Default CSV logger
+    if use_wandb:
+        try:
+            logger = WandbLogger(
+                project=wandb_project,
+                name=wandb_name,
+                save_dir=str(checkpoint_dir.parent / "wandb"),
+            )
+        except Exception as e:
+            print(f"W&B logger failed, falling back to CSV: {e}")
+            logger = True
     
     # Create trainer
     trainer = pl.Trainer(
@@ -87,6 +118,7 @@ def create_trainer(
         accelerator=accelerator,
         devices=1,
         callbacks=callbacks,
+        logger=logger,
         enable_progress_bar=True,
         enable_model_summary=True,
         log_every_n_steps=10,

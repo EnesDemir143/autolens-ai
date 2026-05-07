@@ -3,6 +3,7 @@
 
 Usage:
     uv run python scripts/train.py --config configs/experiments/baseline_0_resnet18.yaml
+    uv run python scripts/train.py --config configs/experiments/baseline_0_resnet18.yaml --wandb
 """
 
 from __future__ import annotations
@@ -36,6 +37,17 @@ def main() -> None:
         required=True,
         help="Path to experiment config YAML file",
     )
+    parser.add_argument(
+        "--wandb",
+        action="store_true",
+        help="Enable W&B logging",
+    )
+    parser.add_argument(
+        "--wandb-project",
+        type=str,
+        default="autolens-ai",
+        help="W&B project name",
+    )
     args = parser.parse_args()
     
     # Load config
@@ -67,7 +79,8 @@ def main() -> None:
             class_counts,
             max_weight=config.get("max_class_weight", 5.0),
         )
-        print(f"Class weights: {class_weights}")
+        print(f"\nClass counts: {class_counts}")
+        print(f"Class weights: {class_weights.tolist()}")
     
     # Create data module
     datamodule = AutoLensDataModule(
@@ -101,17 +114,23 @@ def main() -> None:
         early_stopping_patience=config["early_stopping_patience"],
         monitor_metric=config["monitor_metric"],
         monitor_mode=config["monitor_mode"],
+        use_wandb=args.wandb,
+        wandb_project=args.wandb_project,
+        wandb_name=config["experiment_name"],
     )
     
     # Train
     print("\nStarting training...")
     trainer.fit(model, datamodule)
     
-    # Test
-    print("\nRunning test evaluation...")
-    trainer.test(model, datamodule)
+    # Test with best checkpoint
+    print("\nRunning test evaluation with best checkpoint...")
+    trainer.test(model, datamodule, ckpt_path="best")
     
-    print(f"\nTraining complete! Checkpoints saved to: {config['checkpoint_dir']}")
+    print(f"\nTraining complete!")
+    print(f"Checkpoints saved to: {config['checkpoint_dir']}")
+    print(f"Best model: {config['checkpoint_dir']}/best-*.ckpt")
+    print(f"Last model: {config['checkpoint_dir']}/last.ckpt")
 
 
 if __name__ == "__main__":
