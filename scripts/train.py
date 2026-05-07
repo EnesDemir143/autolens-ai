@@ -256,19 +256,54 @@ def main() -> None:
         print("\nRunning learning rate finder...")
         lr_finder = trainer.tuner.lr_find(model, datamodule)
         if lr_finder:
+            suggested_lr = lr_finder.suggestion()
             fig = lr_finder.plot(suggest=True)
             fig.savefig(f"{checkpoint_dir}/lr_finder.png")
-            print(f"Suggested LR: {lr_finder.suggestion()}")
+            print(f"Suggested LR: {suggested_lr}")
             print(f"LR finder plot saved to: {checkpoint_dir}/lr_finder.png")
-            print("Update config with suggested LR and re-run training")
+            
+            # Save to JSON
+            import json
+            tune_results = {
+                "learning_rate": {
+                    "suggested": float(suggested_lr),
+                    "current": config["learning_rate"],
+                    "plot": f"{checkpoint_dir}/lr_finder.png",
+                },
+                "config_file": args.config,
+                "timestamp": str(Path(checkpoint_dir).name.split("_")[-1]),
+            }
+            tune_path = Path(checkpoint_dir) / "tune_results.json"
+            with open(tune_path, "w") as f:
+                json.dump(tune_results, f, indent=2)
+            print(f"✓ Results saved to: {tune_path}")
+            print("\nTo use suggested LR, update config:")
+            print(f"  learning_rate: {suggested_lr}")
             return
     
     # Optional: Find optimal batch size
     if args.find_batch_size:
         print("\nRunning batch size finder...")
         trainer.tuner.scale_batch_size(model, datamodule, mode="power")
-        print(f"Optimal batch size: {datamodule.batch_size}")
-        print("Update config with suggested batch size and re-run training")
+        suggested_bs = datamodule.batch_size
+        print(f"Optimal batch size: {suggested_bs}")
+        
+        # Save to JSON
+        import json
+        tune_results = {
+            "batch_size": {
+                "suggested": int(suggested_bs),
+                "current": config["batch_size"],
+            },
+            "config_file": args.config,
+            "timestamp": str(Path(checkpoint_dir).name.split("_")[-1]),
+        }
+        tune_path = Path(checkpoint_dir) / "tune_results.json"
+        with open(tune_path, "w") as f:
+            json.dump(tune_results, f, indent=2)
+        print(f"✓ Results saved to: {tune_path}")
+        print("\nTo use suggested batch size, update config:")
+        print(f"  batch_size: {suggested_bs}")
         return
     
     trainer.fit(model, datamodule, ckpt_path=resume_ckpt)
