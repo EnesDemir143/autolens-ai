@@ -53,19 +53,55 @@ make train-all-baselines
 
 ### Advanced: Hyperparameter Tuning
 
+**Find optimal learning rate:**
 ```bash
-# Find optimal learning rate
 uv run python scripts/train.py \
   --config configs/experiments/baseline_0_resnet18.yaml \
   --find-lr
 
-# Find optimal batch size
+# Output:
+# - Suggested LR printed to console
+# - Plot saved: checkpoints/.../lr_finder.png
+# - Results saved: checkpoints/.../tune_results.json
+```
+
+**Check results:**
+```bash
+cat checkpoints/baseline_0_resnet18_*/tune_results.json
+```
+
+**Example output:**
+```json
+{
+  "learning_rate": {
+    "suggested": 0.00123,
+    "current": 0.001,
+    "plot": "checkpoints/.../lr_finder.png"
+  }
+}
+```
+
+**Update config and train:**
+```bash
+# Edit: configs/experiments/baseline_0_resnet18.yaml
+# Change: learning_rate: 0.00123
+
+# Then train
+make train-baseline-0
+```
+
+**Find optimal batch size:**
+```bash
 uv run python scripts/train.py \
   --config configs/experiments/baseline_0_resnet18.yaml \
   --find-batch-size
 
-# Then update config with suggested values and train
+# Output:
+# - Optimal batch size printed
+# - Results saved: checkpoints/.../tune_results.json
 ```
+
+**Note:** Tuning is optional. Default values (lr=0.001, bs=32) work well for most cases.
 
 ### Resume Training
 
