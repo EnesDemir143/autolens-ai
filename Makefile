@@ -63,12 +63,13 @@ clean:
 # Dataset preparation
 compute-stats:
 	@echo "Computing mean and std from training split..."
-	uv run python scripts/compute_dataset_stats.py
+	uv run python scripts/compute_dataset_stats.py --output artifacts/dataset/stats.json
+	@echo "Stats saved to artifacts/dataset/stats.json"
 
 # Training targets
 WANDB ?=
 
-train-baseline-0:
+train-baseline-0: compute-stats
 	@echo "Training Baseline 0: ResNet18 (no augmentation)..."
 	uv run python scripts/train.py --config configs/experiments/baseline_0_resnet18.yaml $(WANDB)
 	@echo ""
@@ -78,11 +79,11 @@ train-baseline-0:
 	@echo "Training Baseline 0: EfficientNet-B2..."
 	uv run python scripts/train.py --config configs/experiments/baseline_0_efficientnet_b2.yaml $(WANDB)
 
-train-baseline-1:
+train-baseline-1: compute-stats
 	@echo "Training Baseline 1: ResNet18 (light augmentation)..."
 	uv run python scripts/train.py --config configs/experiments/baseline_1_resnet18_augmented.yaml $(WANDB)
 
-train-baseline-2:
+train-baseline-2: compute-stats
 	@echo "Training Baseline 2: ResNet18 (weighted sampler)..."
 	uv run python scripts/train.py --config configs/experiments/baseline_2_resnet18_weighted_sampler.yaml $(WANDB)
 

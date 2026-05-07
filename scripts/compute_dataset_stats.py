@@ -3,9 +3,14 @@
 
 Usage:
     uv run python scripts/compute_dataset_stats.py
+    uv run python scripts/compute_dataset_stats.py --output artifacts/dataset/stats.json
 """
 
 from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
 
 import torch
 from torch.utils.data import DataLoader
@@ -77,7 +82,29 @@ def compute_mean_std(
 
 def main() -> None:
     """Main function."""
+    parser = argparse.ArgumentParser(description="Compute dataset statistics")
+    parser.add_argument(
+        "--output",
+        type=str,
+        default="artifacts/dataset/stats.json",
+        help="Output JSON file path",
+    )
+    args = parser.parse_args()
+    
     mean, std = compute_mean_std()
+    
+    # Save to JSON
+    output_path = Path(args.output)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    
+    stats = {
+        "mean": list(mean),
+        "std": list(std),
+        "description": "Dataset normalization statistics computed from train split",
+    }
+    
+    with open(output_path, "w") as f:
+        json.dump(stats, f, indent=2)
     
     print("\n" + "=" * 60)
     print("Dataset Statistics (Train Split)")
@@ -85,12 +112,8 @@ def main() -> None:
     print(f"Mean (RGB): {mean}")
     print(f"Std  (RGB): {std}")
     print("=" * 60)
-    print("\nAdd these to your PreprocessConfig:")
-    print(f"  mean: {mean}")
-    print(f"  std: {std}")
-    print("\nOr update configs/experiments/*.yaml:")
-    print(f"  dataset_mean: {list(mean)}")
-    print(f"  dataset_std: {list(std)}")
+    print(f"\nSaved to: {output_path}")
+    print("\nTraining will automatically load these values.")
 
 
 if __name__ == "__main__":
