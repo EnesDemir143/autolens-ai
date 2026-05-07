@@ -69,12 +69,29 @@ def main() -> None:
         default="autolens-ai",
         help="W&B project name",
     )
+    parser.add_argument(
+        "--run-id",
+        type=str,
+        default=None,
+        help="Optional run ID suffix for checkpoint dir",
+    )
     args = parser.parse_args()
     
     # Load config
     config = load_config(args.config)
     print(f"Loaded config from: {args.config}")
     print(f"Experiment: {config['experiment_name']}")
+    
+    # Add run ID to checkpoint dir if provided, otherwise use timestamp
+    checkpoint_dir = config["checkpoint_dir"]
+    if args.run_id:
+        checkpoint_dir = f"{checkpoint_dir}_{args.run_id}"
+    else:
+        from datetime import datetime
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        checkpoint_dir = f"{checkpoint_dir}_{timestamp}"
+    
+    print(f"Checkpoints will be saved to: {checkpoint_dir}")
     
     # Print device info
     print_device_info()
@@ -139,7 +156,7 @@ def main() -> None:
     trainer = create_trainer(
         max_epochs=config["max_epochs"],
         accelerator=config.get("accelerator"),
-        checkpoint_dir=config["checkpoint_dir"],
+        checkpoint_dir=checkpoint_dir,  # Use updated checkpoint_dir with timestamp
         early_stopping_patience=config["early_stopping_patience"],
         monitor_metric=config["monitor_metric"],
         monitor_mode=config["monitor_mode"],
@@ -157,9 +174,9 @@ def main() -> None:
     trainer.test(model, datamodule, ckpt_path="best")
     
     print(f"\nTraining complete!")
-    print(f"Checkpoints saved to: {config['checkpoint_dir']}")
-    print(f"Best model: {config['checkpoint_dir']}/best-*.ckpt")
-    print(f"Last model: {config['checkpoint_dir']}/last.ckpt")
+    print(f"Checkpoints saved to: {checkpoint_dir}")
+    print(f"Best model: {checkpoint_dir}/best-*.ckpt")
+    print(f"Last model: {checkpoint_dir}/last.ckpt")
 
 
 if __name__ == "__main__":
