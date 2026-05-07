@@ -1,0 +1,17 @@
+{
+  "phase": 2,
+  "dataset_root": "datasets",
+  "internet_research": "skipped because the user supplied local datasets",
+  "target_classes": [
+    "SUV",
+    "VAN",
+    "STATION WAGON",
+    "MICRO",
+    "OPEN WHEEL / F1",
+    "SEDAN",
+    "HATCHBACK",
+    "PICK UP"
+  ],
+  "output_dir": "artifacts/dataset",
+  "command": "uv run python -m autolens_ai.data.build_phase2_dataset --dataset-root datasets --output-dir artifacts/dataset"
+}
