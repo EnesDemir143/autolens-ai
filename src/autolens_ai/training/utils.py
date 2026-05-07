@@ -7,7 +7,7 @@ Phase decision: D-01
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 import pytorch_lightning as pl
 import torch
@@ -40,7 +40,7 @@ def create_trainer(
     wandb_project: str = "autolens-ai",
     wandb_name: str | None = None,
     gradient_clip_val: float | None = None,
-    precision: str = "32-true",
+    precision: Literal["16-true", "16-mixed", "bf16-true", "bf16-mixed", "32-true", "64-true"] = "32-true",
     use_ema: bool = False,
     ema_decay: float = 0.999,
     **trainer_kwargs: Any,
@@ -74,7 +74,7 @@ def create_trainer(
         # Model checkpointing - save top 3 and last
         ModelCheckpoint(
             dirpath=checkpoint_dir,
-            filename="best-{epoch:02d}-{val_f1_macro:.4f}",
+            filename="best-{epoch:02d}-{val/f1_macro:.4f}",
             monitor="val/f1_macro",
             mode="max",
             save_top_k=3,
@@ -84,7 +84,7 @@ def create_trainer(
         # Also save best by loss
         ModelCheckpoint(
             dirpath=checkpoint_dir,
-            filename="best_loss-{epoch:02d}-{val_loss:.4f}",
+            filename="best_loss-{epoch:02d}-{val/loss:.4f}",
             monitor=monitor_metric,
             mode=monitor_mode,
             save_top_k=1,

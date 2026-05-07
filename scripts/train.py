@@ -15,6 +15,7 @@ from pathlib import Path
 import pytorch_lightning as pl
 import torch
 import yaml
+from pytorch_lightning.tuner import Tuner
 
 from autolens_ai.training import (
     AutoLensClassifier,
@@ -254,7 +255,7 @@ def main() -> None:
     # Optional: Find optimal learning rate
     if args.find_lr:
         print("\nRunning learning rate finder...")
-        lr_finder = trainer.tuner.lr_find(model, datamodule)
+        lr_finder = Tuner(trainer).lr_find(model, datamodule)
         if lr_finder:
             suggested_lr = lr_finder.suggestion()
             fig = lr_finder.plot(suggest=True)
@@ -284,7 +285,7 @@ def main() -> None:
     # Optional: Find optimal batch size
     if args.find_batch_size:
         print("\nRunning batch size finder...")
-        trainer.tuner.scale_batch_size(model, datamodule, mode="power")
+        Tuner(trainer).scale_batch_size(model, datamodule, mode="power")
         suggested_bs = datamodule.batch_size
         print(f"Optimal batch size: {suggested_bs}")
         
@@ -312,7 +313,7 @@ def main() -> None:
     print("\nRunning test evaluation with best checkpoint...")
     trainer.test(model, datamodule, ckpt_path="best")
     
-    print(f"\nTraining complete!")
+    print("\nTraining complete!")
     print(f"Checkpoints saved to: {checkpoint_dir}")
     print(f"Best model: {checkpoint_dir}/best-*.ckpt")
     print(f"Last model: {checkpoint_dir}/last.ckpt")
