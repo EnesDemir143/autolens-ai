@@ -62,6 +62,8 @@ def main() -> None:
     preprocess_config = PreprocessConfig(
         resize_size=config["resize_size"],
         crop_size=config["crop_size"],
+        mean=tuple(config.get("dataset_mean", [0.485, 0.456, 0.406])),
+        std=tuple(config.get("dataset_std", [0.229, 0.224, 0.225])),
     )
     
     # Compute class weights if needed
