@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
-from typing import Any
+from typing import Any, cast
 
 import pytorch_lightning as pl
 import torch
@@ -29,7 +29,7 @@ class EMA(Callback):
 
     def on_fit_start(self, trainer: pl.Trainer, pl_module: pl.LightningModule) -> None:
         """Initialize EMA model."""
-        self.ema_model = deepcopy(pl_module.model)
+        self.ema_model = cast(torch.nn.Module, deepcopy(pl_module.model))
         for param in self.ema_model.parameters():
             param.detach_()
 
@@ -48,7 +48,7 @@ class EMA(Callback):
         with torch.no_grad():
             for ema_param, model_param in zip(
                 self.ema_model.parameters(),
-                pl_module.model.parameters(),
+                cast(torch.nn.Module, pl_module.model).parameters(),
             ):
                 ema_param.data.mul_(self.decay).add_(
                     model_param.data, alpha=1 - self.decay

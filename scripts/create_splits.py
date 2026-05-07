@@ -9,7 +9,6 @@ Usage:
 from __future__ import annotations
 
 import argparse
-import csv
 from collections import Counter
 from pathlib import Path
 
