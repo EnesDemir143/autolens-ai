@@ -62,9 +62,14 @@ clean:
 
 # Dataset preparation
 compute-stats:
-	@echo "Computing mean and std from training split..."
-	uv run python scripts/compute_dataset_stats.py --output artifacts/dataset/stats.json
-	@echo "Stats saved to artifacts/dataset/stats.json"
+	@if [ -f artifacts/dataset/stats.json ]; then \
+		echo "✓ Dataset stats already exist (artifacts/dataset/stats.json)"; \
+		echo "  Delete the file to recompute"; \
+	else \
+		echo "Computing mean and std from training split..."; \
+		uv run python scripts/compute_dataset_stats.py --output artifacts/dataset/stats.json; \
+		echo "Stats saved to artifacts/dataset/stats.json"; \
+	fi
 
 # Training targets
 WANDB ?=
