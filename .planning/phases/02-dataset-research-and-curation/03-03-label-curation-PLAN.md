@@ -1,7 +1,7 @@
 ---
 phase: 2
 phase_name: Dataset Research and Curation
-branch: feat/dataset-research-and-curation
+branch: feat/dataset-curation-eda
 plan_id: 02-03
 objective: Map raw labels and curate the 8-class dataset
 wave: 2

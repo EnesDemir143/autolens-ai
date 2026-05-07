@@ -1,5 +1,5 @@
 # Phase 2 Research: Dataset Research and Curation
-**Branch:** `feat/dataset-research-and-curation`
+**Branch:** `feat/dataset-curation-eda`
 
     ## Research Question
 

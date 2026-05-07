@@ -1,7 +1,7 @@
 ---
 phase: 2
 phase_name: Dataset Research and Curation
-branch: feat/dataset-research-and-curation
+branch: feat/dataset-curation-eda
 plan_id: 02-02
 objective: Create source download/ingestion command surfaces
 wave: 1

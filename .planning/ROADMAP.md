@@ -10,7 +10,7 @@
 | # | Phase | Branch | Goal | Requirements | Success Criteria |
 |---|-------|--------|------|--------------|------------------|
 | 1 | Project Foundation | `main` | Create reproducible uv/Python 3.12 project skeleton and quality gates | ENV-01, ENV-02, ENV-03 | 4 |
-| 2 | Dataset Research and Curation | `feat/dataset-research-and-curation` | Build documented near-balanced 8-class dataset pipeline from public sources | DATA-01..DATA-06 | 5 |
+| 2 | Dataset Research and Curation | `feat/dataset-curation-eda` | Build documented near-balanced 8-class dataset pipeline from public sources | DATA-01..DATA-06 | 5 |
 | 3 | Baseline Training Pipeline | `feat/baseline-training-pipeline` | Train explainable CNN baseline/comparison models with Lightning and MPS/CPU support | TRN-01, TRN-02, TRN-03, TRN-06, TRN-07 | 5 |
 | 4 | Main DINOv3 Model and Selection | `feat/model-comparison-and-selection` | Implement the intended main DINOv3 path, compare against baselines, and select by F1/size/speed | TRN-04, TRN-05, EVAL-01..EVAL-07 | 6 |
 | 5 | Gradio Demo Interface | `feat/gradio-demo-interface` | Deliver modern presentation-ready web UI for live classification | UI-01..UI-07 | 5 |
@@ -40,7 +40,7 @@
 
 ### Phase 2: Dataset Research and Curation
 
-**Branch:** `feat/dataset-research-and-curation`
+**Branch:** `feat/dataset-curation-eda`
 
 **Goal:** Convert public Kaggle/Hugging Face/metadata-backed sources into a documented near-balanced 8-class dataset: 36k–40k raw candidates, approximately 32k clean images, about 4k/class.
 
@@ -66,7 +66,7 @@
 
 **Branch:** `feat/baseline-training-pipeline`
 
-**Goal:** Build the reusable training/evaluation path and train MobileNetV4 Conv Medium, EfficientNet-B2, and ResNet strictly as baseline/comparison models.
+**Goal:** Build the reusable training/evaluation path and train MobileNetV4 Conv Medium, EfficientNet-B2, and ResNet18 strictly as baseline/comparison models. These three Phase 3 baselines feed the final four-model-family comparison once DINOv3 is added in Phase 4.
 
 **Requirements:** TRN-01, TRN-02, TRN-03, TRN-06, TRN-07
 
@@ -79,21 +79,21 @@
 
 **Implementation notes:**
 - Use timm for MobileNetV4/EfficientNet where possible.
-- Use torchvision/timm for ResNet baseline.
+- Use torchvision/timm for ResNet18 baseline to keep the classic control model safely below the 95 MB artifact limit.
 - If MobileNetV4 Conv Medium name is unavailable in timm, phase must document the closest supported timm model and rationale before substitution.
 
 ### Phase 4: Main DINOv3 Model and Selection
 
 **Branch:** `feat/model-comparison-and-selection`
 
-**Goal:** Implement/evaluate DINOv3 ViT-S/16 as the intended main model, then compare it against baseline models by macro F1, per-class behavior, artifact size, and speed.
+**Goal:** Implement/evaluate DINOv3 ViT-S/16 as the intended main model, then compare the four model families — MobileNetV4 Conv Medium, EfficientNet-B2, ResNet18, and DINOv3 — by macro F1, per-class behavior, artifact size, and speed.
 
 **Requirements:** TRN-04, TRN-05, EVAL-01, EVAL-02, EVAL-03, EVAL-04, EVAL-05, EVAL-06, EVAL-07
 
 **Success criteria:**
 1. DINOv3 access is validated early because it is the intended main model path; if gated access blocks use, the fallback is documented.
-2. DINOv3 non-LoRA path is implemented/evaluated before any optional LoRA extension.
-3. Every model has Accuracy, Precision, Recall, F1, macro/weighted averages, and per-class metrics.
+2. DINOv3 non-LoRA path is implemented/evaluated before the separate optional LoRA fine-tuning variant.
+3. Every model has Accuracy, balanced accuracy, MCC, Precision, Recall, F1, macro/weighted averages, and per-class metrics.
 4. Required plots are generated: loss, accuracy, normalized confusion matrix.
 5. Final model candidate is under 95 MB or has a clear compression/export path.
 6. Final selection rationale is written in report-ready language.

@@ -1,7 +1,7 @@
 ---
 phase: 2
 phase_name: Dataset Research and Curation
-branch: feat/dataset-research-and-curation
+branch: feat/dataset-curation-eda
 plan_id: 02-04
 objective: Generate manifest, EDA/outlier audit, balance audit, dedup report, and split files
 wave: 2

@@ -19,10 +19,10 @@
 - Treat DINOv3 ViT-S/16 as the intended main model and validate gated Hugging Face access for facebook/dinov3-vits16-pretrain-lvd1689m before planning training assumptions.
 
 ### D-02
-- Evaluate DINOv3 without LoRA first; LoRA is optional only after non-LoRA works.
+- Evaluate DINOv3 without LoRA first; then evaluate a separate LoRA fine-tuning variant if gated access, time, and artifact-size constraints allow it.
 
 ### D-03
-- Rank DINOv3 against baselines by macro F1 first, then artifact size and latency; baselines are fallback/comparison evidence, not the default target.
+- Rank the four model families — MobileNetV4 Conv Medium, EfficientNet-B2, ResNet18, and DINOv3 — by macro F1 first, then balanced accuracy, MCC, per-class behavior, artifact size, and latency. Baselines are fallback/comparison evidence, not the default target.
 
 ### D-04
 - Generate all required assignment plots as reproducible artifacts.
@@ -57,6 +57,9 @@
     - Requirement IDs for this phase: TRN-04, TRN-05, EVAL-01, EVAL-02, EVAL-03, EVAL-04, EVAL-05, EVAL-06, EVAL-07.
     - Execute sequentially, preserving outputs from prior phases.
     - Write evidence files that later phases and the final report can consume.
+    - Overall model comparison must include four model families: MobileNetV4 Conv Medium, EfficientNet-B2, ResNet18, and DINOv3 ViT-S/16.
+    - DINOv3 variants are ordered: non-LoRA first, LoRA second as a separate optional comparison; never start with LoRA before non-LoRA evidence exists.
+    - Required ranking metrics include macro F1, weighted F1, balanced accuracy, MCC, per-class F1, normalized confusion matrix, artifact size, and latency.
 
     </specifics>
 
