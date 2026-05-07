@@ -1,0 +1,50 @@
+# Baseline 0: No Augmentation
+# Requirements: TRN-01, TRN-02, TRN-03, TRN-06, TRN-07
+# Phase decision: D-06
+
+# Dataset
+data_root: artifacts/dataset/raw
+train_csv: artifacts/dataset/splits/train.csv
+val_csv: artifacts/dataset/splits/val.csv
+test_csv: artifacts/dataset/splits/internal_test.csv
+
+# Preprocessing (Baseline 0: no augmentation)
+resize_size: 256
+crop_size: 224
+use_augmentation: false
+
+# Model
+model_name: resnet18  # Start with ResNet18 as the control model
+num_classes: 8
+pretrained: true
+
+# Training
+batch_size: 32
+num_workers: 4
+max_epochs: 50
+learning_rate: 0.001
+weight_decay: 0.0001
+
+# Class imbalance handling (Baseline 0: class-weighted loss)
+use_weighted_sampler: false
+use_class_weights: true
+max_class_weight: 5.0
+
+# Callbacks
+early_stopping_patience: 10
+monitor_metric: val/loss
+monitor_mode: min
+
+# Device
+accelerator: null  # Auto-detect (MPS > CUDA > CPU)
+
+# Checkpoints
+checkpoint_dir: checkpoints/baseline_0_resnet18
+
+# Experiment tracking
+experiment_name: baseline_0_no_augmentation
+tags:
+  - baseline_0
+  - no_augmentation
+  - class_weighted_loss
+  - resnet18

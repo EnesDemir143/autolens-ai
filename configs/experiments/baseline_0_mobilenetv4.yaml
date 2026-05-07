@@ -1,0 +1,50 @@
+# Baseline 0: MobileNetV4 Conv Medium
+# Requirements: TRN-01
+# Phase decision: D-02
+
+# Dataset
+data_root: artifacts/dataset/raw
+train_csv: artifacts/dataset/splits/train.csv
+val_csv: artifacts/dataset/splits/val.csv
+test_csv: artifacts/dataset/splits/internal_test.csv
+
+# Preprocessing (Baseline 0: no augmentation)
+resize_size: 256
+crop_size: 224
+use_augmentation: false
+
+# Model
+model_name: mobilenetv4_conv_medium
+num_classes: 8
+pretrained: true
+
+# Training
+batch_size: 32
+num_workers: 4
+max_epochs: 50
+learning_rate: 0.001
+weight_decay: 0.0001
+
+# Class imbalance handling
+use_weighted_sampler: false
+use_class_weights: true
+max_class_weight: 5.0
+
+# Callbacks
+early_stopping_patience: 10
+monitor_metric: val/loss
+monitor_mode: min
+
+# Device
+accelerator: null
+
+# Checkpoints
+checkpoint_dir: checkpoints/baseline_0_mobilenetv4
+
+# Experiment tracking
+experiment_name: baseline_0_mobilenetv4_conv_medium
+tags:
+  - baseline_0
+  - no_augmentation
+  - class_weighted_loss
+  - mobilenetv4

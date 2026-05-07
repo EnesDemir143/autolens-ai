@@ -1,0 +1,50 @@
+# Baseline 2: Weighted Sampler Comparison
+# Requirements: TRN-01, TRN-02, TRN-03, TRN-06, TRN-07
+# Phase decision: D-07
+
+# Dataset
+data_root: artifacts/dataset/raw
+train_csv: artifacts/dataset/splits/train.csv
+val_csv: artifacts/dataset/splits/val.csv
+test_csv: artifacts/dataset/splits/internal_test.csv
+
+# Preprocessing (no augmentation for fair comparison with Baseline 0)
+resize_size: 256
+crop_size: 224
+use_augmentation: false
+
+# Model
+model_name: resnet18
+num_classes: 8
+pretrained: true
+
+# Training
+batch_size: 32
+num_workers: 4
+max_epochs: 50
+learning_rate: 0.001
+weight_decay: 0.0001
+
+# Class imbalance handling (Baseline 2: weighted sampler instead of class weights)
+use_weighted_sampler: true
+use_class_weights: false
+max_class_weight: 5.0
+
+# Callbacks
+early_stopping_patience: 10
+monitor_metric: val/loss
+monitor_mode: min
+
+# Device
+accelerator: null
+
+# Checkpoints
+checkpoint_dir: checkpoints/baseline_2_resnet18_weighted_sampler
+
+# Experiment tracking
+experiment_name: baseline_2_weighted_sampler
+tags:
+  - baseline_2
+  - no_augmentation
+  - weighted_sampler
+  - resnet18
