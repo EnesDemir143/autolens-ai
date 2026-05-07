@@ -19,7 +19,7 @@ Implement dataset class/datamodule and preprocessing config
 
 <must_haves>
 - Covers requirement IDs: TRN-06, TRN-07.
-- Covers phase decisions: D-01, D-02, D-03, D-04, D-05 where relevant to this plan.
+- Covers phase decisions: D-01, D-02, D-03, D-04, D-05, D-06, D-07 where relevant to this plan.
 - Produces concrete evidence for downstream phases.
 </must_haves>
 
@@ -53,11 +53,13 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `AGENTS.md`
   </read_first>
   <action>
-    Implement the smallest working slice for `Implement dataset class/datamodule and preprocessing config`. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
+    Implement the smallest working slice for `Implement dataset class/datamodule and preprocessing config`. The first preprocessing config must define Baseline 0 with no train augmentation: resize 256, center crop 224, tensor conversion, and ImageNet normalization for train/validation/internal-test. It must consume Phase 2 split CSVs rather than raw folders directly. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
   </action>
   <acceptance_criteria>
     - Output references all requirement IDs: TRN-06, TRN-07.
     - Output contains no instructor final test data.
+    - A no-augmentation Baseline 0 preprocessing config exists and is clearly separate from later augmentation variants.
+    - The datamodule can be pointed at `artifacts/dataset/splits/all_splits.csv` or the split-specific CSV files.
     - Any external dependency blocker is documented with the exact command or resource ID.
   </acceptance_criteria>
 </task>
