@@ -1,0 +1,501 @@
+source_id,raw_label,mapping_status,review_or_exclusion_reason,normalized_label,count
+DrBimmer-vehicle-classification,Barge,excluded,non_target_or_unknown_label,,200
+DrBimmer-vehicle-classification,Bicycle,excluded,non_target_or_unknown_label,,200
+DrBimmer-vehicle-classification,Boat,excluded,non_target_or_unknown_label,,200
+DrBimmer-vehicle-classification,Bus,excluded,non_target_or_unknown_label,,200
+DrBimmer-vehicle-classification,Car,review,ambiguous_car,,200
+DrBimmer-vehicle-classification,Helicopter,excluded,non_target_or_unknown_label,,200
+DrBimmer-vehicle-classification,Motorcycle,excluded,non_target_or_unknown_label,,200
+DrBimmer-vehicle-classification,Tank,excluded,non_target_or_unknown_label,,200
+DrBimmer-vehicle-classification,Taxi,review,ambiguous_taxi,,200
+DrBimmer-vehicle-classification,Truck,excluded,generic_truck_not_mapped_to_pickup,,200
+DrBimmer-vehicle-classification,Van,accepted,explicit_van_or_minivan_label,VAN,200
+DrBimmer-vehicle-classification,Segway,excluded,non_target_or_unknown_label,,153
+DrBimmer-vehicle-classification,Ambulance,excluded,non_target_or_unknown_label,,132
+DrBimmer-vehicle-classification,Snowmobile,excluded,non_target_or_unknown_label,,123
+DrBimmer-vehicle-classification,Limousine,review,ambiguous_limousine,,74
+DrBimmer-vehicle-classification,Cart,review,ambiguous_car,,51
+cars-body-type-cropped,Convertible,review,ambiguous_convertible,,1277
+cars-body-type-cropped,SUV,accepted,explicit_suv_label,SUV,1246
+cars-body-type-cropped,Pick-Up,accepted,explicit_pickup_label,PICK UP,1086
+cars-body-type-cropped,VAN,accepted,explicit_van_or_minivan_label,VAN,1050
+cars-body-type-cropped,Sedan,accepted,explicit_sedan_label,SEDAN,1008
+cars-body-type-cropped,Hatchback,accepted,explicit_hatchback_label,HATCHBACK,976
+cars-body-type-cropped,Coupe,review,ambiguous_coupe,,906
+cbsc,SUV,accepted,explicit_suv_label,SUV,95
+cbsc,limousine,review,ambiguous_limousine,,92
+cbsc,sedan,accepted,explicit_sedan_label,SEDAN,86
+cbsc,sports,review,ambiguous_sports,,51
+cbsc,hatchback,accepted,explicit_hatchback_label,HATCHBACK,50
+cbsc,van,accepted,explicit_van_or_minivan_label,VAN,48
+cbsc,pickup,accepted,explicit_pickup_label,PICK UP,46
+cbsc,bus,excluded,non_target_or_unknown_label,,44
+cbsc,truck,excluded,generic_truck_not_mapped_to_pickup,,39
+cbsc,cabriolet,review,ambiguous_cabriolet,,34
+cbsc,SUV,excluded,duplicate_image_hash,,4
+cbsc,limousine,excluded,duplicate_image_hash,,3
+cbsc,pickup,excluded,duplicate_image_hash,,1
+cbsc,sedan,excluded,duplicate_image_hash,,1
+cbsc,truck,excluded,duplicate_image_hash,,1
+f1-image-classification-updated,Mercedes F1 car,accepted,formula_one_source_or_label,OPEN WHEEL / F1,1477
+f1-image-classification-updated,Ferrari F1 car,accepted,formula_one_source_or_label,OPEN WHEEL / F1,866
+f1-image-classification-updated,McLaren F1 car,accepted,formula_one_source_or_label,OPEN WHEEL / F1,845
+f1-image-classification-updated,Red Bull Racing F1 car,accepted,formula_one_source_or_label,OPEN WHEEL / F1,823
+f1-image-classification-updated,Aston Martin F1 Car,accepted,formula_one_source_or_label,OPEN WHEEL / F1,448
+f1-image-classification-updated,Lotus Formula 1 Car,accepted,formula_one_source_or_label,OPEN WHEEL / F1,360
+f1-image-classification-updated,Williams F1 car,accepted,formula_one_source_or_label,OPEN WHEEL / F1,328
+f1-image-classification-updated,Renault F1 car,accepted,formula_one_source_or_label,OPEN WHEEL / F1,306
+f1-image-classification-updated,Racing Point F1 car,accepted,formula_one_source_or_label,OPEN WHEEL / F1,270
+f1-image-classification-updated,AlphaTauri F1 car,accepted,formula_one_source_or_label,OPEN WHEEL / F1,123
+f1-image-classification-updated,Mercedes F1 car,excluded,duplicate_image_hash,,13
+f1-image-classification-updated,Renault F1 car,excluded,duplicate_image_hash,,3
+f1-image-classification-updated,Williams F1 car,excluded,duplicate_image_hash,,3
+f1-image-classification-updated,Racing Point F1 car,excluded,duplicate_image_hash,,2
+f1-image-classification-updated,Red Bull Racing F1 car,excluded,duplicate_image_hash,,2
+f1-image-classification-updated,Ferrari F1 car,excluded,duplicate_image_hash,,1
+f1-image-classification-updated,McLaren F1 car,excluded,duplicate_image_hash,,1
+stanford-car-body-type-data,Sedan,accepted,explicit_sedan_label,SEDAN,1904
+stanford-car-body-type-data,SUV,accepted,explicit_suv_label,SUV,1436
+stanford-car-body-type-data,Coupe,review,ambiguous_coupe,,1084
+stanford-car-body-type-data,Convertible,review,ambiguous_convertible,,1036
+stanford-car-body-type-data,Cab,review,plain_cab_needs_manual_pickup_review,,717
+stanford-car-body-type-data,Other,excluded,non_target_or_unknown_label,,609
+stanford-car-body-type-data,Hatchback,accepted,explicit_hatchback_label,HATCHBACK,554
+stanford-car-body-type-data,Wagon,accepted,explicit_wagon_label,STATION WAGON,290
+stanford-car-body-type-data,Van,accepted,explicit_van_or_minivan_label,VAN,252
+stanford-car-body-type-data,Minivan,accepted,explicit_van_or_minivan_label,VAN,250
+stanford-car-body-type-data,Coupe,excluded,duplicate_image_hash,,4
+stanford-car-body-type-data,Sedan,excluded,duplicate_image_hash,,3
+stanford-car-body-type-data,Cab,excluded,duplicate_image_hash,,2
+stanford-car-body-type-data,SUV,excluded,duplicate_image_hash,,1
+stanford-car-body-type-data,Van,excluded,duplicate_image_hash,,1
+stanford-car-body-type-data,Wagon,excluded,duplicate_image_hash,,1
+stanford-car-dataset-by-classes-folder,GMC Savana Van 2012,excluded,duplicate_image_hash,,70
+stanford-car-dataset-by-classes-folder,GMC Savana Van 2012,accepted,explicit_van_or_minivan_label,VAN,66
+stanford-car-dataset-by-classes-folder,Chrysler 300 SRT-8 2010,excluded,duplicate_image_hash,,49
+stanford-car-dataset-by-classes-folder,Chrysler 300 SRT-8 2010,excluded,non_target_or_unknown_label,,48
+stanford-car-dataset-by-classes-folder,Mercedes-Benz 300-Class Convertible 1993,excluded,duplicate_image_hash,,48
+stanford-car-dataset-by-classes-folder,Mercedes-Benz 300-Class Convertible 1993,review,ambiguous_convertible,,48
+stanford-car-dataset-by-classes-folder,Mitsubishi Lancer Sedan 2012,excluded,duplicate_image_hash,,48
+stanford-car-dataset-by-classes-folder,Audi V8 Sedan 1994,excluded,duplicate_image_hash,,47
+stanford-car-dataset-by-classes-folder,Bentley Continental GT Coupe 2007,excluded,duplicate_image_hash,,47
+stanford-car-dataset-by-classes-folder,Chevrolet Corvette ZR1 2012,excluded,duplicate_image_hash,,47
+stanford-car-dataset-by-classes-folder,Dodge Durango SUV 2007,excluded,duplicate_image_hash,,47
+stanford-car-dataset-by-classes-folder,Jaguar XK XKR 2012,excluded,duplicate_image_hash,,47
+stanford-car-dataset-by-classes-folder,Mitsubishi Lancer Sedan 2012,accepted,explicit_sedan_label,SEDAN,47
+stanford-car-dataset-by-classes-folder,Audi S6 Sedan 2011,accepted,explicit_sedan_label,SEDAN,46
+stanford-car-dataset-by-classes-folder,Audi S6 Sedan 2011,excluded,duplicate_image_hash,,46
+stanford-car-dataset-by-classes-folder,Chevrolet Corvette ZR1 2012,excluded,non_target_or_unknown_label,,46
+stanford-car-dataset-by-classes-folder,Eagle Talon Hatchback 1998,accepted,explicit_hatchback_label,HATCHBACK,46
+stanford-car-dataset-by-classes-folder,Eagle Talon Hatchback 1998,excluded,duplicate_image_hash,,46
+stanford-car-dataset-by-classes-folder,Ford GT Coupe 2006,excluded,duplicate_image_hash,,46
+stanford-car-dataset-by-classes-folder,Jaguar XK XKR 2012,excluded,non_target_or_unknown_label,,46
+stanford-car-dataset-by-classes-folder,Mercedes-Benz C-Class Sedan 2012,excluded,duplicate_image_hash,,46
+stanford-car-dataset-by-classes-folder,Nissan 240SX Coupe 1998,excluded,duplicate_image_hash,,46
+stanford-car-dataset-by-classes-folder,Nissan 240SX Coupe 1998,review,ambiguous_coupe,,46
+stanford-car-dataset-by-classes-folder,Suzuki Kizashi Sedan 2012,accepted,explicit_sedan_label,SEDAN,46
+stanford-car-dataset-by-classes-folder,Suzuki Kizashi Sedan 2012,excluded,duplicate_image_hash,,46
+stanford-car-dataset-by-classes-folder,Volkswagen Golf Hatchback 1991,accepted,explicit_hatchback_label,HATCHBACK,46
+stanford-car-dataset-by-classes-folder,Volkswagen Golf Hatchback 1991,excluded,duplicate_image_hash,,46
+stanford-car-dataset-by-classes-folder,Volvo 240 Sedan 1993,excluded,duplicate_image_hash,,46
+stanford-car-dataset-by-classes-folder,AM General Hummer SUV 2000,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Acura Integra Type R 2001,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Aston Martin V8 Vantage Convertible 2012,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Aston Martin V8 Vantage Convertible 2012,review,ambiguous_convertible,,45
+stanford-car-dataset-by-classes-folder,Audi S4 Sedan 2007,accepted,explicit_sedan_label,SEDAN,45
+stanford-car-dataset-by-classes-folder,Audi S4 Sedan 2007,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,BMW M3 Coupe 2012,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Bentley Continental Flying Spur Sedan 2007,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Bentley Continental GT Coupe 2007,review,ambiguous_coupe,,45
+stanford-car-dataset-by-classes-folder,Cadillac Escalade EXT Crew Cab 2007,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Chevrolet Avalanche Crew Cab 2012,accepted,pickup_cab_style_label,PICK UP,45
+stanford-car-dataset-by-classes-folder,Chevrolet Avalanche Crew Cab 2012,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Chevrolet Camaro Convertible 2012,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Chevrolet Malibu Sedan 2007,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Chevrolet Monte Carlo Coupe 2007,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Chevrolet Monte Carlo Coupe 2007,review,ambiguous_coupe,,45
+stanford-car-dataset-by-classes-folder,Chevrolet Silverado 1500 Regular Cab 2012,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Chrysler PT Cruiser Convertible 2008,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Chrysler PT Cruiser Convertible 2008,review,ambiguous_convertible,,45
+stanford-car-dataset-by-classes-folder,Daewoo Nubira Wagon 2002,accepted,explicit_wagon_label,STATION WAGON,45
+stanford-car-dataset-by-classes-folder,Daewoo Nubira Wagon 2002,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Dodge Caliber Wagon 2012,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Ford Expedition EL SUV 2009,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Ford F-150 Regular Cab 2007,accepted,pickup_cab_style_label,PICK UP,45
+stanford-car-dataset-by-classes-folder,Ford F-150 Regular Cab 2007,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Ford Focus Sedan 2007,accepted,explicit_sedan_label,SEDAN,45
+stanford-car-dataset-by-classes-folder,Ford Focus Sedan 2007,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Ford GT Coupe 2006,review,ambiguous_coupe,,45
+stanford-car-dataset-by-classes-folder,Ford Mustang Convertible 2007,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,GMC Acadia SUV 2012,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Geo Metro Convertible 1993,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Jeep Grand Cherokee SUV 2012,accepted,explicit_suv_label,SUV,45
+stanford-car-dataset-by-classes-folder,Jeep Grand Cherokee SUV 2012,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Jeep Liberty SUV 2012,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Lamborghini Diablo Coupe 2001,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Mercedes-Benz C-Class Sedan 2012,accepted,explicit_sedan_label,SEDAN,45
+stanford-car-dataset-by-classes-folder,Mercedes-Benz S-Class Sedan 2012,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Rolls-Royce Phantom Sedan 2012,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Spyker C8 Convertible 2009,excluded,duplicate_image_hash,,45
+stanford-car-dataset-by-classes-folder,Spyker C8 Convertible 2009,review,ambiguous_convertible,,45
+stanford-car-dataset-by-classes-folder,Volvo 240 Sedan 1993,accepted,explicit_sedan_label,SEDAN,45
+stanford-car-dataset-by-classes-folder,AM General Hummer SUV 2000,accepted,explicit_suv_label,SUV,44
+stanford-car-dataset-by-classes-folder,Acura Integra Type R 2001,excluded,non_target_or_unknown_label,,44
+stanford-car-dataset-by-classes-folder,Audi TTS Coupe 2012,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,BMW 6 Series Convertible 2007,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,BMW 6 Series Convertible 2007,review,ambiguous_convertible,,44
+stanford-car-dataset-by-classes-folder,BMW M3 Coupe 2012,review,ambiguous_coupe,,44
+stanford-car-dataset-by-classes-folder,Bentley Continental Flying Spur Sedan 2007,accepted,explicit_sedan_label,SEDAN,44
+stanford-car-dataset-by-classes-folder,Bugatti Veyron 16.4 Coupe 2009,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Cadillac Escalade EXT Crew Cab 2007,accepted,pickup_cab_style_label,PICK UP,44
+stanford-car-dataset-by-classes-folder,Chevrolet Camaro Convertible 2012,review,ambiguous_convertible,,44
+stanford-car-dataset-by-classes-folder,Chevrolet Malibu Sedan 2007,accepted,explicit_sedan_label,SEDAN,44
+stanford-car-dataset-by-classes-folder,Chevrolet Silverado 1500 Extended Cab 2012,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Chevrolet Sonic Sedan 2012,accepted,explicit_sedan_label,SEDAN,44
+stanford-car-dataset-by-classes-folder,Chevrolet Sonic Sedan 2012,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Chevrolet Traverse SUV 2012,accepted,explicit_suv_label,SUV,44
+stanford-car-dataset-by-classes-folder,Chevrolet Traverse SUV 2012,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Chrysler Aspen SUV 2009,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Dodge Caravan Minivan 1997,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Dodge Durango SUV 2007,accepted,explicit_suv_label,SUV,44
+stanford-car-dataset-by-classes-folder,Dodge Durango SUV 2012,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Dodge Journey SUV 2012,accepted,explicit_suv_label,SUV,44
+stanford-car-dataset-by-classes-folder,Dodge Journey SUV 2012,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Dodge Ram Pickup 3500 Quad Cab 2009,accepted,explicit_pickup_label,PICK UP,44
+stanford-car-dataset-by-classes-folder,Dodge Ram Pickup 3500 Quad Cab 2009,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Fisker Karma Sedan 2012,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Ford Expedition EL SUV 2009,accepted,explicit_suv_label,SUV,44
+stanford-car-dataset-by-classes-folder,Ford Freestar Minivan 2007,accepted,explicit_van_or_minivan_label,VAN,44
+stanford-car-dataset-by-classes-folder,Ford Freestar Minivan 2007,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Ford Mustang Convertible 2007,review,ambiguous_convertible,,44
+stanford-car-dataset-by-classes-folder,GMC Acadia SUV 2012,accepted,explicit_suv_label,SUV,44
+stanford-car-dataset-by-classes-folder,Geo Metro Convertible 1993,review,ambiguous_convertible,,44
+stanford-car-dataset-by-classes-folder,HUMMER H2 SUT Crew Cab 2009,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Hyundai Genesis Sedan 2012,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Hyundai Tucson SUV 2012,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Jeep Liberty SUV 2012,accepted,explicit_suv_label,SUV,44
+stanford-car-dataset-by-classes-folder,Jeep Patriot SUV 2012,accepted,explicit_suv_label,SUV,44
+stanford-car-dataset-by-classes-folder,Jeep Patriot SUV 2012,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Lamborghini Aventador Coupe 2012,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Lamborghini Diablo Coupe 2001,review,ambiguous_coupe,,44
+stanford-car-dataset-by-classes-folder,McLaren MP4-12C Coupe 2012,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,McLaren MP4-12C Coupe 2012,review,ambiguous_coupe,,44
+stanford-car-dataset-by-classes-folder,Mercedes-Benz E-Class Sedan 2012,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Mercedes-Benz S-Class Sedan 2012,accepted,explicit_sedan_label,SEDAN,44
+stanford-car-dataset-by-classes-folder,Nissan Juke Hatchback 2012,accepted,explicit_hatchback_label,HATCHBACK,44
+stanford-car-dataset-by-classes-folder,Nissan Juke Hatchback 2012,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Plymouth Neon Coupe 1999,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Plymouth Neon Coupe 1999,review,ambiguous_coupe,,44
+stanford-car-dataset-by-classes-folder,Porsche Panamera Sedan 2012,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Spyker C8 Coupe 2009,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Toyota Camry Sedan 2012,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Toyota Corolla Sedan 2012,excluded,duplicate_image_hash,,44
+stanford-car-dataset-by-classes-folder,Acura TL Sedan 2012,accepted,explicit_sedan_label,SEDAN,43
+stanford-car-dataset-by-classes-folder,Acura TL Sedan 2012,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,Audi 100 Wagon 1994,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,Audi R8 Coupe 2012,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,Audi R8 Coupe 2012,review,ambiguous_coupe,,43
+stanford-car-dataset-by-classes-folder,Audi S5 Coupe 2012,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,BMW 3 Series Sedan 2012,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,Bugatti Veyron 16.4 Coupe 2009,review,ambiguous_coupe,,43
+stanford-car-dataset-by-classes-folder,Buick Rainier SUV 2007,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,Cadillac CTS-V Sedan 2012,accepted,explicit_sedan_label,SEDAN,43
+stanford-car-dataset-by-classes-folder,Cadillac CTS-V Sedan 2012,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,Chevrolet Impala Sedan 2007,accepted,explicit_sedan_label,SEDAN,43
+stanford-car-dataset-by-classes-folder,Chevrolet Impala Sedan 2007,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,Chevrolet Silverado 1500 Classic Extended Cab 2007,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,Chevrolet Silverado 1500 Extended Cab 2012,accepted,pickup_cab_style_label,PICK UP,43
+stanford-car-dataset-by-classes-folder,Chevrolet Silverado 1500 Regular Cab 2012,accepted,pickup_cab_style_label,PICK UP,43
+stanford-car-dataset-by-classes-folder,Chrysler Aspen SUV 2009,accepted,explicit_suv_label,SUV,43
+stanford-car-dataset-by-classes-folder,Chrysler Crossfire Convertible 2008,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,Chrysler Crossfire Convertible 2008,review,ambiguous_convertible,,43
+stanford-car-dataset-by-classes-folder,Dodge Caliber Wagon 2007,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,Dodge Caravan Minivan 1997,accepted,explicit_van_or_minivan_label,VAN,43
+stanford-car-dataset-by-classes-folder,Dodge Durango SUV 2012,accepted,explicit_suv_label,SUV,43
+stanford-car-dataset-by-classes-folder,Dodge Ram Pickup 3500 Crew Cab 2010,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,Ferrari 458 Italia Coupe 2012,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,Fisker Karma Sedan 2012,accepted,explicit_sedan_label,SEDAN,43
+stanford-car-dataset-by-classes-folder,Ford Edge SUV 2012,accepted,explicit_suv_label,SUV,43
+stanford-car-dataset-by-classes-folder,Ford Edge SUV 2012,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,Ford F-150 Regular Cab 2012,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,Ford Fiesta Sedan 2012,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,GMC Yukon Hybrid SUV 2012,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,HUMMER H2 SUT Crew Cab 2009,accepted,explicit_suv_label,SUV,43
+stanford-car-dataset-by-classes-folder,Hyundai Elantra Touring Hatchback 2012,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,Hyundai Genesis Sedan 2012,accepted,explicit_sedan_label,SEDAN,43
+stanford-car-dataset-by-classes-folder,Hyundai Tucson SUV 2012,accepted,explicit_suv_label,SUV,43
+stanford-car-dataset-by-classes-folder,Jeep Compass SUV 2012,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,Jeep Wrangler SUV 2012,accepted,explicit_suv_label,SUV,43
+stanford-car-dataset-by-classes-folder,Jeep Wrangler SUV 2012,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,Lamborghini Aventador Coupe 2012,review,ambiguous_coupe,,43
+stanford-car-dataset-by-classes-folder,Land Rover LR2 SUV 2012,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,Land Rover Range Rover SUV 2012,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,Mercedes-Benz E-Class Sedan 2012,accepted,explicit_sedan_label,SEDAN,43
+stanford-car-dataset-by-classes-folder,Porsche Panamera Sedan 2012,accepted,explicit_sedan_label,SEDAN,43
+stanford-car-dataset-by-classes-folder,Rolls-Royce Phantom Sedan 2012,accepted,explicit_sedan_label,SEDAN,43
+stanford-car-dataset-by-classes-folder,Toyota Camry Sedan 2012,accepted,explicit_sedan_label,SEDAN,43
+stanford-car-dataset-by-classes-folder,Toyota Corolla Sedan 2012,accepted,explicit_sedan_label,SEDAN,43
+stanford-car-dataset-by-classes-folder,Volkswagen Beetle Hatchback 2012,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,Volkswagen Golf Hatchback 2012,accepted,explicit_hatchback_label,HATCHBACK,43
+stanford-car-dataset-by-classes-folder,Volkswagen Golf Hatchback 2012,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,Volvo XC90 SUV 2007,accepted,explicit_suv_label,SUV,43
+stanford-car-dataset-by-classes-folder,Volvo XC90 SUV 2007,excluded,duplicate_image_hash,,43
+stanford-car-dataset-by-classes-folder,Acura TL Type-S 2008,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,Acura TL Type-S 2008,excluded,non_target_or_unknown_label,,42
+stanford-car-dataset-by-classes-folder,Audi 100 Sedan 1994,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,Audi 100 Wagon 1994,accepted,explicit_wagon_label,STATION WAGON,42
+stanford-car-dataset-by-classes-folder,Audi A5 Coupe 2012,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,Audi S5 Convertible 2012,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,Audi S5 Convertible 2012,review,ambiguous_convertible,,42
+stanford-car-dataset-by-classes-folder,Audi S5 Coupe 2012,review,ambiguous_coupe,,42
+stanford-car-dataset-by-classes-folder,BMW 3 Series Sedan 2012,accepted,explicit_sedan_label,SEDAN,42
+stanford-car-dataset-by-classes-folder,BMW 3 Series Wagon 2012,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,BMW M6 Convertible 2010,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,BMW X5 SUV 2007,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,BMW X6 SUV 2012,accepted,explicit_suv_label,SUV,42
+stanford-car-dataset-by-classes-folder,BMW X6 SUV 2012,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,Buick Enclave SUV 2012,accepted,explicit_suv_label,SUV,42
+stanford-car-dataset-by-classes-folder,Buick Enclave SUV 2012,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,Buick Rainier SUV 2007,accepted,explicit_suv_label,SUV,42
+stanford-car-dataset-by-classes-folder,Chevrolet Cobalt SS 2010,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,Chevrolet Silverado 1500 Classic Extended Cab 2007,accepted,pickup_cab_style_label,PICK UP,42
+stanford-car-dataset-by-classes-folder,Dodge Charger SRT-8 2009,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,Dodge Charger SRT-8 2009,excluded,non_target_or_unknown_label,,42
+stanford-car-dataset-by-classes-folder,Dodge Ram Pickup 3500 Crew Cab 2010,accepted,explicit_pickup_label,PICK UP,42
+stanford-car-dataset-by-classes-folder,Ferrari 458 Italia Coupe 2012,review,ambiguous_coupe,,42
+stanford-car-dataset-by-classes-folder,Ferrari FF Coupe 2012,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,Ferrari FF Coupe 2012,review,ambiguous_coupe,,42
+stanford-car-dataset-by-classes-folder,Ford F-150 Regular Cab 2012,accepted,pickup_cab_style_label,PICK UP,42
+stanford-car-dataset-by-classes-folder,Ford F-450 Super Duty Crew Cab 2012,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,Ford Fiesta Sedan 2012,accepted,explicit_sedan_label,SEDAN,42
+stanford-car-dataset-by-classes-folder,Ford Ranger SuperCab 2011,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,Ford Ranger SuperCab 2011,excluded,non_target_or_unknown_label,,42
+stanford-car-dataset-by-classes-folder,GMC Terrain SUV 2012,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,GMC Yukon Hybrid SUV 2012,accepted,explicit_suv_label,SUV,42
+stanford-car-dataset-by-classes-folder,Honda Odyssey Minivan 2012,accepted,explicit_van_or_minivan_label,VAN,42
+stanford-car-dataset-by-classes-folder,Honda Odyssey Minivan 2012,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,Hyundai Azera Sedan 2012,accepted,explicit_sedan_label,SEDAN,42
+stanford-car-dataset-by-classes-folder,Hyundai Azera Sedan 2012,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,Hyundai Elantra Sedan 2007,accepted,explicit_sedan_label,SEDAN,42
+stanford-car-dataset-by-classes-folder,Hyundai Elantra Sedan 2007,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,Hyundai Elantra Touring Hatchback 2012,accepted,explicit_hatchback_label,HATCHBACK,42
+stanford-car-dataset-by-classes-folder,Hyundai Santa Fe SUV 2012,accepted,explicit_suv_label,SUV,42
+stanford-car-dataset-by-classes-folder,Hyundai Santa Fe SUV 2012,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,Hyundai Veracruz SUV 2012,accepted,explicit_suv_label,SUV,42
+stanford-car-dataset-by-classes-folder,Hyundai Veracruz SUV 2012,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,Jeep Compass SUV 2012,accepted,explicit_suv_label,SUV,42
+stanford-car-dataset-by-classes-folder,Land Rover LR2 SUV 2012,accepted,explicit_suv_label,SUV,42
+stanford-car-dataset-by-classes-folder,Land Rover Range Rover SUV 2012,accepted,explicit_suv_label,SUV,42
+stanford-car-dataset-by-classes-folder,Nissan Leaf Hatchback 2012,accepted,explicit_hatchback_label,HATCHBACK,42
+stanford-car-dataset-by-classes-folder,Nissan Leaf Hatchback 2012,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,Scion xD Hatchback 2012,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,Suzuki SX4 Hatchback 2012,accepted,explicit_hatchback_label,HATCHBACK,42
+stanford-car-dataset-by-classes-folder,Suzuki SX4 Hatchback 2012,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,Volkswagen Beetle Hatchback 2012,accepted,explicit_hatchback_label,HATCHBACK,42
+stanford-car-dataset-by-classes-folder,Volvo C30 Hatchback 2012,excluded,duplicate_image_hash,,42
+stanford-car-dataset-by-classes-folder,Acura TSX Sedan 2012,excluded,duplicate_image_hash,,41
+stanford-car-dataset-by-classes-folder,Aston Martin V8 Vantage Coupe 2012,excluded,duplicate_image_hash,,41
+stanford-car-dataset-by-classes-folder,Aston Martin V8 Vantage Coupe 2012,review,ambiguous_coupe,,41
+stanford-car-dataset-by-classes-folder,Audi TT Hatchback 2011,excluded,duplicate_image_hash,,41
+stanford-car-dataset-by-classes-folder,Audi TTS Coupe 2012,review,ambiguous_coupe,,41
+stanford-car-dataset-by-classes-folder,BMW 1 Series Coupe 2012,excluded,duplicate_image_hash,,41
+stanford-car-dataset-by-classes-folder,BMW 1 Series Coupe 2012,review,ambiguous_coupe,,41
+stanford-car-dataset-by-classes-folder,BMW 3 Series Wagon 2012,accepted,explicit_wagon_label,STATION WAGON,41
+stanford-car-dataset-by-classes-folder,BMW M5 Sedan 2010,accepted,explicit_sedan_label,SEDAN,41
+stanford-car-dataset-by-classes-folder,BMW M5 Sedan 2010,excluded,duplicate_image_hash,,41
+stanford-car-dataset-by-classes-folder,BMW X5 SUV 2007,accepted,explicit_suv_label,SUV,41
+stanford-car-dataset-by-classes-folder,BMW Z4 Convertible 2012,excluded,duplicate_image_hash,,41
+stanford-car-dataset-by-classes-folder,Cadillac SRX SUV 2012,accepted,explicit_suv_label,SUV,41
+stanford-car-dataset-by-classes-folder,Cadillac SRX SUV 2012,excluded,duplicate_image_hash,,41
+stanford-car-dataset-by-classes-folder,Chevrolet Cobalt SS 2010,excluded,non_target_or_unknown_label,,41
+stanford-car-dataset-by-classes-folder,Chrysler Sebring Convertible 2010,excluded,duplicate_image_hash,,41
+stanford-car-dataset-by-classes-folder,Dodge Caliber Wagon 2007,accepted,explicit_wagon_label,STATION WAGON,41
+stanford-car-dataset-by-classes-folder,Dodge Charger Sedan 2012,accepted,explicit_sedan_label,SEDAN,41
+stanford-car-dataset-by-classes-folder,Dodge Charger Sedan 2012,excluded,duplicate_image_hash,,41
+stanford-car-dataset-by-classes-folder,Dodge Dakota Crew Cab 2010,accepted,pickup_cab_style_label,PICK UP,41
+stanford-car-dataset-by-classes-folder,Dodge Dakota Crew Cab 2010,excluded,duplicate_image_hash,,41
+stanford-car-dataset-by-classes-folder,Ford F-450 Super Duty Crew Cab 2012,accepted,pickup_cab_style_label,PICK UP,41
+stanford-car-dataset-by-classes-folder,GMC Terrain SUV 2012,accepted,explicit_suv_label,SUV,41
+stanford-car-dataset-by-classes-folder,Honda Odyssey Minivan 2007,accepted,explicit_van_or_minivan_label,VAN,41
+stanford-car-dataset-by-classes-folder,Honda Odyssey Minivan 2007,excluded,duplicate_image_hash,,41
+stanford-car-dataset-by-classes-folder,Hyundai Veloster Hatchback 2012,accepted,explicit_hatchback_label,HATCHBACK,41
+stanford-car-dataset-by-classes-folder,Hyundai Veloster Hatchback 2012,excluded,duplicate_image_hash,,41
+stanford-car-dataset-by-classes-folder,Mercedes-Benz Sprinter Van 2012,accepted,explicit_van_or_minivan_label,VAN,41
+stanford-car-dataset-by-classes-folder,Mercedes-Benz Sprinter Van 2012,excluded,duplicate_image_hash,,41
+stanford-car-dataset-by-classes-folder,Ram C-V Cargo Van Minivan 2012,accepted,explicit_van_or_minivan_label,VAN,41
+stanford-car-dataset-by-classes-folder,Ram C-V Cargo Van Minivan 2012,excluded,duplicate_image_hash,,41
+stanford-car-dataset-by-classes-folder,Scion xD Hatchback 2012,accepted,explicit_hatchback_label,HATCHBACK,41
+stanford-car-dataset-by-classes-folder,Spyker C8 Coupe 2009,review,ambiguous_coupe,,41
+stanford-car-dataset-by-classes-folder,Suzuki SX4 Sedan 2012,excluded,duplicate_image_hash,,41
+stanford-car-dataset-by-classes-folder,Toyota 4Runner SUV 2012,excluded,duplicate_image_hash,,41
+stanford-car-dataset-by-classes-folder,Volvo C30 Hatchback 2012,accepted,explicit_hatchback_label,HATCHBACK,41
+stanford-car-dataset-by-classes-folder,Acura TSX Sedan 2012,accepted,explicit_sedan_label,SEDAN,40
+stanford-car-dataset-by-classes-folder,Audi A5 Coupe 2012,review,ambiguous_coupe,,40
+stanford-car-dataset-by-classes-folder,Audi S4 Sedan 2012,excluded,duplicate_image_hash,,40
+stanford-car-dataset-by-classes-folder,Audi TT Hatchback 2011,accepted,explicit_hatchback_label,HATCHBACK,40
+stanford-car-dataset-by-classes-folder,Audi TT RS Coupe 2012,excluded,duplicate_image_hash,,40
+stanford-car-dataset-by-classes-folder,Audi V8 Sedan 1994,accepted,explicit_sedan_label,SEDAN,40
+stanford-car-dataset-by-classes-folder,BMW M6 Convertible 2010,review,ambiguous_convertible,,40
+stanford-car-dataset-by-classes-folder,BMW Z4 Convertible 2012,review,ambiguous_convertible,,40
+stanford-car-dataset-by-classes-folder,Chevrolet Corvette Convertible 2012,excluded,duplicate_image_hash,,40
+stanford-car-dataset-by-classes-folder,Chevrolet Silverado 1500 Hybrid Crew Cab 2012,accepted,pickup_cab_style_label,PICK UP,40
+stanford-car-dataset-by-classes-folder,Chevrolet Silverado 1500 Hybrid Crew Cab 2012,excluded,duplicate_image_hash,,40
+stanford-car-dataset-by-classes-folder,Chevrolet TrailBlazer SS 2009,excluded,duplicate_image_hash,,40
+stanford-car-dataset-by-classes-folder,Chevrolet TrailBlazer SS 2009,excluded,non_target_or_unknown_label,,40
+stanford-car-dataset-by-classes-folder,Chrysler Sebring Convertible 2010,review,ambiguous_convertible,,40
+stanford-car-dataset-by-classes-folder,Dodge Magnum Wagon 2008,accepted,explicit_wagon_label,STATION WAGON,40
+stanford-car-dataset-by-classes-folder,Dodge Magnum Wagon 2008,excluded,duplicate_image_hash,,40
+stanford-car-dataset-by-classes-folder,Dodge Sprinter Cargo Van 2009,excluded,duplicate_image_hash,,40
+stanford-car-dataset-by-classes-folder,Ferrari 458 Italia Convertible 2012,excluded,duplicate_image_hash,,40
+stanford-car-dataset-by-classes-folder,GMC Canyon Extended Cab 2012,accepted,pickup_cab_style_label,PICK UP,40
+stanford-car-dataset-by-classes-folder,GMC Canyon Extended Cab 2012,excluded,duplicate_image_hash,,40
+stanford-car-dataset-by-classes-folder,Hyundai Sonata Sedan 2012,excluded,duplicate_image_hash,,40
+stanford-car-dataset-by-classes-folder,Isuzu Ascender SUV 2008,accepted,explicit_suv_label,SUV,40
+stanford-car-dataset-by-classes-folder,Isuzu Ascender SUV 2008,excluded,duplicate_image_hash,,40
+stanford-car-dataset-by-classes-folder,Rolls-Royce Ghost Sedan 2012,excluded,duplicate_image_hash,,40
+stanford-car-dataset-by-classes-folder,Suzuki SX4 Sedan 2012,accepted,explicit_sedan_label,SEDAN,40
+stanford-car-dataset-by-classes-folder,Toyota 4Runner SUV 2012,accepted,explicit_suv_label,SUV,40
+stanford-car-dataset-by-classes-folder,Toyota Sequoia SUV 2012,excluded,duplicate_image_hash,,40
+stanford-car-dataset-by-classes-folder,smart fortwo Convertible 2012,excluded,duplicate_image_hash,,40
+stanford-car-dataset-by-classes-folder,smart fortwo Convertible 2012,review,ambiguous_convertible,,40
+stanford-car-dataset-by-classes-folder,Acura ZDX Hatchback 2012,accepted,explicit_hatchback_label,HATCHBACK,39
+stanford-car-dataset-by-classes-folder,Acura ZDX Hatchback 2012,excluded,duplicate_image_hash,,39
+stanford-car-dataset-by-classes-folder,Audi 100 Sedan 1994,accepted,explicit_sedan_label,SEDAN,39
+stanford-car-dataset-by-classes-folder,Audi S4 Sedan 2012,accepted,explicit_sedan_label,SEDAN,39
+stanford-car-dataset-by-classes-folder,Audi TT RS Coupe 2012,review,ambiguous_coupe,,39
+stanford-car-dataset-by-classes-folder,BMW X3 SUV 2012,excluded,duplicate_image_hash,,39
+stanford-car-dataset-by-classes-folder,Bentley Arnage Sedan 2009,accepted,explicit_sedan_label,SEDAN,39
+stanford-car-dataset-by-classes-folder,Bentley Arnage Sedan 2009,excluded,duplicate_image_hash,,39
+stanford-car-dataset-by-classes-folder,Chevrolet Corvette Convertible 2012,review,ambiguous_convertible,,39
+stanford-car-dataset-by-classes-folder,Chevrolet Malibu Hybrid Sedan 2010,excluded,duplicate_image_hash,,39
+stanford-car-dataset-by-classes-folder,Dodge Challenger SRT8 2011,excluded,duplicate_image_hash,,39
+stanford-car-dataset-by-classes-folder,Dodge Challenger SRT8 2011,excluded,non_target_or_unknown_label,,39
+stanford-car-dataset-by-classes-folder,Dodge Dakota Club Cab 2007,excluded,duplicate_image_hash,,39
+stanford-car-dataset-by-classes-folder,Dodge Sprinter Cargo Van 2009,accepted,explicit_van_or_minivan_label,VAN,39
+stanford-car-dataset-by-classes-folder,Ferrari 458 Italia Convertible 2012,review,ambiguous_convertible,,39
+stanford-car-dataset-by-classes-folder,Ferrari California Convertible 2012,excluded,duplicate_image_hash,,39
+stanford-car-dataset-by-classes-folder,Ferrari California Convertible 2012,review,ambiguous_convertible,,39
+stanford-car-dataset-by-classes-folder,HUMMER H3T Crew Cab 2010,accepted,explicit_suv_label,SUV,39
+stanford-car-dataset-by-classes-folder,HUMMER H3T Crew Cab 2010,excluded,duplicate_image_hash,,39
+stanford-car-dataset-by-classes-folder,Honda Accord Coupe 2012,excluded,duplicate_image_hash,,39
+stanford-car-dataset-by-classes-folder,Honda Accord Coupe 2012,review,ambiguous_coupe,,39
+stanford-car-dataset-by-classes-folder,Honda Accord Sedan 2012,excluded,duplicate_image_hash,,39
+stanford-car-dataset-by-classes-folder,Hyundai Sonata Sedan 2012,accepted,explicit_sedan_label,SEDAN,39
+stanford-car-dataset-by-classes-folder,Lincoln Town Car Sedan 2011,accepted,explicit_sedan_label,SEDAN,39
+stanford-car-dataset-by-classes-folder,Lincoln Town Car Sedan 2011,excluded,duplicate_image_hash,,39
+stanford-car-dataset-by-classes-folder,Nissan NV Passenger Van 2012,excluded,duplicate_image_hash,,39
+stanford-car-dataset-by-classes-folder,Tesla Model S Sedan 2012,excluded,duplicate_image_hash,,39
+stanford-car-dataset-by-classes-folder,Aston Martin Virage Coupe 2012,excluded,duplicate_image_hash,,38
+stanford-car-dataset-by-classes-folder,Aston Martin Virage Coupe 2012,review,ambiguous_coupe,,38
+stanford-car-dataset-by-classes-folder,BMW X3 SUV 2012,accepted,explicit_suv_label,SUV,38
+stanford-car-dataset-by-classes-folder,Buick Verano Sedan 2012,excluded,duplicate_image_hash,,38
+stanford-car-dataset-by-classes-folder,Chevrolet Corvette Ron Fellows Edition Z06 2007,excluded,duplicate_image_hash,,38
+stanford-car-dataset-by-classes-folder,Chevrolet Malibu Hybrid Sedan 2010,accepted,explicit_sedan_label,SEDAN,38
+stanford-car-dataset-by-classes-folder,Chevrolet Silverado 2500HD Regular Cab 2012,accepted,pickup_cab_style_label,PICK UP,38
+stanford-car-dataset-by-classes-folder,Chevrolet Silverado 2500HD Regular Cab 2012,excluded,duplicate_image_hash,,38
+stanford-car-dataset-by-classes-folder,Chrysler Town and Country Minivan 2012,excluded,duplicate_image_hash,,38
+stanford-car-dataset-by-classes-folder,Dodge Dakota Club Cab 2007,accepted,pickup_cab_style_label,PICK UP,38
+stanford-car-dataset-by-classes-folder,Ford E-Series Wagon Van 2012,excluded,duplicate_image_hash,,38
+stanford-car-dataset-by-classes-folder,Honda Accord Sedan 2012,accepted,explicit_sedan_label,SEDAN,38
+stanford-car-dataset-by-classes-folder,Nissan NV Passenger Van 2012,accepted,explicit_van_or_minivan_label,VAN,38
+stanford-car-dataset-by-classes-folder,Suzuki Aerio Sedan 2007,accepted,explicit_sedan_label,SEDAN,38
+stanford-car-dataset-by-classes-folder,Suzuki Aerio Sedan 2007,excluded,duplicate_image_hash,,38
+stanford-car-dataset-by-classes-folder,Tesla Model S Sedan 2012,accepted,explicit_sedan_label,SEDAN,38
+stanford-car-dataset-by-classes-folder,Audi RS 4 Convertible 2008,excluded,duplicate_image_hash,,37
+stanford-car-dataset-by-classes-folder,Bentley Continental Supersports Conv. Convertible 2012,excluded,duplicate_image_hash,,37
+stanford-car-dataset-by-classes-folder,Buick Verano Sedan 2012,accepted,explicit_sedan_label,SEDAN,37
+stanford-car-dataset-by-classes-folder,Chevrolet Corvette Ron Fellows Edition Z06 2007,excluded,non_target_or_unknown_label,,37
+stanford-car-dataset-by-classes-folder,Chevrolet Express Van 2007,excluded,duplicate_image_hash,,37
+stanford-car-dataset-by-classes-folder,Chevrolet HHR SS 2010,excluded,duplicate_image_hash,,37
+stanford-car-dataset-by-classes-folder,Chevrolet Tahoe Hybrid SUV 2012,accepted,explicit_suv_label,SUV,37
+stanford-car-dataset-by-classes-folder,Chevrolet Tahoe Hybrid SUV 2012,excluded,duplicate_image_hash,,37
+stanford-car-dataset-by-classes-folder,Chrysler Town and Country Minivan 2012,accepted,explicit_van_or_minivan_label,VAN,37
+stanford-car-dataset-by-classes-folder,Ford E-Series Wagon Van 2012,accepted,explicit_wagon_label,STATION WAGON,37
+stanford-car-dataset-by-classes-folder,MINI Cooper Roadster Convertible 2012,excluded,duplicate_image_hash,,37
+stanford-car-dataset-by-classes-folder,Mercedes-Benz SL-Class Coupe 2009,excluded,duplicate_image_hash,,37
+stanford-car-dataset-by-classes-folder,Rolls-Royce Ghost Sedan 2012,accepted,explicit_sedan_label,SEDAN,37
+stanford-car-dataset-by-classes-folder,Toyota Sequoia SUV 2012,accepted,explicit_suv_label,SUV,37
+stanford-car-dataset-by-classes-folder,Audi RS 4 Convertible 2008,review,ambiguous_convertible,,36
+stanford-car-dataset-by-classes-folder,BMW 1 Series Convertible 2012,excluded,duplicate_image_hash,,36
+stanford-car-dataset-by-classes-folder,Bentley Continental GT Coupe 2012,excluded,duplicate_image_hash,,36
+stanford-car-dataset-by-classes-folder,Bentley Continental Supersports Conv. Convertible 2012,review,ambiguous_convertible,,36
+stanford-car-dataset-by-classes-folder,Bentley Mulsanne Sedan 2011,excluded,duplicate_image_hash,,36
+stanford-car-dataset-by-classes-folder,Chevrolet HHR SS 2010,excluded,non_target_or_unknown_label,,36
+stanford-car-dataset-by-classes-folder,Dodge Caliber Wagon 2012,accepted,explicit_wagon_label,STATION WAGON,36
+stanford-car-dataset-by-classes-folder,Lamborghini Gallardo LP 570-4 Superleggera 2012,excluded,duplicate_image_hash,,36
+stanford-car-dataset-by-classes-folder,Lamborghini Reventon Coupe 2008,excluded,duplicate_image_hash,,36
+stanford-car-dataset-by-classes-folder,Lamborghini Reventon Coupe 2008,review,ambiguous_coupe,,36
+stanford-car-dataset-by-classes-folder,MINI Cooper Roadster Convertible 2012,review,ambiguous_convertible,,36
+stanford-car-dataset-by-classes-folder,Mazda Tribute SUV 2011,accepted,explicit_suv_label,SUV,36
+stanford-car-dataset-by-classes-folder,Mazda Tribute SUV 2011,excluded,duplicate_image_hash,,36
+stanford-car-dataset-by-classes-folder,Mercedes-Benz SL-Class Coupe 2009,review,ambiguous_coupe,,36
+stanford-car-dataset-by-classes-folder,BMW 1 Series Convertible 2012,review,ambiguous_convertible,,35
+stanford-car-dataset-by-classes-folder,Bentley Mulsanne Sedan 2011,accepted,explicit_sedan_label,SEDAN,35
+stanford-car-dataset-by-classes-folder,Buick Regal GS 2012,excluded,duplicate_image_hash,,35
+stanford-car-dataset-by-classes-folder,Buick Regal GS 2012,excluded,non_target_or_unknown_label,,35
+stanford-car-dataset-by-classes-folder,Lamborghini Gallardo LP 570-4 Superleggera 2012,excluded,non_target_or_unknown_label,,35
+stanford-car-dataset-by-classes-folder,BMW ActiveHybrid 5 Sedan 2012,accepted,explicit_sedan_label,SEDAN,34
+stanford-car-dataset-by-classes-folder,BMW ActiveHybrid 5 Sedan 2012,excluded,duplicate_image_hash,,34
+stanford-car-dataset-by-classes-folder,Bugatti Veyron 16.4 Convertible 2009,excluded,duplicate_image_hash,,34
+stanford-car-dataset-by-classes-folder,FIAT 500 Convertible 2012,excluded,duplicate_image_hash,,34
+stanford-car-dataset-by-classes-folder,Hyundai Sonata Hybrid Sedan 2012,excluded,duplicate_image_hash,,34
+stanford-car-dataset-by-classes-folder,Infiniti G Coupe IPL 2012,excluded,duplicate_image_hash,,34
+stanford-car-dataset-by-classes-folder,Infiniti G Coupe IPL 2012,review,ambiguous_coupe,,34
+stanford-car-dataset-by-classes-folder,Aston Martin Virage Convertible 2012,excluded,duplicate_image_hash,,33
+stanford-car-dataset-by-classes-folder,Aston Martin Virage Convertible 2012,review,ambiguous_convertible,,33
+stanford-car-dataset-by-classes-folder,Bentley Continental GT Coupe 2012,review,ambiguous_coupe,,33
+stanford-car-dataset-by-classes-folder,Chevrolet Express Van 2007,accepted,explicit_van_or_minivan_label,VAN,33
+stanford-car-dataset-by-classes-folder,FIAT 500 Convertible 2012,review,ambiguous_convertible,,33
+stanford-car-dataset-by-classes-folder,Hyundai Sonata Hybrid Sedan 2012,accepted,explicit_sedan_label,SEDAN,33
+stanford-car-dataset-by-classes-folder,Infiniti QX56 SUV 2011,excluded,duplicate_image_hash,,33
+stanford-car-dataset-by-classes-folder,Acura RL Sedan 2012,accepted,explicit_sedan_label,SEDAN,32
+stanford-car-dataset-by-classes-folder,Acura RL Sedan 2012,excluded,duplicate_image_hash,,32
+stanford-car-dataset-by-classes-folder,Chevrolet Express Cargo Van 2007,excluded,duplicate_image_hash,,32
+stanford-car-dataset-by-classes-folder,Infiniti QX56 SUV 2011,accepted,explicit_suv_label,SUV,32
+stanford-car-dataset-by-classes-folder,Bugatti Veyron 16.4 Convertible 2009,review,ambiguous_convertible,,31
+stanford-car-dataset-by-classes-folder,Rolls-Royce Phantom Drophead Coupe Convertible 2012,excluded,duplicate_image_hash,,31
+stanford-car-dataset-by-classes-folder,Rolls-Royce Phantom Drophead Coupe Convertible 2012,review,ambiguous_coupe,,30
+stanford-car-dataset-by-classes-folder,Maybach Landaulet Convertible 2012,excluded,duplicate_image_hash,,29
+stanford-car-dataset-by-classes-folder,Maybach Landaulet Convertible 2012,review,ambiguous_convertible,,29
+stanford-car-dataset-by-classes-folder,FIAT 500 Abarth 2012,excluded,duplicate_image_hash,,28
+stanford-car-dataset-by-classes-folder,Chevrolet Express Cargo Van 2007,accepted,explicit_van_or_minivan_label,VAN,27
+stanford-car-dataset-by-classes-folder,FIAT 500 Abarth 2012,excluded,non_target_or_unknown_label,,27
+stanford-car-dataset-by-classes-folder,Hyundai Accent Sedan 2012,accepted,explicit_sedan_label,SEDAN,24
+stanford-car-dataset-by-classes-folder,Hyundai Accent Sedan 2012,excluded,duplicate_image_hash,,24
+vehicle-classification-dataset,Bike,excluded,non_target_or_unknown_label,,1077
+vehicle-classification-dataset,Truck,excluded,generic_truck_not_mapped_to_pickup,,837
+vehicle-classification-dataset,SEDAN,accepted,explicit_sedan_label,SEDAN,780
+vehicle-classification-dataset,Easy-Bike,excluded,non_target_or_unknown_label,,724
+vehicle-classification-dataset,CNG,excluded,non_target_or_unknown_label,,646
+vehicle-classification-dataset,Bus,excluded,non_target_or_unknown_label,,554
+vehicle-classification-dataset,MPV,review,ambiguous_mpv,,452
+vehicle-classification-dataset,Hatchback,accepted,explicit_hatchback_label,HATCHBACK,433
+vehicle-classification-dataset,SUV,accepted,explicit_suv_label,SUV,426
+vehicle-classification-dataset,Pickup,accepted,explicit_pickup_label,PICK UP,204
+vehicle-classification-dataset,SUV,excluded,duplicate_image_hash,,154
+vehicle-classification-dataset,SEDAN,excluded,duplicate_image_hash,,152
+vehicle-classification-dataset,MPV,excluded,duplicate_image_hash,,48
+vehicle-classification-dataset,Pickup,excluded,duplicate_image_hash,,37
+vehicle-classification-dataset,Hatchback,excluded,duplicate_image_hash,,35
+vehicle-classification-dataset,Easy-Bike,excluded,duplicate_image_hash,,8
+vehicle-classification-dataset,Bike,excluded,duplicate_image_hash,,6
+vehicle-classification-dataset,Truck,excluded,duplicate_image_hash,,5
+vehicle-classification-dataset,Bus,excluded,duplicate_image_hash,,2
+vehicle-images-dataset,City Car,review,ambiguous_city_car,,4657
+vehicle-images-dataset,Multi Purpose Vehicle,review,ambiguous_multi_purpose_vehicle,,2649
+vehicle-images-dataset,Sedan,accepted,explicit_sedan_label,SEDAN,2619
+vehicle-images-dataset,Van,accepted,explicit_van_or_minivan_label,VAN,2167
+vehicle-images-dataset,Sport Utility Vehicle,accepted,explicit_suv_label,SUV,1826
+vehicle-images-dataset,Truck,excluded,generic_truck_not_mapped_to_pickup,,1150
+vehicle-images-dataset,Big Truck,excluded,generic_truck_not_mapped_to_pickup,,577
+vehicle-type-10-competition,,excluded,missing_raw_label,,151
+vehicle-type-10-competition,convertible,review,ambiguous_convertible,,101
+vehicle-type-10-competition,coupes,review,ambiguous_coupe,,100
+vehicle-type-10-competition,hatchback,accepted,explicit_hatchback_label,HATCHBACK,89
+vehicle-type-10-competition,bus,excluded,non_target_or_unknown_label,,82
+vehicle-type-10-competition,SUV,accepted,explicit_suv_label,SUV,80
+vehicle-type-10-competition,pickup,accepted,explicit_pickup_label,PICK UP,80
+vehicle-type-10-competition,sedan,accepted,explicit_sedan_label,SEDAN,80
+vehicle-type-10-competition,van,accepted,explicit_van_or_minivan_label,VAN,80
+vehicle-type-10-competition,station_wagon,accepted,explicit_wagon_label,STATION WAGON,79
+vehicle-type-10-competition,trucks,excluded,generic_truck_not_mapped_to_pickup,,78

@@ -1,0 +1,42 @@
+source_id,normalized_label,count
+DrBimmer-vehicle-classification,UNMAPPED,2533
+DrBimmer-vehicle-classification,VAN,200
+cars-body-type-cropped,HATCHBACK,976
+cars-body-type-cropped,MICRO,4
+cars-body-type-cropped,PICK UP,1086
+cars-body-type-cropped,SEDAN,1008
+cars-body-type-cropped,SUV,1246
+cars-body-type-cropped,UNMAPPED,2179
+cars-body-type-cropped,VAN,1050
+cbsc,HATCHBACK,50
+cbsc,PICK UP,46
+cbsc,SEDAN,86
+cbsc,SUV,95
+cbsc,UNMAPPED,270
+cbsc,VAN,48
+f1-image-classification-updated,OPEN WHEEL / F1,5846
+f1-image-classification-updated,UNMAPPED,25
+stanford-car-dataset-by-classes-folder,HATCHBACK,1103
+stanford-car-dataset-by-classes-folder,MICRO,202
+stanford-car-dataset-by-classes-folder,PICK UP,1263
+stanford-car-dataset-by-classes-folder,SEDAN,3778
+stanford-car-dataset-by-classes-folder,STATION WAGON,572
+stanford-car-dataset-by-classes-folder,SUV,3016
+stanford-car-dataset-by-classes-folder,UNMAPPED,5257
+stanford-car-dataset-by-classes-folder,VAN,994
+vehicle-classification-dataset,HATCHBACK,433
+vehicle-classification-dataset,PICK UP,204
+vehicle-classification-dataset,SEDAN,780
+vehicle-classification-dataset,SUV,426
+vehicle-classification-dataset,UNMAPPED,4737
+vehicle-images-dataset,SEDAN,2619
+vehicle-images-dataset,SUV,1826
+vehicle-images-dataset,UNMAPPED,9033
+vehicle-images-dataset,VAN,2167
+vehicle-type-10-competition,HATCHBACK,89
+vehicle-type-10-competition,PICK UP,80
+vehicle-type-10-competition,SEDAN,80
+vehicle-type-10-competition,STATION WAGON,79
+vehicle-type-10-competition,SUV,80
+vehicle-type-10-competition,UNMAPPED,512
+vehicle-type-10-competition,VAN,80

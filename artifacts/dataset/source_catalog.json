@@ -1,0 +1,66 @@
+[
+  {
+    "source_id": "DrBimmer-vehicle-classification",
+    "local_path": "datasets/DrBimmer-vehicle-classification",
+    "source_family": "local_user_provided",
+    "source_url_or_id": "local datasets/ mirror; internet research skipped per user instruction",
+    "license_note": "Local Kaggle-style mirror; verify Kaggle page/license before publication.",
+    "phase2_use": "scan_local_manifest_then_eda_decision_gate"
+  },
+  {
+    "source_id": "cars-body-type-cropped",
+    "local_path": "datasets/cars-body-type-cropped",
+    "source_family": "local_user_provided",
+    "source_url_or_id": "local datasets/ mirror; internet research skipped per user instruction",
+    "license_note": "Local Kaggle-style mirror; verify Kaggle page/license before publication.",
+    "phase2_use": "scan_local_manifest_then_eda_decision_gate"
+  },
+  {
+    "source_id": "cbsc",
+    "local_path": "datasets/cbsc",
+    "source_family": "local_user_provided",
+    "source_url_or_id": "local datasets/ mirror; internet research skipped per user instruction",
+    "license_note": "Local Hugging Face/Kaggle-style mirror with README; verify original license before publication.",
+    "phase2_use": "scan_local_manifest_then_eda_decision_gate"
+  },
+  {
+    "source_id": "f1-image-classification-updated",
+    "local_path": "datasets/f1-image-classification-updated",
+    "source_family": "local_user_provided",
+    "source_url_or_id": "local datasets/ mirror; internet research skipped per user instruction",
+    "license_note": "Local Kaggle-style F1 image mirror; verify source license before publication.",
+    "phase2_use": "scan_local_manifest_then_eda_decision_gate"
+  },
+  {
+    "source_id": "stanford-car-dataset-by-classes-folder",
+    "local_path": "datasets/stanford-car-dataset-by-classes-folder",
+    "source_family": "local_user_provided",
+    "source_url_or_id": "local datasets/ mirror; internet research skipped per user instruction",
+    "license_note": "Stanford Cars class-folder mirror; research/education dataset lineage.",
+    "phase2_use": "scan_local_manifest_then_eda_decision_gate"
+  },
+  {
+    "source_id": "vehicle-classification-dataset",
+    "local_path": "datasets/vehicle-classification-dataset",
+    "source_family": "local_user_provided",
+    "source_url_or_id": "local datasets/ mirror; internet research skipped per user instruction",
+    "license_note": "Mixed local vehicle classification mirror; unlabeled train folder is excluded until metadata is supplied.",
+    "phase2_use": "scan_local_manifest_then_eda_decision_gate"
+  },
+  {
+    "source_id": "vehicle-images-dataset",
+    "local_path": "datasets/vehicle-images-dataset",
+    "source_family": "local_user_provided",
+    "source_url_or_id": "local datasets/ mirror; internet research skipped per user instruction",
+    "license_note": "Local vehicle image mirror; ambiguous City Car/MPV/Truck labels require review or exclusion.",
+    "phase2_use": "scan_local_manifest_then_eda_decision_gate"
+  },
+  {
+    "source_id": "vehicle-type-10-competition",
+    "local_path": "datasets/vehicle-type-10-competition",
+    "source_family": "local_user_provided",
+    "source_url_or_id": "local datasets/ mirror; internet research skipped per user instruction",
+    "license_note": "Local 10-class vehicle competition mirror; sample_submission supplies test labels.",
+    "phase2_use": "scan_local_manifest_then_eda_decision_gate"
+  }
+]
