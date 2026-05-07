@@ -10,7 +10,7 @@
 | # | Phase | Branch | Goal | Requirements | Success Criteria |
 |---|-------|--------|------|--------------|------------------|
 | 1 | Project Foundation | `main` | Create reproducible uv/Python 3.12 project skeleton and quality gates | ENV-01, ENV-02, ENV-03 | 4 |
-| 2 | Dataset Research and Curation | `feat/dataset-research-and-curation` | Build documented near-balanced 8-class dataset pipeline from public sources | DATA-01..DATA-06 | 5 |
+| 2 | Dataset Research and Curation | `feat/dataset-curation-eda` | Build documented near-balanced 8-class dataset pipeline from public sources | DATA-01..DATA-06 | 5 |
 | 3 | Baseline Training Pipeline | `feat/baseline-training-pipeline` | Train explainable CNN baseline/comparison models with Lightning and MPS/CPU support | TRN-01, TRN-02, TRN-03, TRN-06, TRN-07 | 5 |
 | 4 | Main DINOv3 Model and Selection | `feat/model-comparison-and-selection` | Implement the intended main DINOv3 path, compare against baselines, and select by F1/size/speed | TRN-04, TRN-05, EVAL-01..EVAL-07 | 6 |
 | 5 | Gradio Demo Interface | `feat/gradio-demo-interface` | Deliver modern presentation-ready web UI for live classification | UI-01..UI-07 | 5 |
@@ -40,7 +40,7 @@
 
 ### Phase 2: Dataset Research and Curation
 
-**Branch:** `feat/dataset-research-and-curation`
+**Branch:** `feat/dataset-curation-eda`
 
 **Goal:** Convert public Kaggle/Hugging Face/metadata-backed sources into a documented near-balanced 8-class dataset: 36k–40k raw candidates, approximately 32k clean images, about 4k/class.
 

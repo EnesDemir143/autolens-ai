@@ -2,7 +2,7 @@
 
 **Phase:** 2 — Dataset Research and Curation
 **Created:** 2026-05-06
-**Branch:** `feat/dataset-research-and-curation`
+**Branch:** `feat/dataset-curation-eda`
 
 ## Required Evidence
 
@@ -14,4 +14,4 @@
 - per-dataset CSV manifests exist under `artifacts/dataset/manifests/` for every inspected source.
 - EDA outputs exist under `artifacts/dataset/eda/` for each candidate dataset and for the merged candidate pool.
 - EDA includes class distributions, source-by-class coverage, missing/null label and metadata counts, missing referenced image-file counts, image dimensions/aspect ratios/file sizes, invalid/corrupt image counts, duplicate/hash results, and ambiguous-label counts.
-- outlier/anomaly review artifacts exist and the final dataset decision note explains which sources/classes/images are accepted, filtered, excluded, or deferred before Phase 3 preprocessing/training.
+- outlier/anomaly review artifacts exist and the final dataset decision note explains which sources/classes/images are accepted, filtered, excluded, or deferred before Phase 3 preprocessing/training. The note must require pre-outlier vs post-outlier comparison of counts/source coverage/metrics before final training selection.
