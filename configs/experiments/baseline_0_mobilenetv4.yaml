@@ -27,6 +27,7 @@ num_workers: 4
 max_epochs: 50
 learning_rate: 0.001
 weight_decay: 0.0001
+seed: 42  # Random seed for reproducibility
 
 # Class imbalance handling
 use_weighted_sampler: false
