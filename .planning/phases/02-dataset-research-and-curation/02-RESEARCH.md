@@ -18,6 +18,8 @@ Hugging Face candidates to validate/download:
 
 Critical research conclusion: no single source satisfies all 8 required labels. Phase 2 must include a class-gap audit and targeted collection strategy for Micro, Station Wagon, Open Wheel/F1, and clean Pick-Up. Final dataset target is 36k–40k raw candidates and about 32k clean near-balanced images (~4k/class). Ambiguous labels must be filtered: `City Car` is not automatically `MICRO`; generic `Truck` is not automatically `PICK_UP`; `Crossover`, `MPV/Minibus`, and `Coupe` are not directly mapped unless audited.
 
+EDA/decision-gate conclusion: before training, every candidate dataset needs its own normalized CSV manifest and EDA summary, then a merged EDA pass across all accepted candidates. The EDA must compare per-source class coverage, target-vs-actual counts, source/domain bias, missing/null labels or metadata fields, missing referenced image files, image dimensions/aspect ratios/file sizes, duplicate hashes, near-duplicate candidates if available, invalid/corrupt images, suspicious tiny/large files, ambiguous-label rows, and visual outlier samples. The output should drive the final inclusion/exclusion/filtering decision and only then feed Phase 3 preprocessing/training.
+
 
     ## Validation Architecture
 
@@ -27,3 +29,6 @@ Critical research conclusion: no single source satisfies all 8 required labels. 
 3. manifest records counts, known gaps, and target-vs-actual counts for the ~4k/class goal.
 4. dedup/split command exists.
 5. balance audit file exists and flags ambiguous-label exclusions.
+6. per-dataset CSV manifests exist for inspected sources.
+7. EDA artifacts exist for each inspected dataset and for the merged candidate dataset.
+8. outlier/duplicate/anomaly review lists exist and are referenced by the final dataset decision note.

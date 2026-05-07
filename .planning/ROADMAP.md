@@ -50,13 +50,16 @@
 1. Candidate sources are downloaded or documented with exact IDs/URLs.
 2. Raw labels are mapped into the 8 required assignment classes.
 3. A manifest records source, class mapping, counts, known gaps, license notes, and target-vs-actual counts.
-4. Train/validation/internal-test split is created without final-test leakage.
-5. Class imbalance report checks the approximate 4k/class target and identifies weak classes such as MICRO, STATION WAGON, OPEN WHEEL/F1, and PICK_UP.
+4. Per-dataset CSV manifests and EDA summaries are produced before merging; merged EDA reports class distributions, source-by-class coverage, image quality statistics, and source/domain bias.
+5. Missing-data, missing-file, outlier, duplicate, corrupt-image, and ambiguous-label review lists are created and used to decide accepted/filtered/excluded/deferred data.
+6. Train/validation/internal-test split is created without final-test leakage after the EDA decision gate.
+7. Class imbalance report checks the approximate 4k/class target and identifies weak classes such as MICRO, STATION WAGON, OPEN WHEEL/F1, and PICK_UP.
 
 **Implementation notes:**
 - Start with assignment-referenced Kaggle datasets.
 - Use metadata/CSV-backed sources such as Car Model Variants, CompCars, Stanford/VMMR/BoxCars lookup, and F1 datasets to reach 30–40k scale.
 - Do not blindly map ambiguous labels: `City Car`, generic `Truck`, `Crossover`, `MPV/Minibus`, and `Coupe` require filtering or exclusion.
+- Use EDA evidence to decide the usable datasets/classes first; detailed preprocessing/augmentation choices are finalized in Phase 3 using the EDA findings.
 - Keep manual review hooks for mislabeled/ambiguous images.
 
 ### Phase 3: Baseline Training Pipeline

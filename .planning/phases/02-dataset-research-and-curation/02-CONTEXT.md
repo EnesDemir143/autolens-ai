@@ -30,6 +30,9 @@
 ### D-05
 - Treat MICRO, STATION WAGON, OPEN WHEEL/F1, and clean PICK_UP as likely gap/risk classes requiring targeted collection and audit.
 
+### D-06
+- Before finalizing the curated training set, run an explicit EDA decision gate: keep one raw/normalized CSV manifest per candidate dataset, generate per-dataset and merged class/image-quality summaries, inspect class distributions and source bias, run outlier/duplicate/anomaly analysis, and record which sources/images are accepted, filtered, excluded, or deferred. Preprocessing choices must be based on this EDA evidence rather than guessed up front.
+
     ### the agent's Discretion
     - Exact filenames and helper function names may be chosen during execution if they remain simple, testable, and consistent with prior phases.
     - Keep implementation small and explainable; avoid speculative abstraction.
@@ -55,6 +58,9 @@
     ## Specific Ideas
 
     - Requirement IDs for this phase: DATA-01, DATA-02, DATA-03, DATA-04, DATA-05, DATA-06. Dataset scale target: 36k–40k raw candidates -> ~32k clean images, about 4k/class.
+    - Produce per-source CSV manifests under `artifacts/dataset/manifests/` before merging. Each row should include at minimum: source ID, original path/URL or local relative path, raw label, normalized 8-class label candidate, split eligibility, dimensions, file size, hash, license/source note, and exclusion/review reason when applicable.
+    - Produce EDA outputs under `artifacts/dataset/eda/`: per-dataset summaries, merged class-distribution tables/plots, source-by-class coverage, image-size/aspect-ratio/file-size summaries, missing-data/missing-file report, duplicate/hash report, and outlier/review candidate lists.
+    - Treat EDA as the dataset selection checkpoint: decide which datasets/classes are usable, which need manual filtering, and which gaps require targeted collection before Phase 3 training.
     - Execute sequentially, preserving outputs from prior phases.
     - Write evidence files that later phases and the final report can consume.
 

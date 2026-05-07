@@ -22,7 +22,7 @@ See: `.planning/PROJECT.md` (updated 2026-05-06)
 | Phase | Branch | Status |
 |---|---|---|
 | Phase 1 — Project Foundation | `main` | Complete — verified 2026-05-06 (3/3 plans) |
-| Phase 2 — Dataset Research and Curation | `feat/dataset-research-and-curation` | Ready to execute — 4 plans |
+| Phase 2 — Dataset Research and Curation | `feat/dataset-research-and-curation` | Ready to execute — 4 plans, with explicit EDA/outlier decision gate |
 | Phase 3 — Baseline Training Pipeline | `feat/baseline-training-pipeline` | Ready to execute — 4 plans |
 | Phase 4 — Main DINOv3 Model and Selection | `feat/model-comparison-and-selection` | Ready to execute — 4 plans |
 | Phase 5 — Gradio Demo Interface | `feat/gradio-demo-interface` | Ready to execute — 4 plans |

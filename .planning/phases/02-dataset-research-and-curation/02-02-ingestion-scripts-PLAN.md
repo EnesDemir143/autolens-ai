@@ -7,7 +7,7 @@ objective: Create source download/ingestion command surfaces
 wave: 1
 depends_on: []
 requirements_addressed: ['DATA-01', 'DATA-02']
-files_modified: ['src/autolens_ai/data/', 'configs/data/', 'artifacts/dataset/', 'docs/dataset_manifest.md']
+files_modified: ['src/autolens_ai/data/', 'configs/data/', 'artifacts/dataset/', 'artifacts/dataset/manifests/', 'docs/dataset_manifest.md']
 autonomous: true
 ---
 
@@ -19,6 +19,7 @@ Create source download/ingestion command surfaces
 
 <must_haves>
 - Covers requirement IDs: DATA-01, DATA-02.
+- Ingestion must produce one normalized CSV manifest per inspected source before any merged dataset is finalized.
 - Covers phase decisions: D-01, D-02, D-03, D-04, D-05 where relevant to this plan.
 - Produces concrete evidence for downstream phases.
 </must_haves>
@@ -53,10 +54,12 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `AGENTS.md`
   </read_first>
   <action>
-    Implement the smallest working slice for `Create source download/ingestion command surfaces`. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
+    Implement the smallest working slice for `Create source download/ingestion command surfaces`. For each inspected dataset, create or document a command that can emit a per-source CSV manifest in `artifacts/dataset/manifests/` with source ID, local path/URL, raw label, normalized label candidate, dimensions, file size, hash, license/source note, split eligibility, and review/exclusion reason columns. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
   </action>
   <acceptance_criteria>
     - Output references all requirement IDs: DATA-01, DATA-02.
+    - A per-source manifest schema is documented or implemented.
+    - Generated/source-specific CSV manifests are separated from the merged manifest.
     - Output contains no instructor final test data.
     - Any external dependency blocker is documented with the exact command or resource ID.
   </acceptance_criteria>
