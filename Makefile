@@ -1,5 +1,5 @@
 .PHONY: help sync import test lint format typecheck check pre-commit graphify-update graphify-report clean
-.PHONY: compute-stats train-baseline-0 train-baseline-1 train-baseline-2 train-all-baselines
+.PHONY: compute-stats train-baseline-0 train-baseline-1 train-baseline-2 train-all-baselines resume-training
 
 help:
 	@printf '%s\n' \
@@ -24,6 +24,9 @@ help:
 		'  make train-baseline-1       Train ResNet18 with Baseline 1 (light augmentation)' \
 		'  make train-baseline-2       Train ResNet18 with Baseline 2 (weighted sampler)' \
 		'  make train-all-baselines    Run all baseline experiments sequentially' \
+		'' \
+		'Resume training:' \
+		'  make resume-training CONFIG=path/to/config.yaml RUN_ID=20260507_234800' \
 		'' \
 		'Add --wandb flag for W&B logging:' \
 		'  make train-baseline-0 WANDB=--wandb'
@@ -95,3 +98,13 @@ train-baseline-2: compute-stats
 train-all-baselines: train-baseline-0 train-baseline-1 train-baseline-2
 	@echo ""
 	@echo "All baseline experiments complete!"
+
+# Resume training from checkpoint
+resume-training:
+	@if [ -z "$(CONFIG)" ] || [ -z "$(RUN_ID)" ]; then \
+		echo "ERROR: Both CONFIG and RUN_ID are required"; \
+		echo "Usage: make resume-training CONFIG=configs/experiments/baseline_0_resnet18.yaml RUN_ID=20260507_234800"; \
+		exit 1; \
+	fi
+	@echo "Resuming training from run: $(RUN_ID)"
+	uv run python scripts/train.py --config $(CONFIG) --run-id $(RUN_ID) --resume $(WANDB)
