@@ -20,6 +20,392 @@ uv run python -c "from autolens_ai.training import print_device_info; print_devi
 - Subsequent runs reuse cached stats
 - To recompute: `rm artifacts/dataset/stats.json`
 
+## Quick Start
+
+```bash
+# Simplest: Train ResNet18 baseline
+make train-baseline-0
+
+# With W&B logging (recommended)
+make train-baseline-0 WANDB=--wandb
+
+# Single model only
+uv run python scripts/train.py --config configs/experiments/baseline_0_resnet18.yaml --wandb
+```
+
+## Training Commands
+
+### Basic Training
+
+```bash
+# Baseline 0: No augmentation (3 models: ResNet18, MobileNetV4, EfficientNet-B2)
+make train-baseline-0
+
+# Baseline 1: Light augmentation (ResNet18)
+make train-baseline-1
+
+# Baseline 2: Weighted sampler (ResNet18)
+make train-baseline-2
+
+# All baselines sequentially
+make train-all-baselines
+```
+
+### Advanced: Hyperparameter Tuning
+
+```bash
+# Find optimal learning rate
+uv run python scripts/train.py \
+  --config configs/experiments/baseline_0_resnet18.yaml \
+  --find-lr
+
+# Find optimal batch size
+uv run python scripts/train.py \
+  --config configs/experiments/baseline_0_resnet18.yaml \
+  --find-batch-size
+
+# Then update config with suggested values and train
+```
+
+### Resume Training
+
+```bash
+# Using Makefile
+make resume-training \
+  CONFIG=configs/experiments/baseline_0_resnet18.yaml \
+  RUN_ID=20260508_001234
+
+# Direct command
+uv run python scripts/train.py \
+  --config configs/experiments/baseline_0_resnet18.yaml \
+  --run-id 20260508_001234 \
+  --resume
+```
+
+### Custom Run ID
+
+```bash
+uv run python scripts/train.py \
+  --config configs/experiments/baseline_0_resnet18.yaml \
+  --run-id my_experiment_v1 \
+  --wandb
+```
+
+## Configuration Options
+
+### Basic Parameters
+
+```yaml
+# Model
+model_name: resnet18
+num_classes: 8
+pretrained: true
+
+# Training
+batch_size: 32
+num_workers: 4
+max_epochs: 50
+learning_rate: 0.001
+weight_decay: 0.0001
+seed: 42
+
+# Preprocessing
+resize_size: 256
+crop_size: 224
+use_augmentation: false
+```
+
+### Stability & Performance
+
+```yaml
+# Gradient clipping (prevents exploding gradients)
+gradient_clip_val: 1.0
+
+# Mixed precision (faster training)
+precision: "bf16-mixed"  # bf16 for MPS, "16-mixed" for CUDA, "32-true" for CPU
+
+# Label smoothing (prevents overconfidence)
+label_smoothing: 0.0  # 0.1 = 10% smoothing
+```
+
+### Advanced Features
+
+```yaml
+# Exponential Moving Average (better generalization)
+use_ema: false
+ema_decay: 0.999
+
+# Focal Loss (for severe class imbalance)
+use_focal_loss: false
+focal_alpha: 1.0
+focal_gamma: 2.0  # Higher = more focus on hard examples
+
+# Class imbalance handling
+use_class_weights: true
+use_weighted_sampler: false
+max_class_weight: 5.0
+```
+
+## What Gets Saved
+
+### Checkpoints (Per Run)
+
+```
+checkpoints/
+├── baseline_0_resnet18_20260508_001234/
+│   ├── best-epoch=15-val_f1_macro=0.7234.ckpt  # Top 3 by F1
+│   ├── best-epoch=18-val_f1_macro=0.7456.ckpt
+│   ├── best-epoch=22-val_f1_macro=0.7512.ckpt
+│   ├── best_loss-epoch=12-val_loss=0.4567.ckpt # Best by loss
+│   ├── last.ckpt                                # Last epoch (for resume)
+│   └── lr_finder.png                            # If --find-lr used
+```
+
+**Checkpoint contents:**
+- Model weights
+- Optimizer state
+- LR scheduler state
+- Epoch number
+- Hyperparameters
+- Training metrics
+
+### Metrics Logged
+
+**Training (every epoch):**
+- train/loss
+- train/acc
+
+**Validation (every epoch):**
+- val/loss
+- val/acc
+- val/f1_macro ⭐ (primary ranking metric)
+- val/f1_weighted
+- val/precision
+- val/recall
+
+**Test (end of training):**
+- test/loss, test/acc
+- test/f1_macro, test/f1_weighted
+- test/precision, test/recall
+- test/confusion_matrix (8×8 normalized)
+
+### Logs
+
+**CSV (default):**
+- `lightning_logs/version_X/metrics.csv`
+- `lightning_logs/version_X/hparams.yaml`
+
+**W&B (with --wandb):**
+- Online dashboard with run comparison
+- Hyperparameter tracking
+- Confusion matrices
+- Learning curves
+
+## Monitoring Training
+
+### Progress Bar
+
+```
+Epoch 15/50 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:05:30
+train/loss: 0.4567  train/acc: 0.8234
+val/loss: 0.5123    val/acc: 0.7891    val/f1_macro: 0.7512
+LR: 0.001000
+```
+
+### Callbacks
+
+- **ModelCheckpoint**: Saves top 3 by F1, best by loss, last
+- **EarlyStopping**: Stops if val/loss doesn't improve (patience=10)
+- **LearningRateMonitor**: Logs LR changes
+- **ReduceLROnPlateau**: Reduces LR by 0.5 when val/loss plateaus (patience=3)
+- **RichProgressBar**: Beautiful terminal progress
+- **EMA** (optional): Exponential moving average of weights
+
+## Expected Training Time
+
+On Apple Silicon M2 Pro with MPS + bf16:
+
+| Model | Epochs | Time (est.) |
+|-------|--------|-------------|
+| ResNet18 | 50 | 1.5-2 hours |
+| MobileNetV4 | 50 | 2-3 hours |
+| EfficientNet-B2 | 50 | 3-4 hours |
+
+**Note:** bf16 mixed precision ~30-40% faster than fp32
+
+## Troubleshooting
+
+### MPS Not Available
+
+```bash
+# Check MPS
+uv run python -c "import torch; print(torch.backends.mps.is_available())"
+
+# If False, training uses CPU (slower)
+# Edit config: precision: "32-true"
+```
+
+### Out of Memory
+
+```bash
+# Reduce batch size
+# Edit config: batch_size: 16  # or 8
+
+# Or disable mixed precision
+# Edit config: precision: "32-true"
+```
+
+### Training Unstable (Loss NaN)
+
+```bash
+# Increase gradient clipping
+# Edit config: gradient_clip_val: 0.5
+
+# Reduce learning rate
+# Edit config: learning_rate: 0.0001
+
+# Or use LR finder
+uv run python scripts/train.py --config ... --find-lr
+```
+
+### W&B Login
+
+```bash
+uv run wandb login
+# Or: export WANDB_API_KEY=your_key
+```
+
+### Resume Not Working
+
+```bash
+# Check run ID exists
+ls checkpoints/
+
+# Verify last.ckpt exists
+ls checkpoints/baseline_0_resnet18_20260508_001234/last.ckpt
+
+# Use exact run ID from directory name
+```
+
+## Advanced Usage
+
+### Enable EMA
+
+```yaml
+# Edit config
+use_ema: true
+ema_decay: 0.999
+```
+
+Benefits: Better generalization, more stable predictions
+
+### Enable Focal Loss
+
+```yaml
+# Edit config
+use_focal_loss: true
+focal_gamma: 2.0  # Try 1.0-3.0
+```
+
+Use when: Severe class imbalance, weighted loss not enough
+
+### Enable Label Smoothing
+
+```yaml
+# Edit config
+label_smoothing: 0.1  # 10% smoothing
+```
+
+Benefits: Prevents overconfidence, better calibration
+
+### Custom Augmentation
+
+```yaml
+# Edit config
+use_augmentation: true
+
+# Then modify src/autolens_ai/training/preprocessing.py
+# to adjust augmentation strength
+```
+
+See: `docs/augmentation_testing_plan.md`
+
+## Comparing Runs
+
+### W&B Dashboard
+
+1. Go to wandb.ai/your-username/autolens-ai
+2. Select multiple runs
+3. Compare:
+   - Val/F1 curves
+   - Loss curves
+   - Confusion matrices
+   - Hyperparameters
+
+### Local Analysis
+
+```bash
+# Check model sizes
+make check-model-size
+
+# List all runs
+ls -lh checkpoints/
+
+# Load checkpoint
+python
+>>> import torch
+>>> ckpt = torch.load("checkpoints/.../best-*.ckpt")
+>>> print(ckpt['hyper_parameters'])
+>>> print(f"Epoch: {ckpt['epoch']}")
+```
+
+## Next Steps
+
+1. **Start with ResNet18 Baseline 0** (fastest, establishes baseline)
+2. **Check metrics** (val/f1_macro, per-class F1)
+3. **If good (F1 > 0.7)**: Run other models
+4. **If poor (F1 < 0.6)**: Debug dataset/labels first
+5. **Compare augmentation** (Baseline 1 vs Baseline 0)
+6. **Select best model** for Phase 4 DINOv3 comparison
+
+## Recommended Workflow
+
+```bash
+# 1. Quick smoke test (1 epoch)
+# Edit config: max_epochs: 1
+uv run python scripts/train.py --config configs/experiments/baseline_0_resnet18.yaml
+
+# 2. If successful, full training
+# Edit config: max_epochs: 50
+make train-baseline-0 WANDB=--wandb
+
+# 3. Monitor progress
+# Watch terminal or W&B dashboard
+
+# 4. After completion
+make check-model-size
+
+# 5. Compare results and select best model
+```
+
+1. Phase 2 dataset splits must exist:
+```bash
+ls -lh artifacts/dataset/splits/
+# Should show: train.csv, val.csv, internal_test.csv, all_splits.csv
+```
+
+2. Verify environment:
+```bash
+uv run python -c "from autolens_ai.training import print_device_info; print_device_info()"
+# Should detect MPS on Apple Silicon
+```
+
+3. Dataset statistics (automatic):
+- First training run computes mean/std from train split
+- Saved to `artifacts/dataset/stats.json`
+- Subsequent runs reuse cached stats
+- To recompute: `rm artifacts/dataset/stats.json`
+
 ## Training Commands
 
 ### Quick Start (Recommended)

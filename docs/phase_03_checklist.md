@@ -44,6 +44,12 @@
 - [x] Skip recomputation if stats exist
 - [x] TQDM progress bar for stats computation
 
+### Reproducibility
+- [x] Comprehensive seed (Python, NumPy, PyTorch, Lightning, CuDNN, MPS)
+- [x] Generator in DataLoader with manual_seed
+- [x] Persistent workers for consistency
+- [x] Stratified split script with seed (create_splits.py)
+
 ### W&B Integration
 - [x] W&B logger support with --wandb flag
 - [x] Fallback to CSV logger if W&B unavailable
@@ -54,6 +60,7 @@
 - [x] Makefile targets (train-baseline-0/1/2, train-all-baselines)
 - [x] WANDB flag support in Makefile
 - [x] compute-stats target with skip logic
+- [x] create-splits target with custom ratios
 
 ### Checkpoint Management
 - [x] Timestamp-based checkpoint directories
@@ -62,30 +69,39 @@
 - [x] Resume training from checkpoint (--resume flag)
 - [x] Hyperparameters saved in checkpoints
 
+### Training Stability & Performance
+- [x] Gradient clipping (gradient_clip_val=1.0)
+- [x] Mixed precision training (bf16-mixed for MPS)
+- [x] Label smoothing support
+- [x] Class-weighted loss
+- [x] WeightedRandomSampler
+
+### Advanced Features
+- [x] Learning Rate Finder (--find-lr)
+- [x] Batch Size Finder (--find-batch-size)
+- [x] Focal Loss (alternative to CrossEntropy)
+- [x] EMA (Exponential Moving Average)
+- [x] Augmentation testing plan
+
 ### Documentation
 - [x] Training quick start guide (comprehensive)
 - [x] Baseline training runbook
 - [x] Phase 3 completion report
+- [x] Augmentation testing plan
 - [x] .gitignore for training artifacts
 
-## ⚠️ Missing (Important but Not Critical)
+### Tools
+- [x] Model size checker (check_model_size.py)
 
-### Model Size Verification
-- [ ] Script to check checkpoint size (<95 MB requirement)
-- [ ] Automatic size check after training
-- [ ] Warning if model exceeds limit
-
-**Priority:** Medium  
-**Impact:** Final model must be <95 MB for submission  
-**Effort:** 30 minutes
+## ⚠️ Missing (Nice-to-Have, Not Critical)
 
 ### Training Metrics Summary
 - [ ] Script to extract metrics from all checkpoints
 - [ ] Generate comparison table (model, F1, accuracy, size)
 - [ ] Export to CSV/markdown for report
 
-**Priority:** Medium  
-**Impact:** Easier model comparison and report generation  
+**Priority:** Low  
+**Impact:** Easier model comparison (can do manually)  
 **Effort:** 1 hour
 
 ### Confusion Matrix Visualization
@@ -93,8 +109,8 @@
 - [ ] Save as PNG for report
 - [ ] Per-class F1 bar chart
 
-**Priority:** Medium  
-**Impact:** Required for IEEE report (Phase 6)  
+**Priority:** Low  
+**Impact:** Required for IEEE report but can be done in Phase 6  
 **Effort:** 1 hour
 
 ### Learning Curve Plots
@@ -103,7 +119,7 @@
 - [ ] Save as PNG for report
 
 **Priority:** Low  
-**Impact:** Nice to have for report, W&B already provides this  
+**Impact:** W&B already provides this  
 **Effort:** 30 minutes
 
 ## ❌ Not Needed for Phase 3
