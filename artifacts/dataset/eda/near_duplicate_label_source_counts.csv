@@ -1,0 +1,35 @@
+normalized_label,near_duplicate_sources,count
+,cbsc|stanford-car-dataset-by-classes-folder,5
+,f1-image-classification-updated|stanford-car-dataset-by-classes-folder,11
+,f1-image-classification-updated|stanford-car-dataset-by-classes-folder|vehicle-classification-dataset,56
+,f1-image-classification-updated|vehicle-classification-dataset,5
+,stanford-car-dataset-by-classes-folder|vehicle-classification-dataset,15
+HATCHBACK,cars-body-type-cropped|stanford-car-dataset-by-classes-folder,4
+HATCHBACK,cars-body-type-cropped|vehicle-classification-dataset,1
+HATCHBACK,f1-image-classification-updated|stanford-car-dataset-by-classes-folder|vehicle-classification-dataset,3
+HATCHBACK,stanford-car-dataset-by-classes-folder|vehicle-classification-dataset,2
+HATCHBACK,stanford-car-dataset-by-classes-folder|vehicle-type-10-competition,1
+OPEN WHEEL / F1,f1-image-classification-updated|stanford-car-dataset-by-classes-folder,11
+OPEN WHEEL / F1,f1-image-classification-updated|stanford-car-dataset-by-classes-folder|vehicle-classification-dataset,4
+OPEN WHEEL / F1,f1-image-classification-updated|vehicle-classification-dataset,3
+PICK UP,cars-body-type-cropped|stanford-car-dataset-by-classes-folder,4
+PICK UP,cbsc|stanford-car-dataset-by-classes-folder,1
+PICK UP,f1-image-classification-updated|stanford-car-dataset-by-classes-folder,2
+PICK UP,f1-image-classification-updated|stanford-car-dataset-by-classes-folder|vehicle-classification-dataset,4
+PICK UP,stanford-car-dataset-by-classes-folder|vehicle-classification-dataset,6
+SEDAN,cars-body-type-cropped|vehicle-classification-dataset,1
+SEDAN,cbsc|stanford-car-dataset-by-classes-folder,5
+SEDAN,f1-image-classification-updated|stanford-car-dataset-by-classes-folder,4
+SEDAN,f1-image-classification-updated|stanford-car-dataset-by-classes-folder|vehicle-classification-dataset,12
+SEDAN,f1-image-classification-updated|vehicle-classification-dataset,1
+SEDAN,stanford-car-dataset-by-classes-folder|vehicle-classification-dataset,7
+STATION WAGON,f1-image-classification-updated|stanford-car-dataset-by-classes-folder|vehicle-classification-dataset,1
+STATION WAGON,stanford-car-dataset-by-classes-folder|vehicle-type-10-competition,5
+SUV,cars-body-type-cropped|stanford-car-dataset-by-classes-folder,4
+SUV,cbsc|stanford-car-dataset-by-classes-folder,3
+SUV,f1-image-classification-updated|stanford-car-dataset-by-classes-folder,5
+SUV,f1-image-classification-updated|vehicle-classification-dataset,2
+SUV,stanford-car-dataset-by-classes-folder|vehicle-classification-dataset,5
+VAN,cbsc|stanford-car-dataset-by-classes-folder,1
+VAN,f1-image-classification-updated|stanford-car-dataset-by-classes-folder,1
+VAN,f1-image-classification-updated|stanford-car-dataset-by-classes-folder|vehicle-classification-dataset,1

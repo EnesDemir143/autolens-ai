@@ -3,7 +3,7 @@ phase: 4
 phase_name: Main DINOv3 Model and Selection
 branch: feat/model-comparison-and-selection
 plan_id: 04-02
-objective: Implement main DINOv3 non-LoRA evaluation path with gated-access fallback
+objective: Implement main DINOv3 non-LoRA path and optional LoRA comparison with gated-access fallback
 wave: 1
 depends_on: []
 requirements_addressed: ['TRN-04', 'TRN-05']
@@ -11,14 +11,14 @@ files_modified: ['src/autolens_ai/evaluation/', 'artifacts/evaluation/', 'docs/m
 autonomous: true
 ---
 
-# Plan 02 — Implement main DINOv3 non-LoRA evaluation path with gated-access fallback
+# Plan 02 — Implement main DINOv3 non-LoRA path and optional LoRA comparison with gated-access fallback
 
 <objective>
-Implement main DINOv3 non-LoRA evaluation path with gated-access fallback
+Implement main DINOv3 non-LoRA path and optional LoRA comparison with gated-access fallback
 </objective>
 
 <must_haves>
-- Covers requirement IDs: TRN-04, TRN-05. DINOv3 is the intended main model path; baselines are only comparison/fallback evidence.
+- Covers requirement IDs: TRN-04, TRN-05. DINOv3 is the intended main model path; non-LoRA must run first, and LoRA is a separate optional variant after non-LoRA works. Baselines are only comparison/fallback evidence.
 - Covers phase decisions: D-01, D-02, D-03, D-04, D-05 where relevant to this plan.
 - Produces concrete evidence for downstream phases.
 </must_haves>
@@ -38,7 +38,7 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `.planning/ROADMAP.md`
   </read_first>
   <action>
-    Create or update the minimal files needed for this plan objective: `Implement main DINOv3 non-LoRA evaluation path with gated-access fallback`. Keep names explicit and avoid hidden behavior. Preserve outputs from earlier phases.
+    Create or update the minimal files needed for this plan objective: `Implement main DINOv3 non-LoRA path and optional LoRA comparison with gated-access fallback`. Keep names explicit and avoid hidden behavior. Preserve outputs from earlier phases.
   </action>
   <acceptance_criteria>
     - `test -d .planning/phases/04-model-comparison-and-selection` exits 0.
@@ -53,11 +53,13 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `AGENTS.md`
   </read_first>
   <action>
-    Implement the smallest working slice for `Implement main DINOv3 non-LoRA evaluation path with gated-access fallback`. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
+    Implement the smallest working slice for `Implement main DINOv3 non-LoRA path and optional LoRA comparison with gated-access fallback`. The non-LoRA path is required first; LoRA must be implemented as a separate optional config/run after non-LoRA evidence exists. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
   </action>
   <acceptance_criteria>
     - Output references all requirement IDs: TRN-04, TRN-05.
     - Output contains no instructor final test data.
+    - DINOv3 non-LoRA run path is available or the exact gated-access blocker is documented.
+    - DINOv3 LoRA is either available as a separate optional variant after non-LoRA or explicitly deferred with rationale.
     - Any external dependency blocker is documented with the exact command or resource ID.
   </acceptance_criteria>
 </task>

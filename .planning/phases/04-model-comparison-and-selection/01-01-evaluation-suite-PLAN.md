@@ -53,11 +53,14 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `AGENTS.md`
   </read_first>
   <action>
-    Implement the smallest working slice for `Create metrics, classification report, and plot generation suite`. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
+    Implement the smallest working slice for `Create metrics, classification report, and plot generation suite`. Metrics must include accuracy, balanced accuracy, MCC, precision, recall, macro F1, weighted F1, per-class metrics, and normalized confusion matrix outputs. Supporting diagnostics may additionally include per-class specificity, ECE, Brier score, and reliability-curve artifacts if calibration evidence is useful for confidence reporting. Temperature scaling or any other calibration fit must use validation predictions only; internal_test must remain untouched until the final evaluation pass. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
   </action>
   <acceptance_criteria>
     - Output references all requirement IDs: EVAL-01, EVAL-02, EVAL-03, EVAL-04, EVAL-05.
     - Output contains no instructor final test data.
+    - Balanced accuracy and MCC are included in metric outputs and benchmark tables.
+    - Optional calibration/supporting diagnostics may include specificity, ECE, Brier score, and reliability curve outputs, but any calibration fit uses validation predictions only.
+    - Internal test remains untouched until the final evaluation pass.
     - Any external dependency blocker is documented with the exact command or resource ID.
   </acceptance_criteria>
 </task>

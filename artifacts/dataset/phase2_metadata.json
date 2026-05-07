@@ -1,0 +1,21 @@
+{
+  "generated_at": "2026-05-07T16:14:30.994544+00:00",
+  "dataset_root": "datasets",
+  "total_images_scanned": 56158,
+  "target_classes": [
+    "SUV",
+    "VAN",
+    "STATION WAGON",
+    "MICRO",
+    "OPEN WHEEL / F1",
+    "SEDAN",
+    "HATCHBACK",
+    "PICK UP"
+  ],
+  "internet_research": "skipped; user provided datasets under datasets/",
+  "manifests": "artifacts/dataset/manifests/",
+  "eda": "artifacts/dataset/eda/",
+  "splits": "artifacts/dataset/splits/",
+  "max_per_class": null,
+  "split_policy": "use all safe accepted unique images unless --max-per-class is set"
+}

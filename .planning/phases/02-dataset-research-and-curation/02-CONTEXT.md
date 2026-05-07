@@ -1,5 +1,5 @@
 # Phase 2: Dataset Research and Curation - Context
-**Branch:** `feat/dataset-research-and-curation`
+**Branch:** `feat/dataset-curation-eda`
 
     **Gathered:** 2026-05-06
     **Status:** Ready for planning
@@ -31,7 +31,7 @@
 - Treat MICRO, STATION WAGON, OPEN WHEEL/F1, and clean PICK_UP as likely gap/risk classes requiring targeted collection and audit.
 
 ### D-06
-- Before finalizing the curated training set, run an explicit EDA decision gate: keep one raw/normalized CSV manifest per candidate dataset, generate per-dataset and merged class/image-quality summaries, inspect class distributions and source bias, run outlier/duplicate/anomaly analysis, and record which sources/images are accepted, filtered, excluded, or deferred. Preprocessing choices must be based on this EDA evidence rather than guessed up front.
+- Before finalizing the curated training set, run an explicit EDA decision gate: keep one raw/normalized CSV manifest per candidate dataset, generate per-dataset and merged class/image-quality summaries, inspect class distributions and source bias, run outlier/duplicate/anomaly analysis, and record which sources/images are accepted, filtered, excluded, or deferred. Outlier filtering must be compared against the pre-outlier dataset instead of silently replacing it. Preprocessing choices must be based on this EDA evidence rather than guessed up front.
 
     ### the agent's Discretion
     - Exact filenames and helper function names may be chosen during execution if they remain simple, testable, and consistent with prior phases.

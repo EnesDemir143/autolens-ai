@@ -24,15 +24,15 @@
 
 - [ ] **TRN-01**: Developer can train MobileNetV4 Conv Medium as a baseline/comparison model on the curated dataset.
 - [ ] **TRN-02**: Developer can train EfficientNet-B2 as a baseline/comparison model on the curated dataset.
-- [ ] **TRN-03**: Developer can train one ResNet baseline as a classic control model on the curated dataset.
+- [ ] **TRN-03**: Developer can train ResNet18 as a classic control baseline model on the curated dataset.
 - [ ] **TRN-04**: Developer can run the intended main DINOv3 ViT-S/16 path using `facebook/dinov3-vits16-pretrain-lvd1689m` when gated access is available.
-- [ ] **TRN-05**: Developer can run DINOv3 without LoRA first as the main-path implementation and keep LoRA as an optional extension.
+- [ ] **TRN-05**: Developer can run DINOv3 without LoRA first as the main-path implementation and then run a LoRA fine-tuning variant as a separate optional comparison when access/time allow.
 - [ ] **TRN-06**: Training supports MPS when available and CPU fallback when not available.
 - [ ] **TRN-07**: Training uses augmentation, normalization, early stopping, and checkpointing to reduce overfitting.
 
 ### Evaluation
 
-- [ ] **EVAL-01**: Developer can compute Accuracy, Precision, Recall, and F1-score for all experiments.
+- [ ] **EVAL-01**: Developer can compute Accuracy, balanced accuracy, MCC, Precision, Recall, and F1-score for all experiments.
 - [ ] **EVAL-02**: Developer can report per-class, macro average, and weighted average metrics.
 - [ ] **EVAL-03**: Developer can generate training/validation loss graph by epoch.
 - [ ] **EVAL-04**: Developer can generate training/validation accuracy graph by epoch.

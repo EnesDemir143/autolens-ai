@@ -1,0 +1,2 @@
+source_id,local_path,exclusion_reason
+stanford-car-body-type-data,datasets/stanford-car-body-type-data,excluded_to_reduce_stanford_source_overlap_leakage_risk

@@ -7,7 +7,9 @@
 ## Required Evidence
 
 - datamodule import succeeds.
-- model factory lists MobileNetV4/EfficientNet-B2/ResNet.
+- model factory lists MobileNetV4/EfficientNet-B2/ResNet18.
 - Lightning trainer config has early stopping/checkpointing.
 - MPS/CPU fallback code exists.
 - baseline runbook exists.
+- Baseline 0 config uses no train augmentation and deterministic resize 256 + center crop 224 + train-split mean/std normalization.
+- Follow-up configs/runbook entries separate light augmentation and weighted sampler comparison from the first baseline, and mark outlier-filtered comparison as low-priority optional work.

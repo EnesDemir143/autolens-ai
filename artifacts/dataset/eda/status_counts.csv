@@ -1,0 +1,25 @@
+mapping_status,reason,count
+accepted,approved_micro_model:FIAT 500,126
+accepted,approved_micro_model:Smart Fortwo,80
+accepted,explicit_hatchback_label,2651
+accepted,explicit_pickup_label,1589
+accepted,explicit_sedan_label,8351
+accepted,explicit_suv_label,6689
+accepted,explicit_van_or_minivan_label,4539
+accepted,explicit_wagon_label,651
+accepted,formula_one_source_or_label,5846
+accepted,pickup_cab_style_label,1090
+excluded,duplicate_image_hash,521
+excluded,generic_truck_not_mapped_to_pickup,2881
+excluded,missing_raw_label,151
+excluded,non_target_or_unknown_label,6089
+review,ambiguous_cabriolet,34
+review,ambiguous_car,251
+review,ambiguous_city_car,4657
+review,ambiguous_convertible,3222
+review,ambiguous_coupe,3222
+review,ambiguous_limousine,166
+review,ambiguous_mpv,452
+review,ambiguous_multi_purpose_vehicle,2649
+review,ambiguous_sports,51
+review,ambiguous_taxi,200
