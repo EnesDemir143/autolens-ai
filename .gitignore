@@ -255,9 +255,14 @@ graphify-out/
 # AutoLens generated dataset row-level artifacts (reproducible from local datasets/)
 artifacts/dataset/manifests/*.csv
 artifacts/dataset/splits/*.csv
+artifacts/dataset/stats.json
 artifacts/dataset/eda/notebook_exports/
 artifacts/dataset/eda/review_candidates.csv
 artifacts/dataset/eda/duplicate_hashes.csv
 artifacts/dataset/eda/missing_or_corrupt.csv
 artifacts/dataset/eda/micro_model_candidates.csv
 artifacts/dataset/eda/near_duplicate_candidates.csv
+
+# Training artifacts
+checkpoints/
+lightning_logs/

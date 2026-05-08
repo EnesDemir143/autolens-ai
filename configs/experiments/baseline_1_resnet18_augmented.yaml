@@ -1,0 +1,66 @@
+# Baseline 1: Light Augmentation
+# Requirements: TRN-01, TRN-02, TRN-03, TRN-06, TRN-07
+# Phase decision: D-07
+
+# Dataset
+data_root: datasets
+train_csv: artifacts/dataset/splits/train.csv
+val_csv: artifacts/dataset/splits/val.csv
+test_csv: artifacts/dataset/splits/internal_test.csv
+
+# Preprocessing (Baseline 1: light augmentation)
+resize_size: 256
+crop_size: 224
+use_augmentation: true
+# Dataset normalization (ImageNet defaults - run scripts/compute_dataset_stats.py to compute from train split)
+dataset_mean: [0.485, 0.456, 0.406]
+dataset_std: [0.229, 0.224, 0.225]
+
+# Model
+model_name: resnet18
+num_classes: 8
+pretrained: true
+
+# Training
+batch_size: 32
+num_workers: 4
+max_epochs: 100
+learning_rate: 0.001
+weight_decay: 0.0001
+seed: 42  # Random seed for reproducibility
+
+# Training stability & performance
+gradient_clip_val: 1.0  # Gradient clipping for stability
+precision: "bf16-mixed"  # "16-mixed" or "bf16-mixed" for faster training on supported hardware
+label_smoothing: 0.0  # Label smoothing (0.0 = no smoothing, 0.1 = 10% smoothing)
+
+# Advanced training features
+use_ema: false  # Exponential Moving Average of weights (improves generalization)
+ema_decay: 0.999  # EMA decay rate
+use_focal_loss: false  # Use Focal Loss instead of CrossEntropy (for severe imbalance)
+focal_alpha: 1.0  # Focal loss alpha
+focal_gamma: 2.0  # Focal loss gamma (higher = more focus on hard examples)
+
+# Class imbalance handling (same as Baseline 0)
+use_weighted_sampler: false
+use_class_weights: true
+max_class_weight: 5.0
+
+# Callbacks
+early_stopping_patience: 10
+monitor_metric: val/loss
+monitor_mode: min
+
+# Device
+accelerator: null
+
+# Checkpoints
+checkpoint_dir: checkpoints/baseline_1_resnet18_augmented
+
+# Experiment tracking
+experiment_name: baseline_1_light_augmentation
+tags:
+  - baseline_1
+  - light_augmentation
+  - class_weighted_loss
+  - resnet18

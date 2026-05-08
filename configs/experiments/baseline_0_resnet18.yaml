@@ -1,0 +1,66 @@
+# Baseline 0: No Augmentation
+# Requirements: TRN-01, TRN-02, TRN-03, TRN-06, TRN-07
+# Phase decision: D-06
+
+# Dataset
+data_root: datasets
+train_csv: artifacts/dataset/splits/train.csv
+val_csv: artifacts/dataset/splits/val.csv
+test_csv: artifacts/dataset/splits/internal_test.csv
+
+# Preprocessing (Baseline 0: no augmentation)
+resize_size: 256
+crop_size: 224
+use_augmentation: false
+# Dataset normalization (ImageNet defaults - run scripts/compute_dataset_stats.py to compute from train split)
+dataset_mean: [0.485, 0.456, 0.406]
+dataset_std: [0.229, 0.224, 0.225]
+
+# Model
+model_name: resnet18  # Start with ResNet18 as the control model
+num_classes: 8
+pretrained: true
+
+# Training
+batch_size: 128
+num_workers: 4
+max_epochs: 100
+learning_rate: 0.001
+weight_decay: 0.0001
+seed: 42  # Random seed for reproducibility
+
+# Training stability & performance
+gradient_clip_val: 1.0  # Gradient clipping for stability
+precision: "bf16-mixed"  # bf16 for Apple Silicon MPS, "16-mixed" for CUDA, "32-true" for CPU
+label_smoothing: 0.0  # Label smoothing (0.0 = no smoothing, 0.1 = 10% smoothing)
+
+# Advanced training features
+use_ema: false  # Exponential Moving Average of weights (improves generalization)
+ema_decay: 0.999  # EMA decay rate
+use_focal_loss: false  # Use Focal Loss instead of CrossEntropy (for severe imbalance)
+focal_alpha: 1.0  # Focal loss alpha
+focal_gamma: 2.0  # Focal loss gamma (higher = more focus on hard examples)
+
+# Class imbalance handling (Baseline 0: class-weighted loss)
+use_weighted_sampler: false
+use_class_weights: true
+max_class_weight: 5.0
+
+# Callbacks
+early_stopping_patience: 10
+monitor_metric: val/loss
+monitor_mode: min
+
+# Device
+accelerator: null  # Auto-detect (MPS > CUDA > CPU)
+
+# Checkpoints
+checkpoint_dir: checkpoints/baseline_0_resnet18
+
+# Experiment tracking
+experiment_name: baseline_0_no_augmentation
+tags:
+  - baseline_0
+  - no_augmentation
+  - class_weighted_loss
+  - resnet18

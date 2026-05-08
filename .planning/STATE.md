@@ -23,7 +23,7 @@ See: `.planning/PROJECT.md` (updated 2026-05-06)
 |---|---|---|
 | Phase 1 — Project Foundation | `main` | Complete — verified 2026-05-06 (3/3 plans) |
 | Phase 2 — Dataset Research and Curation | `feat/dataset-curation-eda` | Complete — verified 2026-05-07 (4/4 plans, local datasets) |
-| Phase 3 — Baseline Training Pipeline | `feat/baseline-training-pipeline` | Ready to execute — 4 plans |
+| Phase 3 — Baseline Training Pipeline | `feat/baseline-training-pipeline` | Complete — verified 2026-05-07 (4/4 plans) |
 | Phase 4 — Main DINOv3 Model and Selection | `feat/model-comparison-and-selection` | Ready to execute — 4 plans |
 | Phase 5 — Gradio Demo Interface | `feat/gradio-demo-interface` | Ready to execute — 4 plans |
 | Phase 6 — Final Evidence and IEEE Report | `feat/final-evidence-and-ieee-report` | Ready to execute — 4 plans |
@@ -37,3 +37,5 @@ See: `.planning/PROJECT.md` (updated 2026-05-06)
 *Last activity: 2026-05-06 — Phase 1 complete and verified*
 
 *Last activity: 2026-05-07 — Phase 2 complete and verified against local datasets*
+
+*Last activity: 2026-05-07 — Phase 3 complete and verified (4 commits, MPS device working)*
