@@ -6,6 +6,7 @@ Phase decision: D-01
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Any
 
 import pytorch_lightning as pl
@@ -38,6 +39,7 @@ class AutoLensClassifier(pl.LightningModule):
         use_focal_loss: bool = False,
         focal_alpha: float = 1.0,
         focal_gamma: float = 2.0,
+        max_epochs: int = 100,
     ):
         """Initialize Lightning module.
         
@@ -141,7 +143,7 @@ class AutoLensClassifier(pl.LightningModule):
         # Logging
         self.log("val/loss", loss, on_step=False, on_epoch=True, prog_bar=True)
         self.log("val/acc", self.val_acc, on_step=False, on_epoch=True, prog_bar=True)
-        self.log("val/f1_macro", self.val_f1_macro, on_step=False, on_epoch=True)
+        self.log("val/f1_macro", self.val_f1_macro, on_step=False, on_epoch=True, prog_bar=True)
         self.log("val/f1_weighted", self.val_f1_weighted, on_step=False, on_epoch=True)
         self.log("val/precision", self.val_precision, on_step=False, on_epoch=True)
         self.log("val/recall", self.val_recall, on_step=False, on_epoch=True)
@@ -169,6 +171,73 @@ class AutoLensClassifier(pl.LightningModule):
         self.log("test/precision", self.test_precision, on_step=False, on_epoch=True)
         self.log("test/recall", self.test_recall, on_step=False, on_epoch=True)
     
+    def on_test_epoch_end(self) -> None:
+        """Save normalized confusion matrix PNG and per-class metrics after test."""
+        import matplotlib.pyplot as plt
+        from sklearn.metrics import classification_report
+
+        from autolens_ai.data.labels import TARGET_CLASSES
+
+        class_names = list(TARGET_CLASSES)
+
+        # --- Confusion matrix ---
+        cm = self.test_confusion.compute().cpu().numpy()
+        cm_norm = cm.astype(float) / cm.sum(axis=1, keepdims=True).clip(min=1)
+
+        fig, ax = plt.subplots(figsize=(10, 8))
+        im = ax.imshow(cm_norm, interpolation="nearest", cmap="Blues", vmin=0, vmax=1)
+        fig.colorbar(im, ax=ax)
+        ax.set(
+            xticks=range(len(class_names)),
+            yticks=range(len(class_names)),
+            xticklabels=class_names,
+            yticklabels=class_names,
+            xlabel="Predicted",
+            ylabel="True",
+            title="Normalized Confusion Matrix",
+        )
+        plt.setp(ax.get_xticklabels(), rotation=45, ha="right")
+        for i in range(len(class_names)):
+            for j in range(len(class_names)):
+                ax.text(j, i, f"{cm_norm[i, j]:.2f}", ha="center", va="center",
+                        color="white" if cm_norm[i, j] > 0.5 else "black", fontsize=8)
+        fig.tight_layout()
+
+        # Save next to checkpoint dir if trainer has it, else cwd
+        save_dir = Path(".")
+        if self.trainer is not None and self.trainer.log_dir:
+            save_dir = Path(self.trainer.log_dir)
+        # Also try checkpoint callback dir
+        if self.trainer is not None:
+            for cb in self.trainer.callbacks:
+                if hasattr(cb, "dirpath") and cb.dirpath:
+                    save_dir = Path(cb.dirpath)
+                    break
+
+        cm_path = save_dir / "confusion_matrix.png"
+        fig.savefig(cm_path, dpi=150, bbox_inches="tight")
+        plt.close(fig)
+        print(f"\n✓ Confusion matrix saved: {cm_path}")
+
+        # --- Per-class metrics via sklearn ---
+        # Reconstruct predictions from confusion matrix rows
+        # (cm[i,j] = number of true-i predicted-as-j)
+        y_true: list[int] = []
+        y_pred: list[int] = []
+        for i in range(len(class_names)):
+            for j in range(len(class_names)):
+                count = int(cm[i, j])
+                y_true.extend([i] * count)
+                y_pred.extend([j] * count)
+
+        report = classification_report(y_true, y_pred, target_names=class_names, digits=4)
+        print("\nPer-class metrics:\n")
+        print(report)
+
+        report_path = save_dir / "per_class_metrics.txt"
+        report_path.write_text(report)
+        print(f"✓ Per-class metrics saved: {report_path}")
+
     def configure_optimizers(self) -> Any:
         """Configure optimizer and scheduler."""
         optimizer = torch.optim.AdamW(
@@ -176,19 +245,17 @@ class AutoLensClassifier(pl.LightningModule):
             lr=self.hparams.learning_rate,  # type: ignore[attr-defined]
             weight_decay=self.hparams.weight_decay,  # type: ignore[attr-defined]
         )
-        
-        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+
+        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
             optimizer,
-            mode="min",
-            factor=0.5,
-            patience=3,
+            T_max=self.hparams.max_epochs,  # type: ignore[attr-defined]
+            eta_min=1e-6,
         )
-        
+
         return {
             "optimizer": optimizer,
             "lr_scheduler": {
                 "scheduler": scheduler,
-                "monitor": "val/loss",
                 "interval": "epoch",
                 "frequency": 1,
             },

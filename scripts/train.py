@@ -82,6 +82,84 @@ def load_dataset_stats(stats_path: str | Path = "artifacts/dataset/stats.json") 
         return [0.485, 0.456, 0.406], [0.229, 0.224, 0.225]
 
 
+def _save_training_graphs(trainer: pl.Trainer, checkpoint_dir: str) -> None:
+    """Save training/validation loss and accuracy graphs as PNG files."""
+    import matplotlib.pyplot as plt
+
+    # Read metrics from Lightning CSV logger
+    metrics_path = None
+    for logger in trainer.loggers:
+        if hasattr(logger, "log_dir"):
+            candidate = Path(logger.log_dir) / "metrics.csv"
+            if candidate.exists():
+                metrics_path = candidate
+                break
+
+    if metrics_path is None:
+        print("WARNING: metrics.csv not found, skipping training graphs")
+        return
+
+    import csv
+
+    rows: list[dict] = []
+    with open(metrics_path) as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            rows.append(row)
+
+    def _collect(key: str) -> tuple[list[float], list[float]]:
+        epochs, vals = [], []
+        for row in rows:
+            if row.get(key, "") != "":
+                try:
+                    epochs.append(float(row["epoch"]))
+                    vals.append(float(row[key]))
+                except (ValueError, KeyError):
+                    pass
+        return epochs, vals
+
+    save_dir = Path(checkpoint_dir)
+    save_dir.mkdir(parents=True, exist_ok=True)
+
+    # --- Loss graph ---
+    fig, ax = plt.subplots(figsize=(9, 5))
+    te, tv = _collect("train/loss_epoch")
+    ve, vv = _collect("val/loss")
+    if te:
+        ax.plot(te, tv, label="Train Loss", marker="o", markersize=3)
+    if ve:
+        ax.plot(ve, vv, label="Val Loss", marker="s", markersize=3)
+    ax.set_xlabel("Epoch")
+    ax.set_ylabel("Loss")
+    ax.set_title("Training & Validation Loss")
+    ax.legend()
+    ax.grid(True, alpha=0.3)
+    fig.tight_layout()
+    loss_path = save_dir / "training_loss.png"
+    fig.savefig(loss_path, dpi=150)
+    plt.close(fig)
+    print(f"✓ Loss graph saved: {loss_path}")
+
+    # --- Accuracy graph ---
+    fig, ax = plt.subplots(figsize=(9, 5))
+    te, tv = _collect("train/acc")
+    ve, vv = _collect("val/acc")
+    if te:
+        ax.plot(te, tv, label="Train Accuracy", marker="o", markersize=3)
+    if ve:
+        ax.plot(ve, vv, label="Val Accuracy", marker="s", markersize=3)
+    ax.set_xlabel("Epoch")
+    ax.set_ylabel("Accuracy")
+    ax.set_title("Training & Validation Accuracy")
+    ax.legend()
+    ax.grid(True, alpha=0.3)
+    fig.tight_layout()
+    acc_path = save_dir / "training_accuracy.png"
+    fig.savefig(acc_path, dpi=150)
+    plt.close(fig)
+    print(f"✓ Accuracy graph saved: {acc_path}")
+
+
 def main() -> None:
     """Main training function."""
     parser = argparse.ArgumentParser(description="Train AutoLens AI baseline model")
@@ -118,6 +196,12 @@ def main() -> None:
         type=int,
         default=None,
         help="Random seed for reproducibility (default: from config or 42)",
+    )
+    parser.add_argument(
+        "--max-epochs",
+        type=int,
+        default=None,
+        help="Override max_epochs from config",
     )
     parser.add_argument(
         "--find-lr",
@@ -226,11 +310,12 @@ def main() -> None:
         use_focal_loss=config.get("use_focal_loss", False),
         focal_alpha=config.get("focal_alpha", 1.0),
         focal_gamma=config.get("focal_gamma", 2.0),
+        max_epochs=args.max_epochs if args.max_epochs is not None else config["max_epochs"],
     )
     
     # Create trainer
     trainer = create_trainer(
-        max_epochs=config["max_epochs"],
+        max_epochs=args.max_epochs if args.max_epochs is not None else config["max_epochs"],
         accelerator=config.get("accelerator"),
         checkpoint_dir=checkpoint_dir,  # Use updated checkpoint_dir with timestamp
         early_stopping_patience=config["early_stopping_patience"],
@@ -312,7 +397,10 @@ def main() -> None:
     # Test with best checkpoint
     print("\nRunning test evaluation with best checkpoint...")
     trainer.test(model, datamodule, ckpt_path="best")
-    
+
+    # Save training graphs (loss + accuracy)
+    _save_training_graphs(trainer, checkpoint_dir)
+
     print("\nTraining complete!")
     print(f"Checkpoints saved to: {checkpoint_dir}")
     print(f"Best model: {checkpoint_dir}/best-*.ckpt")

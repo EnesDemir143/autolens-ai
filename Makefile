@@ -27,6 +27,7 @@ help:
 		'  make check-model-size   Check if model checkpoints are under 95 MB limit' \
 		'' \
 		'Training commands (Phase 3):' \
+		'  make train-resnet-mobilenet    Train ResNet18 then MobileNetV4 sequentially (with 30s pause)' \
 		'  make train-baseline-0       Train all 3 models with Baseline 0 (no augmentation)' \
 		'  make train-baseline-1       Train ResNet18 with Baseline 1 (light augmentation)' \
 		'  make train-baseline-2       Train ResNet18 with Baseline 2 (weighted sampler)' \
@@ -101,6 +102,14 @@ check-model-size:
 
 # Training targets
 WANDB ?=
+
+train-resnet-mobilenet: compute-stats
+	@echo "Training Baseline 0: ResNet18..."
+	uv run python scripts/train.py --config configs/experiments/baseline_0_resnet18.yaml $(WANDB)
+	@echo "Waiting 30s for memory to clear..."
+	sleep 30
+	@echo "Training Baseline 0: MobileNetV4..."
+	uv run python scripts/train.py --config configs/experiments/baseline_0_mobilenetv4.yaml $(WANDB)
 
 train-baseline-0: compute-stats
 	@echo "Training Baseline 0: ResNet18 (no augmentation)..."

@@ -22,7 +22,7 @@ from autolens_ai.training import AutoLensDataset
 
 def compute_mean_std(
     csv_path: str = "artifacts/dataset/splits/train.csv",
-    data_root: str = "artifacts/dataset/raw",
+    data_root: str = "datasets",
     batch_size: int = 64,
     num_workers: int = 4,
 ) -> tuple[tuple[float, float, float], tuple[float, float, float]]:
