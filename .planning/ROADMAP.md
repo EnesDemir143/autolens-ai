@@ -102,7 +102,8 @@
 8. Makefile targets document and execute the required order for a chosen run/checkpoint: ckpt → safetensors → ONNX export → size check → calibration → Gradio artifact pointer/update → smoke test.
 
 **Implementation notes:**
-- Immediate path: Lightning checkpoint → safetensors+metadata → ONNX export → size check → temperature scaling → Gradio adapter readiness using the current EfficientNet-B2 best checkpoint.
+- Immediate path: Lightning checkpoint → safetensors+metadata → ONNX export → **ONNX-simplifier optimization** → size check → temperature scaling → **Gradio adapter with ONNX Runtime inference** using the current EfficientNet-B2 best checkpoint.
+- ONNX-simplifier (onnxsim) is used for optimal inference speed and smaller model size. Gradio uses ONNX Runtime to run the simplified ONNX model.
 - Overnight path: DINOv3 ViT-S non-LoRA, DINOv3 LoRA, and EfficientNet-B2 augmentation+EMA+focal-loss.
 - F1-score is the primary ranking metric; size and latency decide deployability.
 - Keep the Gradio code model-agnostic so replacing the artifact/config is enough after final selection.
