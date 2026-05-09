@@ -105,11 +105,15 @@ Tek global store, prop drilling yok. Alanlar:
 
 Model değişince `AnimatePresence` cross-fade.
 
-**`App.tsx`** — Mount'ta `fetchModels()` çağrılır, modeller ve aktif model yüklenir.
+**`App.tsx`** — Mount'ta `fetchModels()` çağrılır, modeller ve aktif model yüklenir. Tüm uygulama bir `ErrorBoundary` ile sarılır — render hatası (örn. beklenmedik API response formatı) tüm uygulamayı çökertmez, fallback UI gösterir.
 
 ### Dev Ortamı
 
-Vite dev server ve uvicorn ayrı terminallerde çalıştırılır (`concurrently` veya iki terminal). Vite `/api/*` isteklerini `localhost:8000`'e proxy'ler.
+`concurrently` ile tek komuttan Vite dev server + uvicorn birlikte başlatılır. Vite `/api/*` isteklerini `localhost:8000`'e proxy'ler.
+
+### Responsive Karar
+
+**Sadece desktop (min-width: 1024px).** Bu bir ML demo aracı, mobil kullanım hedeflenmez. Dar ekranda "Bu uygulama masaüstü için tasarlanmıştır" notu gösterilir, layout kırılmaz.
 
 ---
 
@@ -125,7 +129,7 @@ Vite dev server ve uvicorn ayrı terminallerde çalıştırılır (`concurrently
 ## Dependencies
 
 **Python:** `fastapi`, `uvicorn[standard]`, `python-multipart`  
-**Node:** `vite`, `react`, `react-dom`, `typescript`, `tailwindcss`, `framer-motion`, `recharts`, `axios`, `zustand`, `@fontsource/syne`, `@fontsource/dm-mono`
+**Node:** `vite`, `react`, `react-dom`, `typescript`, `tailwindcss`, `framer-motion`, `recharts`, `axios`, `zustand`, `@fontsource/syne`, `@fontsource/dm-mono`, `concurrently` (devDependency)
 
 ---
 
