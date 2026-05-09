@@ -25,7 +25,7 @@ See: `.planning/PROJECT.md` (updated 2026-05-06)
 | Phase 2 — Dataset Research and Curation | `feat/dataset-curation-eda` | Complete — verified 2026-05-07 (4/4 plans, local datasets) |
 | Phase 3 — Baseline Training Pipeline | `feat/baseline-training-pipeline` | Complete — verified 2026-05-07 (4/4 plans) |
 | Phase 4 — Export, Calibration, Overnight Model Selection | `feat/model-comparison-and-selection` | In progress — Plan 05 current EfficientNet-B2 export/calibration/demo artifact complete 2026-05-09; overnight model queue and final selection still deferred |
-| Phase 5 — Gradio Demo Interface | `feat/gradio-demo-interface` | Revised 2026-05-09 — build model-agnostic demo against current calibrated/exported checkpoint, then repoint to final winner |
+| Phase 5 — Gradio Demo Interface | `feat/gradio-demo-interface` | Complete — verified 2026-05-09 (4/4 plans, ONNX predictor + Gradio layout + probability chart + smoke test/docs) |
 | Phase 6 — Hugging Face Spaces Demo Deploy | `feat/hugging-face-spaces-deploy` | Planned 2026-05-09 — package/publish local Gradio ONNX demo without Docker |
 | Phase 7 — Final Evidence and IEEE Report | `feat/final-evidence-and-ieee-report` | Ready after deploy evidence — existing report plans shifted from Phase 6 |
 
@@ -48,3 +48,5 @@ See: `.planning/PROJECT.md` (updated 2026-05-06)
 *Last activity: 2026-05-09 — Added Gradio loading/progress state requirement and new Phase 6 HF Spaces deploy before Phase 7 report.*
 
 *Last activity: 2026-05-09 — Phase 4 Plan 05 executed: EfficientNet-B2 checkpoint converted to safetensors, exported to ONNX, size-checked under 95 MB, validation-calibrated, and active demo artifact config written.*
+
+*Last activity: 2026-05-09 — Phase 5 complete and verified (4 plans, ONNX predictor + Gradio Blocks UI + probability chart + smoke test + docs).*
