@@ -59,6 +59,7 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - Output references all requirement IDs: UI-03, UI-04, UI-07.
     - Output contains no instructor final test data.
     - Adapter is model-agnostic and does not hardcode EfficientNet-B2 or DINOv3-specific UI behavior.
+    - Inference uses **ONNX Runtime** with **ONNX-simplifier** optimized ONNX model for best speed.
     - Missing final-winner artifact is not a blocker if the current calibrated/exported checkpoint contract is available or its exact blocker is documented.
     - Any external dependency blocker is documented with the exact command or resource ID.
   </acceptance_criteria>

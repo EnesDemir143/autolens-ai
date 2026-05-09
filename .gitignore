@@ -266,3 +266,7 @@ artifacts/dataset/eda/near_duplicate_candidates.csv
 # Training artifacts
 checkpoints/
 lightning_logs/
+
+# Exported model binaries (regenerate from checkpoint/export scripts)
+artifacts/export/**/*.safetensors
+artifacts/export/**/*.onnx

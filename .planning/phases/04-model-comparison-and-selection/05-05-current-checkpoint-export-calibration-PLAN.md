@@ -9,6 +9,9 @@ depends_on: []
 requirements_addressed: ['OPT-01', 'OPT-02', 'CAL-01', 'CAL-02', 'EVAL-07', 'OPS-02', 'PUBLISH-01']
 files_modified: ['Makefile', 'src/autolens_ai/inference/', 'src/autolens_ai/evaluation/', 'scripts/', 'artifacts/export/', 'docs/model_selection.md', 'docs/deployment_runbook.md', 'docs/hf_model_publishing.md']
 autonomous: true
+status: complete
+completed_at: 2026-05-09
+completion_report: docs/phase_reports/phase_04_plan_05_export_calibration.md
 ---
 
 # Plan 05 — Convert checkpoint, export ONNX, calibrate confidence, and prepare demo artifact
@@ -114,3 +117,17 @@ Keep local credentials and dataset/API tokens out of git. Do not upload private 
 <verification>
 Use `04-VALIDATION.md`. For code changes, run targeted tests plus the smallest safetensors round-trip, ONNX, and calibration smoke commands available. Also verify `make help` exposes the ordered deployment/demo artifact targets.
 </verification>
+
+<completion_evidence>
+Completed on 2026-05-09 for the current EfficientNet-B2 lane only.
+
+- Selected checkpoint: `checkpoints/baseline_0_efficientnet_b2_20260509_135313/best-04-0.8994.ckpt`
+- Export folder: `artifacts/export/efficientnet_b2_current/`
+- Active demo pointer: `artifacts/demo/active_model.json`
+- Size evidence: `model.safetensors` 29.72 MB and `model.onnx` 29.37 MB, both under 95 MB.
+- ONNX Runtime smoke: CPU provider, input `image`, output shape `[1, 8]`.
+- Calibration: validation-only temperature scaling on 3,157 validation samples, temperature `1.779860258102417`, NLL `0.29796 -> 0.24160`, ECE `0.03823 -> 0.01043`.
+- Verification commands are recorded in `docs/phase_reports/phase_04_plan_05_export_calibration.md`.
+
+Deferred by user instruction: slower DINOv3, LoRA, benchmark, final-selection, Docker, and API work.
+</completion_evidence>

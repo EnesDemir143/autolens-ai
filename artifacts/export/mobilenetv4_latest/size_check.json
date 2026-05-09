@@ -1,0 +1,18 @@
+{
+  "max_size_mb": 95.0,
+  "results": [
+    {
+      "path": "artifacts/export/mobilenetv4_latest/model.safetensors",
+      "exists": true,
+      "size_mb": 32.517,
+      "under_limit": true
+    },
+    {
+      "path": "artifacts/export/mobilenetv4_latest/model.onnx",
+      "exists": true,
+      "size_mb": 32.12,
+      "under_limit": true
+    }
+  ],
+  "all_under_limit": true
+}

@@ -1,0 +1,108 @@
+{
+  "artifact_format_version": 1,
+  "created_at": "2026-05-09T15:19:12.150358+00:00",
+  "source": {
+    "checkpoint_path": "checkpoints/baseline_0_efficientnet_b2_20260509_135313/best-04-0.8994.ckpt",
+    "checkpoint_sha256": "d54d26116c4a246f3a01eef941069d627432547c7be90bd5efa31d81ff43eb8c",
+    "run_id": "baseline_0_efficientnet_b2_20260509_135313",
+    "config_path": "configs/experiments/baseline_0_efficientnet_b2.yaml",
+    "metrics_csv": "checkpoints/baseline_0_efficientnet_b2_20260509_135313/metrics.csv",
+    "git": {
+      "commit": "d38a2a6f16b5579a0e0c6dd07ea4bb2c5c087429",
+      "dirty": "true"
+    }
+  },
+  "model": {
+    "architecture": "timm",
+    "model_name": "efficientnet_b2",
+    "num_classes": 8,
+    "pretrained_at_training": true,
+    "use_lora": false,
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.1,
+    "lora_target_modules": null
+  },
+  "classes": {
+    "labels": [
+      "SUV",
+      "VAN",
+      "STATION WAGON",
+      "MICRO",
+      "OPEN WHEEL / F1",
+      "SEDAN",
+      "HATCHBACK",
+      "PICK UP"
+    ],
+    "class_to_idx": {
+      "SUV": 0,
+      "VAN": 1,
+      "STATION WAGON": 2,
+      "MICRO": 3,
+      "OPEN WHEEL / F1": 4,
+      "SEDAN": 5,
+      "HATCHBACK": 6,
+      "PICK UP": 7
+    },
+    "display_labels": [
+      "SUV",
+      "VAN",
+      "STATION WAGON",
+      "MICRO",
+      "OPEN WHEEL / F1",
+      "SEDAN",
+      "HATCHBACK",
+      "PICK UP"
+    ]
+  },
+  "preprocessing": {
+    "image_size": 224,
+    "resize_size": 256,
+    "crop_size": 224,
+    "mean": [
+      0.4429,
+      0.4354,
+      0.437
+    ],
+    "std": [
+      0.2456,
+      0.2421,
+      0.2449
+    ],
+    "color_mode": "RGB"
+  },
+  "data": {
+    "train_csv": "artifacts/dataset/splits/train.csv",
+    "val_csv": "artifacts/dataset/splits/val.csv",
+    "test_csv_reserved_not_used_for_calibration": "artifacts/dataset/splits/internal_test.csv",
+    "data_root": "datasets"
+  },
+  "training": {
+    "epoch": 4,
+    "global_step": 1980,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "label_smoothing": 0.0,
+    "metrics_summary": {
+      "epoch": 17,
+      "test/acc": 0.9205047488212585,
+      "test/f1_macro": 0.9003689289093018,
+      "test/f1_weighted": 0.920499324798584,
+      "test/loss": 0.28352469205856323
+    }
+  },
+  "artifacts": {
+    "directory": "artifacts/export/efficientnet_b2_latest",
+    "safetensors": "artifacts/export/efficientnet_b2_latest/model.safetensors",
+    "metadata": "artifacts/export/efficientnet_b2_latest/metadata.json",
+    "onnx": "artifacts/export/efficientnet_b2_latest/model.onnx",
+    "calibration": "artifacts/export/efficientnet_b2_latest/calibration.json",
+    "safetensors_sha256": "1ac7acaa040e0a944d9deb2314067d7034b6e7460f3e30b79e8c03280ab423d4",
+    "safetensors_size_bytes": 31166288,
+    "size_report": "artifacts/export/efficientnet_b2_latest/size_report.json"
+  },
+  "license_notes": {
+    "base_model": "efficientnet_b2 pretrained backbone; verify upstream license before public publishing.",
+    "dataset": "Do not publish merged raw dataset images; document source links/counts instead."
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "max_size_mb": 95.0,
+  "artifacts": {
+    "safetensors": {
+      "path": "artifacts/export/mobilenetv4_latest/model.safetensors",
+      "size_mb": 32.517,
+      "under_limit": true
+    },
+    "onnx": {
+      "path": "artifacts/export/mobilenetv4_latest/model.onnx",
+      "size_mb": 32.12,
+      "under_limit": true
+    },
+    "simplified_onnx": {
+      "path": "artifacts/export/mobilenetv4_latest/model.simplified.onnx",
+      "size_mb": 32.131,
+      "under_limit": true
+    }
+  },
+  "onnxruntime_smoke": {
+    "provider": "CPUExecutionProvider",
+    "input_name": "image",
+    "output_shape": [
+      1,
+      8
+    ]
+  },
+  "simplification": {
+    "attempted": true,
+    "ok": true,
+    "path": "artifacts/export/mobilenetv4_latest/model.simplified.onnx"
+  }
+}

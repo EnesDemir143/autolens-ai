@@ -1,7 +1,7 @@
 [project]
 name = "autolens-ai"
 version = "0.1.0"
-description = "8-class car body type classifier for Yazlab 2 Project III"
+description = "8-class car body type classifier"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
