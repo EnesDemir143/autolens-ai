@@ -151,6 +151,16 @@ Model değişince `AnimatePresence` cross-fade.
 
 ---
 
+## Implementation Notes
+
+**Backend — Race condition (model switch):** İki eş zamanlı `POST /api/models/active` isteği cache ve `active_model.json`'u tutarsız bırakabilir. Model switch işlemi `asyncio.Lock` ile serialize edilmeli.
+
+**Frontend — Model switch sırasında classify engellenmeli:** `setActiveModel` API call'u tamamlanmadan `predict` çalışabilir. Store'a `isModelSwitching: boolean` eklenmeli; bu `true` iken classify butonu disabled kalır.
+
+**Frontend — Browser cache:** `GET /api/models` browser tarafından cache'lenebilir. Model switch sonrası `fetchModels()` eski response dönebilir. `api.ts`'de bu endpoint `Cache-Control: no-store` veya axios `cache: false` ile çağrılmalı.
+
+---
+
 ## What This Plan Does NOT Touch
 
 - `app.py` — Gradio, HF Spaces için olduğu gibi kalır
