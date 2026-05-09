@@ -12,7 +12,7 @@ license: other
 
 # AutoLens MobileNetV4 Baseline
 
-Lightweight CNN baseline for 8-class vehicle body type classification. This repository is part of the AutoLens AI Yazlab 2 project.
+Lightweight CNN baseline for 8-class vehicle body type classification.
 
 ## Model
 

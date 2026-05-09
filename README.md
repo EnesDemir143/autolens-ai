@@ -1,6 +1,6 @@
 # AutoLens AI
 
-AutoLens AI targets the Yazlab 2 Project III 8-class car body type classifier assignment using Python 3.12 and uv.
+AutoLens AI is an 8-class car body type classifier using Python 3.12 and uv.
 
 ## Setup
 

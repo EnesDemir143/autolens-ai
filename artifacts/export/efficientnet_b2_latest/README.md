@@ -12,7 +12,7 @@ license: other
 
 # AutoLens EfficientNet-B2 Candidate
 
-Current strongest CNN candidate for the AutoLens AI demo artifact lane. This repository is part of the AutoLens AI Yazlab 2 project.
+Current strongest CNN candidate for the AutoLens AI demo artifact lane.
 
 ## Model
 

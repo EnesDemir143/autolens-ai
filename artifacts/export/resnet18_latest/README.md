@@ -12,7 +12,7 @@ license: other
 
 # AutoLens ResNet18 Baseline
 
-Baseline CNN model for 8-class vehicle body type classification. This repository is part of the AutoLens AI Yazlab 2 project.
+Baseline CNN model for 8-class vehicle body type classification.
 
 ## Model
 

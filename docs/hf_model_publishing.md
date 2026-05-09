@@ -83,7 +83,7 @@ Each model repository should include a `README.md` model card. Hugging Face rend
 
 - Model name and architecture.
 - Task: 8-class car body type image classification.
-- Intended use: AutoLens AI Yazlab 2 project demo and educational inference.
+- Intended use: AutoLens AI demo and educational inference.
 - Classes:
   - SUV
   - VAN
