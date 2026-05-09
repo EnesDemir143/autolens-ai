@@ -151,6 +151,40 @@ Model değişince `AnimatePresence` cross-fade.
 
 ---
 
+## GradCAM / Explainability
+
+### Yaklaşım
+
+`safetensors` checkpoint PyTorch'a yüklenir, `torch-cam` (veya `pytorch-grad-cam`) ile GradCAM hesaplanır, heatmap orijinal görsel üzerine overlay edilip base64 PNG olarak döndürülür. ONNX'e dokunulmaz.
+
+Local çalıştığı için model yükleme süresi (~1-3sn) kabul edilebilir.
+
+### Backend — `POST /api/gradcam`
+
+- Aynı `multipart/form-data` image formatı
+- Aktif modelin `safetensors` dosyası PyTorch'a yüklenir (ayrı cache — predictor cache'den bağımsız)
+- GradCAM hesaplanır, overlay PNG base64 döndürülür
+- Her model için hedef katman `metadata.json`'daki `model_name`'den otomatik belirlenir
+
+### Frontend — `GradCAMPanel.tsx`
+
+`SoftmaxChart`'ın altında, sadece `status === 'done'` iken görünür:
+
+- "🔍 Show Explanation (GradCAM)" toggle butonu
+- Tıklayınca spinner + "Generating…"
+- Tamamlanınca orijinal görsel ile heatmap overlay yan yana
+- Tekrar tıklayınca kapanır
+
+### Store Eklemeleri
+
+`gradcam: string | null`, `isGeneratingGradcam: boolean`, `fetchGradcam: () => Promise<void>`
+
+### Dependency
+
+`torch-cam` veya `pytorch-grad-cam` — `pyproject.toml`'a eklenir.
+
+---
+
 ## Implementation Notes
 
 **Backend — Race condition (model switch):** İki eş zamanlı `POST /api/models/active` isteği cache ve `active_model.json`'u tutarsız bırakabilir. Model switch işlemi `asyncio.Lock` ile serialize edilmeli.
