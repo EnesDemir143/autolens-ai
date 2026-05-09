@@ -153,6 +153,15 @@ make publish-model-hf REPO=USERNAME/autolens-efficientnet-b2 ARTIFACT_DIR=artifa
 
 ## What to publish now vs later
 
+### Current EfficientNet-B2 artifact evidence
+
+Phase 4 Plan 05 generated the current share/export candidate at `artifacts/export/efficientnet_b2_current/`:
+
+- `model.safetensors` with `metadata.json` as the preferred clean HF model artifact.
+- `model.onnx` for ONNX Runtime deployment.
+- `calibration.json` with validation-only temperature scaling.
+- No raw dataset images, credentials, instructor final test data, or internal-test calibration data are included.
+
 ### Publish now / as soon as artifacts are complete
 
 - Any model with a finished run, metrics, `model.safetensors`, metadata, and a stable artifact folder.
