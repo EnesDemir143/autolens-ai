@@ -1,5 +1,6 @@
 .PHONY: help sync import test lint format typecheck check pre-commit graphify-update graphify-report clean
 .PHONY: compute-stats train-baseline-0 train-baseline-1 train-baseline-2 train-all-baselines resume-training
+.PHONY: train-all-wandb
 
 help:
 	@printf '%s\n' \
@@ -37,7 +38,10 @@ help:
 		'  make resume-training CONFIG=path/to/config.yaml RUN_ID=20260507_234800' \
 		'' \
 		'Add --wandb flag for W&B logging:' \
-		'  make train-baseline-0 WANDB=--wandb'
+		'  make train-baseline-0 WANDB=--wandb' \
+		'' \
+		'Full W&B run (all 5 models sequentially):' \
+		'  make train-all-wandb'
 
 sync:
 	uv sync
@@ -142,3 +146,24 @@ resume-training:
 	fi
 	@echo "Resuming training from run: $(RUN_ID)"
 	uv run python scripts/train.py --config $(CONFIG) --run-id $(RUN_ID) --resume $(WANDB)
+
+# Full W&B comparison run: 5 models sequentially, 30s sleep between each
+# Early stopping (patience=10) is active in all configs.
+# Even if you Ctrl+C mid-run, completed runs are already synced to W&B.
+train-all-wandb: compute-stats
+	@echo "=== [1/5] ResNet18 ==="
+	uv run python scripts/train.py --config configs/experiments/baseline_0_resnet18.yaml --wandb
+	@echo "Sleeping 30s..."; sleep 30
+	@echo "=== [2/5] MobileNetV4 ==="
+	uv run python scripts/train.py --config configs/experiments/baseline_0_mobilenetv4.yaml --wandb
+	@echo "Sleeping 30s..."; sleep 30
+	@echo "=== [3/5] EfficientNet-B2 ==="
+	uv run python scripts/train.py --config configs/experiments/baseline_0_efficientnet_b2.yaml --wandb
+	@echo "Sleeping 30s..."; sleep 30
+	@echo "=== [4/5] DINOv3 ViT-S/16 + LoRA ==="
+	uv run python scripts/train.py --config configs/experiments/baseline_0_dinov3_vits16_lora.yaml --wandb --lora
+	@echo "Sleeping 30s..."; sleep 30
+	@echo "=== [5/5] DINOv3 ViT-S/16 (no LoRA) ==="
+	uv run python scripts/train.py --config configs/experiments/baseline_0_dinov3_vits16.yaml --wandb
+	@echo ""
+	@echo "All 5 models complete. Results synced to W&B project: autolens-ai"

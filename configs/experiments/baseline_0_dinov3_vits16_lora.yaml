@@ -1,0 +1,77 @@
+# Baseline 0: DINOv3 ViT-S/16 (timm/vit_small_patch16_dinov3.lvd1689m)
+# Requirements: TRN-04
+# Phase: 4 — Model Comparison and Selection
+#
+# Model: ViT-Small/16 pretrained with DINOv3 on LVD-1689M dataset
+# Source: timm hub (timm/vit_small_patch16_dinov3.lvd1689m)
+# Input: 256x256, no center crop (crop_pct=1.0), ImageNet mean/std
+
+# Dataset
+data_root: datasets
+train_csv: artifacts/dataset/splits/train.csv
+val_csv: artifacts/dataset/splits/val.csv
+test_csv: artifacts/dataset/splits/internal_test.csv
+
+# Preprocessing — DINOv3 expects 256x256, no crop
+resize_size: 256
+crop_size: 256
+use_augmentation: false
+dataset_mean: [0.4429, 0.4354, 0.4370]
+dataset_std: [0.2456, 0.2421, 0.2449]
+
+# Model
+model_name: vit_small_patch16_dinov3
+num_classes: 8
+pretrained: true
+
+# Training
+batch_size: 64
+num_workers: 4
+max_epochs: 100
+learning_rate: 0.0001
+weight_decay: 0.0001
+seed: 42
+
+# Training stability & performance
+gradient_clip_val: 1.0
+precision: "bf16-mixed"
+label_smoothing: 0.0
+
+# Advanced
+use_ema: false
+ema_decay: 0.999
+use_focal_loss: false
+focal_alpha: 1.0
+focal_gamma: 2.0
+
+# Class imbalance
+use_weighted_sampler: false
+use_class_weights: true
+max_class_weight: 5.0
+
+# LoRA fine-tuning (used when --lora flag is passed)
+lora_r: 8
+lora_alpha: 16
+lora_dropout: 0.1
+lora_target_modules: ["qkv", "proj"]
+
+# Callbacks
+early_stopping_patience: 10
+monitor_metric: val/loss
+monitor_mode: min
+
+# Device
+accelerator: null
+
+# Checkpoints
+checkpoint_dir: checkpoints/baseline_0_dinov3_vits16_lora
+
+# Experiment tracking
+experiment_name: baseline_0_dinov3_vits16_lora
+tags:
+  - baseline_0
+  - no_augmentation
+  - class_weighted_loss
+  - dinov3
+  - vit_small
+  - lora
