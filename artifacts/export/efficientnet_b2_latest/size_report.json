@@ -1,0 +1,33 @@
+{
+  "max_size_mb": 95.0,
+  "artifacts": {
+    "safetensors": {
+      "path": "artifacts/export/efficientnet_b2_latest/model.safetensors",
+      "size_mb": 29.722,
+      "under_limit": true
+    },
+    "onnx": {
+      "path": "artifacts/export/efficientnet_b2_latest/model.onnx",
+      "size_mb": 29.371,
+      "under_limit": true
+    },
+    "simplified_onnx": {
+      "path": "artifacts/export/efficientnet_b2_latest/model.simplified.onnx",
+      "size_mb": 29.398,
+      "under_limit": true
+    }
+  },
+  "onnxruntime_smoke": {
+    "provider": "CPUExecutionProvider",
+    "input_name": "image",
+    "output_shape": [
+      1,
+      8
+    ]
+  },
+  "simplification": {
+    "attempted": true,
+    "ok": true,
+    "path": "artifacts/export/efficientnet_b2_latest/model.simplified.onnx"
+  }
+}
