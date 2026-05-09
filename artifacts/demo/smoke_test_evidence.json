@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-05-09T16:19:04Z",
+  "artifact_config": "artifacts/demo/active_model.json",
+  "model_path": "artifacts/export/efficientnet_b2_current/model.onnx",
+  "num_classes": 8,
+  "class_labels": [
+    "SUV",
+    "VAN",
+    "STATION WAGON",
+    "MICRO",
+    "OPEN WHEEL / F1",
+    "SEDAN",
+    "HATCHBACK",
+    "PICK UP"
+  ],
+  "single_inference_ms": 21.86,
+  "avg_inference_ms_5_runs": 14.66,
+  "status": "PASS"
+}
