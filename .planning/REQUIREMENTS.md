@@ -130,14 +130,14 @@
 | CAL-02 | Phase 4 | Pending — calibration evidence without test leakage |
 | OPS-01 | Phase 4 | Pending — overnight experiment queue |
 | OPS-02 | Phase 4/5 | Pending — Makefile-driven export/calibration/demo artifact orchestration |
-| UI-01 | Phase 5 | Pending |
-| UI-02 | Phase 5 | Pending |
-| UI-03 | Phase 5 | Pending |
-| UI-04 | Phase 5 | Pending |
-| UI-05 | Phase 5 | Pending |
-| UI-06 | Phase 5 | Pending |
-| UI-07 | Phase 5 | Pending |
-| UI-08 | Phase 5 | Pending — loading/progress state for inference |
+| UI-01 | Phase 5 | Complete — 2026-05-09 |
+| UI-02 | Phase 5 | Complete — 2026-05-09 |
+| UI-03 | Phase 5 | Complete — 2026-05-09 |
+| UI-04 | Phase 5 | Complete — 2026-05-09 |
+| UI-05 | Phase 5 | Complete — 2026-05-09 |
+| UI-06 | Phase 5 | Complete — 2026-05-09 |
+| UI-07 | Phase 5 | Complete — 2026-05-09 |
+| UI-08 | Phase 5 | Complete — 2026-05-09 |
 | PUBLISH-01 | Phase 6 | Pending — publish completed model artifacts to HF model repos |
 | PUBLISH-02 | Phase 6 | Pending — do not redistribute merged raw datasets; link/document sources instead |
 | PUBLISH-03 | Phase 6 | Pending — optional Makefile/CLI model publish path |
