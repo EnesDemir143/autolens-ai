@@ -3,6 +3,7 @@
 .PHONY: train-all-wandb
 .PHONY: checkpoint-to-safetensors export-model size-check calibrate-model prepare-demo-artifact deploy-run-to-demo
 .PHONY: demo demo-smoke ui-smoke-check
+.PHONY: frontend-install frontend-build demo-web demo-gradio
 
 help:
 	@printf '%s\n' \
@@ -238,3 +239,20 @@ demo:
 demo-smoke:
 	@echo "Running UI/inference smoke test..."
 	uv run python scripts/smoke_test_demo.py
+
+# Phase 05-05: FastAPI + Vite frontend
+frontend-install:
+	@echo "Installing frontend npm dependencies..."
+	cd frontend && npm install
+
+frontend-build:
+	@echo "Building production frontend..."
+	cd frontend && npm run build
+
+demo-web: frontend-build
+	@echo "Launching FastAPI + Vite demo on http://localhost:8080 ..."
+	uv run uvicorn api:app --host 0.0.0.0 --port 8080
+
+demo-gradio:
+	@echo "Launching Gradio demo on http://localhost:7860 ..."
+	uv run python app.py
