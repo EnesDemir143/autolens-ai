@@ -89,7 +89,7 @@ def _save_training_graphs(trainer: pl.Trainer, checkpoint_dir: str) -> None:
     # Read metrics from Lightning CSV logger
     metrics_path = None
     for logger in trainer.loggers:
-        if hasattr(logger, "log_dir"):
+        if hasattr(logger, "log_dir") and logger.log_dir is not None:
             candidate = Path(logger.log_dir) / "metrics.csv"
             if candidate.exists():
                 metrics_path = candidate
@@ -213,6 +213,11 @@ def main() -> None:
         action="store_true",
         help="Run batch size finder before training",
     )
+    parser.add_argument(
+        "--lora",
+        action="store_true",
+        help="Use LoRA fine-tuning (only for ViT models, freezes backbone)",
+    )
     args = parser.parse_args()
     
     # Load config
@@ -311,6 +316,11 @@ def main() -> None:
         focal_alpha=config.get("focal_alpha", 1.0),
         focal_gamma=config.get("focal_gamma", 2.0),
         max_epochs=args.max_epochs if args.max_epochs is not None else config["max_epochs"],
+        use_lora=args.lora,
+        lora_r=config.get("lora_r", 8),
+        lora_alpha=config.get("lora_alpha", 16),
+        lora_dropout=config.get("lora_dropout", 0.1),
+        lora_target_modules=config.get("lora_target_modules", None),
     )
     
     # Create trainer

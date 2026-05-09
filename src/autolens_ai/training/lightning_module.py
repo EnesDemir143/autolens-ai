@@ -40,6 +40,11 @@ class AutoLensClassifier(pl.LightningModule):
         focal_alpha: float = 1.0,
         focal_gamma: float = 2.0,
         max_epochs: int = 100,
+        use_lora: bool = False,
+        lora_r: int = 8,
+        lora_alpha: int = 16,
+        lora_dropout: float = 0.1,
+        lora_target_modules: list[str] | None = None,
     ):
         """Initialize Lightning module.
         
@@ -63,6 +68,11 @@ class AutoLensClassifier(pl.LightningModule):
             model_name=model_name,
             num_classes=num_classes,
             pretrained=pretrained,
+            use_lora=use_lora,
+            lora_r=lora_r,
+            lora_alpha=lora_alpha,
+            lora_dropout=lora_dropout,
+            lora_target_modules=lora_target_modules,
         )
         
         # Loss function
