@@ -270,3 +270,8 @@ lightning_logs/
 # Exported model binaries (regenerate from checkpoint/export scripts)
 artifacts/export/**/*.safetensors
 artifacts/export/**/*.onnx
+
+# API runtime cache
+artifacts/export/**/_api_cache_config.json
+frontend/dist/
+frontend/node_modules/
