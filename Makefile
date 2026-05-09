@@ -2,6 +2,7 @@
 .PHONY: compute-stats train-baseline-0 train-baseline-1 train-baseline-2 train-all-baselines resume-training
 .PHONY: train-all-wandb
 .PHONY: checkpoint-to-safetensors export-model size-check calibrate-model prepare-demo-artifact deploy-run-to-demo
+.PHONY: demo demo-smoke ui-smoke-check
 
 help:
 	@printf '%s\n' \
@@ -35,6 +36,10 @@ help:
 		'  make calibrate-model [ONNX=path] [METADATA=path]  # validation split only' \
 		'  make prepare-demo-artifact [ARTIFACT_CONFIG=artifacts/demo/active_model.json]' \
 		'  make deploy-run-to-demo [CHECKPOINT=path.ckpt]  # convert -> export -> size -> calibrate -> pointer' \
+		'' \
+		'Phase 5 Gradio demo commands:' \
+		'  make demo               Launch Gradio demo server' \
+		'  make demo-smoke         Run UI/inference smoke test (non-interactive)' \
 		'' \
 		'Training commands (Phase 3):' \
 		'  make train-resnet-mobilenet    Train ResNet18 then MobileNetV4 sequentially (with 30s pause)' \
@@ -224,3 +229,12 @@ train-all-wandb: compute-stats
 	uv run python scripts/train.py --config configs/experiments/baseline_0_dinov3_vits16.yaml --wandb
 	@echo ""
 	@echo "All 5 models complete. Results synced to W&B project: autolens-ai"
+
+# Phase 5: Gradio demo
+demo:
+	@echo "Launching Gradio demo on http://localhost:7860 ..."
+	uv run python app.py
+
+demo-smoke:
+	@echo "Running UI/inference smoke test..."
+	uv run python scripts/smoke_test_demo.py
