@@ -1,9 +1,9 @@
 ---
 phase: 4
-phase_name: Main DINOv3 Model and Selection
+phase_name: Export, Calibration, Overnight Model Selection
 branch: feat/model-comparison-and-selection
 plan_id: 04-04
-objective: Write DINOv3-first final model selection artifact and report-ready rationale
+objective: Write evidence-first final model selection artifact and report-ready rationale
 wave: 2
 depends_on: ['04-01', '04-02']
 requirements_addressed: ['EVAL-06', 'EVAL-07']
@@ -11,14 +11,14 @@ files_modified: ['src/autolens_ai/evaluation/', 'artifacts/evaluation/', 'docs/m
 autonomous: true
 ---
 
-# Plan 04 — Write DINOv3-first final model selection artifact and report-ready rationale
+# Plan 04 — Write evidence-first final model selection artifact and report-ready rationale
 
 <objective>
-Write DINOv3-first final model selection artifact and report-ready rationale
+Write evidence-first final model selection artifact and report-ready rationale
 </objective>
 
 <must_haves>
-- Covers requirement IDs: EVAL-06, EVAL-07. Selection rationale starts from DINOv3 as the intended main model and only selects a baseline if DINOv3 is blocked or inferior on F1/size/latency.
+- Covers requirement IDs: EVAL-06, EVAL-07. Selection rationale starts from measured macro F1 and deployability evidence. The current EfficientNet-B2 candidate may remain the winner if overnight DINOv3/LoRA/enhanced-EfficientNet runs are blocked or inferior on F1, size, or latency.
 - Covers phase decisions: D-01, D-02, D-03, D-04, D-05 where relevant to this plan.
 - Produces concrete evidence for downstream phases.
 </must_haves>
@@ -38,7 +38,7 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `.planning/ROADMAP.md`
   </read_first>
   <action>
-    Create or update the minimal files needed for this plan objective: `Write DINOv3-first final model selection artifact and report-ready rationale`. Keep names explicit and avoid hidden behavior. Preserve outputs from earlier phases.
+    Create or update the minimal files needed for this plan objective: `Write evidence-first final model selection artifact and report-ready rationale`. Keep names explicit and avoid hidden behavior. Preserve outputs from earlier phases.
   </action>
   <acceptance_criteria>
     - `test -d .planning/phases/04-model-comparison-and-selection` exits 0.
@@ -53,7 +53,7 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `AGENTS.md`
   </read_first>
   <action>
-    Implement the smallest working slice for `Write DINOv3-first final model selection artifact and report-ready rationale`. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
+    Implement the smallest working slice for `Write evidence-first final model selection artifact and report-ready rationale`. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
   </action>
   <acceptance_criteria>
     - Output references all requirement IDs: EVAL-06, EVAL-07.

@@ -3,7 +3,7 @@ phase: 5
 phase_name: Gradio Demo Interface
 branch: feat/gradio-demo-interface
 plan_id: 05-03
-objective: Add predicted class, confidence, and 8-class probability chart
+objective: Add predicted class, confidence, 8-class probability chart, and post-loading result transition
 wave: 2
 depends_on: ['05-01', '05-02']
 requirements_addressed: ['UI-04', 'UI-05']
@@ -11,10 +11,10 @@ files_modified: ['src/autolens_ai/inference/', 'src/autolens_ai/ui/', 'app.py', 
 autonomous: true
 ---
 
-# Plan 03 — Add predicted class, confidence, and 8-class probability chart
+# Plan 03 — Add predicted class, confidence, 8-class probability chart, and post-loading result transition
 
 <objective>
-Add predicted class, confidence, and 8-class probability chart
+Add predicted class, confidence, 8-class probability chart, and post-loading result transition
 </objective>
 
 <must_haves>
@@ -38,7 +38,7 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `.planning/ROADMAP.md`
   </read_first>
   <action>
-    Create or update the minimal files needed for this plan objective: `Add predicted class, confidence, and 8-class probability chart`. Keep names explicit and avoid hidden behavior. Preserve outputs from earlier phases.
+    Create or update the minimal files needed for this plan objective: `Add predicted class, confidence, 8-class probability chart, and post-loading result transition`. Keep names explicit and avoid hidden behavior. Preserve outputs from earlier phases.
   </action>
   <acceptance_criteria>
     - `test -d .planning/phases/05-gradio-demo-interface` exits 0.
@@ -53,7 +53,7 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `AGENTS.md`
   </read_first>
   <action>
-    Implement the smallest working slice for `Add predicted class, confidence, and 8-class probability chart`. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
+    Implement the smallest working slice for `Add predicted class, confidence, 8-class probability chart, and post-loading result transition`. Results should replace the loading/status state cleanly after inference completes. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing. The UI must work against the current calibrated/exported EfficientNet-B2 artifact first and remain ready to repoint to the final winner after overnight experiments.
   </action>
   <acceptance_criteria>
     - Output references all requirement IDs: UI-04, UI-05.

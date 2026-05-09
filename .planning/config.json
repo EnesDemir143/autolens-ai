@@ -17,7 +17,8 @@
       "3": "feat/baseline-training-pipeline",
       "4": "feat/model-comparison-and-selection",
       "5": "feat/gradio-demo-interface",
-      "6": "feat/final-evidence-and-ieee-report"
+      "6": "feat/hugging-face-spaces-deploy",
+      "7": "feat/final-evidence-and-ieee-report"
     }
   },
   "workflow": {

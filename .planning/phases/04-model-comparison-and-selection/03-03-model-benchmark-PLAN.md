@@ -1,6 +1,6 @@
 ---
 phase: 4
-phase_name: Main DINOv3 Model and Selection
+phase_name: Export, Calibration, Overnight Model Selection
 branch: feat/model-comparison-and-selection
 plan_id: 04-03
 objective: Benchmark four model families by macro F1, balanced accuracy, MCC, size, and latency
@@ -18,7 +18,7 @@ Benchmark four model families by macro F1, balanced accuracy, MCC, size, and lat
 </objective>
 
 <must_haves>
-- Covers requirement IDs: EVAL-06, EVAL-07. DINOv3 is the intended main model; MobileNetV4 Conv Medium, EfficientNet-B2, and ResNet18 baseline results quantify benefit and provide fallback if needed.
+- Covers requirement IDs: EVAL-06, EVAL-07. DINOv3 is a required comparison candidate; MobileNetV4 Conv Medium, EfficientNet-B2, and ResNet18 baseline results quantify benefit and provide fallback if needed.
 - Covers phase decisions: D-01, D-02, D-03, D-04, D-05 where relevant to this plan.
 - Produces concrete evidence for downstream phases.
 </must_haves>

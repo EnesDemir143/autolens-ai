@@ -1,4 +1,4 @@
-# Phase 6: Final Evidence and IEEE Report - Context
+# Phase 7: Final Evidence and IEEE Report - Context
 **Branch:** `feat/final-evidence-and-ieee-report`
 
     **Gathered:** 2026-05-06
@@ -8,7 +8,7 @@
     <domain>
     ## Phase Boundary
 
-    Final Evidence and IEEE Report delivers only the capabilities mapped to requirement IDs: RPT-01, RPT-02, RPT-03. Work outside these IDs is deferred to the appropriate roadmap phase.
+    Final Evidence and IEEE Report delivers only the capabilities mapped to requirement IDs: RPT-01, RPT-02, RPT-03. It may cite local Gradio and optional HF Spaces deploy evidence produced by Phase 6. Work outside these IDs is deferred to the appropriate roadmap phase.
 
     </domain>
 
@@ -22,7 +22,7 @@
 - Use `.agents/skills/latex-report-creator/SKILL.md` / awesome-ieee-report rules.
 
 ### D-03
-- Report must include dataset sources, preprocessing, model rationale, metrics, plots, normalized confusion matrix, UI evidence, and final model size.
+- Report must include dataset sources, preprocessing, model rationale, metrics, plots, normalized confusion matrix, UI evidence, optional HF Spaces deploy evidence/link and Hugging Face model repo links, and final model size.
 
 ### D-04
 - Report body must use academic prose and pseudocode, not raw source code dumps.
@@ -58,6 +58,7 @@
     - Requirement IDs for this phase: RPT-01, RPT-02, RPT-03.
     - Execute sequentially, preserving outputs from prior phases.
     - Write evidence files that later phases and the final report can consume.
+    - Include HF Spaces link/build evidence and HF model repo links if Phase 6 completed them; otherwise cite local demo evidence, deployment runbook, and model publishing plan.
 
     </specifics>
 
@@ -69,5 +70,5 @@
     </deferred>
 
     ---
-    *Phase: 06-final-evidence-and-ieee-report*
+    *Phase: 07-final-evidence-and-ieee-report*
     *Context gathered: 2026-05-06 via `$gsd-discuss-phase 6`*
