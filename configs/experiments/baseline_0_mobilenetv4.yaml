@@ -13,8 +13,8 @@ resize_size: 256
 crop_size: 224
 use_augmentation: false
 # Dataset normalization (ImageNet defaults - run scripts/compute_dataset_stats.py to compute from train split)
-dataset_mean: [0.485, 0.456, 0.406]
-dataset_std: [0.229, 0.224, 0.225]
+dataset_mean: [0.4429, 0.4354, 0.4370]
+dataset_std: [0.2456, 0.2421, 0.2449]
 
 # Model
 model_name: mobilenetv4_conv_medium

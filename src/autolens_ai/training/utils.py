@@ -12,7 +12,7 @@ from typing import Any, Literal
 import pytorch_lightning as pl
 import torch
 from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint, LearningRateMonitor, RichProgressBar
-from pytorch_lightning.loggers import WandbLogger
+from pytorch_lightning.loggers import WandbLogger, CSVLogger
 
 
 def get_device() -> str:
@@ -110,17 +110,18 @@ def create_trainer(
         print(f"✓ EMA enabled (decay={ema_decay})")
     
     # Logger
-    logger: Any = True  # Default CSV logger
+    csv_logger = CSVLogger(save_dir=str(checkpoint_dir), name="", version="")
+    logger: Any = csv_logger
     if use_wandb:
         try:
-            logger = WandbLogger(
+            wandb_logger = WandbLogger(
                 project=wandb_project,
                 name=wandb_name,
                 save_dir=str(checkpoint_dir.parent / "wandb"),
             )
+            logger = [wandb_logger, csv_logger]
         except Exception as e:
             print(f"W&B logger failed, falling back to CSV: {e}")
-            logger = True
     
     # Create trainer
     trainer = pl.Trainer(
