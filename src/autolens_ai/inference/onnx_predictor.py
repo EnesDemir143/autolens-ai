@@ -62,8 +62,8 @@ class ONNXPredictor:
         mean = self.preprocessing.get("mean", [0.485, 0.456, 0.406])
         std = self.preprocessing.get("std", [0.229, 0.224, 0.225])
 
-        # Resize and center crop
-        image = image.resize((resize_size, resize_size), Image.BICUBIC)
+        # Resize and center crop (BILINEAR matches torchvision.transforms.Resize default)
+        image = image.resize((resize_size, resize_size), Image.BILINEAR)
         left = (resize_size - crop_size) // 2
         top = (resize_size - crop_size) // 2
         image = image.crop((left, top, left + crop_size, top + crop_size))
