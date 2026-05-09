@@ -41,10 +41,6 @@ Baseline CNN model for 8-class vehicle body type classification.
 - Mean: `[0.4429, 0.4354, 0.437]`
 - Std: `[0.2456, 0.2421, 0.2449]`
 
-## Calibration
-
-Post-hoc temperature scaling was fitted on the validation split only.
-
 ## Internal Test Results
 
 Evaluated on held-out internal test set (3170 samples, no data leakage).
@@ -72,7 +68,6 @@ Evaluated on held-out internal test set (3170 samples, no data leakage).
 
 - `model.safetensors`: 42.698 MB
 - `model.onnx`: 42.642 MB
-- Project limit: 95 MB
 
 ## Files
 
@@ -80,7 +75,6 @@ Evaluated on held-out internal test set (3170 samples, no data leakage).
 - `metadata.json` — architecture, classes, preprocessing, source run, and artifact metadata
 - `model.onnx` — ONNX Runtime inference artifact
 - `model.simplified.onnx` — optional simplified ONNX graph when available
-- `calibration.json` — temperature scaling metadata
 - `size_report.json` / `size_check.json` — artifact size and ONNX smoke evidence
 
 ## Intended use

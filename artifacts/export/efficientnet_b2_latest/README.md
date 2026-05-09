@@ -68,7 +68,6 @@ Evaluated on held-out internal test set (3170 samples, no data leakage).
 
 - `model.safetensors`: 29.722 MB
 - `model.onnx`: 29.371 MB
-- Project limit: 95 MB
 
 ## Files
 
@@ -76,7 +75,6 @@ Evaluated on held-out internal test set (3170 samples, no data leakage).
 - `metadata.json` — architecture, classes, preprocessing, source run, and artifact metadata
 - `model.onnx` — ONNX Runtime inference artifact
 - `model.simplified.onnx` — optional simplified ONNX graph when available
-- `calibration.json` — temperature scaling metadata
 - `size_report.json` / `size_check.json` — artifact size and ONNX smoke evidence
 
 ## Intended use
