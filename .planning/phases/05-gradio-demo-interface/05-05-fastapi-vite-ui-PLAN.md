@@ -50,6 +50,7 @@ autolens_ai/
     └── src/
         ├── main.tsx
         ├── App.tsx
+        ├── store.ts            ← Zustand global store
         ├── api.ts              ← typed API client
         ├── types.ts            ← shared types
         └── components/
@@ -121,12 +122,34 @@ autolens_ai/
 }
 ```
 
+### Lifespan & Predictor Cache
+
+```python
+# Tüm modeller için predictor cache — model_dir → ONNXPredictor
+_predictor_cache: dict[str, ONNXPredictor] = {}
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup: aktif modeli önceden yükle (ilk istek soğuk başlamaz)
+    _predictor_cache[_active_model_dir()] = _build_predictor(_active_model_dir())
+    yield
+    # Shutdown: ONNX session'lar GC'ye bırakılır, temizlik gerekmez
+
+app = FastAPI(lifespan=lifespan)
+```
+
+**Cache davranışı:**
+- `_get_predictor(model_dir)` → cache'de varsa döndür, yoksa yükle + cache'e ekle
+- Model switch (`POST /api/models/active`) → `active_model.json` günceller, cache'i **silmez** — aynı modele geri dönünce yeniden yükleme olmaz
+- Uygulama ömrü boyunca tüm yüklenen modeller bellekte kalır (3 model × ~30-100MB = makul)
+- Restart gerekirse `uvicorn --reload` lifespan'i yeniden tetikler
+
 ### Implementation Notes
 
 - `_discover_models()` mevcut multi-model `app.py` versiyonundan taşınır, `training` ve `per_class` alanları eklenir.
 - CORS middleware: dev'de `localhost:5173` origin'e izin ver.
 - Image: `UploadFile` → bytes → `PIL.Image.open(BytesIO(...))` → `ONNXPredictor.predict()`.
-- Model switch: `active_model.json` güncelle + predictor cache'den sil.
+- Model switch: `active_model.json` güncelle, cache'e dokunma.
 
 ---
 
@@ -138,9 +161,37 @@ autolens_ai/
 cd frontend
 npm create vite@latest . -- --template react-ts
 npm install -D tailwindcss @tailwindcss/vite
-npm install framer-motion recharts axios
+npm install framer-motion recharts axios zustand
 npm install @fontsource/syne @fontsource/dm-mono
 ```
+
+### State Management — Zustand (`src/store.ts`)
+
+Tek global store, prop drilling yok:
+
+```ts
+interface AppStore {
+  // Model state
+  models: ModelInfo[]
+  activeModel: ModelInfo | null
+  setActiveModel: (model: ModelInfo) => Promise<void>  // API call + state update
+
+  // Prediction state
+  status: 'idle' | 'analyzing' | 'done' | 'error'
+  result: PredictResult | null
+  predict: (file: File) => Promise<void>
+
+  // UI state
+  detailPanelOpen: boolean
+  detailTab: 'config' | 'training'
+  toggleDetailPanel: () => void
+  setDetailTab: (tab: 'config' | 'training') => void
+}
+```
+
+`setActiveModel` → `POST /api/models/active` → store güncellenir → `ModelDetailPanel` otomatik re-render.  
+`predict` → `status: 'analyzing'` set et → `POST /api/predict` → `status: 'done'` + `result` set et.  
+`AnalyzingOverlay` sadece `status === 'analyzing'`'i subscribe eder, gereksiz re-render yok.
 
 ### Layout — `App.tsx`
 
@@ -327,6 +378,7 @@ vite, react, react-dom, typescript
 framer-motion
 recharts
 axios
+zustand
 @fontsource/syne, @fontsource/dm-mono
 ```
 
