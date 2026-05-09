@@ -1,0 +1,18 @@
+{
+  "max_size_mb": 95.0,
+  "results": [
+    {
+      "path": "artifacts/export/resnet18_latest/model.safetensors",
+      "exists": true,
+      "size_mb": 42.698,
+      "under_limit": true
+    },
+    {
+      "path": "artifacts/export/resnet18_latest/model.onnx",
+      "exists": true,
+      "size_mb": 42.642,
+      "under_limit": true
+    }
+  ],
+  "all_under_limit": true
+}

@@ -1,0 +1,108 @@
+{
+  "artifact_format_version": 1,
+  "created_at": "2026-05-09T15:17:06.293828+00:00",
+  "source": {
+    "checkpoint_path": "checkpoints/baseline_0_resnet18_20260509_092916/best-12-0.8414.ckpt",
+    "checkpoint_sha256": "240185c1a5cd38e615d8823c8afbc1e8707e3c7ed0bab538fa7ba2e342ce4143",
+    "run_id": "baseline_0_resnet18_20260509_092916",
+    "config_path": "configs/experiments/baseline_0_resnet18.yaml",
+    "metrics_csv": "checkpoints/baseline_0_resnet18_20260509_092916/metrics.csv",
+    "git": {
+      "commit": "d38a2a6f16b5579a0e0c6dd07ea4bb2c5c087429",
+      "dirty": "true"
+    }
+  },
+  "model": {
+    "architecture": "timm",
+    "model_name": "resnet18",
+    "num_classes": 8,
+    "pretrained_at_training": true,
+    "use_lora": false,
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.1,
+    "lora_target_modules": null
+  },
+  "classes": {
+    "labels": [
+      "SUV",
+      "VAN",
+      "STATION WAGON",
+      "MICRO",
+      "OPEN WHEEL / F1",
+      "SEDAN",
+      "HATCHBACK",
+      "PICK UP"
+    ],
+    "class_to_idx": {
+      "SUV": 0,
+      "VAN": 1,
+      "STATION WAGON": 2,
+      "MICRO": 3,
+      "OPEN WHEEL / F1": 4,
+      "SEDAN": 5,
+      "HATCHBACK": 6,
+      "PICK UP": 7
+    },
+    "display_labels": [
+      "SUV",
+      "VAN",
+      "STATION WAGON",
+      "MICRO",
+      "OPEN WHEEL / F1",
+      "SEDAN",
+      "HATCHBACK",
+      "PICK UP"
+    ]
+  },
+  "preprocessing": {
+    "image_size": 224,
+    "resize_size": 256,
+    "crop_size": 224,
+    "mean": [
+      0.4429,
+      0.4354,
+      0.437
+    ],
+    "std": [
+      0.2456,
+      0.2421,
+      0.2449
+    ],
+    "color_mode": "RGB"
+  },
+  "data": {
+    "train_csv": "artifacts/dataset/splits/train.csv",
+    "val_csv": "artifacts/dataset/splits/val.csv",
+    "test_csv_reserved_not_used_for_calibration": "artifacts/dataset/splits/internal_test.csv",
+    "data_root": "datasets"
+  },
+  "training": {
+    "epoch": 12,
+    "global_step": 2574,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "label_smoothing": 0.0,
+    "metrics_summary": {
+      "epoch": 19,
+      "test/acc": 0.8968454003334045,
+      "test/f1_macro": 0.8583438396453857,
+      "test/f1_weighted": 0.8963087797164917,
+      "test/loss": 0.5226470232009888
+    }
+  },
+  "artifacts": {
+    "directory": "artifacts/export/resnet18_latest",
+    "safetensors": "artifacts/export/resnet18_latest/model.safetensors",
+    "metadata": "artifacts/export/resnet18_latest/metadata.json",
+    "onnx": "artifacts/export/resnet18_latest/model.onnx",
+    "calibration": "artifacts/export/resnet18_latest/calibration.json",
+    "safetensors_sha256": "cb43349fc3d9b8223abff9e1b6f83af30ae1fbee4757002ad3a282af84e66bb0",
+    "safetensors_size_bytes": 44771776,
+    "size_report": "artifacts/export/resnet18_latest/size_report.json"
+  },
+  "license_notes": {
+    "base_model": "resnet18 pretrained backbone; verify upstream license before public publishing.",
+    "dataset": "Do not publish merged raw dataset images; document source links/counts instead."
+  }
+}

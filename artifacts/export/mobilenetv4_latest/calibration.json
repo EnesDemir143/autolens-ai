@@ -1,0 +1,23 @@
+{
+  "created_at": "2026-05-09T15:19:01.189470+00:00",
+  "method": "temperature_scaling",
+  "temperature": 2.669508934020996,
+  "fit_split": "artifacts/dataset/splits/val.csv",
+  "forbidden_splits": [
+    "internal_test",
+    "instructor_final_test"
+  ],
+  "num_samples": 3157,
+  "before": {
+    "nll": 0.5466067790985107,
+    "ece": 0.07736977934837341,
+    "accuracy": 0.8888185024261475,
+    "mean_confidence": 0.9661882519721985
+  },
+  "after": {
+    "nll": 0.32763975858688354,
+    "ece": 0.012631780467927456,
+    "accuracy": 0.8888185024261475,
+    "mean_confidence": 0.8910920023918152
+  }
+}
