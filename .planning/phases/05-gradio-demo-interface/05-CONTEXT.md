@@ -8,7 +8,7 @@
     <domain>
     ## Phase Boundary
 
-    Gradio Demo Interface delivers only the capabilities mapped to requirement IDs: UI-01, UI-02, UI-03, UI-04, UI-05, UI-06, UI-07. Work outside these IDs is deferred to the appropriate roadmap phase.
+    Gradio Demo Interface delivers only the capabilities mapped to requirement IDs: UI-01, UI-02, UI-03, UI-04, UI-05, UI-06, UI-07. It should consume the swappable inference artifact contract from Phase 4 Plan 05: first the current calibrated/exported EfficientNet-B2 artifact, then the final winner after overnight comparison. Work outside these IDs is deferred to the appropriate roadmap phase.
 
     </domain>
 
@@ -33,6 +33,7 @@
     ### the agent's Discretion
     - Exact filenames and helper function names may be chosen during execution if they remain simple, testable, and consistent with prior phases.
     - Keep implementation small and explainable; avoid speculative abstraction.
+- Do not hardcode EfficientNet-B2 in UI code; load backend/model path/class mapping/preprocessing/calibration from explicit metadata so the final selected model can replace it later.
 
     </decisions>
 
@@ -55,6 +56,7 @@
     ## Specific Ideas
 
     - Requirement IDs for this phase: UI-01, UI-02, UI-03, UI-04, UI-05, UI-06, UI-07.
+    - Phase 5 may begin after Phase 4 Plan 05 produces either a current EfficientNet-B2 demo artifact or a documented blocker/fallback stub; it does not need to wait for overnight DINOv3/EMA runs.
     - Execute sequentially, preserving outputs from prior phases.
     - Write evidence files that later phases and the final report can consume.
 
@@ -70,3 +72,5 @@
     ---
     *Phase: 05-gradio-demo-interface*
     *Context gathered: 2026-05-06 via `$gsd-discuss-phase 5`*
+
+*Context revised: 2026-05-09 — UI is model-agnostic and initially targets the current EfficientNet-B2 export/calibration artifact.*

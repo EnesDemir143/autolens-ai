@@ -49,6 +49,19 @@
 - [ ] **UI-05**: User can see confidence score and probability distribution for all 8 classes.
 - [ ] **UI-06**: UI presents uploaded image and result in a clean, modern, presentation-ready layout.
 - [ ] **UI-07**: UI prediction latency is acceptable for live demo usage.
+- [ ] **UI-08**: UI shows a clear loading/progress/status state during inference so slower CPU predictions do not appear frozen.
+
+### Deployment
+
+- [ ] **PUBLISH-01**: Developer can publish completed model artifacts to the student Hugging Face account as model repositories with model cards.
+- [ ] **PUBLISH-02**: Model publishing excludes raw merged datasets and documents dataset sources/links/license caveats instead of redistributing third-party images.
+- [ ] **PUBLISH-03**: Optional Makefile/CLI publish path is documented for uploading a selected artifact directory to a Hugging Face model repo.
+
+- [ ] **DEPLOY-01**: Developer can package the local Gradio + ONNX Runtime demo for Hugging Face Spaces without Docker.
+- [ ] **DEPLOY-02**: Deploy package includes only required demo files and excludes training datasets, final instructor test images, secrets, and unnecessary checkpoints.
+- [ ] **DEPLOY-03**: Deploy package uses the active artifact config/pointer so the final selected ONNX model can be swapped without Gradio code edits.
+- [ ] **DEPLOY-04**: Developer has a manual HF Spaces runbook covering Gradio SDK, CPU Basic hardware, build logs, and public URL smoke test.
+- [ ] **DEPLOY-05**: Optional Makefile/CLI deploy path is documented; missing Hugging Face auth falls back to manual steps.
 
 ### Reporting
 
@@ -60,11 +73,19 @@
 
 ### Optimization
 
-- **OPT-01**: Developer can export the selected model to ONNX and run ONNX Runtime inference.
-- **OPT-02**: Developer can simplify ONNX graph with onnxsim.
+- **OPT-01**: Developer can export the selected model to ONNX and run ONNX Runtime inference. For the 2026-05-09 pivot, this is first applied to the current best EfficientNet-B2 checkpoint so the demo can finish before overnight experiments complete.
+- **OPT-02**: Developer can simplify ONNX graph with onnxsim and record artifact size against the 95 MB limit.
 - **OPT-03**: Developer can run Optuna hyperparameter tuning after all baseline models work.
 - **OPT-04**: Developer can add Grad-CAM visualizations for supported CNN models.
 - **OPT-05**: Developer can add LoRA fine-tuning for the main DINOv3 path if time and access allow.
+
+
+### Calibration / Demo-readiness
+
+- **CAL-01**: Developer can fit temperature scaling on validation predictions only and save the calibration temperature/metadata beside the exported model.
+- **CAL-02**: Developer can compare pre/post-calibration confidence behavior using NLL/ECE or equivalent confidence diagnostics without touching internal test or instructor final test data.
+- **OPS-01**: Developer can queue long-running DINOv3 ViT-S, DINOv3 LoRA, and EfficientNet-B2 augmentation+EMA+focal-loss experiments for overnight execution while the current checkpoint demo path remains usable.
+- **OPS-02**: Developer can run the post-training deployment sequence from Makefile targets: choose a run/checkpoint, export it to ONNX, check size, calibrate, update the Gradio model artifact pointer/config, and run a demo smoke check in the documented order.
 
 ## Out of Scope
 
@@ -103,6 +124,12 @@
 | EVAL-05 | Phase 4 | Pending |
 | EVAL-06 | Phase 4 | Pending |
 | EVAL-07 | Phase 4 | Pending |
+| OPT-01 | Phase 4 | Pending — immediate EfficientNet-B2 export first, repeat for final winner later |
+| OPT-02 | Phase 4 | Pending — simplify/check artifact size where supported |
+| CAL-01 | Phase 4 | Pending — validation-only temperature scaling |
+| CAL-02 | Phase 4 | Pending — calibration evidence without test leakage |
+| OPS-01 | Phase 4 | Pending — overnight experiment queue |
+| OPS-02 | Phase 4/5 | Pending — Makefile-driven export/calibration/demo artifact orchestration |
 | UI-01 | Phase 5 | Pending |
 | UI-02 | Phase 5 | Pending |
 | UI-03 | Phase 5 | Pending |
@@ -110,15 +137,25 @@
 | UI-05 | Phase 5 | Pending |
 | UI-06 | Phase 5 | Pending |
 | UI-07 | Phase 5 | Pending |
-| RPT-01 | Phase 6 | Pending |
-| RPT-02 | Phase 6 | Pending |
-| RPT-03 | Phase 6 | Pending |
+| UI-08 | Phase 5 | Pending — loading/progress state for inference |
+| PUBLISH-01 | Phase 6 | Pending — publish completed model artifacts to HF model repos |
+| PUBLISH-02 | Phase 6 | Pending — do not redistribute merged raw datasets; link/document sources instead |
+| PUBLISH-03 | Phase 6 | Pending — optional Makefile/CLI model publish path |
+| DEPLOY-01 | Phase 6 | Pending — HF Spaces package without Docker |
+| DEPLOY-02 | Phase 6 | Pending — safe deploy package contents |
+| DEPLOY-03 | Phase 6 | Pending — active artifact config reuse |
+| DEPLOY-04 | Phase 6 | Pending — manual Spaces runbook |
+| DEPLOY-05 | Phase 6 | Pending — optional Makefile/CLI deploy path |
+| RPT-01 | Phase 7 | Pending |
+| RPT-02 | Phase 7 | Pending |
+| RPT-03 | Phase 7 | Pending |
 
 **Coverage:**
 - v1 requirements: 33 total
-- Mapped to phases: 33
+- v2/v3 execution requirements now mapped for export, calibration, and overnight run orchestration
+- Mapped to phases: 49
 - Unmapped: 0
 
 ---
 *Requirements defined: 2026-05-06*
-*Last updated: 2026-05-06 after roadmap initialization*
+*Last updated: 2026-05-09 after loading UX and HF Spaces deploy phase planning update*

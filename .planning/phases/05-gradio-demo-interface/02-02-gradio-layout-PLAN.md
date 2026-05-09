@@ -3,18 +3,18 @@ phase: 5
 phase_name: Gradio Demo Interface
 branch: feat/gradio-demo-interface
 plan_id: 05-02
-objective: Build modern Gradio Blocks layout with upload and preview
+objective: Build modern Gradio Blocks layout with upload, preview, and loading state
 wave: 1
 depends_on: []
-requirements_addressed: ['UI-01', 'UI-02', 'UI-06']
+requirements_addressed: ['UI-01', 'UI-02', 'UI-06', 'UI-08']
 files_modified: ['src/autolens_ai/inference/', 'src/autolens_ai/ui/', 'app.py', 'docs/ui.md']
 autonomous: true
 ---
 
-# Plan 02 — Build modern Gradio Blocks layout with upload and preview
+# Plan 02 — Build modern Gradio Blocks layout with upload, preview, and loading state
 
 <objective>
-Build modern Gradio Blocks layout with upload and preview
+Build modern Gradio Blocks layout with upload, preview, and loading state
 </objective>
 
 <must_haves>
@@ -38,7 +38,7 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `.planning/ROADMAP.md`
   </read_first>
   <action>
-    Create or update the minimal files needed for this plan objective: `Build modern Gradio Blocks layout with upload and preview`. Keep names explicit and avoid hidden behavior. Preserve outputs from earlier phases.
+    Create or update the minimal files needed for this plan objective: `Build modern Gradio Blocks layout with upload, preview, and loading state`. Keep names explicit and avoid hidden behavior. Preserve outputs from earlier phases.
   </action>
   <acceptance_criteria>
     - `test -d .planning/phases/05-gradio-demo-interface` exits 0.
@@ -53,10 +53,11 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `AGENTS.md`
   </read_first>
   <action>
-    Implement the smallest working slice for `Build modern Gradio Blocks layout with upload and preview`. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
+    Implement the smallest working slice for `Build modern Gradio Blocks layout with upload, preview, and loading state`. Include user-visible loading/progress/status feedback for prediction, such as “Analyzing vehicle image…”, so slower CPU inference does not appear frozen. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing. The UI must work against the current calibrated/exported EfficientNet-B2 artifact first and remain ready to repoint to the final winner after overnight experiments.
   </action>
   <acceptance_criteria>
-    - Output references all requirement IDs: UI-01, UI-02, UI-06.
+    - Output references all requirement IDs: UI-01, UI-02, UI-06, UI-08.
+    - Loading/progress state is visible during prediction.
     - Output contains no instructor final test data.
     - Any external dependency blocker is documented with the exact command or resource ID.
   </acceptance_criteria>

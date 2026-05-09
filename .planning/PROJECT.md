@@ -17,11 +17,12 @@ The system must generalize to unseen presentation/test images and return the cor
 ### Active
 
 - [ ] Build a documented, near-balanced 8-class custom dataset from public sources: target 36k–40k raw candidates and approximately 32k clean images (about 4k/class).
-- [ ] Compare four model families overall: MobileNetV4 Conv Medium, EfficientNet-B2, ResNet18, and DINOv3 ViT-S/16. DINOv3 is the intended main model path and must run non-LoRA first, with LoRA as a separate optional variant after the non-LoRA path works.
+- [ ] Compare four model families overall: MobileNetV4 Conv Medium, EfficientNet-B2, ResNet18, and DINOv3 ViT-S/16. Current execution priority is to ship a working calibrated EfficientNet-B2 demo first, then run DINOv3 non-LoRA, DINOv3 LoRA, and enhanced EfficientNet-B2 overnight before final selection.
 - [ ] Optimize for macro F1 first, then balanced accuracy, MCC, Accuracy, Precision, and Recall.
-- [ ] Keep final deployable model artifact under the 95 MB submission limit.
-- [ ] Provide a modern Gradio web UI with upload, preview, prediction, confidence score, and class probability chart.
+- [ ] Keep final deployable model artifact under the 95 MB submission limit; check this immediately on the current EfficientNet-B2 ONNX export and repeat for the final winner.
+- [ ] Provide a modern Gradio web UI with upload, preview, prediction, confidence score, class probability chart, and loading/progress feedback during inference.
 - [ ] Produce required training/validation loss, accuracy curves, and normalized confusion matrix figures.
+- [ ] Optionally publish the final local Gradio + ONNX Runtime demo to Hugging Face Spaces CPU Basic before the report, using Gradio SDK without Docker.
 - [ ] Produce the IEEE LaTeX report at the end using the local LaTeX report creator skill.
 
 ### Out of Scope
@@ -57,8 +58,10 @@ Karpathy-guideline constraints apply: keep implementation small and explainable,
 | Use uv + Python 3.12 | Modern reproducible Python workflow; user requested it explicitly. | — Pending |
 | Use Standard GSD granularity with sequential execution | User requested 5-8 phases and sequential planning. | — Pending |
 | Commit `.planning/` docs | User requested planning docs in git. | — Pending |
-| Make DINOv3 the intended main model | DINOv3 ViT-S/16 is the fourth model family and primary architecture target; MobileNetV4, EfficientNet-B2, and ResNet18 remain baselines for comparison, fallback, and report evidence. DINOv3 non-LoRA is required before optional LoRA. | — Pending |
-| Use Gradio for UI | Fast demo delivery while satisfying web UI requirements. | — Pending |
+| Current-checkpoint demo first, overnight experiments second | Deadline risk is lower if ONNX export, size check, validation-only temperature scaling, and Gradio demo are completed with the current best EfficientNet-B2 checkpoint before slow DINOv3/EMA runs finish. | — Active from 2026-05-09 |
+| Make DINOv3 an overnight candidate, not a demo blocker | DINOv3 ViT-S/16 remains a required comparison family; non-LoRA runs before optional LoRA, but neither blocks the first working demo if EfficientNet-B2 is already usable. | — Active from 2026-05-09 |
+| Use Gradio for UI | Fast demo delivery while satisfying web UI requirements. Add loading/progress state so slower CPU inference still looks professional. | — Pending |
+| Use Hugging Face Spaces for optional public deploy | Gradio SDK + ONNX Runtime on CPU Basic gives a free public demo path without Docker/API scope. | — Planned from 2026-05-09 |
 | Generate report at the end with LaTeX skill | Final report should reflect actual implemented evidence, metrics, and UI screenshots/placeholders. | — Pending |
 
 ## Evolution
@@ -79,4 +82,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-06 after Phase 1 verification*
+*Last updated: 2026-05-09 after loading UX and HF Spaces deploy phase planning update*

@@ -1,9 +1,9 @@
 ---
 phase: 4
-phase_name: Main DINOv3 Model and Selection
+phase_name: Export, Calibration, Overnight Model Selection
 branch: feat/model-comparison-and-selection
 plan_id: 04-01
-objective: Create metrics, classification report, and plot generation suite
+objective: Create metrics, classification report, plot, and calibration diagnostics suite
 wave: 1
 depends_on: []
 requirements_addressed: ['EVAL-01', 'EVAL-02', 'EVAL-03', 'EVAL-04', 'EVAL-05']
@@ -11,10 +11,10 @@ files_modified: ['src/autolens_ai/evaluation/', 'artifacts/evaluation/', 'docs/m
 autonomous: true
 ---
 
-# Plan 01 — Create metrics, classification report, and plot generation suite
+# Plan 01 — Create metrics, classification report, plot, and calibration diagnostics suite
 
 <objective>
-Create metrics, classification report, and plot generation suite
+Create metrics, classification report, plot, and calibration diagnostics suite
 </objective>
 
 <must_haves>
@@ -38,7 +38,7 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `.planning/ROADMAP.md`
   </read_first>
   <action>
-    Create or update the minimal files needed for this plan objective: `Create metrics, classification report, and plot generation suite`. Keep names explicit and avoid hidden behavior. Preserve outputs from earlier phases.
+    Create or update the minimal files needed for this plan objective: `Create metrics, classification report, plot, and calibration diagnostics suite`. Keep names explicit and avoid hidden behavior. Preserve outputs from earlier phases.
   </action>
   <acceptance_criteria>
     - `test -d .planning/phases/04-model-comparison-and-selection` exits 0.
@@ -53,7 +53,7 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `AGENTS.md`
   </read_first>
   <action>
-    Implement the smallest working slice for `Create metrics, classification report, and plot generation suite`. Metrics must include accuracy, balanced accuracy, MCC, precision, recall, macro F1, weighted F1, per-class metrics, and normalized confusion matrix outputs. Supporting diagnostics may additionally include per-class specificity, ECE, Brier score, and reliability-curve artifacts if calibration evidence is useful for confidence reporting. Temperature scaling or any other calibration fit must use validation predictions only; internal_test must remain untouched until the final evaluation pass. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
+    Implement the smallest working slice for `Create metrics, classification report, plot, and calibration diagnostics suite`. Metrics must include accuracy, balanced accuracy, MCC, precision, recall, macro F1, weighted F1, per-class metrics, and normalized confusion matrix outputs. Supporting diagnostics may additionally include per-class specificity, ECE, Brier score, and reliability-curve artifacts if calibration evidence is useful for confidence reporting. Temperature scaling or any other calibration fit must use validation predictions only; internal_test must remain untouched until the final evaluation pass. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
   </action>
   <acceptance_criteria>
     - Output references all requirement IDs: EVAL-01, EVAL-02, EVAL-03, EVAL-04, EVAL-05.

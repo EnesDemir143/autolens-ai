@@ -3,18 +3,18 @@ phase: 5
 phase_name: Gradio Demo Interface
 branch: feat/gradio-demo-interface
 plan_id: 05-01
-objective: Create final model loading and prediction adapter
+objective: Create swappable calibrated model loading and prediction adapter
 wave: 1
-depends_on: []
+depends_on: ['04-05']
 requirements_addressed: ['UI-03', 'UI-04', 'UI-07']
 files_modified: ['src/autolens_ai/inference/', 'src/autolens_ai/ui/', 'app.py', 'docs/ui.md']
 autonomous: true
 ---
 
-# Plan 01 — Create final model loading and prediction adapter
+# Plan 01 — Create swappable calibrated model loading and prediction adapter
 
 <objective>
-Create final model loading and prediction adapter
+Create swappable calibrated model loading and prediction adapter
 </objective>
 
 <must_haves>
@@ -38,7 +38,7 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `.planning/ROADMAP.md`
   </read_first>
   <action>
-    Create or update the minimal files needed for this plan objective: `Create final model loading and prediction adapter`. Keep names explicit and avoid hidden behavior. Preserve outputs from earlier phases.
+    Create or update the minimal files needed for this plan objective: `Create swappable calibrated model loading and prediction adapter`. Keep names explicit and avoid hidden behavior. Preserve outputs from earlier phases.
   </action>
   <acceptance_criteria>
     - `test -d .planning/phases/05-gradio-demo-interface` exits 0.
@@ -53,11 +53,13 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `AGENTS.md`
   </read_first>
   <action>
-    Implement the smallest working slice for `Create final model loading and prediction adapter`. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
+    Implement the smallest working slice for `Create swappable calibrated model loading and prediction adapter`. The adapter must load backend/model path, class mapping, preprocessing metadata, and temperature calibration from explicit artifact metadata; start with the current EfficientNet-B2 export/calibration artifact and allow a later final-winner path swap without UI rewrites. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
   </action>
   <acceptance_criteria>
     - Output references all requirement IDs: UI-03, UI-04, UI-07.
     - Output contains no instructor final test data.
+    - Adapter is model-agnostic and does not hardcode EfficientNet-B2 or DINOv3-specific UI behavior.
+    - Missing final-winner artifact is not a blocker if the current calibrated/exported checkpoint contract is available or its exact blocker is documented.
     - Any external dependency blocker is documented with the exact command or resource ID.
   </acceptance_criteria>
 </task>

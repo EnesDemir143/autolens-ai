@@ -1,9 +1,9 @@
 ---
 phase: 4
-phase_name: Main DINOv3 Model and Selection
+phase_name: Export, Calibration, Overnight Model Selection
 branch: feat/model-comparison-and-selection
 plan_id: 04-02
-objective: Implement main DINOv3 non-LoRA path and optional LoRA comparison with gated-access fallback
+objective: Prepare overnight DINOv3 non-LoRA and optional LoRA comparison runs with gated-access fallback
 wave: 1
 depends_on: []
 requirements_addressed: ['TRN-04', 'TRN-05']
@@ -11,14 +11,14 @@ files_modified: ['src/autolens_ai/evaluation/', 'artifacts/evaluation/', 'docs/m
 autonomous: true
 ---
 
-# Plan 02 — Implement main DINOv3 non-LoRA path and optional LoRA comparison with gated-access fallback
+# Plan 02 — Prepare overnight DINOv3 non-LoRA and optional LoRA comparison runs with gated-access fallback
 
 <objective>
-Implement main DINOv3 non-LoRA path and optional LoRA comparison with gated-access fallback
+Prepare overnight DINOv3 non-LoRA and optional LoRA comparison runs with gated-access fallback
 </objective>
 
 <must_haves>
-- Covers requirement IDs: TRN-04, TRN-05. DINOv3 is the intended main model path; non-LoRA must run first, and LoRA is a separate optional variant after non-LoRA works. Baselines are only comparison/fallback evidence.
+- Covers requirement IDs: TRN-04, TRN-05. DINOv3 remains a required comparison path; non-LoRA must run before LoRA. These long runs are queued for overnight and must not block the immediate EfficientNet-B2 export/calibration/demo path.
 - Covers phase decisions: D-01, D-02, D-03, D-04, D-05 where relevant to this plan.
 - Produces concrete evidence for downstream phases.
 </must_haves>
@@ -53,7 +53,7 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `AGENTS.md`
   </read_first>
   <action>
-    Implement the smallest working slice for `Implement main DINOv3 non-LoRA path and optional LoRA comparison with gated-access fallback`. The non-LoRA path is required first; LoRA must be implemented as a separate optional config/run after non-LoRA evidence exists. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
+    Implement the smallest working slice for `Prepare overnight DINOv3 non-LoRA and optional LoRA comparison runs with gated-access fallback`. The non-LoRA path is required first; LoRA must be a separate optional config/run after non-LoRA evidence exists. Record exact overnight run commands and status so final selection can consume them later. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
   </action>
   <acceptance_criteria>
     - Output references all requirement IDs: TRN-04, TRN-05.

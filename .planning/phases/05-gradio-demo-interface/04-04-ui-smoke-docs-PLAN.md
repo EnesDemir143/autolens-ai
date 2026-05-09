@@ -7,7 +7,7 @@ objective: Add UI smoke test/run docs and latency evidence
 wave: 2
 depends_on: ['05-01', '05-02']
 requirements_addressed: ['UI-06', 'UI-07']
-files_modified: ['src/autolens_ai/inference/', 'src/autolens_ai/ui/', 'app.py', 'docs/ui.md']
+files_modified: ['Makefile', 'src/autolens_ai/inference/', 'src/autolens_ai/ui/', 'app.py', 'docs/ui.md', 'docs/deployment_runbook.md']
 autonomous: true
 ---
 
@@ -53,12 +53,15 @@ Keep local credentials and dataset/API tokens out of git. Use `.env.example` pla
     - `AGENTS.md`
   </read_first>
   <action>
-    Implement the smallest working slice for `Add UI smoke test/run docs and latency evidence`. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing.
+    Implement the smallest working slice for `Add UI smoke test/run docs and latency evidence`. Include Makefile targets for launching Gradio with the active artifact config and for running a UI/inference smoke check before presentation. If the slice depends on external credentials, network access, dataset availability, gated model access, or prior phase runtime artifacts, document the exact blocker and fallback in the corresponding docs/artifacts file instead of guessing. The UI must work against the current calibrated/exported EfficientNet-B2 artifact first and remain ready to repoint to the final winner after overnight experiments.
   </action>
   <acceptance_criteria>
     - Output references all requirement IDs: UI-06, UI-07.
     - Output contains no instructor final test data.
     - Any external dependency blocker is documented with the exact command or resource ID.
+    - `make help` shows the Gradio/demo run and smoke-check commands.
+    - Demo run target uses the active artifact config/pointer produced by Phase 4 instead of hardcoded model paths.
+    - Smoke docs include checking that loading/progress feedback appears during prediction.
   </acceptance_criteria>
 </task>
 
