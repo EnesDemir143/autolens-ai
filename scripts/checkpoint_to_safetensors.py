@@ -165,7 +165,7 @@ def build_metadata(
             "calibration": str(output_dir / "calibration.json"),
         },
         "license_notes": {
-            "base_model": "timm efficientnet_b2 pretrained backbone; verify upstream license before public publishing.",
+            "base_model": f"{hparams.get('model_name', config['model_name'])} pretrained backbone; verify upstream license before public publishing.",
             "dataset": "Do not publish merged raw dataset images; document source links/counts instead.",
         },
     }
