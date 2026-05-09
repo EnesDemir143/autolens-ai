@@ -41,17 +41,28 @@ Current strongest CNN candidate for the AutoLens AI demo artifact lane.
 - Mean: `[0.4429, 0.4354, 0.437]`
 - Std: `[0.2456, 0.2421, 0.2449]`
 
-## Calibration
+## Internal Test Results
 
-Post-hoc temperature scaling was fitted on the validation split only.
+Evaluated on held-out internal test set (3170 samples, no data leakage).
 
-- Temperature: `1.779860`
-- Validation samples: 3157
-- NLL: 0.29796 -> 0.24160
-- ECE: 0.03823 -> 0.01043
-- Accuracy: 0.92398
+- Accuracy: **0.9202**
+- F1-macro: **0.8982**
+- F1-weighted: 0.9201
+- Precision-macro: 0.9056
+- Recall-macro: 0.8923
 
-No internal test or instructor final test images were used for calibration.
+### Per-class Performance
+
+| Class | Precision | Recall | F1-score | Support |
+|-------|-----------|--------|----------|---------|
+| SUV | 0.9213 | 0.9090 | 0.9151 | 670 |
+| VAN | 0.9450 | 0.9824 | 0.9634 | 455 |
+| STATION WAGON | 0.8033 | 0.7424 | 0.7717 | 66 |
+| MICRO | 0.9545 | 0.9545 | 0.9545 | 22 |
+| OPEN WHEEL / F1 | 0.9948 | 0.9846 | 0.9897 | 586 |
+| SEDAN | 0.9023 | 0.9282 | 0.9151 | 836 |
+| HATCHBACK | 0.7662 | 0.8008 | 0.7831 | 266 |
+| PICK UP | 0.9574 | 0.8364 | 0.8929 | 269 |
 
 ## Artifact sizes
 

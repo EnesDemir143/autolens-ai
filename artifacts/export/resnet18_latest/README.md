@@ -45,13 +45,28 @@ Baseline CNN model for 8-class vehicle body type classification.
 
 Post-hoc temperature scaling was fitted on the validation split only.
 
-- Temperature: `2.407835`
-- Validation samples: 3157
-- NLL: 0.49280 -> 0.32135
-- ECE: 0.07337 -> 0.01263
-- Accuracy: 0.88787
+## Internal Test Results
 
-No internal test or instructor final test images were used for calibration.
+Evaluated on held-out internal test set (3170 samples, no data leakage).
+
+- Accuracy: **0.8968**
+- F1-macro: **0.8590**
+- F1-weighted: 0.8963
+- Precision-macro: 0.8887
+- Recall-macro: 0.8361
+
+### Per-class Performance
+
+| Class | Precision | Recall | F1-score | Support |
+|-------|-----------|--------|----------|---------|
+| SUV | 0.9104 | 0.9104 | 0.9104 | 670 |
+| VAN | 0.9165 | 0.9165 | 0.9165 | 455 |
+| STATION WAGON | 0.6212 | 0.6212 | 0.6212 | 66 |
+| MICRO | 0.7727 | 0.7727 | 0.7727 | 22 |
+| OPEN WHEEL / F1 | 0.9949 | 0.9949 | 0.9949 | 586 |
+| SEDAN | 0.8800 | 0.9031 | 0.8914 | 836 |
+| HATCHBACK | 0.7306 | 0.7444 | 0.7374 | 266 |
+| PICK UP | 0.9328 | 0.8253 | 0.8757 | 269 |
 
 ## Artifact sizes
 
