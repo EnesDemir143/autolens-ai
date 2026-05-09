@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-05-09T14:56:15.065630+00:00",
+  "created_at": "2026-05-09T19:14:31+00:00",
   "backend": "onnxruntime",
   "model_path": "artifacts/export/efficientnet_b2_current/model.simplified.onnx",
   "metadata_path": "artifacts/export/efficientnet_b2_current/metadata.json",
