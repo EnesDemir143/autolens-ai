@@ -1,6 +1,7 @@
 .PHONY: help sync import test lint format typecheck check pre-commit graphify-update graphify-report clean
 .PHONY: compute-stats train-baseline-0 train-baseline-1 train-baseline-2 train-all-baselines resume-training
 .PHONY: train-all-wandb
+.PHONY: checkpoint-to-safetensors export-model size-check calibrate-model prepare-demo-artifact deploy-run-to-demo
 
 help:
 	@printf '%s\n' \
@@ -26,6 +27,14 @@ help:
 		'' \
 		'Model analysis:' \
 		'  make check-model-size   Check if model checkpoints are under 95 MB limit' \
+		'' \
+		'Phase 4 demo artifact sequence:' \
+		'  make checkpoint-to-safetensors [CHECKPOINT=path.ckpt] [EXPORT_DIR=artifacts/export/efficientnet_b2_current]' \
+		'  make export-model [SAFETENSORS=path] [METADATA=path] [ONNX=path]' \
+		'  make size-check [SAFETENSORS=path] [ONNX=path]' \
+		'  make calibrate-model [ONNX=path] [METADATA=path]  # validation split only' \
+		'  make prepare-demo-artifact [ARTIFACT_CONFIG=artifacts/demo/active_model.json]' \
+		'  make deploy-run-to-demo [CHECKPOINT=path.ckpt]  # convert -> export -> size -> calibrate -> pointer' \
 		'' \
 		'Training commands (Phase 3):' \
 		'  make train-resnet-mobilenet    Train ResNet18 then MobileNetV4 sequentially (with 30s pause)' \
@@ -103,6 +112,54 @@ compute-stats:
 check-model-size:
 	@echo "Checking model checkpoint sizes..."
 	uv run python scripts/check_model_size.py checkpoints/
+
+# Phase 4 current-candidate export/calibration targets.
+EXPORT_DIR ?= artifacts/export/efficientnet_b2_current
+SAFETENSORS ?= $(EXPORT_DIR)/model.safetensors
+METADATA ?= $(EXPORT_DIR)/metadata.json
+ONNX ?= $(EXPORT_DIR)/model.onnx
+CALIBRATION ?= $(EXPORT_DIR)/calibration.json
+ARTIFACT_CONFIG ?= artifacts/demo/active_model.json
+EXPORT_CONFIG ?= configs/experiments/baseline_0_efficientnet_b2.yaml
+
+checkpoint-to-safetensors:
+	@echo "Converting Lightning checkpoint to safetensors + metadata..."
+	uv run python scripts/checkpoint_to_safetensors.py \
+		$(if $(CHECKPOINT),--checkpoint $(CHECKPOINT),) \
+		--config $(EXPORT_CONFIG) \
+		--output-dir $(EXPORT_DIR)
+
+export-model:
+	@echo "Exporting safetensors artifact to ONNX..."
+	uv run python scripts/export_model.py \
+		--safetensors $(SAFETENSORS) \
+		--metadata $(METADATA) \
+		--output $(ONNX)
+
+size-check:
+	@echo "Checking deploy artifact sizes against 95 MB..."
+	uv run python scripts/check_artifact_size.py \
+		$(SAFETENSORS) \
+		$(ONNX) \
+		--json-output $(EXPORT_DIR)/size_check.json
+
+calibrate-model:
+	@echo "Fitting validation-only temperature scaling..."
+	uv run python scripts/calibrate_model.py \
+		--onnx $(ONNX) \
+		--metadata $(METADATA) \
+		--output $(CALIBRATION)
+
+prepare-demo-artifact:
+	@echo "Writing active demo artifact config..."
+	uv run python scripts/prepare_demo_artifact.py \
+		--metadata $(METADATA) \
+		--onnx $(ONNX) \
+		--calibration $(CALIBRATION) \
+		--output $(ARTIFACT_CONFIG)
+
+deploy-run-to-demo: checkpoint-to-safetensors export-model size-check calibrate-model prepare-demo-artifact
+	@echo "Deployable demo artifact prepared at $(ARTIFACT_CONFIG)"
 
 # Training targets
 WANDB ?=
