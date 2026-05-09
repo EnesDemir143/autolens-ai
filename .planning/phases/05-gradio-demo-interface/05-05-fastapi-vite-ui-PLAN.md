@@ -91,7 +91,7 @@ Tek global store, prop drilling yok. Alanlar:
 
 **`Header`** — Logo, aktif model badge, model selector dropdown. Her model option'ında: model adı, accuracy, F1 macro. Seçim → `setActiveModel()`.
 
-**`ImageUpload`** — Drag & drop + click. Preview thumbnail. Classify butonu sadece `selectedFile` varken aktif. Yeni dosya seçilince önceki result temizlenir.
+**`ImageUpload`** — Drag & drop + click. Preview thumbnail. Classify butonu sadece `selectedFile` varken aktif. Yeni dosya seçilince önceki result temizlenir. **Not (ödev gereği):** Yüklenen görsel ile tahmin sonucu yan yana olmalı — mevcut layout (sol sütun: görsel, orta sütun: sonuç) bunu karşılıyor, implement sırasında bu düzen korunmalı.
 
 **`AnalyzingOverlay`** — `status === 'analyzing'` iken görsel üzerine: yarı saydam overlay + yatay tarama çizgisi animasyonu (loop) + "Analyzing…" pulse. Tamamlanınca fade-out.
 
