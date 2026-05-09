@@ -72,9 +72,10 @@ autolens_ai/
 | Method | Path | Description |
 |--------|------|-------------|
 | `GET` | `/api/models` | Export artifact'larını listele (metadata dahil) |
-| `GET` | `/api/models/active` | Aktif model full metadata |
+| `GET` | `/api/models/active` | ~~Aktif model full metadata~~ — `/api/models` `is_active:true` ile karşılanır, **kaldırıldı** |
 | `POST` | `/api/models/active` | `{"model_dir": "..."}` → active_model.json güncelle |
 | `POST` | `/api/predict` | `multipart/form-data` image → prediction JSON |
+| `GET` | `/api/health` | Liveness check — model yüklü mü, cache kaç model tutuyor |
 | `GET` | `/` | `frontend/dist/index.html` |
 
 ### `GET /api/models` Response
@@ -144,6 +145,25 @@ app = FastAPI(lifespan=lifespan)
 - Uygulama ömrü boyunca tüm yüklenen modeller bellekte kalır (3 model × ~30-100MB = makul)
 - Restart gerekirse `uvicorn --reload` lifespan'i yeniden tetikler
 
+### `GET /api/health` Response
+
+```json
+{ "status": "ok", "active_model": "efficientnet_b2_current", "cached_models": 2 }
+```
+
+### File Validation (`POST /api/predict`)
+
+```python
+ALLOWED_TYPES = {"image/jpeg", "image/png", "image/webp"}
+MAX_SIZE_BYTES = 10 * 1024 * 1024  # 10 MB
+
+if file.content_type not in ALLOWED_TYPES:
+    raise HTTPException(415, "Unsupported file type")
+data = await file.read()
+if len(data) > MAX_SIZE_BYTES:
+    raise HTTPException(413, "File too large (max 10 MB)")
+```
+
 ### Implementation Notes
 
 - `_discover_models()` mevcut multi-model `app.py` versiyonundan taşınır, `training` ve `per_class` alanları eklenir.
@@ -174,12 +194,16 @@ interface AppStore {
   // Model state
   models: ModelInfo[]
   activeModel: ModelInfo | null
-  setActiveModel: (model: ModelInfo) => Promise<void>  // API call + state update
+  fetchModels: () => Promise<void>           // GET /api/models → store populate
+  setActiveModel: (model: ModelInfo) => Promise<void>
 
   // Prediction state
   status: 'idle' | 'analyzing' | 'done' | 'error'
   result: PredictResult | null
-  predict: (file: File) => Promise<void>
+  error: string | null
+  selectedFile: File | null
+  setFile: (file: File) => void
+  predict: () => Promise<void>              // selectedFile'ı kullanır
 
   // UI state
   detailPanelOpen: boolean
@@ -190,8 +214,16 @@ interface AppStore {
 ```
 
 `setActiveModel` → `POST /api/models/active` → store güncellenir → `ModelDetailPanel` otomatik re-render.  
-`predict` → `status: 'analyzing'` set et → `POST /api/predict` → `status: 'done'` + `result` set et.  
+`predict` → `status: 'analyzing'` set et → `POST /api/predict` → `status: 'done'` + `result` set et. Hata durumunda `status: 'error'` + `error` mesajı set et.  
 `AnalyzingOverlay` sadece `status === 'analyzing'`'i subscribe eder, gereksiz re-render yok.
+
+**Initial load — `App.tsx`:**
+```tsx
+useEffect(() => {
+  useAppStore.getState().fetchModels()
+}, [])
+```
+`fetchModels` → `GET /api/models` → `models` + `activeModel` (`is_active: true` olan) store'a yazılır.
 
 ### Layout — `App.tsx`
 
@@ -242,6 +274,7 @@ Classify tetiklenince görsel üzerine overlay:
   - 60–85% → `#fbbf24` "Moderate"
   - <60% → `#f87171` "Low"
 - **Latency chip** — `{n} ms · ONNX Runtime`
+- **Error state** (`status === 'error'`) — kırmızı border, `error` mesajı, "Try again" butonu (`setFile(null)` + `status: 'idle'`)
 
 ---
 
@@ -301,6 +334,7 @@ Header'da compact dropdown (custom, Tailwind styled):
 export const getModels = (): Promise<ModelInfo[]>
 export const setActiveModel = (dir: string): Promise<void>
 export const predict = (file: File): Promise<PredictResult>
+export const healthCheck = (): Promise<{ status: string; active_model: string; cached_models: number }>
 ```
 
 ---
@@ -311,8 +345,9 @@ export const predict = (file: File): Promise<PredictResult>
 interface ModelInfo {
   id: string; model_name: string; accuracy: number; f1_macro: number;
   f1_weighted: number; val_loss: number; temperature: number;
-  is_active: boolean; per_class: Record<string, {accuracy: number; support: number}>;
-  training: { best_epoch: number; total_epochs_run: number; learning_rate: number; weight_decay: number; };
+  is_active: boolean;
+  per_class: Record<string, { accuracy: number; support: number }>;
+  training: { best_epoch: number; total_epochs_run: number; learning_rate: number; weight_decay: number };
 }
 
 interface PredictResult {
@@ -387,14 +422,18 @@ zustand
 ## Validation Criteria
 
 - [ ] `uv run uvicorn api:app` hatasız ayağa kalkıyor
-- [ ] `GET /api/models` 3 model, `per_class` ve `training` alanlarıyla dönüyor
+- [ ] `GET /api/health` `{"status":"ok"}` dönüyor
+- [ ] `GET /api/models` 3 model, `per_class` ve `training` alanlarıyla dönüyor, `is_active` doğru set
 - [ ] `POST /api/predict` geçerli araç görseli için doğru JSON dönüyor
+- [ ] `POST /api/predict` PDF veya 10MB+ dosyada 415/413 hatası dönüyor
 - [ ] Frontend `npm run build` hatasız tamamlanıyor
 - [ ] Production modda tek port (8000) çalışıyor
+- [ ] Sayfa açılınca `fetchModels` çalışır, model listesi ve aktif model yüklenir
 - [ ] Model selector'dan farklı model seçince sonraki predict yeni modeli kullanıyor
 - [ ] Classify sırasında scanning animasyonu görünüyor, sonuçlar slide-in ile geliyor
 - [ ] Softmax bar'ları animate ederek genişliyor
 - [ ] ModelDetailPanel açılıp kapanıyor, Config ve Training sekmeleri çalışıyor
+- [ ] Predict hatası `status:'error'` + hata mesajı + "Try again" butonu gösteriyor
 - [ ] `app.py` (Gradio) bu değişikliklerden etkilenmiyor
 
 ---
