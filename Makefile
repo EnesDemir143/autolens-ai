@@ -1,7 +1,7 @@
 .PHONY: help sync import test lint format typecheck check pre-commit graphify-update graphify-report clean
 .PHONY: compute-stats train-baseline-0 train-baseline-1 train-baseline-2 train-all-baselines resume-training
 .PHONY: train-all-wandb
-.PHONY: train-dinov3 dry-run-dinov3
+.PHONY: train-dinov3 train-dinov3-safe-focal dry-run-dinov3 dry-run-dinov3-safe-focal
 .PHONY: checkpoint-to-safetensors export-model size-check calibrate-model prepare-demo-artifact deploy-run-to-demo
 .PHONY: demo demo-smoke ui-smoke-check
 .PHONY: frontend-install frontend-build demo-web demo-gradio
@@ -57,7 +57,11 @@ help:
 		'  make train-baseline-0 WANDB=--wandb' \
 		'' \
 		'Full W&B run (all 5 models sequentially):' \
-		'  make train-all-wandb'
+		'  make train-all-wandb' \
+		'' \
+		'Recommended DINOv3 tuning:' \
+		'  make dry-run-dinov3-safe-focal WANDB=--wandb  # 1 epoch smoke test' \
+		'  make train-dinov3-safe-focal WANDB=--wandb      # safe aug + class-weighted focal + EMA'
 
 sync:
 	uv sync
@@ -170,6 +174,7 @@ deploy-run-to-demo: checkpoint-to-safetensors export-model size-check calibrate-
 
 # Training targets
 WANDB ?=
+WANDB_PROJECT ?= autolens-ai
 
 train-resnet-mobilenet: compute-stats
 	@echo "Training Baseline 0: ResNet18..."
@@ -217,6 +222,25 @@ train-dinov3:
 		$(WANDB)
 	@echo ""
 	@echo "DINOv3 training complete (non-LoRA + LoRA)."
+
+train-dinov3-safe-focal: compute-stats
+	@echo "Training recommended DINOv3 run: safe augmentation + class-weighted focal loss + EMA..."
+	uv run python scripts/train.py \
+		--config configs/experiments/dinov3_safe_focal_aug.yaml \
+		$(WANDB) \
+		$(if $(WANDB),--wandb-project $(WANDB_PROJECT),)
+	@echo ""
+	@echo "Recommended DINOv3 safe-focal run complete."
+
+dry-run-dinov3-safe-focal: compute-stats
+	@echo "[DRY RUN] DINOv3 safe-focal — 1 epoch smoke test..."
+	uv run python scripts/train.py \
+		--config configs/experiments/dinov3_safe_focal_aug.yaml \
+		--max-epochs 1 \
+		$(WANDB) \
+		$(if $(WANDB),--wandb-project $(WANDB_PROJECT),)
+	@echo ""
+	@echo "DINOv3 safe-focal dry run complete."
 
 # DINOv3 dry-run — 1 epoch only, tests data pipeline / logger / model init
 dry-run-dinov3:

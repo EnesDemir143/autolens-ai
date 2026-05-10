@@ -71,7 +71,7 @@ def create_trainer(
     
     # Callbacks
     callbacks = [
-        # Model checkpointing - save top 3 and last
+        # Primary checkpointing - optimize for the assignment metric
         ModelCheckpoint(
             dirpath=checkpoint_dir,
             filename="best-{epoch:02d}-{val/f1_macro:.4f}",
@@ -81,27 +81,38 @@ def create_trainer(
             save_last=True,
             auto_insert_metric_name=False,
         ),
-        # Also save best by loss
-        ModelCheckpoint(
-            dirpath=checkpoint_dir,
-            filename="best_loss-{epoch:02d}-{val/loss:.4f}",
-            monitor=monitor_metric,
-            mode=monitor_mode,
-            save_top_k=1,
-            auto_insert_metric_name=False,
-        ),
-        # Early stopping
-        EarlyStopping(
-            monitor=monitor_metric,
-            mode=monitor_mode,
-            patience=early_stopping_patience,
-            verbose=True,
-        ),
-        # Learning rate monitoring
-        LearningRateMonitor(logging_interval="epoch"),
-        # Rich progress bar
-        RichProgressBar(),
+        # Optional secondary checkpointing when early stopping / selection
+        # metric differs from the primary F1-macro target. Lightning does not
+        # allow multiple stateful ModelCheckpoint callbacks with the same state key.
     ]
+
+    if monitor_metric != "val/f1_macro" or monitor_mode != "max":
+        callbacks.append(
+            ModelCheckpoint(
+                dirpath=checkpoint_dir,
+                filename="best_loss-{epoch:02d}-{val/loss:.4f}",
+                monitor=monitor_metric,
+                mode=monitor_mode,
+                save_top_k=1,
+                auto_insert_metric_name=False,
+            )
+        )
+
+    callbacks.extend(
+        [
+            # Early stopping
+            EarlyStopping(
+                monitor=monitor_metric,
+                mode=monitor_mode,
+                patience=early_stopping_patience,
+                verbose=True,
+            ),
+            # Learning rate monitoring
+            LearningRateMonitor(logging_interval="epoch"),
+            # Rich progress bar
+            RichProgressBar(),
+        ]
+    )
     
     # Optional: EMA
     if use_ema:

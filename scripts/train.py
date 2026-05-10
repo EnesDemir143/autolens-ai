@@ -269,6 +269,15 @@ def main() -> None:
         crop_size=config["crop_size"],
         mean=tuple(mean),
         std=tuple(std),
+        crop_scale=tuple(config.get("aug_crop_scale", (0.8, 1.0))),
+        crop_ratio=tuple(config.get("aug_crop_ratio", (0.85, 1.15))),
+        color_jitter_brightness=config.get("aug_brightness", 0.1),
+        color_jitter_contrast=config.get("aug_contrast", 0.1),
+        color_jitter_saturation=config.get("aug_saturation", 0.1),
+        color_jitter_hue=config.get("aug_hue", 0.0),
+        random_erasing_p=config.get("random_erasing_p", 0.0),
+        random_erasing_scale=tuple(config.get("random_erasing_scale", (0.02, 0.10))),
+        random_erasing_ratio=tuple(config.get("random_erasing_ratio", (0.3, 3.3))),
     )
     
     # Compute class weights if needed
@@ -311,6 +320,7 @@ def main() -> None:
         weight_decay=config["weight_decay"],
         class_weights=class_weights,
         pretrained=config["pretrained"],
+        drop_path_rate=config.get("drop_path_rate", 0.0),
         label_smoothing=config.get("label_smoothing", 0.0),
         use_focal_loss=config.get("use_focal_loss", False),
         focal_alpha=config.get("focal_alpha", 1.0),

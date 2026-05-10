@@ -35,9 +35,10 @@ class AutoLensClassifier(pl.LightningModule):
         weight_decay: float = 1e-4,
         class_weights: torch.Tensor | None = None,
         pretrained: bool = True,
+        drop_path_rate: float = 0.0,
         label_smoothing: float = 0.0,
         use_focal_loss: bool = False,
-        focal_alpha: float = 1.0,
+        focal_alpha: float | str = 1.0,
         focal_gamma: float = 2.0,
         max_epochs: int = 100,
         use_lora: bool = False,
@@ -55,9 +56,10 @@ class AutoLensClassifier(pl.LightningModule):
             weight_decay: Weight decay for optimizer
             class_weights: Optional class weights for loss
             pretrained: Whether to use pretrained weights
+            drop_path_rate: Stochastic depth rate for timm/ViT fine-tuning
             label_smoothing: Label smoothing factor (0.0 = no smoothing, 0.1 = 10% smoothing)
             use_focal_loss: Use Focal Loss instead of CrossEntropy
-            focal_alpha: Focal loss alpha parameter
+            focal_alpha: Focal loss alpha parameter, or "class_weights" to reuse computed class weights
             focal_gamma: Focal loss gamma parameter
         """
         super().__init__()
@@ -68,6 +70,7 @@ class AutoLensClassifier(pl.LightningModule):
             model_name=model_name,
             num_classes=num_classes,
             pretrained=pretrained,
+            drop_path_rate=drop_path_rate,
             use_lora=use_lora,
             lora_r=lora_r,
             lora_alpha=lora_alpha,
@@ -85,7 +88,18 @@ class AutoLensClassifier(pl.LightningModule):
         # Focal loss
         if use_focal_loss:
             from autolens_ai.training.focal_loss import FocalLoss
-            self.focal_loss_fn = FocalLoss(alpha=focal_alpha, gamma=focal_gamma)
+            focal_alpha_value: float | torch.Tensor
+            if focal_alpha == "class_weights":
+                if class_weights is None:
+                    raise ValueError("focal_alpha='class_weights' requires computed class_weights")
+                focal_alpha_value = class_weights
+            else:
+                focal_alpha_value = float(focal_alpha)
+            self.focal_loss_fn = FocalLoss(
+                alpha=focal_alpha_value,
+                gamma=focal_gamma,
+                label_smoothing=label_smoothing,
+            )
         
         # Metrics
         self.train_acc = Accuracy(task="multiclass", num_classes=num_classes)
@@ -184,7 +198,7 @@ class AutoLensClassifier(pl.LightningModule):
     def on_test_epoch_end(self) -> None:
         """Save normalized confusion matrix PNG and per-class metrics after test."""
         import matplotlib.pyplot as plt
-        from sklearn.metrics import classification_report
+        from sklearn.metrics import classification_report  # type: ignore[import-untyped]
 
         from autolens_ai.data.labels import TARGET_CLASSES
 
@@ -219,7 +233,7 @@ class AutoLensClassifier(pl.LightningModule):
             save_dir = Path(self.trainer.log_dir)
         # Also try checkpoint callback dir
         if self.trainer is not None:
-            for cb in self.trainer.callbacks:
+            for cb in self.trainer.callbacks:  # type: ignore[attr-defined]
                 if hasattr(cb, "dirpath") and cb.dirpath:
                     save_dir = Path(cb.dirpath)
                     break

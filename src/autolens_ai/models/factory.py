@@ -50,6 +50,7 @@ def create_model(
     model_name: str,
     num_classes: int = 8,
     pretrained: bool = True,
+    drop_path_rate: float = 0.0,
     use_lora: bool = False,
     lora_r: int = 8,
     lora_alpha: int = 16,
@@ -62,6 +63,7 @@ def create_model(
         model_name: One of 'mobilenetv4_conv_medium', 'efficientnet_b2', 'resnet18', 'vit_small_patch16_dinov3'
         num_classes: Number of output classes (default: 8 for AutoLens)
         pretrained: Whether to use pretrained weights
+        drop_path_rate: Stochastic depth rate for timm models (0.1 is a safe ViT fine-tuning default)
         use_lora: Apply LoRA adapters — only supported for ViT models
         lora_r: LoRA rank
         lora_alpha: LoRA alpha scaling
@@ -85,6 +87,7 @@ def create_model(
             config["name"],  # type: ignore[arg-type]
             pretrained=pretrained,
             num_classes=num_classes,
+            drop_path_rate=drop_path_rate,
         )
     elif source == "torchvision":
         if model_name == "resnet18":
@@ -114,7 +117,7 @@ def create_model(
             target_modules=lora_target_modules or ["qkv", "proj"],
             bias="none",
         )
-        model = get_peft_model(model, lora_config)
+        model = get_peft_model(model, lora_config)  # type: ignore[arg-type]
 
         # Unfreeze classifier head
         for name, param in model.named_parameters():
