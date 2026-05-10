@@ -77,6 +77,20 @@ def main() -> None:
     dummy = torch.zeros(1, 3, image_size, image_size, dtype=torch.float32)
     args.output.parent.mkdir(parents=True, exist_ok=True)
 
+    # EVA (DINOv3) patch: TorchScript tracer requires is_causal to be bool, not Tensor.
+    try:
+        import timm.models.eva as _eva_module  # type: ignore[import-untyped]
+        _orig_attn_fwd = _eva_module.EvaAttention.forward
+
+        def _patched_attn_fwd(self, x, rope=None, attn_mask=None, is_causal=False):  # type: ignore[override]
+            if isinstance(is_causal, torch.Tensor):
+                is_causal = bool(is_causal.item())
+            return _orig_attn_fwd(self, x, rope=rope, attn_mask=attn_mask, is_causal=is_causal)
+
+        _eva_module.EvaAttention.forward = _patched_attn_fwd  # type: ignore[method-assign]
+    except (ImportError, AttributeError):
+        pass  # Not an EVA model — no patch needed
+
     torch.onnx.export(
         model,
         dummy,
