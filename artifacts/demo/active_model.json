@@ -1,10 +1,10 @@
 {
-  "created_at": "2026-05-09T19:14:31+00:00",
+  "created_at": "2026-05-10T08:33:18.261555+00:00",
   "backend": "onnxruntime",
-  "model_path": "artifacts/export/efficientnet_b2_current/model.simplified.onnx",
-  "metadata_path": "artifacts/export/efficientnet_b2_current/metadata.json",
-  "calibration_path": "artifacts/export/efficientnet_b2_current/calibration.json",
-  "temperature": 1.779860258102417,
+  "model_path": "artifacts/export/dinov3_vits16_latest/model.onnx",
+  "metadata_path": "artifacts/export/dinov3_vits16_latest/metadata.json",
+  "calibration_path": "artifacts/export/dinov3_vits16_latest/calibration.json",
+  "temperature": 1.721068263053894,
   "class_labels": [
     "SUV",
     "VAN",
@@ -26,9 +26,9 @@
     "PICK UP"
   ],
   "preprocessing": {
-    "image_size": 224,
+    "image_size": 256,
     "resize_size": 256,
-    "crop_size": 224,
+    "crop_size": 256,
     "mean": [
       0.4429,
       0.4354,
@@ -41,6 +41,6 @@
     ],
     "color_mode": "RGB"
   },
-  "source_run_id": "baseline_0_efficientnet_b2_20260509_135313",
+  "source_run_id": "baseline_0_dinov3_vits16_20260509_235120",
   "contract": "Phase 5 should replace this JSON pointer, not edit UI prediction code, when final winner changes."
 }

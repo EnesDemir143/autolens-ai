@@ -9,6 +9,9 @@ depends_on: []
 requirements_addressed: ['TRN-04', 'TRN-05']
 files_modified: ['src/autolens_ai/evaluation/', 'artifacts/evaluation/', 'docs/model_selection.md']
 autonomous: true
+status: complete
+completed_at: 2026-05-10
+completion_evidence: configs/experiments/baseline_0_dinov3_vits16*.yaml; checkpoints DINOv3 non-LoRA and LoRA metrics; docs/dinov3_non_lora_selection.md
 ---
 
 # Plan 02 — Prepare overnight DINOv3 non-LoRA and optional LoRA comparison runs with gated-access fallback

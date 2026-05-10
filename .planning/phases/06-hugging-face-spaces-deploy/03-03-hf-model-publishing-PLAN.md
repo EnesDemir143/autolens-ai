@@ -9,6 +9,9 @@ depends_on: ['06-01']
 requirements_addressed: ['PUBLISH-01', 'PUBLISH-02', 'PUBLISH-03']
 files_modified: ['docs/hf_model_publishing.md', 'Makefile', 'artifacts/export/', 'deploy/hf_models/']
 autonomous: true
+status: partial
+updated_at: 2026-05-10
+completion_evidence: DINOv3 and EfficientNet-B2 model repos uploaded; final evidence recorded; remaining: ensure final selected model is marked as final in Phase 7 evidence
 ---
 
 # Plan 03 — Publish completed model artifacts to Hugging Face model repos

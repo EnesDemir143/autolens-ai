@@ -5,7 +5,7 @@
 See: `.planning/PROJECT.md` (updated 2026-05-06)
 
 **Core value:** Generalize to unseen presentation/test images and return the correct 8-class car body type with fast, explainable prediction.
-**Current focus:** Phase 4 Plan 05 execution complete for the current EfficientNet-B2 deployability lane. Next execution should start only the deferred DINOv3/LoRA/benchmark/final-selection plans when explicitly requested.
+**Current focus:** Phase 6 — deploy/publish the selected final DINOv3 ViT-S/16 non-LoRA artifact. Phase 4 final selection is complete; Phase 5 UI is model-agnostic and active demo pointer now uses DINOv3 with passing smoke/latency evidence.
 
 ## Workflow Preferences
 
@@ -24,10 +24,10 @@ See: `.planning/PROJECT.md` (updated 2026-05-06)
 | Phase 1 — Project Foundation | `main` | Complete — verified 2026-05-06 (3/3 plans) |
 | Phase 2 — Dataset Research and Curation | `feat/dataset-curation-eda` | Complete — verified 2026-05-07 (4/4 plans, local datasets) |
 | Phase 3 — Baseline Training Pipeline | `feat/baseline-training-pipeline` | Complete — verified 2026-05-07 (4/4 plans) |
-| Phase 4 — Export, Calibration, Overnight Model Selection | `feat/model-comparison-and-selection` | In progress — Plan 05 current EfficientNet-B2 export/calibration/demo artifact complete 2026-05-09; overnight model queue and final selection still deferred |
+| Phase 4 — Export, Calibration, Overnight Model Selection | `main` | Complete — DINOv3 ViT-S/16 non-LoRA selected 2026-05-10; LoRA rejected by validation/internal-test evidence; final export/calibration exists |
 | Phase 5 — Gradio Demo Interface | `feat/gradio-demo-interface` | Complete — verified 2026-05-09 (4/4 plans, ONNX predictor + Gradio layout + probability chart + smoke test/docs) |
-| Phase 6 — Hugging Face Spaces Demo Deploy | `feat/hugging-face-spaces-deploy` | Planned 2026-05-09 — package/publish local Gradio ONNX demo without Docker |
-| Phase 7 — Final Evidence and IEEE Report | `feat/final-evidence-and-ieee-report` | Ready after deploy evidence — existing report plans shifted from Phase 6 |
+| Phase 6 — Hugging Face Spaces Demo Deploy | `main` | In progress — DINOv3/EfficientNet model repos published; active demo repointed to DINOv3 and smoke-tested; remaining: deploy/update HF Space and record URL |
+| Phase 7 — Final Evidence and IEEE Report | `main` | Pending — start after Phase 6 Space URL and final evidence are frozen |
 
 ---
 *Initialized: 2026-05-06*
@@ -50,3 +50,6 @@ See: `.planning/PROJECT.md` (updated 2026-05-06)
 *Last activity: 2026-05-09 — Phase 4 Plan 05 executed: EfficientNet-B2 checkpoint converted to safetensors, exported to ONNX, size-checked under 95 MB, validation-calibrated, and active demo artifact config written.*
 
 *Last activity: 2026-05-09 — Phase 5 complete and verified (4 plans, ONNX predictor + Gradio Blocks UI + probability chart + smoke test + docs).*
+*Last activity: 2026-05-10 — Final model selected: DINOv3 ViT-S/16 non-LoRA. Phase 4 plans 01-04 marked complete; `docs/dinov3_non_lora_selection.md` and split-explicit `docs/model_comparison.md` are the selection evidence.*
+
+*Last activity: 2026-05-10 — Current phase is Phase 6. `artifacts/demo/active_model.json` now points to `artifacts/export/dinov3_vits16_latest/`; DINOv3 local smoke test passed with 44.21 ms single inference and 39.64 ms average over 5 runs. Next action: deploy/update Hugging Face Space and record URL for Phase 7.*

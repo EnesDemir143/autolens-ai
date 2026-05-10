@@ -9,6 +9,9 @@ depends_on: ['04-01', '04-02']
 requirements_addressed: ['EVAL-06', 'EVAL-07']
 files_modified: ['src/autolens_ai/evaluation/', 'artifacts/evaluation/', 'docs/model_selection.md']
 autonomous: true
+status: complete
+completed_at: 2026-05-10
+completion_evidence: docs/dinov3_non_lora_selection.md and docs/model_comparison.md select DINOv3 ViT-S/16 non-LoRA
 ---
 
 # Plan 04 — Write evidence-first final model selection artifact and report-ready rationale

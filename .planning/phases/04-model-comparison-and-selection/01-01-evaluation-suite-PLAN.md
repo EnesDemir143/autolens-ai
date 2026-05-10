@@ -9,6 +9,9 @@ depends_on: []
 requirements_addressed: ['EVAL-01', 'EVAL-02', 'EVAL-03', 'EVAL-04', 'EVAL-05']
 files_modified: ['src/autolens_ai/evaluation/', 'artifacts/evaluation/', 'docs/model_selection.md']
 autonomous: true
+status: complete
+completed_at: 2026-05-10
+completion_evidence: docs/model_comparison.md; artifacts/export/*/internal_test_results.json; calibration.json test_eval fields
 ---
 
 # Plan 01 — Create metrics, classification report, plot, and calibration diagnostics suite

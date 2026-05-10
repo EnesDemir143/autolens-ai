@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-05-09T16:24:22Z",
+  "timestamp": "2026-05-10T08:33:20Z",
   "artifact_config": "artifacts/demo/active_model.json",
-  "model_path": "artifacts/export/efficientnet_b2_current/model.onnx",
+  "model_path": "artifacts/export/dinov3_vits16_latest/model.onnx",
   "num_classes": 8,
   "class_labels": [
     "SUV",
@@ -13,7 +13,7 @@
     "HATCHBACK",
     "PICK UP"
   ],
-  "single_inference_ms": 18.21,
-  "avg_inference_ms_5_runs": 14.43,
+  "single_inference_ms": 44.21,
+  "avg_inference_ms_5_runs": 39.64,
   "status": "PASS"
 }

@@ -9,6 +9,9 @@ depends_on: ['04-01', '04-02']
 requirements_addressed: ['EVAL-06', 'EVAL-07']
 files_modified: ['src/autolens_ai/evaluation/', 'artifacts/evaluation/', 'docs/model_selection.md']
 autonomous: true
+status: complete
+completed_at: 2026-05-10
+completion_evidence: docs/model_comparison.md split-explicit benchmark with Accuracy/Balanced Acc/MCC/Precision/Recall/F1, artifact sizes, and DINOv3 smoke latency in artifacts/demo/smoke_test_evidence.json
 ---
 
 # Plan 03 — Benchmark four model families by macro F1, balanced accuracy, MCC, size, and latency

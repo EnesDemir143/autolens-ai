@@ -42,3 +42,21 @@
 - Metrics include macro F1, weighted F1, balanced accuracy, MCC, per-class metrics, normalized confusion matrix, size, and latency.
 - Selected final artifact is under 95 MB or mitigation is documented.
 - If an overnight model beats the current EfficientNet-B2 candidate, export/calibration evidence is repeated for that winner before Phase 6.
+
+---
+
+## Completion Evidence — 2026-05-10
+
+Phase 4 final selection is complete.
+
+- Final selected model: **DINOv3 ViT-S/16 non-LoRA**.
+- Selection rationale: `docs/dinov3_non_lora_selection.md`.
+- Split-explicit benchmark: `docs/model_comparison.md`.
+- Final export folder: `artifacts/export/dinov3_vits16_latest/`.
+- Internal-test evidence: `artifacts/export/dinov3_vits16_latest/internal_test_results.json`.
+- Calibration evidence: `artifacts/export/dinov3_vits16_latest/calibration.json` with `test_eval` measured on `internal_test`.
+- Size evidence: `artifacts/export/dinov3_vits16_latest/size_check.json`; safetensors and ONNX are under 95 MB.
+- Final demo smoke/latency evidence: `artifacts/demo/smoke_test_evidence.json`; DINOv3 ONNX average latency over 5 runs is 39.64 ms.
+- LoRA comparison evidence: `checkpoints/baseline_0_dinov3_vits16_lora_20260509_225159/metrics.csv` and `checkpoints/baseline_0_dinov3_vits16_lora_20260510_073524/metrics.csv`; LoRA did not beat non-LoRA validation F1 and lacks equivalent final export/test/calibration evidence.
+
+Remaining work moves to Phase 6: repoint the active demo artifact to DINOv3, smoke-test, and deploy/update Hugging Face Space.
