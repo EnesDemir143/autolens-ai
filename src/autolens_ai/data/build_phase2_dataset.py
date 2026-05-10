@@ -187,13 +187,17 @@ def average_hash64(image: Image.Image) -> str:
     return f"{bits:016x}"
 
 
-def scan_source(source_root: Path, dataset_root: Path, seen_hashes: dict[str, str]) -> list[ImageRecord]:
+def scan_source(
+    source_root: Path, dataset_root: Path, seen_hashes: dict[str, str]
+) -> list[ImageRecord]:
     source_id = source_root.name
     sample_labels = load_sample_submission(source_root)
     metadata_labels = load_vehicle_classification_labels(source_root)
     rows: list[ImageRecord] = []
     for image_path in iter_images(source_root):
-        raw_label = metadata_labels.get(image_path.name) or infer_raw_label(source_root, image_path, sample_labels)
+        raw_label = metadata_labels.get(image_path.name) or infer_raw_label(
+            source_root, image_path, sample_labels
+        )
         decision = normalize_label(raw_label, source_id)
         width, height, ratio, size, digest, ahash, image_error = image_facts(image_path)
         rel = image_path.relative_to(dataset_root).as_posix()
@@ -231,7 +235,9 @@ def scan_source(source_root: Path, dataset_root: Path, seen_hashes: dict[str, st
                 near_duplicate_group_size="",
                 near_duplicate_sources="",
                 duplicate_of=duplicate_of,
-                license_note=SOURCE_LICENSE_NOTES.get(source_id, "Local user-provided dataset; verify source/license."),
+                license_note=SOURCE_LICENSE_NOTES.get(
+                    source_id, "Local user-provided dataset; verify source/license."
+                ),
             )
         )
         if approved_micro_model and not image_error and not duplicate_of:
@@ -239,7 +245,9 @@ def scan_source(source_root: Path, dataset_root: Path, seen_hashes: dict[str, st
             reason = f"approved_micro_model:{approved_micro_model}"
             normalized_label = "MICRO"
 
-        split_eligible = "yes" if status == "accepted" and normalized_label in TARGET_CLASSES else "no"
+        split_eligible = (
+            "yes" if status == "accepted" and normalized_label in TARGET_CLASSES else "no"
+        )
         rows.append(
             ImageRecord(
                 source_id=source_id,
@@ -261,7 +269,9 @@ def scan_source(source_root: Path, dataset_root: Path, seen_hashes: dict[str, st
                 near_duplicate_group_size="",
                 near_duplicate_sources="",
                 duplicate_of=duplicate_of,
-                license_note=SOURCE_LICENSE_NOTES.get(source_id, "Local user-provided dataset; verify source/license."),
+                license_note=SOURCE_LICENSE_NOTES.get(
+                    source_id, "Local user-provided dataset; verify source/license."
+                ),
             )
         )
     return rows
@@ -276,7 +286,10 @@ def write_csv(path: Path, rows: list[dict[str, str]], columns: list[str]) -> Non
 
 
 def write_counts(path: Path, counts: Mapping[tuple[str, ...], int], columns: list[str]) -> None:
-    rows = [{**{columns[i]: key[i] for i in range(len(key))}, "count": str(value)} for key, value in sorted(counts.items())]
+    rows = [
+        {**{columns[i]: key[i] for i in range(len(key))}, "count": str(value)}
+        for key, value in sorted(counts.items())
+    ]
     write_csv(path, rows, [*columns, "count"])
 
 
@@ -334,11 +347,13 @@ def write_micro_model_candidates(rows: list[ImageRecord], output_dir: Path) -> N
 
     counts: Counter[tuple[str, ...]] = Counter()
     for candidate_row in candidate_rows:
-        counts[(
-            candidate_row["micro_model_name"],
-            candidate_row["micro_candidate_tier"],
-            candidate_row["micro_candidate_unique_valid"],
-        )] += 1
+        counts[
+            (
+                candidate_row["micro_model_name"],
+                candidate_row["micro_candidate_tier"],
+                candidate_row["micro_candidate_unique_valid"],
+            )
+        ] += 1
     write_counts(
         output_dir / "eda/micro_model_candidate_counts.csv",
         counts,
@@ -417,7 +432,9 @@ def write_near_duplicate_reports(rows: list[ImageRecord], output_dir: Path) -> N
     for row in rows:
         if not row.near_duplicate_group:
             continue
-        counts[(row.near_duplicate_group, row.near_duplicate_group_size, row.near_duplicate_sources)] += 1
+        counts[
+            (row.near_duplicate_group, row.near_duplicate_group_size, row.near_duplicate_sources)
+        ] += 1
         label_counts[(row.normalized_label, row.near_duplicate_sources)] += 1
     write_counts(
         output_dir / "eda/near_duplicate_group_counts.csv",
@@ -431,13 +448,19 @@ def write_near_duplicate_reports(rows: list[ImageRecord], output_dir: Path) -> N
     )
 
 
-def build_splits(rows: list[ImageRecord], output_dir: Path, max_per_class: int | None = None) -> dict[str, Counter[str]]:
+def build_splits(
+    rows: list[ImageRecord], output_dir: Path, max_per_class: int | None = None
+) -> dict[str, Counter[str]]:
     by_class: dict[str, list[ImageRecord]] = defaultdict(list)
     for row in rows:
         if row.split_eligible == "yes":
             by_class[row.normalized_label].append(row)
 
-    split_counts: dict[str, Counter[str]] = {"train": Counter(), "val": Counter(), "internal_test": Counter()}
+    split_counts: dict[str, Counter[str]] = {
+        "train": Counter(),
+        "val": Counter(),
+        "internal_test": Counter(),
+    }
     split_rows: dict[str, list[dict[str, str]]] = defaultdict(list)
     split_columns = ["split", *MANIFEST_COLUMNS]
 
@@ -455,7 +478,9 @@ def build_splits(rows: list[ImageRecord], output_dir: Path, max_per_class: int |
 
     for split, records in split_rows.items():
         write_csv(output_dir / f"splits/{split}.csv", records, split_columns)
-    all_split_rows = [record for split in ("train", "val", "internal_test") for record in split_rows[split]]
+    all_split_rows = [
+        record for split in ("train", "val", "internal_test") for record in split_rows[split]
+    ]
     write_csv(output_dir / "splits/all_splits.csv", all_split_rows, split_columns)
     return split_counts
 
@@ -470,14 +495,23 @@ def write_catalog(dataset_root: Path, source_dirs: list[Path], output_dir: Path)
                 "local_path": source_dir.as_posix(),
                 "source_family": "local_user_provided",
                 "source_url_or_id": "local datasets/ mirror; internet research skipped per user instruction",
-                "license_note": SOURCE_LICENSE_NOTES.get(source_id, "Verify original source/license before publication."),
+                "license_note": SOURCE_LICENSE_NOTES.get(
+                    source_id, "Verify original source/license before publication."
+                ),
                 "phase2_use": "scan_local_manifest_then_eda_decision_gate",
             }
         )
     write_csv(
         output_dir / "source_catalog.csv",
         rows,
-        ["source_id", "local_path", "source_family", "source_url_or_id", "license_note", "phase2_use"],
+        [
+            "source_id",
+            "local_path",
+            "source_family",
+            "source_url_or_id",
+            "license_note",
+            "phase2_use",
+        ],
     )
     (output_dir / "source_catalog.json").write_text(json.dumps(rows, indent=2), encoding="utf-8")
 
@@ -498,7 +532,11 @@ def run(dataset_root: Path, output_dir: Path, max_per_class: int | None = None) 
         for path in all_source_dirs
         if path.name in EXCLUDED_SOURCE_IDS
     ]
-    write_csv(output_dir / "excluded_source_catalog.csv", excluded_rows, ["source_id", "local_path", "exclusion_reason"])
+    write_csv(
+        output_dir / "excluded_source_catalog.csv",
+        excluded_rows,
+        ["source_id", "local_path", "exclusion_reason"],
+    )
 
     all_rows: list[ImageRecord] = []
     seen_hashes: dict[str, str] = {}
@@ -509,27 +547,68 @@ def run(dataset_root: Path, output_dir: Path, max_per_class: int | None = None) 
     all_rows = annotate_near_duplicates(all_rows)
     for source_dir in source_dirs:
         source_rows = [row for row in all_rows if row.source_id == source_dir.name]
-        write_csv(output_dir / f"manifests/{source_dir.name}.csv", [asdict(row) for row in source_rows], MANIFEST_COLUMNS)
+        write_csv(
+            output_dir / f"manifests/{source_dir.name}.csv",
+            [asdict(row) for row in source_rows],
+            MANIFEST_COLUMNS,
+        )
 
-    write_csv(output_dir / "manifests/merged_manifest.csv", [asdict(row) for row in all_rows], MANIFEST_COLUMNS)
+    write_csv(
+        output_dir / "manifests/merged_manifest.csv",
+        [asdict(row) for row in all_rows],
+        MANIFEST_COLUMNS,
+    )
 
-    write_counts(output_dir / "eda/class_distribution.csv", Counter((row.normalized_label or "UNMAPPED",) for row in all_rows), ["normalized_label"])
-    write_counts(output_dir / "eda/status_counts.csv", Counter((row.mapping_status, row.review_or_exclusion_reason) for row in all_rows), ["mapping_status", "reason"])
-    write_counts(output_dir / "eda/source_by_class.csv", Counter((row.source_id, row.normalized_label or "UNMAPPED") for row in all_rows), ["source_id", "normalized_label"])
-    write_counts(output_dir / "eda/source_status_counts.csv", Counter((row.source_id, row.mapping_status, row.review_or_exclusion_reason) for row in all_rows), ["source_id", "mapping_status", "reason"])
-    write_csv(output_dir / "eda/image_quality_summary.csv", [summarize_numeric(all_rows, field) for field in ("width", "height", "aspect_ratio", "file_size_bytes")], ["field", "count", "min", "max", "mean"])
+    write_counts(
+        output_dir / "eda/class_distribution.csv",
+        Counter((row.normalized_label or "UNMAPPED",) for row in all_rows),
+        ["normalized_label"],
+    )
+    write_counts(
+        output_dir / "eda/status_counts.csv",
+        Counter((row.mapping_status, row.review_or_exclusion_reason) for row in all_rows),
+        ["mapping_status", "reason"],
+    )
+    write_counts(
+        output_dir / "eda/source_by_class.csv",
+        Counter((row.source_id, row.normalized_label or "UNMAPPED") for row in all_rows),
+        ["source_id", "normalized_label"],
+    )
+    write_counts(
+        output_dir / "eda/source_status_counts.csv",
+        Counter(
+            (row.source_id, row.mapping_status, row.review_or_exclusion_reason) for row in all_rows
+        ),
+        ["source_id", "mapping_status", "reason"],
+    )
+    write_csv(
+        output_dir / "eda/image_quality_summary.csv",
+        [
+            summarize_numeric(all_rows, field)
+            for field in ("width", "height", "aspect_ratio", "file_size_bytes")
+        ],
+        ["field", "count", "min", "max", "mean"],
+    )
     write_micro_model_candidates(all_rows, output_dir)
 
     review_rows = [asdict(row) for row in all_rows if row.mapping_status == "review"]
-    duplicate_rows = [asdict(row) for row in all_rows if row.review_or_exclusion_reason == "duplicate_image_hash"]
-    missing_rows = [asdict(row) for row in all_rows if row.review_or_exclusion_reason in {"missing_raw_label", "invalid_or_corrupt_image"}]
+    duplicate_rows = [
+        asdict(row) for row in all_rows if row.review_or_exclusion_reason == "duplicate_image_hash"
+    ]
+    missing_rows = [
+        asdict(row)
+        for row in all_rows
+        if row.review_or_exclusion_reason in {"missing_raw_label", "invalid_or_corrupt_image"}
+    ]
     write_csv(output_dir / "eda/review_candidates.csv", review_rows, MANIFEST_COLUMNS)
     write_csv(output_dir / "eda/duplicate_hashes.csv", duplicate_rows, MANIFEST_COLUMNS)
     write_csv(output_dir / "eda/missing_or_corrupt.csv", missing_rows, MANIFEST_COLUMNS)
     write_near_duplicate_reports(all_rows, output_dir)
 
     split_counts = build_splits(all_rows, output_dir, max_per_class=max_per_class)
-    accepted_counts = Counter(row.normalized_label for row in all_rows if row.split_eligible == "yes")
+    accepted_counts = Counter(
+        row.normalized_label for row in all_rows if row.split_eligible == "yes"
+    )
     target_rows = [
         {
             "class": label,
@@ -542,7 +621,19 @@ def run(dataset_root: Path, output_dir: Path, max_per_class: int | None = None) 
         }
         for label in TARGET_CLASSES
     ]
-    write_csv(output_dir / "eda/balance_audit.csv", target_rows, ["class", "target_clean_count", "eligible_unique_count", "gap_to_target", "train_count", "val_count", "internal_test_count"])
+    write_csv(
+        output_dir / "eda/balance_audit.csv",
+        target_rows,
+        [
+            "class",
+            "target_clean_count",
+            "eligible_unique_count",
+            "gap_to_target",
+            "train_count",
+            "val_count",
+            "internal_test_count",
+        ],
+    )
 
     metadata = {
         "generated_at": datetime.now(UTC).isoformat(),
@@ -556,7 +647,9 @@ def run(dataset_root: Path, output_dir: Path, max_per_class: int | None = None) 
         "max_per_class": max_per_class,
         "split_policy": "use all safe accepted unique images unless --max-per-class is set",
     }
-    (output_dir / "phase2_metadata.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
+    (output_dir / "phase2_metadata.json").write_text(
+        json.dumps(metadata, indent=2), encoding="utf-8"
+    )
 
     accepted_total = sum(accepted_counts.values())
     decision = [
@@ -581,7 +674,9 @@ def run(dataset_root: Path, output_dir: Path, max_per_class: int | None = None) 
         "## Weak/gap classes",
     ]
     for row in target_rows:
-        decision.append(f"- {row['class']}: {row['eligible_unique_count']} eligible vs 4000 target; gap {row['gap_to_target']}.")
+        decision.append(
+            f"- {row['class']}: {row['eligible_unique_count']} eligible vs 4000 target; gap {row['gap_to_target']}."
+        )
     decision.extend(
         [
             "",
@@ -603,7 +698,9 @@ def run(dataset_root: Path, output_dir: Path, max_per_class: int | None = None) 
             "- Stanford-derived classes and cropped body-type images may differ in framing; augmentation/normalization should be chosen after inspecting EDA distributions.",
         ]
     )
-    (output_dir / "dataset_decision_note.md").write_text("\n".join(decision) + "\n", encoding="utf-8")
+    (output_dir / "dataset_decision_note.md").write_text(
+        "\n".join(decision) + "\n", encoding="utf-8"
+    )
 
 
 def main() -> None:

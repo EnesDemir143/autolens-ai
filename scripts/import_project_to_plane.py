@@ -63,15 +63,41 @@ PROJECT_DESCRIPTION = (
 )
 
 MODULES = [
-    ModuleSpec("Product / UX", "Gradio demo deneyimi, upload/preview/prediction akışı ve sunum hazırlığı."),
-    ModuleSpec("Dataset / Curation", "Açık kaynak Kaggle/Hugging Face veri kaynakları, 8 sınıf etiket eşleme, EDA, denge ve split yönetimi."),
-    ModuleSpec("Training Pipeline", "PyTorch Lightning eğitim döngüsü, MPS/CPU fallback, augmentasyon, checkpoint ve baseline modeller."),
-    ModuleSpec("Model Comparison / Evaluation", "DINOv3 ana yol, baseline karşılaştırmaları, Accuracy/Precision/Recall/F1, confusion matrix, boyut ve hız ölçümü."),
-    ModuleSpec("Inference / Demo", "Final model yükleme, preprocessing parity, sınıf olasılıkları ve canlı demo inference adaptörü."),
-    ModuleSpec("Reports / Docs", "IEEE LaTeX raporu, dataset/model/metric/UI kanıtları, README ve faz raporları."),
-    ModuleSpec("Infrastructure / DevEx", "uv/Python 3.12 proje temeli, pyproject, kalite kapıları, repo yapısı ve geliştirici komutları."),
-    ModuleSpec("Testing & Quality", "pytest, ruff, mypy, veri sızıntısı kontrolleri, smoke testleri ve doğrulama kayıtları."),
-    ModuleSpec("Backlog / Optimization", "ONNX, Optuna, Grad-CAM, LoRA ve zaman kalırsa yapılacak optimizasyonlar."),
+    ModuleSpec(
+        "Product / UX", "Gradio demo deneyimi, upload/preview/prediction akışı ve sunum hazırlığı."
+    ),
+    ModuleSpec(
+        "Dataset / Curation",
+        "Açık kaynak Kaggle/Hugging Face veri kaynakları, 8 sınıf etiket eşleme, EDA, denge ve split yönetimi.",
+    ),
+    ModuleSpec(
+        "Training Pipeline",
+        "PyTorch Lightning eğitim döngüsü, MPS/CPU fallback, augmentasyon, checkpoint ve baseline modeller.",
+    ),
+    ModuleSpec(
+        "Model Comparison / Evaluation",
+        "DINOv3 ana yol, baseline karşılaştırmaları, Accuracy/Precision/Recall/F1, confusion matrix, boyut ve hız ölçümü.",
+    ),
+    ModuleSpec(
+        "Inference / Demo",
+        "Final model yükleme, preprocessing parity, sınıf olasılıkları ve canlı demo inference adaptörü.",
+    ),
+    ModuleSpec(
+        "Reports / Docs",
+        "IEEE LaTeX raporu, dataset/model/metric/UI kanıtları, README ve faz raporları.",
+    ),
+    ModuleSpec(
+        "Infrastructure / DevEx",
+        "uv/Python 3.12 proje temeli, pyproject, kalite kapıları, repo yapısı ve geliştirici komutları.",
+    ),
+    ModuleSpec(
+        "Testing & Quality",
+        "pytest, ruff, mypy, veri sızıntısı kontrolleri, smoke testleri ve doğrulama kayıtları.",
+    ),
+    ModuleSpec(
+        "Backlog / Optimization",
+        "ONNX, Optuna, Grad-CAM, LoRA ve zaman kalırsa yapılacak optimizasyonlar.",
+    ),
 ]
 
 PHASE_ITEMS = [
@@ -144,22 +170,118 @@ PHASE_ITEMS = [
 ]
 
 WORK_ITEMS = [
-    WorkItemSpec("Kaynak katalog ve lisans manifestini tamamla", "Dataset / Curation", "high", "Kaggle/Hugging Face/metadata kaynakları ID, URL, lisans, sınıf kapsama ve indirme notlarıyla tek manifestte topla.", parent_phase="Phase 2 — Dataset Research and Curation"),
-    WorkItemSpec("8 sınıf label mapping kararlarını kilitle", "Dataset / Curation", "high", "SUV, VAN, STATION WAGON, MICRO, OPEN WHEEL, SEDAN, HATCHBACK, PICK UP mapping tablosu ve ambiguous-label exclusion kararlarını belgele.", parent_phase="Phase 2 — Dataset Research and Curation"),
-    WorkItemSpec("EDA ve veri kalite raporlarını üret", "Dataset / Curation", "high", "Class/source distribution, image quality, duplicate/corrupt/outlier listeleri ve zayıf sınıf raporları üret.", parent_phase="Phase 2 — Dataset Research and Curation"),
-    WorkItemSpec("Leakage-safe split manifestini oluştur", "Dataset / Curation", "high", "Train/validation/internal-test splitlerini final instructor test verisi kullanılmadan ve source/domain bias notlarıyla oluştur.", parent_phase="Phase 2 — Dataset Research and Curation"),
-    WorkItemSpec("Lightning DataModule ve transform parity ekle", "Training Pipeline", "high", "Dataset manifestinden çalışan dataloader, train/val augmentation ve deterministic validation preprocessing katmanını kur.", parent_phase="Phase 3 — Baseline Training Pipeline"),
-    WorkItemSpec("Baseline model factory kur", "Training Pipeline", "high", "timm/torchvision tabanlı MobileNetV4/EfficientNet-B2/ResNet model factory ve substitution notlarını ekle.", parent_phase="Phase 3 — Baseline Training Pipeline"),
-    WorkItemSpec("Training loop, checkpoint ve metric logging tamamla", "Training Pipeline", "high", "MPS/CPU fallback, early stopping, checkpointing, torchmetrics ve W&B/yerel log kanıtlarını çalıştır.", parent_phase="Phase 3 — Baseline Training Pipeline"),
-    WorkItemSpec("DINOv3 erişim ve fallback kararını belgeleyip uygula", "Model Comparison / Evaluation", "high", "DINOv3 gated erişimini doğrula; bloke olursa raporlanabilir fallback mimarisini seç ve uygulamaya bağla.", parent_phase="Phase 4 — Main DINOv3 Model and Selection"),
-    WorkItemSpec("Model benchmark tablosu ve seçim notunu üret", "Model Comparison / Evaluation", "high", "Makro F1 öncelikli, accuracy/precision/recall, size <95 MB ve latency karşılaştırma tablosuyla final modeli seç.", parent_phase="Phase 4 — Main DINOv3 Model and Selection"),
-    WorkItemSpec("Zorunlu grafik ve confusion matrix üretimini otomatikleştir", "Model Comparison / Evaluation", "high", "Loss/accuracy eğrileri ve 8x8 normalized confusion matrix çıktıları tekrar üretilebilir script/komutla oluşmalı.", parent_phase="Phase 4 — Main DINOv3 Model and Selection"),
-    WorkItemSpec("Inference adapter ve class probability çıktısını bağla", "Inference / Demo", "high", "Final artifact + class mapping yüklenerek predicted class, confidence ve 8 sınıf probability dict/array üret.", parent_phase="Phase 5 — Gradio Demo Interface"),
-    WorkItemSpec("Gradio Blocks UI akışını tasarla", "Product / UX", "high", "Upload/preview/result/probability chart layout modern, sade ve sunum-ready olacak şekilde kur.", parent_phase="Phase 5 — Gradio Demo Interface"),
-    WorkItemSpec("Demo smoke test ve örnek kullanım dokümantasyonu ekle", "Testing & Quality", "medium", "UI import/smoke testleri ve README demo komutları ile canlı sunum öncesi hızlı doğrulama sağla.", parent_phase="Phase 5 — Gradio Demo Interface"),
-    WorkItemSpec("Final evidence freeze checklist oluştur", "Reports / Docs", "high", "Metric CSV/JSON, plots, class mapping, model artifact size, UI screenshot ve dataset manifest kanıtlarını tek yerde listele.", parent_phase="Phase 6 — Final Evidence and IEEE Report"),
-    WorkItemSpec("IEEE LaTeX report source üret", "Reports / Docs", "high", "awesome-ieee-report skill çıktısı olarak .tex/.bib ve gerekli figür referanslarını üret; minimum 4 sayfa hedefini kontrol et.", parent_phase="Phase 6 — Final Evidence and IEEE Report"),
-    WorkItemSpec("v2 Backlog — ONNX / Optuna / Grad-CAM / LoRA", "Backlog / Optimization", "low", "Backlog: ana teslim tamamlandıktan sonra ONNX export, Optuna tuning, Grad-CAM ve DINOv3 LoRA opsiyonlarını değerlendir.", "backlog"),
+    WorkItemSpec(
+        "Kaynak katalog ve lisans manifestini tamamla",
+        "Dataset / Curation",
+        "high",
+        "Kaggle/Hugging Face/metadata kaynakları ID, URL, lisans, sınıf kapsama ve indirme notlarıyla tek manifestte topla.",
+        parent_phase="Phase 2 — Dataset Research and Curation",
+    ),
+    WorkItemSpec(
+        "8 sınıf label mapping kararlarını kilitle",
+        "Dataset / Curation",
+        "high",
+        "SUV, VAN, STATION WAGON, MICRO, OPEN WHEEL, SEDAN, HATCHBACK, PICK UP mapping tablosu ve ambiguous-label exclusion kararlarını belgele.",
+        parent_phase="Phase 2 — Dataset Research and Curation",
+    ),
+    WorkItemSpec(
+        "EDA ve veri kalite raporlarını üret",
+        "Dataset / Curation",
+        "high",
+        "Class/source distribution, image quality, duplicate/corrupt/outlier listeleri ve zayıf sınıf raporları üret.",
+        parent_phase="Phase 2 — Dataset Research and Curation",
+    ),
+    WorkItemSpec(
+        "Leakage-safe split manifestini oluştur",
+        "Dataset / Curation",
+        "high",
+        "Train/validation/internal-test splitlerini final instructor test verisi kullanılmadan ve source/domain bias notlarıyla oluştur.",
+        parent_phase="Phase 2 — Dataset Research and Curation",
+    ),
+    WorkItemSpec(
+        "Lightning DataModule ve transform parity ekle",
+        "Training Pipeline",
+        "high",
+        "Dataset manifestinden çalışan dataloader, train/val augmentation ve deterministic validation preprocessing katmanını kur.",
+        parent_phase="Phase 3 — Baseline Training Pipeline",
+    ),
+    WorkItemSpec(
+        "Baseline model factory kur",
+        "Training Pipeline",
+        "high",
+        "timm/torchvision tabanlı MobileNetV4/EfficientNet-B2/ResNet model factory ve substitution notlarını ekle.",
+        parent_phase="Phase 3 — Baseline Training Pipeline",
+    ),
+    WorkItemSpec(
+        "Training loop, checkpoint ve metric logging tamamla",
+        "Training Pipeline",
+        "high",
+        "MPS/CPU fallback, early stopping, checkpointing, torchmetrics ve W&B/yerel log kanıtlarını çalıştır.",
+        parent_phase="Phase 3 — Baseline Training Pipeline",
+    ),
+    WorkItemSpec(
+        "DINOv3 erişim ve fallback kararını belgeleyip uygula",
+        "Model Comparison / Evaluation",
+        "high",
+        "DINOv3 gated erişimini doğrula; bloke olursa raporlanabilir fallback mimarisini seç ve uygulamaya bağla.",
+        parent_phase="Phase 4 — Main DINOv3 Model and Selection",
+    ),
+    WorkItemSpec(
+        "Model benchmark tablosu ve seçim notunu üret",
+        "Model Comparison / Evaluation",
+        "high",
+        "Makro F1 öncelikli, accuracy/precision/recall, size <95 MB ve latency karşılaştırma tablosuyla final modeli seç.",
+        parent_phase="Phase 4 — Main DINOv3 Model and Selection",
+    ),
+    WorkItemSpec(
+        "Zorunlu grafik ve confusion matrix üretimini otomatikleştir",
+        "Model Comparison / Evaluation",
+        "high",
+        "Loss/accuracy eğrileri ve 8x8 normalized confusion matrix çıktıları tekrar üretilebilir script/komutla oluşmalı.",
+        parent_phase="Phase 4 — Main DINOv3 Model and Selection",
+    ),
+    WorkItemSpec(
+        "Inference adapter ve class probability çıktısını bağla",
+        "Inference / Demo",
+        "high",
+        "Final artifact + class mapping yüklenerek predicted class, confidence ve 8 sınıf probability dict/array üret.",
+        parent_phase="Phase 5 — Gradio Demo Interface",
+    ),
+    WorkItemSpec(
+        "Gradio Blocks UI akışını tasarla",
+        "Product / UX",
+        "high",
+        "Upload/preview/result/probability chart layout modern, sade ve sunum-ready olacak şekilde kur.",
+        parent_phase="Phase 5 — Gradio Demo Interface",
+    ),
+    WorkItemSpec(
+        "Demo smoke test ve örnek kullanım dokümantasyonu ekle",
+        "Testing & Quality",
+        "medium",
+        "UI import/smoke testleri ve README demo komutları ile canlı sunum öncesi hızlı doğrulama sağla.",
+        parent_phase="Phase 5 — Gradio Demo Interface",
+    ),
+    WorkItemSpec(
+        "Final evidence freeze checklist oluştur",
+        "Reports / Docs",
+        "high",
+        "Metric CSV/JSON, plots, class mapping, model artifact size, UI screenshot ve dataset manifest kanıtlarını tek yerde listele.",
+        parent_phase="Phase 6 — Final Evidence and IEEE Report",
+    ),
+    WorkItemSpec(
+        "IEEE LaTeX report source üret",
+        "Reports / Docs",
+        "high",
+        "awesome-ieee-report skill çıktısı olarak .tex/.bib ve gerekli figür referanslarını üret; minimum 4 sayfa hedefini kontrol et.",
+        parent_phase="Phase 6 — Final Evidence and IEEE Report",
+    ),
+    WorkItemSpec(
+        "v2 Backlog — ONNX / Optuna / Grad-CAM / LoRA",
+        "Backlog / Optimization",
+        "low",
+        "Backlog: ana teslim tamamlandıktan sonra ONNX export, Optuna tuning, Grad-CAM ve DINOv3 LoRA opsiyonlarını değerlendir.",
+        "backlog",
+    ),
 ]
 
 PROJECT_PAGE_MD = """# AutoLens AI Overview
@@ -269,14 +391,20 @@ class PlaneClient:
     def post_json(self, path: str, payload: dict[str, Any]) -> Any:
         response = self.client.post(path, json=payload)
         if response.status_code >= 400:
-            print(f"POST failed {response.status_code}: {path}\n{response.text[:1000]}", file=sys.stderr)
+            print(
+                f"POST failed {response.status_code}: {path}\n{response.text[:1000]}",
+                file=sys.stderr,
+            )
         response.raise_for_status()
         return response.json() if response.content else {}
 
     def patch_json(self, path: str, payload: dict[str, Any]) -> Any:
         response = self.client.patch(path, json=payload)
         if response.status_code >= 400:
-            print(f"PATCH failed {response.status_code}: {path}\n{response.text[:1000]}", file=sys.stderr)
+            print(
+                f"PATCH failed {response.status_code}: {path}\n{response.text[:1000]}",
+                file=sys.stderr,
+            )
         response.raise_for_status()
         return response.json() if response.content else {}
 
@@ -295,7 +423,8 @@ class PlaneClient:
 
         payload = {
             "name": api_name,
-            "identifier": env("PLANE_PROJECT_IDENTIFIER", PROJECT_IDENTIFIER, required=False) or PROJECT_IDENTIFIER,
+            "identifier": env("PLANE_PROJECT_IDENTIFIER", PROJECT_IDENTIFIER, required=False)
+            or PROJECT_IDENTIFIER,
             "description": PROJECT_DESCRIPTION,
             "description_html": html_desc(PROJECT_DESCRIPTION),
             "network": 2,
@@ -311,7 +440,8 @@ class PlaneClient:
     def update_project_description(self) -> None:
         payload = {
             "name": plane_project_name(PROJECT_NAME),
-            "identifier": env("PLANE_PROJECT_IDENTIFIER", PROJECT_IDENTIFIER, required=False) or PROJECT_IDENTIFIER,
+            "identifier": env("PLANE_PROJECT_IDENTIFIER", PROJECT_IDENTIFIER, required=False)
+            or PROJECT_IDENTIFIER,
             "description": PROJECT_DESCRIPTION,
             "description_html": html_desc(PROJECT_DESCRIPTION),
             "module_view": True,
@@ -354,7 +484,9 @@ def main() -> None:
     plane.update_project_description()
 
     existing_modules_raw = plane.get_json(plane.path("modules/"))
-    existing_modules = {module.get("name"): module for module in existing_modules_raw if isinstance(module, dict)}
+    existing_modules = {
+        module.get("name"): module for module in existing_modules_raw if isinstance(module, dict)
+    }
 
     module_ids: dict[str, str] = {}
     for spec in MODULES:
@@ -377,10 +509,14 @@ def main() -> None:
     try:
         existing_items_raw = plane.get_json(plane.path("work-items/"))
         existing_by_title = {
-            item.get("name"): item for item in existing_items_raw if isinstance(item, dict) and item.get("name")
+            item.get("name"): item
+            for item in existing_items_raw
+            if isinstance(item, dict) and item.get("name")
         }
     except httpx.HTTPStatusError as exc:
-        print(f"! Could not list existing work items; will create without duplicate check: {exc.response.status_code}")
+        print(
+            f"! Could not list existing work items; will create without duplicate check: {exc.response.status_code}"
+        )
 
     def upsert_work_item(
         name: str,
@@ -407,12 +543,17 @@ def main() -> None:
         existing = existing_by_title.get(name)
         if existing:
             plane.patch_json(plane.path(f"work-items/{existing['id']}/"), payload)
-            print(f"= work item updated: {name} [{state_group}]" + (" as sub-item" if parent_id else ""))
+            print(
+                f"= work item updated: {name} [{state_group}]"
+                + (" as sub-item" if parent_id else "")
+            )
             return str(existing["id"])
         created = plane.post_json(plane.path("work-items/"), payload)
         if isinstance(created, dict) and created.get("id"):
             existing_by_title[name] = created
-        print(f"+ work item created: {name} [{state_group}]" + (" as sub-item" if parent_id else ""))
+        print(
+            f"+ work item created: {name} [{state_group}]" + (" as sub-item" if parent_id else "")
+        )
         return str(created["id"])
 
     phase_ids: dict[str, str] = {}
@@ -423,9 +564,13 @@ def main() -> None:
 
     for item in WORK_ITEMS:
         parent_id = phase_ids.get(item.parent_phase or "")
-        upsert_work_item(item.name, item.module, item.priority, item.description, item.state_group, parent_id)
+        upsert_work_item(
+            item.name, item.module, item.priority, item.description, item.state_group, parent_id
+        )
 
-    print("\nPages API self-host sürümünde dokümante olmayabilir. UI > Pages içine şunu kopyalayabilirsin:\n")
+    print(
+        "\nPages API self-host sürümünde dokümante olmayabilir. UI > Pages içine şunu kopyalayabilirsin:\n"
+    )
     print(PROJECT_PAGE_MD)
 
 

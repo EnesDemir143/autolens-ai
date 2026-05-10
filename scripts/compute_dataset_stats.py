@@ -27,29 +27,31 @@ def compute_mean_std(
     num_workers: int = 4,
 ) -> tuple[tuple[float, float, float], tuple[float, float, float]]:
     """Compute mean and std from training dataset.
-    
+
     Args:
         csv_path: Path to train.csv
         data_root: Root directory containing images
         batch_size: Batch size for loading
         num_workers: Number of workers
-        
+
     Returns:
         (mean, std) tuples for RGB channels
     """
     # Create dataset with only resize and to_tensor (no normalization yet)
-    transform = transforms.Compose([
-        transforms.Resize(256),
-        transforms.CenterCrop(224),
-        transforms.ToTensor(),
-    ])
-    
+    transform = transforms.Compose(
+        [
+            transforms.Resize(256),
+            transforms.CenterCrop(224),
+            transforms.ToTensor(),
+        ]
+    )
+
     dataset = AutoLensDataset(
         csv_path=csv_path,
         root_dir=data_root,
         transform=transform,
     )
-    
+
     loader = DataLoader(
         dataset,
         batch_size=batch_size,
@@ -57,14 +59,14 @@ def compute_mean_std(
         num_workers=num_workers,
         pin_memory=True,
     )
-    
+
     print(f"Computing mean and std from {len(dataset)} training images...")
-    
+
     # Compute mean
     mean = torch.zeros(3)
     std = torch.zeros(3)
     total_images = 0
-    
+
     for images, _ in tqdm(loader, desc="Computing statistics"):
         batch_size = images.size(0)
         # Reshape to (batch, channels, height*width)
@@ -73,10 +75,10 @@ def compute_mean_std(
         mean += images.mean(2).sum(0)
         std += images.std(2).sum(0)
         total_images += batch_size
-    
+
     mean /= total_images
     std /= total_images
-    
+
     return tuple(mean.tolist()), tuple(std.tolist())
 
 
@@ -90,22 +92,22 @@ def main() -> None:
         help="Output JSON file path",
     )
     args = parser.parse_args()
-    
+
     mean, std = compute_mean_std()
-    
+
     # Save to JSON
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    
+
     stats = {
         "mean": list(mean),
         "std": list(std),
         "description": "Dataset normalization statistics computed from train split",
     }
-    
+
     with open(output_path, "w") as f:
         json.dump(stats, f, indent=2)
-    
+
     print("\n" + "=" * 60)
     print("Dataset Statistics (Train Split)")
     print("=" * 60)

@@ -126,7 +126,9 @@ def create_model(
 
         trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
         total = sum(p.numel() for p in model.parameters())
-        print(f"LoRA: trainable {trainable/1e6:.2f}M / {total/1e6:.2f}M params ({100*trainable/total:.1f}%)")
+        print(
+            f"LoRA: trainable {trainable / 1e6:.2f}M / {total / 1e6:.2f}M params ({100 * trainable / total:.1f}%)"
+        )
 
     return model
 
@@ -138,10 +140,10 @@ def list_available_models() -> list[str]:
 
 def get_model_info(model_name: str) -> dict[str, Any]:
     """Get information about a baseline model.
-    
+
     Args:
         model_name: Model name
-        
+
     Returns:
         Dictionary with model metadata
     """

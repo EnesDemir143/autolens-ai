@@ -33,17 +33,13 @@ class ONNXPredictor:
                 (e.g., artifacts/demo/active_model.json).
         """
         self.config_path = Path(artifact_config_path)
-        self.config: dict[str, Any] = json.loads(
-            self.config_path.read_text(encoding="utf-8")
-        )
+        self.config: dict[str, Any] = json.loads(self.config_path.read_text(encoding="utf-8"))
 
         self.model_path = Path(self.config["model_path"])
         self.metadata_path = Path(self.config["metadata_path"])
         self.temperature = float(self.config.get("temperature", 1.0))
         self.class_labels: list[str] = self.config["class_labels"]
-        self.display_labels: list[str] = self.config.get(
-            "display_labels", self.class_labels
-        )
+        self.display_labels: list[str] = self.config.get("display_labels", self.class_labels)
         self.preprocessing: dict[str, Any] = self.config["preprocessing"]
 
         # Build ONNX Runtime session (CPU by default for maximum compatibility)
@@ -101,9 +97,7 @@ class ONNXPredictor:
         latency_ms = (time.perf_counter() - start) * 1000
 
         # Build probability dict
-        prob_dict = {
-            label: float(prob) for label, prob in zip(self.class_labels, probs)
-        }
+        prob_dict = {label: float(prob) for label, prob in zip(self.class_labels, probs)}
         sorted_idx = int(np.argmax(probs))
         predicted_class = self.class_labels[sorted_idx]
         predicted_display = self.display_labels[sorted_idx]

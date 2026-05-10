@@ -11,13 +11,18 @@ from typing import Any, Literal
 
 import pytorch_lightning as pl
 import torch
-from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint, LearningRateMonitor, RichProgressBar
+from pytorch_lightning.callbacks import (
+    EarlyStopping,
+    ModelCheckpoint,
+    LearningRateMonitor,
+    RichProgressBar,
+)
 from pytorch_lightning.loggers import WandbLogger, CSVLogger
 
 
 def get_device() -> str:
     """Get the best available device (MPS > CUDA > CPU).
-    
+
     Returns:
         Device string: 'mps', 'cuda', or 'cpu'
     """
@@ -40,13 +45,15 @@ def create_trainer(
     wandb_project: str = "autolens-ai",
     wandb_name: str | None = None,
     gradient_clip_val: float | None = None,
-    precision: Literal["16-true", "16-mixed", "bf16-true", "bf16-mixed", "32-true", "64-true"] = "32-true",
+    precision: Literal[
+        "16-true", "16-mixed", "bf16-true", "bf16-mixed", "32-true", "64-true"
+    ] = "32-true",
     use_ema: bool = False,
     ema_decay: float = 0.999,
     **trainer_kwargs: Any,
 ) -> pl.Trainer:
     """Create a Lightning Trainer with standard callbacks.
-    
+
     Args:
         max_epochs: Maximum number of epochs
         accelerator: Device accelerator ('mps', 'cuda', 'cpu', or None for auto)
@@ -58,17 +65,17 @@ def create_trainer(
         wandb_project: W&B project name
         wandb_name: W&B run name
         **trainer_kwargs: Additional arguments for pl.Trainer
-        
+
     Returns:
         Configured Lightning Trainer
     """
     # Auto-detect device if not specified
     if accelerator is None:
         accelerator = get_device()
-    
+
     checkpoint_dir = Path(checkpoint_dir)
     checkpoint_dir.mkdir(parents=True, exist_ok=True)
-    
+
     # Callbacks
     callbacks = [
         # Primary checkpointing - optimize for the assignment metric
@@ -113,13 +120,14 @@ def create_trainer(
             RichProgressBar(),
         ]
     )
-    
+
     # Optional: EMA
     if use_ema:
         from autolens_ai.training.ema import EMA
+
         callbacks.append(EMA(decay=ema_decay))
         print(f"✓ EMA enabled (decay={ema_decay})")
-    
+
     # Logger
     csv_logger = CSVLogger(save_dir=str(checkpoint_dir), name="", version="")
     logger: Any = csv_logger
@@ -133,7 +141,7 @@ def create_trainer(
             logger = [wandb_logger, csv_logger]
         except Exception as e:
             print(f"W&B logger failed, falling back to CSV: {e}")
-    
+
     # Create trainer
     trainer = pl.Trainer(
         max_epochs=max_epochs,
@@ -148,7 +156,7 @@ def create_trainer(
         precision=precision,
         **trainer_kwargs,
     )
-    
+
     return trainer
 
 

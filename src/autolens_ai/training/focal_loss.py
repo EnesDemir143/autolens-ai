@@ -14,11 +14,11 @@ import torch.nn.functional as F
 
 class FocalLoss(nn.Module):
     """Focal Loss for addressing class imbalance.
-    
+
     Focal Loss = -alpha * (1 - p_t)^gamma * log(p_t)
-    
+
     where p_t is the model's estimated probability for the true class.
-    
+
     Args:
         alpha: Weighting factor (default: 1.0)
         gamma: Focusing parameter (default: 2.0)
@@ -43,11 +43,11 @@ class FocalLoss(nn.Module):
 
     def forward(self, inputs: torch.Tensor, targets: torch.Tensor) -> torch.Tensor:
         """Compute focal loss.
-        
+
         Args:
             inputs: Logits (batch_size, num_classes)
             targets: Ground truth labels (batch_size,)
-            
+
         Returns:
             Focal loss
         """
@@ -73,7 +73,7 @@ class FocalLoss(nn.Module):
 
         focal_loss = -alpha_t * (1 - probs) ** self.gamma * true_dist * log_probs
         focal_loss = focal_loss.sum(dim=1)
-        
+
         if self.reduction == "mean":
             return focal_loss.mean()
         elif self.reduction == "sum":

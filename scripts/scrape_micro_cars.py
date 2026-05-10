@@ -12,16 +12,20 @@ from icrawler.builtin import BingImageCrawler
 
 # (display_name, search_query, max_images)
 QUERIES: list[tuple[str, str, int]] = [
-    ("smart_fortwo",   "Smart Fortwo car exterior -toy -diecast -hotwheels -model -interior -parts", 200),
-    ("citroen_ami",    "Citroen Ami electric car exterior -toy -diecast -model -interior", 150),
-    ("toyota_iq",      "Toyota iQ city car exterior -toy -diecast -model -interior", 150),
-    ("renault_twizy",  "Renault Twizy car exterior -toy -diecast -model -interior", 120),
-    ("tata_nano",      "Tata Nano car exterior -toy -diecast -model -interior", 120),
-    ("bmw_isetta",     "BMW Isetta car exterior -toy -diecast -model -interior -replica", 80),
-    ("aixam_city",     "Aixam City microcar exterior -toy -diecast -model", 80),
-    ("ligier_js50",    "Ligier JS50 microcar exterior -toy -diecast -model", 60),
-    ("peel_p50",       "Peel P50 car exterior -toy -diecast -model -replica -miniature", 60),
-    ("smart_forfour",  "Smart Forfour car exterior -toy -diecast -model -interior", 80),
+    (
+        "smart_fortwo",
+        "Smart Fortwo car exterior -toy -diecast -hotwheels -model -interior -parts",
+        200,
+    ),
+    ("citroen_ami", "Citroen Ami electric car exterior -toy -diecast -model -interior", 150),
+    ("toyota_iq", "Toyota iQ city car exterior -toy -diecast -model -interior", 150),
+    ("renault_twizy", "Renault Twizy car exterior -toy -diecast -model -interior", 120),
+    ("tata_nano", "Tata Nano car exterior -toy -diecast -model -interior", 120),
+    ("bmw_isetta", "BMW Isetta car exterior -toy -diecast -model -interior -replica", 80),
+    ("aixam_city", "Aixam City microcar exterior -toy -diecast -model", 80),
+    ("ligier_js50", "Ligier JS50 microcar exterior -toy -diecast -model", 60),
+    ("peel_p50", "Peel P50 car exterior -toy -diecast -model -replica -miniature", 60),
+    ("smart_forfour", "Smart Forfour car exterior -toy -diecast -model -interior", 80),
 ]
 
 OUT_ROOT = Path("datasets/scraped-micro")
@@ -66,7 +70,9 @@ def summary() -> None:
     total = 0
     for slug, _, _ in QUERIES:
         d = OUT_ROOT / slug
-        count = sum(1 for _ in d.glob("*.jpg")) + sum(1 for _ in d.glob("*.png")) if d.exists() else 0
+        count = (
+            sum(1 for _ in d.glob("*.jpg")) + sum(1 for _ in d.glob("*.png")) if d.exists() else 0
+        )
         total += count
         print(f"  {slug:<20} {count:>4} görsel")
     print(f"  {'TOPLAM':<20} {total:>4} görsel")

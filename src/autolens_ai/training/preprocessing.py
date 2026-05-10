@@ -17,7 +17,7 @@ from torchvision import transforms  # type: ignore[import-untyped]
 @dataclass
 class PreprocessConfig:
     """Preprocessing configuration."""
-    
+
     resize_size: int = 256
     crop_size: int = 224
     # ImageNet defaults - override with dataset-specific values for better performance
@@ -32,21 +32,23 @@ class PreprocessConfig:
     random_erasing_p: float = 0.0
     random_erasing_scale: tuple[float, float] = (0.02, 0.10)
     random_erasing_ratio: tuple[float, float] = (0.3, 3.3)
-    
+
     def get_train_transform(self, augment: bool = False) -> Any:
         """Get training transform.
-        
+
         Args:
             augment: If True, apply light augmentation (Baseline 1+). If False, use Baseline 0.
         """
         if not augment:
             # Baseline 0: deterministic preprocessing only
-            return transforms.Compose([
-                transforms.Resize(self.resize_size),
-                transforms.CenterCrop(self.crop_size),
-                transforms.ToTensor(),
-                transforms.Normalize(mean=self.mean, std=self.std),
-            ])
+            return transforms.Compose(
+                [
+                    transforms.Resize(self.resize_size),
+                    transforms.CenterCrop(self.crop_size),
+                    transforms.ToTensor(),
+                    transforms.Normalize(mean=self.mean, std=self.std),
+                ]
+            )
         else:
             # Baseline 1+: light augmentation
             transform_steps: list[Any] = [
@@ -75,23 +77,27 @@ class PreprocessConfig:
                     )
                 )
             return transforms.Compose(transform_steps)
-    
+
     def get_val_transform(self) -> Any:
         """Get validation/test transform (always deterministic)."""
-        return transforms.Compose([
-            transforms.Resize(self.resize_size),
-            transforms.CenterCrop(self.crop_size),
-            transforms.ToTensor(),
-            transforms.Normalize(mean=self.mean, std=self.std),
-        ])
+        return transforms.Compose(
+            [
+                transforms.Resize(self.resize_size),
+                transforms.CenterCrop(self.crop_size),
+                transforms.ToTensor(),
+                transforms.Normalize(mean=self.mean, std=self.std),
+            ]
+        )
 
 
-def compute_dataset_stats(dataset: Any) -> tuple[tuple[float, float, float], tuple[float, float, float]]:
+def compute_dataset_stats(
+    dataset: Any,
+) -> tuple[tuple[float, float, float], tuple[float, float, float]]:
     """Compute mean and std from training dataset.
-    
+
     Args:
         dataset: PyTorch dataset with images
-        
+
     Returns:
         (mean, std) tuples for RGB channels
     """
@@ -102,21 +108,21 @@ def compute_dataset_stats(dataset: Any) -> tuple[tuple[float, float, float], tup
         shuffle=False,
         num_workers=0,
     )
-    
+
     mean = torch.zeros(3)
     std = torch.zeros(3)
     total_images = 0
-    
+
     for images, _ in loader:
         batch_size = images.size(0)
         images = images.view(batch_size, images.size(1), -1)
         mean += images.mean(2).sum(0)
         std += images.std(2).sum(0)
         total_images += batch_size
-    
+
     mean /= total_images
     std /= total_images
-    
+
     return tuple(mean.tolist()), tuple(std.tolist())
 
 

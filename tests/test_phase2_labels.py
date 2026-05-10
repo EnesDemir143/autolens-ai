@@ -17,7 +17,10 @@ def test_target_classes_are_exact_assignment_labels() -> None:
 def test_safe_label_mappings() -> None:
     assert normalize_label("BMW X5 SUV 2007").normalized_label == "SUV"
     assert normalize_label("Audi 100 Wagon 1994").normalized_label == "STATION WAGON"
-    assert normalize_label("Ferrari F1 car", "f1-image-classification-updated").normalized_label == "OPEN WHEEL / F1"
+    assert (
+        normalize_label("Ferrari F1 car", "f1-image-classification-updated").normalized_label
+        == "OPEN WHEEL / F1"
+    )
     assert normalize_label("Chevrolet Silverado 1500 Crew Cab 2012").normalized_label == "PICK UP"
 
 

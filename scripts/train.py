@@ -30,29 +30,29 @@ def set_seed(seed: int) -> None:
     """Set random seed for reproducibility across all libraries."""
     import random
     import numpy as np
-    
+
     # Python random
     random.seed(seed)
-    
+
     # NumPy
     np.random.seed(seed)
-    
+
     # PyTorch
     torch.manual_seed(seed)
     torch.cuda.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
-    
+
     # PyTorch Lightning
     pl.seed_everything(seed, workers=True)
-    
+
     # CuDNN
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
-    
+
     # MPS (Apple Silicon)
     if torch.backends.mps.is_available():
         torch.mps.manual_seed(seed)
-    
+
     print(f"✓ Random seed set to {seed} (Python, NumPy, PyTorch, Lightning)")
 
 
@@ -62,9 +62,11 @@ def load_config(config_path: str | Path) -> dict:
         return yaml.safe_load(f)
 
 
-def load_dataset_stats(stats_path: str | Path = "artifacts/dataset/stats.json") -> tuple[list[float], list[float]]:
+def load_dataset_stats(
+    stats_path: str | Path = "artifacts/dataset/stats.json",
+) -> tuple[list[float], list[float]]:
     """Load dataset statistics from JSON file.
-    
+
     Returns:
         (mean, std) lists for RGB channels, or ImageNet defaults if file not found
     """
@@ -219,21 +221,21 @@ def main() -> None:
         help="Use LoRA fine-tuning (only for ViT models, freezes backbone)",
     )
     args = parser.parse_args()
-    
+
     # Load config
     config = load_config(args.config)
     print(f"Loaded config from: {args.config}")
     print(f"Experiment: {config['experiment_name']}")
-    
+
     # Set seed for reproducibility
     seed = args.seed if args.seed is not None else config.get("seed", 42)
     set_seed(seed)
     print(f"Random seed: {seed}")
-    
+
     # Handle checkpoint directory and resume
     checkpoint_dir = config["checkpoint_dir"]
     resume_ckpt = None
-    
+
     if args.resume:
         if not args.run_id:
             print("ERROR: --resume requires --run-id to specify which run to resume")
@@ -249,20 +251,21 @@ def main() -> None:
         checkpoint_dir = f"{checkpoint_dir}_{args.run_id}"
     else:
         from datetime import datetime
+
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         checkpoint_dir = f"{checkpoint_dir}_{timestamp}"
-    
+
     print(f"Checkpoints will be saved to: {checkpoint_dir}")
-    
+
     # Print device info
     print_device_info()
-    
+
     # Load dataset stats (from JSON or config or defaults)
     mean, std = load_dataset_stats()
     # Override with config values if present
     mean = config.get("dataset_mean", mean)
     std = config.get("dataset_std", std)
-    
+
     # Create preprocessing config
     preprocess_config = PreprocessConfig(
         resize_size=config["resize_size"],
@@ -279,12 +282,13 @@ def main() -> None:
         random_erasing_scale=tuple(config.get("random_erasing_scale", (0.02, 0.10))),
         random_erasing_ratio=tuple(config.get("random_erasing_ratio", (0.3, 3.3))),
     )
-    
+
     # Compute class weights if needed
     class_weights = None
     if config.get("use_class_weights", False):
         # Create temporary dataset to compute weights
         from autolens_ai.training import AutoLensDataset
+
         temp_dataset = AutoLensDataset(
             csv_path=config["train_csv"],
             root_dir=config["data_root"],
@@ -297,7 +301,7 @@ def main() -> None:
         )
         print(f"\nClass counts: {class_counts}")
         print(f"Class weights: {class_weights.tolist()}")
-    
+
     # Create data module
     datamodule = AutoLensDataModule(
         data_root=config["data_root"],
@@ -311,7 +315,7 @@ def main() -> None:
         use_weighted_sampler=config.get("use_weighted_sampler", False),
         class_weights=class_weights,
     )
-    
+
     # Create model
     model = AutoLensClassifier(
         model_name=config["model_name"],
@@ -332,7 +336,7 @@ def main() -> None:
         lora_dropout=config.get("lora_dropout", 0.1),
         lora_target_modules=config.get("lora_target_modules", None),
     )
-    
+
     # Create trainer
     trainer = create_trainer(
         max_epochs=args.max_epochs if args.max_epochs is not None else config["max_epochs"],
@@ -351,12 +355,12 @@ def main() -> None:
         use_ema=config.get("use_ema", False),
         ema_decay=config.get("ema_decay", 0.999),
     )
-    
+
     # Train
     print("\nStarting training...")
     if resume_ckpt:
         print(f"Resuming from checkpoint: {resume_ckpt}")
-    
+
     # Optional: Find optimal learning rate
     if args.find_lr:
         print("\nRunning learning rate finder...")
@@ -367,9 +371,10 @@ def main() -> None:
             fig.savefig(f"{checkpoint_dir}/lr_finder.png")
             print(f"Suggested LR: {suggested_lr}")
             print(f"LR finder plot saved to: {checkpoint_dir}/lr_finder.png")
-            
+
             # Save to JSON
             import json
+
             tune_results = {
                 "learning_rate": {
                     "suggested": float(suggested_lr),
@@ -386,16 +391,17 @@ def main() -> None:
             print("\nTo use suggested LR, update config:")
             print(f"  learning_rate: {suggested_lr}")
             return
-    
+
     # Optional: Find optimal batch size
     if args.find_batch_size:
         print("\nRunning batch size finder...")
         Tuner(trainer).scale_batch_size(model, datamodule, mode="power")
         suggested_bs = datamodule.batch_size
         print(f"Optimal batch size: {suggested_bs}")
-        
+
         # Save to JSON
         import json
+
         tune_results = {
             "batch_size": {
                 "suggested": int(suggested_bs),
@@ -411,9 +417,9 @@ def main() -> None:
         print("\nTo use suggested batch size, update config:")
         print(f"  batch_size: {suggested_bs}")
         return
-    
+
     trainer.fit(model, datamodule, ckpt_path=resume_ckpt)
-    
+
     # Test with best checkpoint
     print("\nRunning test evaluation with best checkpoint...")
     trainer.test(model, datamodule, ckpt_path="best")

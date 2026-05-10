@@ -80,6 +80,7 @@ def main() -> None:
     # EVA (DINOv3) patch: TorchScript tracer requires is_causal to be bool, not Tensor.
     try:
         import timm.models.eva as _eva_module  # type: ignore[import-untyped]
+
         _orig_attn_fwd = _eva_module.EvaAttention.forward
 
         def _patched_attn_fwd(self, x, rope=None, attn_mask=None, is_causal=False):  # type: ignore[override]

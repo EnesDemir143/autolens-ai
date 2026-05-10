@@ -161,9 +161,13 @@ def fit_temperature_scaling(
 
     # Evaluate calibration quality on internal test set (read-only, not used for fitting)
     test_csv_key = "test_csv_reserved_not_used_for_calibration"
-    test_csv = Path(metadata["data"].get(test_csv_key, "artifacts/dataset/splits/internal_test.csv"))
+    test_csv = Path(
+        metadata["data"].get(test_csv_key, "artifacts/dataset/splits/internal_test.csv")
+    )
     if test_csv.exists():
-        test_logits, test_labels = collect_logits_from_csv(onnx_path, metadata, test_csv, batch_size)
+        test_logits, test_labels = collect_logits_from_csv(
+            onnx_path, metadata, test_csv, batch_size
+        )
         result["test_eval"] = {
             "split": str(test_csv),
             "num_samples": int(test_labels.numel()),

@@ -3,15 +3,13 @@
 
 from __future__ import annotations
 
-import json
-from pathlib import Path
 from typing import Any
 
 import gradio as gr
 import matplotlib
+
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-import numpy as np
 from PIL import Image
 
 from autolens_ai.inference import ONNXPredictor
@@ -48,9 +46,15 @@ def _build_prob_chart(probabilities: dict[str, float]) -> plt.Figure:
 
     for bar, prob in zip(bars, probs):
         color = "#a5b4fc" if prob == max(probs) else "#6b7280"
-        ax.text(bar.get_width() + 0.02, bar.get_y() + bar.get_height() / 2,
-                f"{prob:.1%}", va="center", fontsize=8.5, color=color,
-                fontweight="bold" if prob == max(probs) else "normal")
+        ax.text(
+            bar.get_width() + 0.02,
+            bar.get_y() + bar.get_height() / 2,
+            f"{prob:.1%}",
+            va="center",
+            fontsize=8.5,
+            color=color,
+            fontweight="bold" if prob == max(probs) else "normal",
+        )
 
     plt.tight_layout(pad=0.4)
     return fig
@@ -58,7 +62,10 @@ def _build_prob_chart(probabilities: dict[str, float]) -> plt.Figure:
 
 def classify(image: Image.Image | None) -> tuple[str, Any]:
     if image is None:
-        return ("<div style='color:#4b5563;text-align:center;padding:60px 0;font-size:14px'>Upload a vehicle image to begin</div>", gr.update(visible=False))
+        return (
+            "<div style='color:#4b5563;text-align:center;padding:60px 0;font-size:14px'>Upload a vehicle image to begin</div>",
+            gr.update(visible=False),
+        )
     try:
         predictor = _load_predictor()
         result = predictor.predict(image)
@@ -90,13 +97,22 @@ def classify(image: Image.Image | None) -> tuple[str, Any]:
         </div>"""
         return (html, gr.update(value=chart, visible=True))
     except Exception as exc:
-        return (f"<div style='color:#f87171;padding:12px;background:#1e293b;border-radius:8px'>Error: {exc}</div>", gr.update(visible=False))
+        return (
+            f"<div style='color:#f87171;padding:12px;background:#1e293b;border-radius:8px'>Error: {exc}</div>",
+            gr.update(visible=False),
+        )
 
 
 def on_start(image):
     if image is None:
-        return ("<div style='color:#4b5563;text-align:center;padding:60px 0;font-size:14px'>⚠️ Please upload an image first.</div>", gr.update(visible=False))
-    return ("<div style='color:#94a3b8;text-align:center;padding:60px 0;font-size:14px'>⏳ Analyzing…</div>", gr.update(visible=False))
+        return (
+            "<div style='color:#4b5563;text-align:center;padding:60px 0;font-size:14px'>⚠️ Please upload an image first.</div>",
+            gr.update(visible=False),
+        )
+    return (
+        "<div style='color:#94a3b8;text-align:center;padding:60px 0;font-size:14px'>⏳ Analyzing…</div>",
+        gr.update(visible=False),
+    )
 
 
 CSS = """
@@ -149,11 +165,17 @@ def build_interface() -> gr.Blocks:
         with gr.Row(equal_height=True):
             with gr.Column(scale=2, min_width=280, elem_classes=["al-left"]):
                 image_input = gr.Image(
-                    type="pil", label="Vehicle Image",
-                    sources=["upload", "clipboard"], height=300,
+                    type="pil",
+                    label="Vehicle Image",
+                    sources=["upload", "clipboard"],
+                    height=300,
                 )
-                classify_btn = gr.Button("Classify →", variant="primary", elem_classes=["classify-btn"])
-                gr.HTML("<div style='color:#374151;font-size:10px;margin-top:8px;text-align:center'>JPG · PNG · WebP</div>")
+                classify_btn = gr.Button(
+                    "Classify →", variant="primary", elem_classes=["classify-btn"]
+                )
+                gr.HTML(
+                    "<div style='color:#374151;font-size:10px;margin-top:8px;text-align:center'>JPG · PNG · WebP</div>"
+                )
 
             with gr.Column(scale=3, min_width=380):
                 result_html = gr.HTML(
@@ -162,14 +184,22 @@ def build_interface() -> gr.Blocks:
                 prob_chart = gr.Plot(label="", visible=False, elem_id="prob-chart")
 
         classify_btn.click(
-            fn=on_start, inputs=[image_input], outputs=[result_html, prob_chart],
+            fn=on_start,
+            inputs=[image_input],
+            outputs=[result_html, prob_chart],
         ).then(
-            fn=classify, inputs=[image_input], outputs=[result_html, prob_chart],
+            fn=classify,
+            inputs=[image_input],
+            outputs=[result_html, prob_chart],
         )
         image_input.upload(
-            fn=on_start, inputs=[image_input], outputs=[result_html, prob_chart],
+            fn=on_start,
+            inputs=[image_input],
+            outputs=[result_html, prob_chart],
         ).then(
-            fn=classify, inputs=[image_input], outputs=[result_html, prob_chart],
+            fn=classify,
+            inputs=[image_input],
+            outputs=[result_html, prob_chart],
         )
 
     return demo

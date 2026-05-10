@@ -26,12 +26,12 @@ from typing import Any
 import numpy as np
 import torch
 from fastapi import FastAPI, File, HTTPException, UploadFile
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from PIL import Image
 from pydantic import BaseModel
 
-from autolens_ai.inference.artifact import load_artifact_metadata, load_model_from_artifact
+from autolens_ai.inference.artifact import load_model_from_artifact
 from autolens_ai.inference.onnx_predictor import ONNXPredictor
 
 # ---------------------------------------------------------------------------
@@ -55,7 +55,7 @@ _EXPORT_DIRS: list[str] = [
 # ---------------------------------------------------------------------------
 
 _predictor_cache: dict[str, ONNXPredictor] = {}  # id → ONNXPredictor
-_gradcam_cache: dict[str, torch.nn.Module] = {}   # id → PyTorch model (for GradCAM)
+_gradcam_cache: dict[str, torch.nn.Module] = {}  # id → PyTorch model (for GradCAM)
 _active_model_id: str = ""
 _model_switch_lock = asyncio.Lock()
 
@@ -249,11 +249,13 @@ async def _read_validated_image(file: UploadFile) -> Image.Image:
 
 @app.get("/api/health")
 async def health() -> JSONResponse:
-    return JSONResponse({
-        "status": "ok",
-        "active_model": _active_model_id,
-        "cached_models": list(_predictor_cache.keys()),
-    })
+    return JSONResponse(
+        {
+            "status": "ok",
+            "active_model": _active_model_id,
+            "cached_models": list(_predictor_cache.keys()),
+        }
+    )
 
 
 @app.get("/api/models")
@@ -325,7 +327,6 @@ async def gradcam(file: UploadFile = File(...)) -> JSONResponse:
     """Run GradCAM on the active model and return base64 PNG overlay."""
     from pytorch_grad_cam import GradCAM  # type: ignore[import-untyped]
     from pytorch_grad_cam.utils.image import show_cam_on_image  # type: ignore[import-untyped]
-    from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget  # type: ignore[import-untyped]
 
     image = await _read_validated_image(file)
 

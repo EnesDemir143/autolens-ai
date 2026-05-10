@@ -20,7 +20,7 @@ from autolens_ai.models import create_model
 
 class AutoLensClassifier(pl.LightningModule):
     """Lightning module for AutoLens AI classification.
-    
+
     Supports:
     - MPS/CPU device handling
     - Class-weighted loss
@@ -48,7 +48,7 @@ class AutoLensClassifier(pl.LightningModule):
         lora_target_modules: list[str] | None = None,
     ):
         """Initialize Lightning module.
-        
+
         Args:
             model_name: Model architecture name
             num_classes: Number of classes
@@ -64,7 +64,7 @@ class AutoLensClassifier(pl.LightningModule):
         """
         super().__init__()
         self.save_hyperparameters(ignore=["class_weights"])
-        
+
         # Create model
         self.model = create_model(
             model_name=model_name,
@@ -77,17 +77,18 @@ class AutoLensClassifier(pl.LightningModule):
             lora_dropout=lora_dropout,
             lora_target_modules=lora_target_modules,
         )
-        
+
         # Loss function
         self.class_weights = class_weights
         self.label_smoothing = label_smoothing
         self.use_focal_loss = use_focal_loss
         if class_weights is not None:
             self.register_buffer("_class_weights", class_weights)
-        
+
         # Focal loss
         if use_focal_loss:
             from autolens_ai.training.focal_loss import FocalLoss
+
             focal_alpha_value: float | torch.Tensor
             if focal_alpha == "class_weights":
                 if class_weights is None:
@@ -100,62 +101,68 @@ class AutoLensClassifier(pl.LightningModule):
                 gamma=focal_gamma,
                 label_smoothing=label_smoothing,
             )
-        
+
         # Metrics
         self.train_acc = Accuracy(task="multiclass", num_classes=num_classes)
         self.val_acc = Accuracy(task="multiclass", num_classes=num_classes)
         self.test_acc = Accuracy(task="multiclass", num_classes=num_classes)
-        
+
         self.val_f1_macro = F1Score(task="multiclass", num_classes=num_classes, average="macro")
-        self.val_f1_weighted = F1Score(task="multiclass", num_classes=num_classes, average="weighted")
+        self.val_f1_weighted = F1Score(
+            task="multiclass", num_classes=num_classes, average="weighted"
+        )
         self.val_precision = Precision(task="multiclass", num_classes=num_classes, average="macro")
         self.val_recall = Recall(task="multiclass", num_classes=num_classes, average="macro")
-        
+
         self.test_f1_macro = F1Score(task="multiclass", num_classes=num_classes, average="macro")
-        self.test_f1_weighted = F1Score(task="multiclass", num_classes=num_classes, average="weighted")
+        self.test_f1_weighted = F1Score(
+            task="multiclass", num_classes=num_classes, average="weighted"
+        )
         self.test_precision = Precision(task="multiclass", num_classes=num_classes, average="macro")
         self.test_recall = Recall(task="multiclass", num_classes=num_classes, average="macro")
         self.test_confusion = MulticlassConfusionMatrix(num_classes=num_classes)
-    
+
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """Forward pass."""
         return self.model(x)
-    
+
     def _compute_loss(self, logits: torch.Tensor, targets: torch.Tensor) -> torch.Tensor:
         """Compute loss with optional class weights, label smoothing, or focal loss."""
         if self.use_focal_loss:
             return self.focal_loss_fn(logits, targets)
         elif self.class_weights is not None:
             return F.cross_entropy(
-                logits, 
-                targets, 
+                logits,
+                targets,
                 weight=self._class_weights,  # type: ignore[arg-type]
                 label_smoothing=self.label_smoothing,
             )
         return F.cross_entropy(logits, targets, label_smoothing=self.label_smoothing)
-    
-    def training_step(self, batch: tuple[torch.Tensor, torch.Tensor], batch_idx: int) -> torch.Tensor:
+
+    def training_step(
+        self, batch: tuple[torch.Tensor, torch.Tensor], batch_idx: int
+    ) -> torch.Tensor:
         """Training step."""
         images, labels = batch
         logits = self(images)
         loss = self._compute_loss(logits, labels)
-        
+
         # Metrics
         preds = torch.argmax(logits, dim=1)
         acc = self.train_acc(preds, labels)
-        
+
         # Logging
         self.log("train/loss", loss, on_step=True, on_epoch=True, prog_bar=True)
         self.log("train/acc", acc, on_step=False, on_epoch=True, prog_bar=True)
-        
+
         return loss
-    
+
     def validation_step(self, batch: tuple[torch.Tensor, torch.Tensor], batch_idx: int) -> None:
         """Validation step."""
         images, labels = batch
         logits = self(images)
         loss = self._compute_loss(logits, labels)
-        
+
         # Metrics
         preds = torch.argmax(logits, dim=1)
         self.val_acc(preds, labels)
@@ -163,7 +170,7 @@ class AutoLensClassifier(pl.LightningModule):
         self.val_f1_weighted(preds, labels)
         self.val_precision(preds, labels)
         self.val_recall(preds, labels)
-        
+
         # Logging
         self.log("val/loss", loss, on_step=False, on_epoch=True, prog_bar=True)
         self.log("val/acc", self.val_acc, on_step=False, on_epoch=True, prog_bar=True)
@@ -171,13 +178,13 @@ class AutoLensClassifier(pl.LightningModule):
         self.log("val/f1_weighted", self.val_f1_weighted, on_step=False, on_epoch=True)
         self.log("val/precision", self.val_precision, on_step=False, on_epoch=True)
         self.log("val/recall", self.val_recall, on_step=False, on_epoch=True)
-    
+
     def test_step(self, batch: tuple[torch.Tensor, torch.Tensor], batch_idx: int) -> None:
         """Test step."""
         images, labels = batch
         logits = self(images)
         loss = self._compute_loss(logits, labels)
-        
+
         # Metrics
         preds = torch.argmax(logits, dim=1)
         self.test_acc(preds, labels)
@@ -186,7 +193,7 @@ class AutoLensClassifier(pl.LightningModule):
         self.test_precision(preds, labels)
         self.test_recall(preds, labels)
         self.test_confusion(preds, labels)
-        
+
         # Logging
         self.log("test/loss", loss, on_step=False, on_epoch=True)
         self.log("test/acc", self.test_acc, on_step=False, on_epoch=True)
@@ -194,7 +201,7 @@ class AutoLensClassifier(pl.LightningModule):
         self.log("test/f1_weighted", self.test_f1_weighted, on_step=False, on_epoch=True)
         self.log("test/precision", self.test_precision, on_step=False, on_epoch=True)
         self.log("test/recall", self.test_recall, on_step=False, on_epoch=True)
-    
+
     def on_test_epoch_end(self) -> None:
         """Save normalized confusion matrix PNG and per-class metrics after test."""
         import matplotlib.pyplot as plt
@@ -223,8 +230,15 @@ class AutoLensClassifier(pl.LightningModule):
         plt.setp(ax.get_xticklabels(), rotation=45, ha="right")
         for i in range(len(class_names)):
             for j in range(len(class_names)):
-                ax.text(j, i, f"{cm_norm[i, j]:.2f}", ha="center", va="center",
-                        color="white" if cm_norm[i, j] > 0.5 else "black", fontsize=8)
+                ax.text(
+                    j,
+                    i,
+                    f"{cm_norm[i, j]:.2f}",
+                    ha="center",
+                    va="center",
+                    color="white" if cm_norm[i, j] > 0.5 else "black",
+                    fontsize=8,
+                )
         fig.tight_layout()
 
         # Save next to checkpoint dir if trainer has it, else cwd

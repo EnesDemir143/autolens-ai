@@ -15,7 +15,7 @@ from autolens_ai.data.labels import TARGET_CLASSES
 
 class AutoLensDataset(Dataset):
     """Dataset that loads images from Phase 2 split CSVs.
-    
+
     Requirements: TRN-06, TRN-07
     """
 
@@ -27,7 +27,7 @@ class AutoLensDataset(Dataset):
         split_filter: str | None = None,
     ):
         """Initialize dataset from Phase 2 split CSV.
-        
+
         Args:
             csv_path: Path to split CSV (train.csv, val.csv, internal_test.csv, or all_splits.csv)
             root_dir: Root directory containing the dataset images
@@ -36,21 +36,21 @@ class AutoLensDataset(Dataset):
         """
         self.root_dir = Path(root_dir)
         self.transform = transform
-        
+
         # Load CSV
         df = pd.read_csv(csv_path)
-        
+
         # Filter by split if needed
         if split_filter:
             df = df[df["split"] == split_filter]
-        
+
         # Keep only accepted images
         df = df[df["mapping_status"] == "accepted"]
-        
+
         # Build class to index mapping
         self.class_to_idx = {cls: idx for idx, cls in enumerate(TARGET_CLASSES)}
         self.idx_to_class = {idx: cls for cls, idx in self.class_to_idx.items()}
-        
+
         # Store image paths and labels
         self.samples = []
         for _, row in df.iterrows():
@@ -58,22 +58,22 @@ class AutoLensDataset(Dataset):
             label = row["normalized_label"]
             if label in self.class_to_idx:
                 self.samples.append((img_path, self.class_to_idx[label]))
-    
+
     def __len__(self) -> int:
         return len(self.samples)
-    
+
     def __getitem__(self, idx: int) -> tuple[torch.Tensor, int]:
         img_path, label = self.samples[idx]
-        
+
         # Load image
         image = Image.open(img_path).convert("RGB")
-        
+
         # Apply transform
         if self.transform:
             image = self.transform(image)  # type: ignore[assignment]
-        
+
         return image, label  # type: ignore[return-value]
-    
+
     def get_class_counts(self) -> dict[str, int]:
         """Return class distribution for computing weights."""
         counts = {cls: 0 for cls in TARGET_CLASSES}
