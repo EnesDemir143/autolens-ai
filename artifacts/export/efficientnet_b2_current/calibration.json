@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-05-09T14:56:00.451600+00:00",
+  "created_at": "2026-05-10T08:02:13.433720+00:00",
   "method": "temperature_scaling",
   "temperature": 1.779860258102417,
   "fit_split": "artifacts/dataset/splits/val.csv",
@@ -19,5 +19,21 @@
     "ece": 0.01043415255844593,
     "accuracy": 0.9239784479141235,
     "mean_confidence": 0.9190037250518799
+  },
+  "test_eval": {
+    "split": "artifacts/dataset/splits/internal_test.csv",
+    "num_samples": 3170,
+    "before": {
+      "nll": 0.2744634747505188,
+      "ece": 0.03928366303443909,
+      "accuracy": 0.9201892614364624,
+      "mean_confidence": 0.9594728946685791
+    },
+    "after": {
+      "nll": 0.23008054494857788,
+      "ece": 0.010715372860431671,
+      "accuracy": 0.9201892614364624,
+      "mean_confidence": 0.9168013334274292
+    }
   }
 }

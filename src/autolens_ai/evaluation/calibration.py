@@ -106,6 +106,38 @@ def diagnostics(logits: torch.Tensor, labels: torch.Tensor, temperature: float) 
     }
 
 
+def collect_logits_from_csv(
+    onnx_path: Path,
+    metadata: dict[str, Any],
+    csv_path: Path,
+    batch_size: int,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """Run ONNX inference over an arbitrary CSV split and return logits/labels."""
+    preprocess = metadata["preprocessing"]
+    dataset = AutoLensDataset(
+        csv_path=csv_path,
+        root_dir=Path(metadata["data"]["data_root"]),
+        transform=PreprocessConfig(
+            resize_size=int(preprocess["resize_size"]),
+            crop_size=int(preprocess["crop_size"]),
+            mean=tuple(preprocess["mean"]),
+            std=tuple(preprocess["std"]),
+        ).get_val_transform(),
+    )
+    loader = torch.utils.data.DataLoader(
+        dataset, batch_size=batch_size, shuffle=False, num_workers=0
+    )
+    session = ort.InferenceSession(str(onnx_path), providers=["CPUExecutionProvider"])
+    input_name = session.get_inputs()[0].name
+    logits_batches: list[torch.Tensor] = []
+    label_batches: list[torch.Tensor] = []
+    for images, labels in tqdm(loader, desc=f"logits [{csv_path.name}]"):
+        output = session.run(None, {input_name: images.numpy().astype(np.float32)})[0]
+        logits_batches.append(torch.from_numpy(output).float())
+        label_batches.append(labels.long())
+    return torch.cat(logits_batches), torch.cat(label_batches)
+
+
 def fit_temperature_scaling(
     onnx_path: Path,
     metadata: dict[str, Any],
@@ -115,7 +147,8 @@ def fit_temperature_scaling(
     """Fit validation-only temperature scaling and return serializable metadata."""
     logits, labels = collect_logits(onnx_path, metadata, batch_size, limit)
     temperature = fit_temperature(logits, labels)
-    return {
+
+    result: dict[str, Any] = {
         "created_at": datetime.now(UTC).isoformat(),
         "method": "temperature_scaling",
         "temperature": temperature,
@@ -125,3 +158,17 @@ def fit_temperature_scaling(
         "before": diagnostics(logits, labels, 1.0),
         "after": diagnostics(logits, labels, temperature),
     }
+
+    # Evaluate calibration quality on internal test set (read-only, not used for fitting)
+    test_csv_key = "test_csv_reserved_not_used_for_calibration"
+    test_csv = Path(metadata["data"].get(test_csv_key, "artifacts/dataset/splits/internal_test.csv"))
+    if test_csv.exists():
+        test_logits, test_labels = collect_logits_from_csv(onnx_path, metadata, test_csv, batch_size)
+        result["test_eval"] = {
+            "split": str(test_csv),
+            "num_samples": int(test_labels.numel()),
+            "before": diagnostics(test_logits, test_labels, 1.0),
+            "after": diagnostics(test_logits, test_labels, temperature),
+        }
+
+    return result

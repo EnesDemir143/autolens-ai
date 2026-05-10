@@ -64,6 +64,18 @@ Evaluated on held-out internal test set (3170 samples, no data leakage).
 | HATCHBACK | 0.7662 | 0.8008 | 0.7831 | 266 |
 | PICK UP | 0.9574 | 0.8364 | 0.8929 | 269 |
 
+## Temperature Scaling (Calibration)
+
+Post-training calibration uses temperature scaling. Temperature was fit on the validation set only; the before/after values below are measured on the held-out internal test set.
+
+- Temperature: **1.7799**
+- Internal test ECE before: 0.0393 → after: **0.0107**
+- Internal test NLL before: 0.2745 → after: **0.2301**
+- Internal test mean confidence before: 0.9595 → after: **0.9168**
+- Internal test accuracy: **0.9202** (3170 samples)
+
+Calibration parameters are stored in `calibration.json`. The ONNX model outputs raw logits; apply temperature scaling at inference time.
+
 ## Artifact sizes
 
 - `model.safetensors`: 29.722 MB
