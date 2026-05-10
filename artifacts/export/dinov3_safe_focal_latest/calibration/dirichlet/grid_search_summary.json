@@ -1,0 +1,36 @@
+{
+  "experiment_name": "dinov3_safe_focal_aug",
+  "method": "dirichlet",
+  "odir_lambdas": [
+    0.001,
+    0.01,
+    0.1,
+    1.0
+  ],
+  "results": [
+    {
+      "odir_lambda": 0.001,
+      "val_nll_after": 0.13770146667957306,
+      "val_ece_after": 0.018350478261709213,
+      "test_f1_macro": 0.94274
+    },
+    {
+      "odir_lambda": 0.01,
+      "val_nll_after": 0.14431852102279663,
+      "val_ece_after": 0.01948411762714386,
+      "test_f1_macro": 0.943392
+    },
+    {
+      "odir_lambda": 0.1,
+      "val_nll_after": 0.15334120392799377,
+      "val_ece_after": 0.014982147142291069,
+      "test_f1_macro": 0.943036
+    },
+    {
+      "odir_lambda": 1.0,
+      "val_nll_after": 0.16314689815044403,
+      "val_ece_after": 0.015612920746207237,
+      "test_f1_macro": 0.942159
+    }
+  ]
+}

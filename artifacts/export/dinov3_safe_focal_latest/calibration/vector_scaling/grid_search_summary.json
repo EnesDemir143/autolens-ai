@@ -1,0 +1,29 @@
+{
+  "experiment_name": "dinov3_safe_focal_aug",
+  "method": "vector_scaling",
+  "l2_lambdas": [
+    0.01,
+    0.1,
+    1.0
+  ],
+  "results": [
+    {
+      "l2_lambda": 0.01,
+      "val_nll_after": 0.19038841128349304,
+      "val_ece_after": 0.03359692916274071,
+      "test_f1_macro": 0.938603
+    },
+    {
+      "l2_lambda": 0.1,
+      "val_nll_after": 0.280426949262619,
+      "val_ece_after": 0.12681670486927032,
+      "test_f1_macro": 0.940852
+    },
+    {
+      "l2_lambda": 1.0,
+      "val_nll_after": 0.44944438338279724,
+      "val_ece_after": 0.26400405168533325,
+      "test_f1_macro": 0.942167
+    }
+  ]
+}

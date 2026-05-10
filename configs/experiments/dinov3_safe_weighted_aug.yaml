@@ -80,6 +80,22 @@ checkpoint_dir: checkpoints/dinov3_safe_weighted_aug
 
 # Experiment tracking
 experiment_name: dinov3_safe_weighted_aug
+# Calibration parameters for post-hoc calibration experiments
+calibration:
+  artifact_dir: artifacts/export/dinov3_safe_weighted_latest
+  output_base: artifacts/export
+  output_subdir: calibration
+  batch_size: 64
+  methods:
+    temperature:
+      enabled: true
+    vector_scaling:
+      enabled: true
+      l2_lambdas: [0.01, 0.1, 1.0]
+    dirichlet:
+      enabled: true
+      odir_lambdas: [0.001, 0.01, 0.1, 1.0]
+
 tags:
   - dinov3
   - safe_augmentation

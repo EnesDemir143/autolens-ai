@@ -2,7 +2,12 @@
 .PHONY: compute-stats train-baseline-0 train-baseline-1 train-baseline-2 train-all-baselines resume-training
 .PHONY: train-all-wandb
 .PHONY: train-dinov3 train-dinov3-safe-focal train-dinov3-safe-weighted dry-run-dinov3 dry-run-dinov3-safe-focal dry-run-dinov3-safe-weighted
-.PHONY: checkpoint-to-safetensors export-model size-check calibrate-model prepare-demo-artifact deploy-run-to-demo
+.PHONY: checkpoint-to-safetensors export-model size-check
+.PHONY: calibrate-model calibrate-temperature calibrate-vector calibrate-dirichlet calibrate-all calibrate-compare calibrate-sweep
+.PHONY: calibrate-dinov3-weighted-temperature calibrate-dinov3-weighted-vector calibrate-dinov3-weighted-dirichlet calibrate-dinov3-weighted-all calibrate-dinov3-weighted-compare
+.PHONY: calibrate-dinov3-focal-temperature calibrate-dinov3-focal-vector calibrate-dinov3-focal-dirichlet calibrate-dinov3-focal-all calibrate-dinov3-focal-compare
+.PHONY: calibrate-dinov3-all calibrate-dinov3-compare
+.PHONY: prepare-demo-artifact deploy-run-to-demo deploy-run-full
 .PHONY: demo demo-smoke ui-smoke-check
 .PHONY: frontend-install frontend-build demo-web demo-gradio
 
@@ -35,7 +40,9 @@ help:
 		'  make checkpoint-to-safetensors [CHECKPOINT=path.ckpt] [EXPORT_DIR=artifacts/export/efficientnet_b2_current]' \
 		'  make export-model [SAFETENSORS=path] [METADATA=path] [ONNX=path]' \
 		'  make size-check [SAFETENSORS=path] [ONNX=path]' \
-		'  make calibrate-model [ONNX=path] [METADATA=path]  # validation split only' \
+		'  make calibrate-temperature [ONNX=path] [METADATA=path]  # validation split only' \
+		'  make calibrate-dinov3-all       Run weighted + focal DINOv3 calibration sweeps' \
+		'  make calibrate-dinov3-compare   Compare saved DINOv3 calibration outputs' \
 		'  make prepare-demo-artifact [ARTIFACT_CONFIG=artifacts/demo/active_model.json]' \
 		'  make deploy-run-to-demo [CHECKPOINT=path.ckpt]  # convert -> export -> size -> calibrate -> pointer' \
 		'' \
@@ -134,6 +141,18 @@ CALIBRATION ?= $(EXPORT_DIR)/calibration.json
 ARTIFACT_CONFIG ?= artifacts/demo/active_model.json
 EXPORT_CONFIG ?= configs/experiments/baseline_0_efficientnet_b2.yaml
 
+# Calibration comparison
+CAL_EXP ?= efficientnet_b2_current
+CAL_ONNX ?= artifacts/export/$(CAL_EXP)/model.onnx
+CAL_META ?= artifacts/export/$(CAL_EXP)/metadata.json
+CAL_BASE ?= artifacts/calibration
+DINO_WEIGHTED_CONFIG ?= configs/experiments/dinov3_safe_weighted_aug.yaml
+DINO_FOCAL_CONFIG ?= configs/experiments/dinov3_safe_focal_aug.yaml
+DINO_CAL_OUTPUT_BASE ?= artifacts/export
+DINO_CAL_BATCH_SIZE ?= 64
+DINO_WEIGHTED_EXPORT_DIR ?= artifacts/export/dinov3_safe_weighted_latest
+DINO_FOCAL_EXPORT_DIR ?= artifacts/export/dinov3_safe_focal_latest
+
 checkpoint-to-safetensors:
 	@echo "Converting Lightning checkpoint to safetensors + metadata..."
 	uv run python scripts/checkpoint_to_safetensors.py \
@@ -155,12 +174,177 @@ size-check:
 		$(ONNX) \
 		--json-output $(EXPORT_DIR)/size_check.json
 
-calibrate-model:
-	@echo "Fitting validation-only temperature scaling..."
+# ── Calibration Methods ───────────────────────────────────────
+# Three post-hoc calibration methods + grid search
+
+calibrate-temperature:
+	@echo "=== Temperature Scaling ==="
 	uv run python scripts/calibrate_model.py \
 		--onnx $(ONNX) \
 		--metadata $(METADATA) \
-		--output $(CALIBRATION)
+		--method temperature \
+		--output-base $(CAL_BASE)
+
+calibrate-model: calibrate-temperature
+	@echo "Alias complete: calibrate-model -> calibrate-temperature"
+
+calibrate-vector:
+	@echo "=== Vector Scaling (grid search over L2 λ) ==="
+	uv run python scripts/calibrate_model.py \
+		--onnx $(ONNX) \
+		--metadata $(METADATA) \
+		--method vector_scaling \
+		--l2-lambda 0.001 \
+		--output-base $(CAL_BASE)
+	uv run python scripts/calibrate_model.py \
+		--onnx $(ONNX) \
+		--metadata $(METADATA) \
+		--method vector_scaling \
+		--l2-lambda 0.01 \
+		--output-base $(CAL_BASE)
+	uv run python scripts/calibrate_model.py \
+		--onnx $(ONNX) \
+		--metadata $(METADATA) \
+		--method vector_scaling \
+		--l2-lambda 0.1 \
+		--output-base $(CAL_BASE)
+	uv run python scripts/calibrate_model.py \
+		--onnx $(ONNX) \
+		--metadata $(METADATA) \
+		--method vector_scaling \
+		--l2-lambda 1.0 \
+		--output-base $(CAL_BASE)
+
+calibrate-dirichlet:
+	@echo "=== Dirichlet Calibration (grid search over ODIR λ) ==="
+	uv run python scripts/calibrate_model.py \
+		--onnx $(ONNX) \
+		--metadata $(METADATA) \
+		--method dirichlet \
+		--odir-lambda 0.001 \
+		--output-base $(CAL_BASE)
+	uv run python scripts/calibrate_model.py \
+		--onnx $(ONNX) \
+		--metadata $(METADATA) \
+		--method dirichlet \
+		--odir-lambda 0.01 \
+		--output-base $(CAL_BASE)
+	uv run python scripts/calibrate_model.py \
+		--onnx $(ONNX) \
+		--metadata $(METADATA) \
+		--method dirichlet \
+		--odir-lambda 0.1 \
+		--output-base $(CAL_BASE)
+	uv run python scripts/calibrate_model.py \
+		--onnx $(ONNX) \
+		--metadata $(METADATA) \
+		--method dirichlet \
+		--odir-lambda 1.0 \
+		--output-base $(CAL_BASE)
+
+# Run ALL calibration methods in one shot (recommended)
+calibrate-all: calibrate-temperature calibrate-vector calibrate-dirichlet
+	@echo "✅ All calibration methods complete. Results in $(CAL_BASE)/$(CAL_EXP)/"
+
+# Compare calibration methods on internal test set
+calibrate-compare:
+	@echo "=== Calibration Comparison on Internal Test ==="
+	uv run python scripts/evaluate_calibration.py \
+		--experiment $(CAL_EXP)
+
+# Full sweep: calibrate + compare (recommended entry point)
+calibrate-sweep:
+	@echo "=== FULL CALIBRATION SWEEP: all methods × all lambdas ==="
+	uv run python scripts/calibrate_model.py \
+		--onnx $(ONNX) \
+		--metadata $(METADATA) \
+		--method all \
+		--grid-search \
+		--output-base $(CAL_BASE)
+	@echo ""
+	@echo "=== Now comparing results ==="
+	uv run python scripts/evaluate_calibration.py \
+		--experiment $(CAL_EXP) \
+		--onnx $(ONNX) \
+		--metadata $(METADATA) \
+		--internal-test artifacts/dataset/splits/internal_test.csv \
+		--output-base $(CAL_BASE)
+
+# DINOv3 calibration experiments.
+# These targets read calibration grids from each DINOv3 config and save under:
+#   artifacts/export/<experiment_name>/calibration/<method...>/
+calibrate-dinov3-weighted-temperature:
+	@echo "=== DINOv3 weighted: Temperature Scaling ==="
+	uv run python scripts/run_calibration_temperature.py \
+		--config $(DINO_WEIGHTED_CONFIG) \
+		--output-base $(DINO_CAL_OUTPUT_BASE) \
+		--batch-size $(DINO_CAL_BATCH_SIZE)
+
+calibrate-dinov3-weighted-vector:
+	@echo "=== DINOv3 weighted: Vector Scaling grid ==="
+	uv run python scripts/run_calibration_vector.py \
+		--config $(DINO_WEIGHTED_CONFIG) \
+		--output-base $(DINO_CAL_OUTPUT_BASE) \
+		--batch-size $(DINO_CAL_BATCH_SIZE)
+
+calibrate-dinov3-weighted-dirichlet:
+	@echo "=== DINOv3 weighted: Dirichlet Calibration grid ==="
+	uv run python scripts/run_calibration_dirichlet.py \
+		--config $(DINO_WEIGHTED_CONFIG) \
+		--output-base $(DINO_CAL_OUTPUT_BASE) \
+		--batch-size $(DINO_CAL_BATCH_SIZE)
+
+calibrate-dinov3-weighted-all: calibrate-dinov3-weighted-temperature calibrate-dinov3-weighted-vector calibrate-dinov3-weighted-dirichlet
+	@echo "✅ DINOv3 weighted calibration complete: $(DINO_WEIGHTED_EXPORT_DIR)/calibration/"
+
+calibrate-dinov3-weighted-compare:
+	@echo "=== DINOv3 weighted: compare saved calibration outputs ==="
+	uv run python scripts/evaluate_calibration.py \
+		--experiment dinov3_safe_weighted_aug \
+		--results-dir $(DINO_WEIGHTED_EXPORT_DIR)/calibration
+
+calibrate-dinov3-focal-temperature:
+	@echo "=== DINOv3 focal: Temperature Scaling ==="
+	uv run python scripts/run_calibration_temperature.py \
+		--config $(DINO_FOCAL_CONFIG) \
+		--output-base $(DINO_CAL_OUTPUT_BASE) \
+		--batch-size $(DINO_CAL_BATCH_SIZE)
+
+calibrate-dinov3-focal-vector:
+	@echo "=== DINOv3 focal: Vector Scaling grid ==="
+	uv run python scripts/run_calibration_vector.py \
+		--config $(DINO_FOCAL_CONFIG) \
+		--output-base $(DINO_CAL_OUTPUT_BASE) \
+		--batch-size $(DINO_CAL_BATCH_SIZE)
+
+calibrate-dinov3-focal-dirichlet:
+	@echo "=== DINOv3 focal: Dirichlet Calibration grid ==="
+	uv run python scripts/run_calibration_dirichlet.py \
+		--config $(DINO_FOCAL_CONFIG) \
+		--output-base $(DINO_CAL_OUTPUT_BASE) \
+		--batch-size $(DINO_CAL_BATCH_SIZE)
+
+calibrate-dinov3-focal-all: calibrate-dinov3-focal-temperature calibrate-dinov3-focal-vector calibrate-dinov3-focal-dirichlet
+	@echo "✅ DINOv3 focal calibration complete: $(DINO_FOCAL_EXPORT_DIR)/calibration/"
+
+calibrate-dinov3-focal-compare:
+	@echo "=== DINOv3 focal: compare saved calibration outputs ==="
+	uv run python scripts/evaluate_calibration.py \
+		--experiment dinov3_safe_focal_aug \
+		--results-dir $(DINO_FOCAL_EXPORT_DIR)/calibration
+
+calibrate-dinov3-all: calibrate-dinov3-weighted-all calibrate-dinov3-focal-all
+	@echo "✅ All DINOv3 calibration experiments complete."
+
+calibrate-dinov3-compare: calibrate-dinov3-weighted-compare calibrate-dinov3-focal-compare
+	@echo "✅ All DINOv3 calibration comparisons printed."
+
+# ── Deploy pipeline ───────────────────────────────────────────
+deploy-run-to-demo: checkpoint-to-safetensors export-model size-check calibrate-temperature prepare-demo-artifact
+	@echo "Deployable demo artifact (with temperature scaling) prepared at $(ARTIFACT_CONFIG)"
+
+deploy-run-full: checkpoint-to-safetensors export-model size-check calibrate-all calibrate-compare prepare-demo-artifact
+	@echo "Full deployment pipeline complete — best calibration selected"
 
 prepare-demo-artifact:
 	@echo "Writing active demo artifact config..."
@@ -169,9 +353,6 @@ prepare-demo-artifact:
 		--onnx $(ONNX) \
 		--calibration $(CALIBRATION) \
 		--output $(ARTIFACT_CONFIG)
-
-deploy-run-to-demo: checkpoint-to-safetensors export-model size-check calibrate-model prepare-demo-artifact
-	@echo "Deployable demo artifact prepared at $(ARTIFACT_CONFIG)"
 
 # Training targets
 WANDB ?=
