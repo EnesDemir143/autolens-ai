@@ -1,8 +1,10 @@
 .PHONY: help sync import test lint format typecheck check pre-commit graphify-update graphify-report clean
 .PHONY: compute-stats train-baseline-0 train-baseline-1 train-baseline-2 train-all-baselines resume-training
 .PHONY: train-all-wandb
+.PHONY: train-dinov3 dry-run-dinov3
 .PHONY: checkpoint-to-safetensors export-model size-check calibrate-model prepare-demo-artifact deploy-run-to-demo
 .PHONY: demo demo-smoke ui-smoke-check
+.PHONY: frontend-install frontend-build demo-web demo-gradio
 
 help:
 	@printf '%s\n' \
@@ -199,6 +201,40 @@ train-all-baselines: train-baseline-0 train-baseline-1 train-baseline-2
 	@echo ""
 	@echo "All baseline experiments complete!"
 
+# DINOv3 ViT-S/16 — non-LoRA then LoRA (Phase 4 model comparison)
+train-dinov3:
+	@echo "[1/2] Training DINOv3 ViT-S/16 — non-LoRA baseline..."
+	uv run python scripts/train.py \
+		--config configs/experiments/baseline_0_dinov3_vits16.yaml \
+		$(WANDB)
+	@echo ""
+	@echo "Waiting 30s for memory to clear before LoRA run..."
+	sleep 30
+	@echo "[2/2] Training DINOv3 ViT-S/16 — LoRA baseline..."
+	uv run python scripts/train.py \
+		--config configs/experiments/baseline_0_dinov3_vits16_lora.yaml \
+		--lora \
+		$(WANDB)
+	@echo ""
+	@echo "DINOv3 training complete (non-LoRA + LoRA)."
+
+# DINOv3 dry-run — 1 epoch only, tests data pipeline / logger / model init
+dry-run-dinov3:
+	@echo "[DRY RUN 1/2] DINOv3 ViT-S/16 non-LoRA — 1 epoch smoke test..."
+	uv run python scripts/train.py \
+		--config configs/experiments/baseline_0_dinov3_vits16.yaml \
+		--max-epochs 1
+	@echo ""
+	@echo "Waiting 15s..."
+	sleep 15
+	@echo "[DRY RUN 2/2] DINOv3 ViT-S/16 LoRA — 1 epoch smoke test..."
+	uv run python scripts/train.py \
+		--config configs/experiments/baseline_0_dinov3_vits16_lora.yaml \
+		--lora \
+		--max-epochs 1
+	@echo ""
+	@echo "Dry-run complete. Check logs for errors before overnight run."
+
 # Resume training from checkpoint
 resume-training:
 	@if [ -z "$(CONFIG)" ] || [ -z "$(RUN_ID)" ]; then \
@@ -238,3 +274,20 @@ demo:
 demo-smoke:
 	@echo "Running UI/inference smoke test..."
 	uv run python scripts/smoke_test_demo.py
+
+# Phase 05-05: FastAPI + Vite frontend
+frontend-install:
+	@echo "Installing frontend npm dependencies..."
+	cd frontend && npm install
+
+frontend-build:
+	@echo "Building production frontend..."
+	cd frontend && npm run build
+
+demo-web: frontend-build
+	@echo "Launching FastAPI + Vite demo on http://localhost:8080 ..."
+	uv run uvicorn api:app --host 0.0.0.0 --port 8080
+
+demo-gradio:
+	@echo "Launching Gradio demo on http://localhost:7860 ..."
+	uv run python app.py
