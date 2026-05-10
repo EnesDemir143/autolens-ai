@@ -1,0 +1,89 @@
+# DINOv3 ViT-S/16: safe augmentation + class-weighted loss + EMA
+#
+# Decision basis: docs/research/AutoLens-AI-Augmentation-Strategy.md
+# - Preserve vehicle silhouette and aspect ratio.
+# - Prefer class-weighted loss over weighted sampling for long-tail classes.
+# - Use EMA and modest ViT stochastic depth to stabilize full fine-tuning.
+# - Keep validation/test preprocessing deterministic.
+
+# Dataset
+data_root: datasets
+train_csv: artifacts/dataset/splits/train.csv
+val_csv: artifacts/dataset/splits/val.csv
+test_csv: artifacts/dataset/splits/internal_test.csv
+
+# Preprocessing — DINOv3 expects 256x256, no center crop shrink
+resize_size: 256
+crop_size: 256
+use_augmentation: true
+dataset_mean: [0.4429, 0.4354, 0.4370]
+dataset_std: [0.2456, 0.2421, 0.2449]
+
+# Shape-preserving augmentation policy
+aug_crop_scale: [0.75, 1.0]
+aug_crop_ratio: [0.85, 1.15]
+aug_brightness: 0.1
+aug_contrast: 0.1
+aug_saturation: 0.1
+aug_hue: 0.0
+random_erasing_p: 0.15
+random_erasing_scale: [0.02, 0.10]
+random_erasing_ratio: [0.3, 3.3]
+
+# Model
+model_name: vit_small_patch16_dinov3
+num_classes: 8
+pretrained: true
+drop_path_rate: 0.1
+
+# Training
+batch_size: 64
+num_workers: 4
+max_epochs: 100
+learning_rate: 0.0001
+weight_decay: 0.0001
+seed: 42
+
+# Training stability & performance
+gradient_clip_val: 1.0
+precision: "bf16-mixed"
+label_smoothing: 0.05
+
+# Advanced
+use_ema: true
+ema_decay: 0.999
+use_focal_loss: false
+focal_alpha: class_weights
+focal_gamma: 2.0
+
+# Class imbalance
+use_weighted_sampler: false
+use_class_weights: true
+max_class_weight: 5.0
+
+# LoRA fine-tuning (not used by the recommended make target unless --lora is passed manually)
+lora_r: 8
+lora_alpha: 16
+lora_dropout: 0.1
+lora_target_modules: ["qkv", "proj"]
+
+# Callbacks — macro F1 is the assignment-priority metric
+early_stopping_patience: 12
+monitor_metric: val/f1_macro
+monitor_mode: max
+
+# Device
+accelerator: null
+
+# Checkpoints
+checkpoint_dir: checkpoints/dinov3_safe_weighted_aug
+
+# Experiment tracking
+experiment_name: dinov3_safe_weighted_aug
+tags:
+  - dinov3
+  - safe_augmentation
+  - random_erasing
+  - class_weighted_loss
+  - ema
+  - wandb

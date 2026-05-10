@@ -275,3 +275,6 @@ artifacts/export/**/*.onnx
 artifacts/export/**/_api_cache_config.json
 frontend/dist/
 frontend/node_modules/
+
+# Archive artifacts
+*.tar.gz
