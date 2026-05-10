@@ -1,7 +1,7 @@
 .PHONY: help sync import test lint format typecheck check pre-commit graphify-update graphify-report clean
 .PHONY: compute-stats train-baseline-0 train-baseline-1 train-baseline-2 train-all-baselines resume-training
 .PHONY: train-all-wandb
-.PHONY: train-dinov3 train-dinov3-safe-focal dry-run-dinov3 dry-run-dinov3-safe-focal
+.PHONY: train-dinov3 train-dinov3-safe-focal train-dinov3-safe-weighted dry-run-dinov3 dry-run-dinov3-safe-focal dry-run-dinov3-safe-weighted
 .PHONY: checkpoint-to-safetensors export-model size-check calibrate-model prepare-demo-artifact deploy-run-to-demo
 .PHONY: demo demo-smoke ui-smoke-check
 .PHONY: frontend-install frontend-build demo-web demo-gradio
@@ -61,7 +61,8 @@ help:
 		'' \
 		'Recommended DINOv3 tuning:' \
 		'  make dry-run-dinov3-safe-focal WANDB=--wandb  # 1 epoch smoke test' \
-		'  make train-dinov3-safe-focal WANDB=--wandb      # safe aug + class-weighted focal + EMA'
+		'  make train-dinov3-safe-focal WANDB=--wandb      # safe aug + class-weighted focal + EMA' \
+		'  make train-dinov3-safe-weighted WANDB=--wandb   # safe aug + class-weighted CE + EMA'
 
 sync:
 	uv sync
@@ -241,6 +242,25 @@ dry-run-dinov3-safe-focal: compute-stats
 		$(if $(WANDB),--wandb-project $(WANDB_PROJECT),)
 	@echo ""
 	@echo "DINOv3 safe-focal dry run complete."
+
+train-dinov3-safe-weighted: compute-stats
+	@echo "Training DINOv3 run: safe augmentation + class-weighted loss + EMA..."
+	uv run python scripts/train.py \
+		--config configs/experiments/dinov3_safe_weighted_aug.yaml \
+		--wandb \
+		--wandb-project $(WANDB_PROJECT)
+	@echo ""
+	@echo "DINOv3 safe-weighted run complete."
+
+dry-run-dinov3-safe-weighted: compute-stats
+	@echo "[DRY RUN] DINOv3 safe-weighted — 1 epoch smoke test..."
+	uv run python scripts/train.py \
+		--config configs/experiments/dinov3_safe_weighted_aug.yaml \
+		--max-epochs 1 \
+		--wandb \
+		--wandb-project $(WANDB_PROJECT)
+	@echo ""
+	@echo "DINOv3 safe-weighted dry run complete."
 
 # DINOv3 dry-run — 1 epoch only, tests data pipeline / logger / model init
 dry-run-dinov3:
