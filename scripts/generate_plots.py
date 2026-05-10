@@ -11,9 +11,11 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import csv
 from pathlib import Path
 
 import matplotlib
+
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import torch
@@ -22,8 +24,12 @@ import torch
 def parse_epoch_metrics(log_path: Path) -> dict[str, list]:
     """Parse val/loss, val/acc, val/f1_macro, train/loss_epoch, train/acc from output.log."""
     metrics: dict[str, list] = {
-        "epoch": [], "train_loss": [], "train_acc": [],
-        "val_loss": [], "val_acc": [], "val_f1_macro": [],
+        "epoch": [],
+        "train_loss": [],
+        "train_acc": [],
+        "val_loss": [],
+        "val_acc": [],
+        "val_f1_macro": [],
     }
 
     # Each completed epoch line looks like:
@@ -82,6 +88,65 @@ def parse_epoch_metrics(log_path: Path) -> dict[str, list]:
     return metrics
 
 
+def parse_epoch_metrics_from_csv(metrics_path: Path) -> dict[str, list]:
+    """Parse epoch-level training metrics from metrics.csv."""
+    metrics: dict[str, list] = {
+        "epoch": [],
+        "train_loss": [],
+        "train_acc": [],
+        "val_loss": [],
+        "val_acc": [],
+        "val_f1_macro": [],
+    }
+
+    if not metrics_path.exists():
+        raise FileNotFoundError(f"Metrics CSV not found: {metrics_path}")
+
+    # Keep the latest non-empty value per field for each epoch.
+    per_epoch: dict[int, dict[str, float]] = {}
+    with metrics_path.open(newline="") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            epoch_raw = (row.get("epoch") or "").strip()
+            if not epoch_raw:
+                continue
+            try:
+                epoch = int(float(epoch_raw))
+            except ValueError:
+                continue
+            bucket = per_epoch.setdefault(epoch, {})
+            for src, dst in [
+                ("train/loss_epoch", "train_loss"),
+                ("train/acc", "train_acc"),
+                ("val/loss", "val_loss"),
+                ("val/acc", "val_acc"),
+                ("val/f1_macro", "val_f1_macro"),
+            ]:
+                value_raw = (row.get(src) or "").strip()
+                if not value_raw:
+                    continue
+                try:
+                    bucket[dst] = float(value_raw)
+                except ValueError:
+                    continue
+
+    for epoch in sorted(per_epoch):
+        bucket = per_epoch[epoch]
+        if "val_loss" not in bucket and "train_loss" not in bucket:
+            continue
+        metrics["epoch"].append(epoch)
+        metrics["train_loss"].append(bucket.get("train_loss", float("nan")))
+        metrics["train_acc"].append(bucket.get("train_acc", float("nan")))
+        metrics["val_loss"].append(bucket.get("val_loss", float("nan")))
+        metrics["val_acc"].append(bucket.get("val_acc", float("nan")))
+        metrics["val_f1_macro"].append(bucket.get("val_f1_macro", float("nan")))
+
+    if not metrics["epoch"]:
+        raise ValueError(f"No epoch-level metrics found in {metrics_path}")
+
+    return metrics
+
+
 def save_training_graphs(metrics: dict, save_dir: Path) -> None:
     epochs = metrics["epoch"]
 
@@ -89,30 +154,43 @@ def save_training_graphs(metrics: dict, save_dir: Path) -> None:
     fig, ax = plt.subplots(figsize=(9, 5))
     ax.plot(epochs, metrics["train_loss"], label="Train Loss", marker="o", markersize=4)
     ax.plot(epochs, metrics["val_loss"], label="Val Loss", marker="s", markersize=4)
-    ax.set_xlabel("Epoch"); ax.set_ylabel("Loss")
+    ax.set_xlabel("Epoch")
+    ax.set_ylabel("Loss")
     ax.set_title("Training & Validation Loss")
-    ax.legend(); ax.grid(True, alpha=0.3)
+    ax.legend()
+    ax.grid(True, alpha=0.3)
     fig.tight_layout()
     p = save_dir / "training_loss.png"
-    fig.savefig(p, dpi=150); plt.close(fig)
+    fig.savefig(p, dpi=150)
+    plt.close(fig)
     print(f"✓ Loss graph: {p}")
 
     # Accuracy
     fig, ax = plt.subplots(figsize=(9, 5))
     ax.plot(epochs, metrics["train_acc"], label="Train Accuracy", marker="o", markersize=4)
     ax.plot(epochs, metrics["val_acc"], label="Val Accuracy", marker="s", markersize=4)
-    ax.set_xlabel("Epoch"); ax.set_ylabel("Accuracy")
+    ax.set_xlabel("Epoch")
+    ax.set_ylabel("Accuracy")
     ax.set_title("Training & Validation Accuracy")
-    ax.legend(); ax.grid(True, alpha=0.3)
+    ax.legend()
+    ax.grid(True, alpha=0.3)
     fig.tight_layout()
     p = save_dir / "training_accuracy.png"
-    fig.savefig(p, dpi=150); plt.close(fig)
+    fig.savefig(p, dpi=150)
+    plt.close(fig)
     print(f"✓ Accuracy graph: {p}")
+
+
+def save_training_graphs_from_csv(metrics_path: Path, save_dir: Path) -> None:
+    """Generate training graphs from metrics.csv without parsing logs."""
+    metrics = parse_epoch_metrics_from_csv(metrics_path)
+    save_training_graphs(metrics, save_dir)
 
 
 def save_confusion_matrix(ckpt_path: Path, save_dir: Path, batch_size: int = 64) -> None:
     """Run test set through the model and save confusion matrix + per-class metrics."""
     import sys
+
     sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
     from autolens_ai.data.labels import TARGET_CLASSES
@@ -120,8 +198,21 @@ def save_confusion_matrix(ckpt_path: Path, save_dir: Path, batch_size: int = 64)
 
     class_names = list(TARGET_CLASSES)
 
+    # Some focal-loss checkpoints require class_weights to reconstruct the module.
+    # The weights are stored in the checkpoint state_dict as a buffer.
+    class_weights = None
+    checkpoint = torch.load(str(ckpt_path), map_location="cpu", weights_only=False)
+    state_dict = checkpoint.get("state_dict", {})
+    if "_class_weights" in state_dict:
+        class_weights = state_dict["_class_weights"].detach().cpu()
+
     # Load model
-    model = AutoLensClassifier.load_from_checkpoint(str(ckpt_path), map_location="cpu", strict=False)
+    model = AutoLensClassifier.load_from_checkpoint(
+        str(ckpt_path),
+        map_location="cpu",
+        strict=False,
+        class_weights=class_weights,
+    )
     model.eval()
 
     # Load dataset stats
@@ -130,8 +221,10 @@ def save_confusion_matrix(ckpt_path: Path, save_dir: Path, batch_size: int = 64)
         stats = json.load(f)
 
     preprocess_config = PreprocessConfig(
-        resize_size=232, crop_size=224,
-        mean=tuple(stats["mean"]), std=tuple(stats["std"]),
+        resize_size=232,
+        crop_size=224,
+        mean=tuple(stats["mean"]),
+        std=tuple(stats["std"]),
     )
 
     datamodule = AutoLensDataModule(
@@ -160,7 +253,6 @@ def save_confusion_matrix(ckpt_path: Path, save_dir: Path, batch_size: int = 64)
             all_preds.extend(preds.tolist())
             all_labels.extend(labels.tolist())
 
-    import numpy as np
     from sklearn.metrics import classification_report, confusion_matrix
 
     cm = confusion_matrix(all_labels, all_preds, labels=list(range(8)))
@@ -171,19 +263,30 @@ def save_confusion_matrix(ckpt_path: Path, save_dir: Path, batch_size: int = 64)
     im = ax.imshow(cm_norm, interpolation="nearest", cmap="Blues", vmin=0, vmax=1)
     fig.colorbar(im, ax=ax)
     ax.set(
-        xticks=range(8), yticks=range(8),
-        xticklabels=class_names, yticklabels=class_names,
-        xlabel="Predicted", ylabel="True",
+        xticks=range(8),
+        yticks=range(8),
+        xticklabels=class_names,
+        yticklabels=class_names,
+        xlabel="Predicted",
+        ylabel="True",
         title="Normalized Confusion Matrix",
     )
     plt.setp(ax.get_xticklabels(), rotation=45, ha="right")
     for i in range(8):
         for j in range(8):
-            ax.text(j, i, f"{cm_norm[i, j]:.2f}", ha="center", va="center",
-                    color="white" if cm_norm[i, j] > 0.5 else "black", fontsize=8)
+            ax.text(
+                j,
+                i,
+                f"{cm_norm[i, j]:.2f}",
+                ha="center",
+                va="center",
+                color="white" if cm_norm[i, j] > 0.5 else "black",
+                fontsize=8,
+            )
     fig.tight_layout()
     p = save_dir / "confusion_matrix.png"
-    fig.savefig(p, dpi=150, bbox_inches="tight"); plt.close(fig)
+    fig.savefig(p, dpi=150, bbox_inches="tight")
+    plt.close(fig)
     print(f"✓ Confusion matrix: {p}")
 
     # Per-class report
@@ -198,7 +301,11 @@ def save_confusion_matrix(ckpt_path: Path, save_dir: Path, batch_size: int = 64)
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--ckpt", required=True, help="Path to best .ckpt file")
-    parser.add_argument("--log", required=True, help="Path to output.log from wandb run")
+    parser.add_argument("--log", help="Path to output.log from wandb run")
+    parser.add_argument(
+        "--metrics-csv",
+        help="Path to metrics.csv for log-free training graph generation (defaults to the checkpoint directory).",
+    )
     parser.add_argument("--batch-size", type=int, default=64)
     args = parser.parse_args()
 
@@ -208,11 +315,20 @@ def main() -> None:
 
     print(f"Saving plots to: {save_dir}\n")
 
-    # Training graphs from log
-    print("Parsing training metrics from log...")
-    metrics = parse_epoch_metrics(Path(args.log))
-    print(f"  Found {len(metrics['epoch'])} epochs")
-    save_training_graphs(metrics, save_dir)
+    # Training graphs from log or metrics.csv
+    if args.log:
+        print("Parsing training metrics from log...")
+        metrics = parse_epoch_metrics(Path(args.log))
+        print(f"  Found {len(metrics['epoch'])} epochs")
+        save_training_graphs(metrics, save_dir)
+    else:
+        metrics_csv = (
+            Path(args.metrics_csv) if args.metrics_csv else ckpt_path.parent / "metrics.csv"
+        )
+        print(f"Parsing training metrics from CSV: {metrics_csv}")
+        metrics = parse_epoch_metrics_from_csv(metrics_csv)
+        print(f"  Found {len(metrics['epoch'])} epochs")
+        save_training_graphs(metrics, save_dir)
 
     # Confusion matrix + per-class from checkpoint
     print("\nRunning test set inference...")
