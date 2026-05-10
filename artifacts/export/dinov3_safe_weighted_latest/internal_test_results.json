@@ -1,0 +1,67 @@
+{
+  "split": "internal_test",
+  "num_samples": 3170,
+  "accuracy": 0.9584,
+  "macro_avg": {
+    "precision": 0.9561,
+    "recall": 0.9456,
+    "f1": 0.9507,
+    "support": 3170
+  },
+  "weighted_avg": {
+    "precision": 0.9586,
+    "recall": 0.9584,
+    "f1": 0.9584,
+    "support": 3170
+  },
+  "per_class": {
+    "SUV": {
+      "precision": 0.9576,
+      "recall": 0.9433,
+      "f1": 0.9504,
+      "support": 670
+    },
+    "VAN": {
+      "precision": 0.9933,
+      "recall": 0.978,
+      "f1": 0.9856,
+      "support": 455
+    },
+    "STATION WAGON": {
+      "precision": 0.9524,
+      "recall": 0.9091,
+      "f1": 0.9302,
+      "support": 66
+    },
+    "MICRO": {
+      "precision": 1.0,
+      "recall": 0.9545,
+      "f1": 0.9767,
+      "support": 22
+    },
+    "OPEN WHEEL / F1": {
+      "precision": 1.0,
+      "recall": 0.9983,
+      "f1": 0.9991,
+      "support": 586
+    },
+    "SEDAN": {
+      "precision": 0.9496,
+      "recall": 0.9689,
+      "f1": 0.9591,
+      "support": 836
+    },
+    "HATCHBACK": {
+      "precision": 0.8667,
+      "recall": 0.8797,
+      "f1": 0.8731,
+      "support": 266
+    },
+    "PICK UP": {
+      "precision": 0.9296,
+      "recall": 0.9331,
+      "f1": 0.9314,
+      "support": 269
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "max_size_mb": 95.0,
+  "results": [
+    {
+      "path": "artifacts/export/dinov3_safe_focal_latest/model.safetensors",
+      "exists": true,
+      "size_mb": 82.373,
+      "under_limit": true
+    },
+    {
+      "path": "artifacts/export/dinov3_safe_focal_latest/model.onnx",
+      "exists": true,
+      "size_mb": 82.572,
+      "under_limit": true
+    }
+  ],
+  "all_under_limit": true
+}

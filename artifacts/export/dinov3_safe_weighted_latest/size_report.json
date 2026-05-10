@@ -1,0 +1,28 @@
+{
+  "max_size_mb": 95.0,
+  "artifacts": {
+    "safetensors": {
+      "path": "artifacts/export/dinov3_safe_weighted_latest/model.safetensors",
+      "size_mb": 82.373,
+      "under_limit": true
+    },
+    "onnx": {
+      "path": "artifacts/export/dinov3_safe_weighted_latest/model.onnx",
+      "size_mb": 82.572,
+      "under_limit": true
+    }
+  },
+  "onnxruntime_smoke": {
+    "provider": "CPUExecutionProvider",
+    "input_name": "image",
+    "output_shape": [
+      1,
+      8
+    ]
+  },
+  "simplification": {
+    "attempted": true,
+    "ok": false,
+    "reason": "Input /Sub_1_output_0 is undefined!"
+  }
+}
