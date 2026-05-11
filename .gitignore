@@ -278,3 +278,10 @@ frontend/node_modules/
 
 # Archive artifacts
 *.tar.gz
+
+# Generated prediction output files
+preds.txt
+True.txt
+
+# Session documentation files
+docs/session-*.md
