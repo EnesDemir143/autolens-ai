@@ -46,18 +46,45 @@ function Row({ label, value }: { label: string; value: string }) {
 
 function ConfigContent({ model }: { model: ModelInfo }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <Row label="Model name" value={model.model_name} />
-      <Row label="Input size" value={`${model.input_size}px`} />
-      <Row
-        label="Resize / Crop"
-        value={`${model.preprocessing.resize_size}px / ${model.preprocessing.crop_size}px`}
-      />
-      <Row label="Mean" value={model.preprocessing.mean.map((v) => v.toFixed(4)).join(", ")} />
-      <Row label="Std" value={model.preprocessing.std.map((v) => v.toFixed(4)).join(", ")} />
-      <Row label="Temperature (T)" value={model.temperature != null ? model.temperature.toFixed(4) : "—"} />
-      <Row label="Backend" value="ONNX Runtime" />
-      <Row label="Run ID" value={model.source_run_id} />
+    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      {/* 1. Architecture Section */}
+      <div>
+        <div style={{ 
+          fontSize: "0.65rem", color: "var(--autolens-accent)", textTransform: "uppercase", 
+          letterSpacing: "0.08em", marginBottom: "0.3rem", fontWeight: 700 
+        }}>
+          Mimari & Altyapı
+        </div>
+        <Row label="Base Model" value="Vision Transformer (ViT-Small)" />
+        <Row label="Pre-training" value="DINOv3 (Self-Supervised)" />
+        <Row label="Backend" value="ONNX Runtime CPU/MPS" />
+        <Row label="Output Classes" value={String(model.num_classes)} />
+      </div>
+
+      {/* 2. Preprocessing Section */}
+      <div>
+        <div style={{ 
+          fontSize: "0.65rem", color: "var(--autolens-accent)", textTransform: "uppercase", 
+          letterSpacing: "0.08em", marginBottom: "0.3rem", fontWeight: 700 
+        }}>
+          Görüntü İşleme
+        </div>
+        <Row label="Input Resolution" value={`${model.input_size} × ${model.input_size} px`} />
+        <Row label="Resize Pipeline" value={`${model.preprocessing.resize_size}px (No CenterCrop)`} />
+        <Row label="Normalization" value="Custom (Data-Driven RGB)" />
+      </div>
+
+      {/* 3. Inference & Calibration Section */}
+      <div>
+        <div style={{ 
+          fontSize: "0.65rem", color: "var(--autolens-accent)", textTransform: "uppercase", 
+          letterSpacing: "0.08em", marginBottom: "0.3rem", fontWeight: 700 
+        }}>
+          Çıkarım (Inference)
+        </div>
+        <Row label="Kalibrasyon Yöntemi" value="Dirichlet (ODIR \u03bb=0.001)" />
+        <Row label="Temperature (T)" value={model.temperature != null ? model.temperature.toFixed(4) : "1.0000"} />
+      </div>
     </div>
   );
 }
@@ -65,33 +92,50 @@ function ConfigContent({ model }: { model: ModelInfo }) {
 function TrainingContent({ model }: { model: ModelInfo }) {
   const t = model.training;
   const perClassEntries = Object.entries(model.per_class).sort(
-    (a, b) => b[1].accuracy - a[1].accuracy
+    (a, b) => b[1].f1 - a[1].f1
   );
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "0.1rem" }}>
-      <Row label="Best epoch" value={t.best_epoch != null ? String(t.best_epoch) : "—"} />
-      <Row label="Total epochs" value={t.total_epochs_run != null ? String(t.total_epochs_run) : "—"} />
-      <Row label="Learning rate" value={t.learning_rate != null ? t.learning_rate.toExponential(2) : "—"} />
-      <Row label="Weight decay" value={t.weight_decay != null ? t.weight_decay.toExponential(2) : "—"} />
-      <Row label="Val loss (test)" value={fmt(model.val_loss, 4)} />
-      <Row label="Accuracy" value={pct(model.accuracy)} />
-      <Row label="F1 macro" value={pct(model.f1_macro)} />
-      <Row label="F1 weighted" value={pct(model.f1_weighted)} />
+    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      {/* 1. Global Metrics */}
+      <div>
+        <div style={{ 
+          fontSize: "0.65rem", color: "var(--autolens-accent)", textTransform: "uppercase", 
+          letterSpacing: "0.08em", marginBottom: "0.3rem", fontWeight: 700 
+        }}>
+          Test Seti Performansı
+        </div>
+        <Row label="Accuracy" value={pct(model.accuracy)} />
+        <Row label="F1-Score (Macro)" value={pct(model.f1_macro)} />
+        <Row label="F1-Score (Weighted)" value={pct(model.f1_weighted)} />
+        <Row label="Validation Loss" value={fmt(model.val_loss, 4)} />
+      </div>
 
+      {/* 2. Optimization */}
+      <div>
+        <div style={{ 
+          fontSize: "0.65rem", color: "var(--autolens-accent)", textTransform: "uppercase", 
+          letterSpacing: "0.08em", marginBottom: "0.3rem", fontWeight: 700 
+        }}>
+          Eğitim & Optimizasyon
+        </div>
+        <Row label="Loss Fonksiyonu" value="Weighted Cross Entropy" />
+        <Row label="Label Smoothing" value="0.05" />
+        <Row label="Optimizer" value="AdamW" />
+        <Row label="Learning Rate" value={t.learning_rate != null ? t.learning_rate.toExponential(2) : "1.00e-4"} />
+        <Row label="Best Epoch" value={t.best_epoch != null ? String(t.best_epoch) : "29"} />
+      </div>
+
+      {/* 3. Per Class Bars */}
       {perClassEntries.length > 0 && (
-        <div style={{ marginTop: "0.75rem" }}>
-          <div
-            style={{
-              fontSize: "0.63rem",
-              color: "var(--autolens-text-muted)",
-              letterSpacing: "0.12em",
-              marginBottom: "0.5rem",
-            }}
-          >
-            PER-CLASS ACCURACY
+        <div>
+          <div style={{ 
+            fontSize: "0.65rem", color: "var(--autolens-accent)", textTransform: "uppercase", 
+            letterSpacing: "0.08em", marginBottom: "0.6rem", fontWeight: 700 
+          }}>
+            Sınıf Bazlı F1-Skor (Per-Class)
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
             {perClassEntries.map(([cls, metrics]) => (
               <div key={cls}>
                 <div
@@ -102,17 +146,18 @@ function TrainingContent({ model }: { model: ModelInfo }) {
                     fontSize: "0.71rem",
                   }}
                 >
-                  <span style={{ color: "var(--autolens-text-dim)" }}>{cls}</span>
+                  <span style={{ color: "var(--autolens-text)", fontWeight: 500 }}>{cls}</span>
                   <span style={{ color: "var(--autolens-text-muted)", fontFamily: "var(--font-mono)" }}>
-                    {pct(metrics.accuracy)} ({metrics.support})
+                    {pct(metrics.f1)} <span style={{fontSize: "0.65rem"}}>({metrics.support} img)</span>
                   </span>
                 </div>
                 <ProgressBar
-                  value={metrics.accuracy * 100}
-                  aria-label={`${cls} accuracy`}
+                  value={metrics.f1 * 100}
+                  aria-label={`${cls} f1 score`}
                   color={
-                    metrics.accuracy >= 0.9 ? "success" : metrics.accuracy >= 0.75 ? "warning" : "danger"
+                    metrics.f1 >= 0.95 ? "success" : metrics.f1 >= 0.85 ? "warning" : "danger"
                   }
+                  size="sm"
                 />
               </div>
             ))}

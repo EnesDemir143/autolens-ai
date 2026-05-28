@@ -1,7 +1,9 @@
 // ── Shared TypeScript types for AutoLens AI demo UI ──────────────────────
 
 export interface PerClassMetrics {
-  accuracy: number;
+  precision: number;
+  recall: number;
+  f1: number;
   support: number;
 }
 
