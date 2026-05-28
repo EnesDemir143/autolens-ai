@@ -1,5 +1,5 @@
 // ── ImageUpload — Drag & drop + click, preview thumbnail ─────────────────
-import { useCallback, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { Button } from "@heroui/react/button";
 import { useStore } from "../store";
 
@@ -11,6 +11,24 @@ export function ImageUpload() {
   const preview = selectedFile ? URL.createObjectURL(selectedFile) : null;
   const isAnalyzing = status === "analyzing";
   const canClassify = !!selectedFile && !isAnalyzing && !isModelSwitching;
+
+  // Ctrl+V / Cmd+V paste support (global)
+  React.useEffect(() => {
+    const handlePaste = (e: ClipboardEvent) => {
+      const items = e.clipboardData?.items;
+      if (!items) return;
+      for (const item of items) {
+        if (item.type.startsWith("image/")) {
+          e.preventDefault();
+          const file = item.getAsFile();
+          if (file) setFile(file);
+          return;
+        }
+      }
+    };
+    window.addEventListener("paste", handlePaste);
+    return () => window.removeEventListener("paste", handlePaste);
+  }, [setFile]);
 
   const onFiles = useCallback(
     (files: FileList | null) => {
