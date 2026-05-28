@@ -1,10 +1,10 @@
 {
-  "created_at": "2026-05-10T08:33:18.261555+00:00",
+  "created_at": "2026-05-23T00:00:00+00:00",
   "backend": "onnxruntime",
-  "model_path": "artifacts/export/dinov3_vits16_latest/model.onnx",
-  "metadata_path": "artifacts/export/dinov3_vits16_latest/metadata.json",
-  "calibration_path": "artifacts/export/dinov3_vits16_latest/calibration.json",
-  "temperature": 1.721068263053894,
+  "model_path": "artifacts/export/dinov3_safe_weighted_latest/model.onnx",
+  "metadata_path": "artifacts/export/dinov3_safe_weighted_latest/metadata.json",
+  "calibration_path": "artifacts/export/dinov3_safe_weighted_latest/calibration/dirichlet/best_calibration.json",
+  "temperature": 1.0,
   "class_labels": [
     "SUV",
     "VAN",
@@ -41,6 +41,7 @@
     ],
     "color_mode": "RGB"
   },
-  "source_run_id": "baseline_0_dinov3_vits16_20260509_235120",
-  "contract": "Phase 5 should replace this JSON pointer, not edit UI prediction code, when final winner changes."
+  "source_run_id": "autolens-ai_checkpoints_dinov3_safe_weighted_aug_20260510_131319",
+  "contract": "Phase 5 should replace this JSON pointer, not edit UI prediction code, when final winner changes.",
+  "calibration_method": "dirichlet"
 }

@@ -45,9 +45,7 @@ MAX_FILE_BYTES = 10 * 1024 * 1024  # 10 MB
 
 # Directory names that map to export subdirs (order = display order in UI)
 _EXPORT_DIRS: list[str] = [
-    "efficientnet_b2_current",
-    "resnet18_latest",
-    "mobilenetv4_latest",
+    "dinov3_safe_weighted_latest",
 ]
 
 # ---------------------------------------------------------------------------
@@ -154,9 +152,22 @@ def _predictor_for(model_id: str) -> ONNXPredictor:
     # ONNXPredictor reads from a JSON file, so we write a temp one.
     # To avoid mutating active_model.json we call the constructor with a real path.
     # Easier: construct a minimal JSON and pass the path.
-    calibration_path = export_dir / "calibration.json"
+    # Resolve calibration: prefer dirichlet best, then top-level calibration.json
+    dirichlet_best = export_dir / "calibration" / "dirichlet" / "best_calibration.json"
+    top_level_cal = export_dir / "calibration.json"
+    if dirichlet_best.exists():
+        calibration_path = dirichlet_best
+        calibration_method = "dirichlet"
+    elif top_level_cal.exists():
+        calibration_path = top_level_cal
+        cal = json.loads(top_level_cal.read_text(encoding="utf-8"))
+        calibration_method = cal.get("method", "temperature")
+    else:
+        calibration_path = None
+        calibration_method = "temperature"
+
     temperature: float = 1.0
-    if calibration_path.exists():
+    if calibration_path and calibration_method == "temperature":
         cal = json.loads(calibration_path.read_text(encoding="utf-8"))
         temperature = float(cal.get("temperature", 1.0))
 
@@ -164,7 +175,8 @@ def _predictor_for(model_id: str) -> ONNXPredictor:
         "backend": "onnxruntime",
         "model_path": str(onnx_path),
         "metadata_path": str(export_dir / "metadata.json"),
-        "calibration_path": str(calibration_path) if calibration_path.exists() else None,
+        "calibration_path": str(calibration_path) if calibration_path else None,
+        "calibration_method": calibration_method,
         "temperature": temperature,
         "class_labels": meta["classes"]["labels"],
         "display_labels": meta["classes"].get("display_labels", meta["classes"]["labels"]),
