@@ -6,20 +6,20 @@
 
 /* ── Custom design tokens (complement HeroUI's token system) ───────────── */
 :root {
-  /* Slate / silver dark theme */
-  --autolens-bg: #0d0f12;
-  --autolens-surface: #13161b;
-  --autolens-surface-2: #191d24;
-  --autolens-border: #252930;
-  --autolens-accent: #7b8fa6;
-  --autolens-accent-dim: #5a6e82;
-  --autolens-secondary: #9aafc4;
-  --autolens-success: #4fbe8f;
-  --autolens-warn: #d4a84b;
-  --autolens-danger: #d4696a;
-  --autolens-text: #d8dce6;
-  --autolens-text-dim: #8892a4;
-  --autolens-text-muted: #4a5265;
+  /* Slate / silver dark theme - More professional & modern */
+  --autolens-bg: #0b0d10;
+  --autolens-surface: #12151b;
+  --autolens-surface-2: #1b2028;
+  --autolens-border: #29303c;
+  --autolens-accent: #6b85d9;     /* More vibrant professional blue */
+  --autolens-accent-dim: #3a4b7f; /* Deeper matching blue */
+  --autolens-secondary: #909bb2;
+  --autolens-success: #38b47f;    /* Clearer green */
+  --autolens-warn: #e0ac42;
+  --autolens-danger: #e25859;     /* Sharper red */
+  --autolens-text: #e1e4ec;
+  --autolens-text-dim: #929bb0;
+  --autolens-text-muted: #535c72;
   --font-display: "Syne", system-ui, sans-serif;
   --font-mono: "DM Mono", "Fira Code", monospace;
 }
