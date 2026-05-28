@@ -237,7 +237,7 @@ pyrightconfig.json
 
 /datasets/
 
-.claude/    
+.claude/
 .codebuddy/
 .gemini/
 .kiro/
@@ -285,3 +285,6 @@ True.txt
 
 # Session documentation files
 docs/session-*.md
+.agents/
+.github/
+test_script/Ek Dosyalar(PredictionScript.txt ve Text.txt)/
