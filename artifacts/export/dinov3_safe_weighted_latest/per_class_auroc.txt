@@ -1,0 +1,14 @@
+Class                AUROC
+------------------------------
+SUV                  0.9985
+VAN                  0.9995
+STATION WAGON        0.9955
+MICRO                1.0000
+OPEN WHEEL / F1      1.0000
+SEDAN                0.9977
+HATCHBACK            0.9917
+PICK UP              0.9974
+------------------------------
+Macro OVR            0.9975
+Weighted OVR         0.9980
+Micro OVR            0.9984
