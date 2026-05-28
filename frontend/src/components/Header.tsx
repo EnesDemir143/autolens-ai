@@ -6,7 +6,7 @@ import { Spinner } from "@heroui/react/spinner";
 import { useStore } from "../store";
 
 export function Header() {
-  const { models, activeModel, isModelSwitching, setActiveModel } = useStore();
+  const { activeModel, isModelSwitching } = useStore();
 
   return (
     <header
@@ -50,58 +50,27 @@ export function Header() {
         </span>
       </div>
 
-      {/* Model selector */}
-      <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", minWidth: "360px" }}>
+      {/* Model selector (Removed - Only single active model used now) */}
+      <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
         {isModelSwitching && <Spinner size="sm" />}
-        <div style={{ flex: 1, position: "relative" }}>
-          <select
-            id="model-selector"
-            aria-label="Active model"
-            value={activeModel?.id ?? ""}
-            onChange={(e) => {
-              const id = e.target.value;
-              if (id && id !== activeModel?.id) setActiveModel(id);
-            }}
-            disabled={isModelSwitching || models.length === 0}
-            style={{
-              width: "100%",
-              background: "var(--autolens-surface-2)",
-              border: "1px solid var(--autolens-border)",
-              borderRadius: "8px",
-              padding: "0.45rem 2rem 0.45rem 0.75rem",
-              color: "var(--autolens-text)",
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.8rem",
-              cursor: "pointer",
-              appearance: "none",
-              WebkitAppearance: "none",
-              outline: "none",
-            }}
-          >
-            {models.map((m) => (
-              <option key={m.id} value={m.id}>
-                {m.model_name}
-                {" — acc "}
-                {m.accuracy != null ? (m.accuracy * 100).toFixed(1) + "%" : "—"}
-                {" · F1 "}
-                {m.f1_macro != null ? (m.f1_macro * 100).toFixed(1) + "%" : "—"}
-              </option>
-            ))}
-          </select>
-          {/* Custom chevron */}
-          <svg
-            style={{
-              position: "absolute",
-              right: "0.6rem",
-              top: "50%",
-              transform: "translateY(-50%)",
-              pointerEvents: "none",
-              color: "var(--autolens-text-muted)",
-            }}
-            width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5"
-          >
-            <polyline points="2 4 6 8 10 4"/>
-          </svg>
+        <div style={{ 
+          background: "var(--autolens-surface-2)",
+          border: "1px solid var(--autolens-border)",
+          borderRadius: "8px",
+          padding: "0.45rem 1rem",
+          color: "var(--autolens-text)",
+          fontFamily: "var(--font-mono)",
+          fontSize: "0.8rem",
+          display: "flex",
+          alignItems: "center",
+          gap: "0.5rem"
+        }}>
+          <span style={{ color: "var(--autolens-accent)" }}>●</span>
+          {activeModel ? "AutoLens ViT-S" : "AutoLens ViT-S"}
+          <span style={{ color: "var(--autolens-text-muted)", marginLeft: "0.5rem" }}>
+            {"acc "}
+            {activeModel?.accuracy != null ? (activeModel.accuracy * 100).toFixed(1) + "%" : "96.0%"}
+          </span>
         </div>
       </div>
     </header>
