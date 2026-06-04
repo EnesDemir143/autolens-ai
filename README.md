@@ -15,9 +15,9 @@
 
 - **HuggingFace model collection:** [AutoLens Vehicle Body Classification](https://huggingface.co/collections/morpeN1/autolens-vehicle-body-classification)
 - **Selected model:** [morpeN1/autolens-dinov3-safe-weighted](https://huggingface.co/morpeN1/autolens-dinov3-safe-weighted)
-- **HF Spaces demo:** add Space URL here after publishing
+- **HF Spaces demo:** [morpeN1/autolens-ai-demo](https://huggingface.co/spaces/morpeN1/autolens-ai-demo)
 
-Screenshots can be added under `assets/screenshots/` and linked here.
+Screenshot from the demo: ![After Prediction](assets/screenshots/after_prediction.png)
 
 ---
 

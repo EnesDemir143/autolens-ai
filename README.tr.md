@@ -15,9 +15,9 @@
 
 - **HuggingFace model collection:** [AutoLens Vehicle Body Classification](https://huggingface.co/collections/morpeN1/autolens-vehicle-body-classification)
 - **Seçilen model:** [morpeN1/autolens-dinov3-safe-weighted](https://huggingface.co/morpeN1/autolens-dinov3-safe-weighted)
-- **HF Spaces demo:** yayınlandıktan sonra link buraya eklenecek
+- **HF Spaces demo:** [morpeN1/autolens-ai-demo](https://huggingface.co/spaces/morpeN1/autolens-ai-demo)
 
-Ekran görüntüleri `assets/screenshots/` altına eklenip README içinde gösterilebilir.
+![After Prediction](assets/screenshots/after_prediction.png)
 
 ---
 
