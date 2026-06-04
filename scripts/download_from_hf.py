@@ -136,9 +136,6 @@ def write_active_model(export_dir: Path) -> None:
         temperature = float(json.loads(cal_path.read_text()).get("temperature", 1.0))
 
     active = {
-        "created_at": __import__("time").strftime(
-            "%Y-%m-%dT%H:%M:%S+00:00", __import__("time").gmtime()
-        ),
         "backend": "onnxruntime",
         "model_path": str(export_dir / "model.onnx"),
         "metadata_path": str(export_dir / "metadata.json"),
