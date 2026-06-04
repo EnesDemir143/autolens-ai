@@ -17,7 +17,7 @@
 - **Selected model:** [morpeN1/autolens-dinov3-safe-weighted](https://huggingface.co/morpeN1/autolens-dinov3-safe-weighted)
 - **HF Spaces demo:** [morpeN1/autolens-ai-demo](https://huggingface.co/spaces/morpeN1/autolens-ai-demo)
 
-Screenshot from the demo: ![After Prediction](assets/screenshots/after_prediction.png)
+Screenshot from the demo: ![After Prediction](assets/screenshots/after_pred.png)
 
 ---
 
