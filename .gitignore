@@ -313,6 +313,17 @@ docs/._*
 docs/.DS_Store
 docs/Yazlab\ 2-\ Proje\ 3_images/._*
 
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+
 # Old working-note docs kept local after final docs restructure
 docs/*.md
 docs/*.pdf
@@ -327,3 +338,5 @@ report/latex-report-creator-SKILL.md
 
 # Export scratch files
 artifacts/export/**/*.onnx.original
+
+autolens-ai-demo/
