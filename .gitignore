@@ -306,3 +306,18 @@ notebooks/
 docs/._*
 docs/.DS_Store
 docs/Yazlab\ 2-\ Proje\ 3_images/._*
+
+# Old working-note docs kept local after final docs restructure
+docs/*.md
+docs/*.pdf
+docs/*.json
+docs/*_images/
+docs/phase_reports/
+docs/research/
+
+# Project-agent / report-generation local files
+AGENTS.md
+report/latex-report-creator-SKILL.md
+
+# Export scratch files
+artifacts/export/**/*.onnx.original

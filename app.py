@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Any
 
 import gradio as gr
@@ -20,6 +21,12 @@ PREDICTOR: ONNXPredictor | None = None
 def _load_predictor() -> ONNXPredictor:
     global PREDICTOR
     if PREDICTOR is None:
+        if not Path("artifacts/demo/active_model.json").exists():
+            # HF Spaces / fresh clone fallback: download the flagship model on first launch.
+            from scripts.download_from_hf import download_model, write_active_model
+
+            export_dir = download_model("dinov3-weighted", force=False)
+            write_active_model(export_dir)
         PREDICTOR = ONNXPredictor.from_default_config()
     return PREDICTOR
 
@@ -158,7 +165,7 @@ def build_interface() -> gr.Blocks:
         gr.HTML("""
         <div class="al-header">
           <h1>AutoLens AI</h1>
-          <p>8-class vehicle body type classifier · EfficientNet-B2 · ONNX Runtime</p>
+          <p>8-class vehicle body type classifier · DINOv3 ViT-S/16 weighted · ONNX Runtime</p>
         </div>
         """)
 
