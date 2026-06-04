@@ -64,8 +64,8 @@ def download_model(short_name: str, force: bool = False) -> Path:
     print(f"Downloading {short_name} from {repo_id} …")
     print(f"  → {local_dir}")
 
-    # Files to download
-    files = ["model.onnx", "metadata.json", "metrics.csv",
+    # Files to download. ONNX is used for fast prediction; safetensors is used lazily for Grad-CAM.
+    files = ["model.onnx", "model.safetensors", "metadata.json", "metrics.csv",
              "per_class_metrics.txt", "internal_test_results.json"]
 
     for fname in files:
