@@ -188,16 +188,4 @@ make typecheck
 make check
 ```
 
----
 
-## GitHub About / Topics
-
-Suggested About text:
-
-> 8-class vehicle body type classifier using DINOv3, EfficientNet-B2, ResNet18, and MobileNetV4. Custom-curated dataset, ONNX export, HuggingFace models, Gradio and React/FastAPI demos.
-
-Suggested topics:
-
-```text
-computer-vision image-classification pytorch onnx huggingface gradio dinov3 efficientnet vehicle-classification cnn vision-transformer python uv
-```
