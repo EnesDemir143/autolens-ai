@@ -288,3 +288,21 @@ docs/session-*.md
 .agents/
 .github/
 test_script/Ek Dosyalar(PredictionScript.txt ve Text.txt)/
+.planning/
+.codegraph/
+
+# Submission package (local only)
+230202066_230202095/
+
+# Research notes (local only)
+literature-contribution/
+SCHOLAR_LABS_RESEARCH_QA.md
+TEST_SET_LEAKAGE_ANALYSIS.md
+
+# Jupyter notebooks (binary diff pollution)
+notebooks/
+
+# macOS junk in docs
+docs/._*
+docs/.DS_Store
+docs/Yazlab\ 2-\ Proje\ 3_images/._*
