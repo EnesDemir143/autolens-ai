@@ -512,7 +512,7 @@ frontend-build:
 
 demo-web: frontend-build
 	@echo "Launching FastAPI + Vite demo on http://localhost:8080 ..."
-	uv run uvicorn api:app --host 0.0.0.0 --port 8080
+	uv run python -m uvicorn api:app --host 0.0.0.0 --port 8080
 
 demo-gradio:
 	@echo "Launching Gradio demo on http://localhost:7860 ..."
