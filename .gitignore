@@ -302,6 +302,12 @@ TEST_SET_LEAKAGE_ANALYSIS.md
 # Jupyter notebooks (binary diff pollution)
 notebooks/
 
+# macOS resource forks / junk files
+._*
+**/._*
+.DS_Store
+**/.DS_Store
+
 # macOS junk in docs
 docs/._*
 docs/.DS_Store
