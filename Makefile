@@ -10,6 +10,7 @@
 .PHONY: prepare-demo-artifact deploy-run-to-demo deploy-run-full
 .PHONY: demo demo-smoke ui-smoke-check
 .PHONY: frontend-install frontend-build demo-web demo-gradio
+.PHONY: download-hf-model
 
 help:
 	@printf '%s\n' \
@@ -21,6 +22,17 @@ help:
 		'  make format          Format with ruff' \
 		'  make typecheck       Run mypy on src' \
 		'  make check           Run import, tests, lint, and typecheck' \
+		'' \
+		'─── HuggingFace → Local ──────────────────────────────' \
+		'  make download-hf-model [MODEL=dinov3-weighted]   Download model from HF Hub' \
+		'' \
+		'─── Run Demo ─────────────────────────────────────────' \
+		'  make demo-gradio     Launch Gradio demo (port 7860)' \
+		'  make demo-web        Launch FastAPI + React frontend (port 8000)' \
+		'  make demo             Alias for make demo-gradio' \
+		'' \
+		'─── Quality Gates ────────────────────────────────────' \
+		'' \
 		'  make pre-commit      Run all pre-commit hooks' \
 		'  make graphify-update Refresh the project knowledge graph' \
 		'  make graphify-report Show the current graph report' \
@@ -33,43 +45,32 @@ help:
 		'Custom split ratios:' \
 		'  make create-splits TRAIN_RATIO=0.7 VAL_RATIO=0.15 TEST_RATIO=0.15 SEED=123' \
 		'' \
-		'Model analysis:' \
-		'  make check-model-size   Check if model checkpoints are under 95 MB limit' \
-		'' \
-		'Phase 4 demo artifact sequence:' \
-		'  make checkpoint-to-safetensors [CHECKPOINT=path.ckpt] [EXPORT_DIR=artifacts/export/efficientnet_b2_current]' \
-		'  make export-model [SAFETENSORS=path] [METADATA=path] [ONNX=path]' \
-		'  make size-check [SAFETENSORS=path] [ONNX=path]' \
-		'  make calibrate-temperature [ONNX=path] [METADATA=path]  # validation split only' \
-		'  make calibrate-dinov3-all       Run weighted + focal DINOv3 calibration sweeps' \
-		'  make calibrate-dinov3-compare   Compare saved DINOv3 calibration outputs' \
-		'  make prepare-demo-artifact [ARTIFACT_CONFIG=artifacts/demo/active_model.json]' \
-		'  make deploy-run-to-demo [CHECKPOINT=path.ckpt]  # convert -> export -> size -> calibrate -> pointer' \
-		'' \
-		'Phase 5 Gradio demo commands:' \
-		'  make demo               Launch Gradio demo server' \
-		'  make demo-smoke         Run UI/inference smoke test (non-interactive)' \
-		'' \
-		'Training commands (Phase 3):' \
-		'  make train-resnet-mobilenet    Train ResNet18 then MobileNetV4 sequentially (with 30s pause)' \
+		'─── Training (Phase 3) ──────────────────────────────' \
 		'  make train-baseline-0       Train all 3 models with Baseline 0 (no augmentation)' \
 		'  make train-baseline-1       Train ResNet18 with Baseline 1 (light augmentation)' \
 		'  make train-baseline-2       Train ResNet18 with Baseline 2 (weighted sampler)' \
 		'  make train-all-baselines    Run all baseline experiments sequentially' \
+		'  make resume-training CONFIG=path RUN_ID=20260507_234800' \
 		'' \
-		'Resume training:' \
-		'  make resume-training CONFIG=path/to/config.yaml RUN_ID=20260507_234800' \
+		'  Add --wandb flag for W&B logging:' \
+		'    make train-baseline-0 WANDB=--wandb' \
 		'' \
-		'Add --wandb flag for W&B logging:' \
-		'  make train-baseline-0 WANDB=--wandb' \
-		'' \
-		'Full W&B run (all 5 models sequentially):' \
-		'  make train-all-wandb' \
-		'' \
-		'Recommended DINOv3 tuning:' \
+		'─── DINOv3 Tuning ───────────────────────────────────' \
 		'  make dry-run-dinov3-safe-focal WANDB=--wandb  # 1 epoch smoke test' \
-		'  make train-dinov3-safe-focal WANDB=--wandb      # safe aug + class-weighted focal + EMA' \
-		'  make train-dinov3-safe-weighted WANDB=--wandb   # safe aug + class-weighted CE + EMA'
+		'  make train-dinov3-safe-focal WANDB=--wandb      # safe aug + focal + EMA' \
+		'  make train-dinov3-safe-weighted WANDB=--wandb   # safe aug + weighted CE + EMA' \
+		'' \
+		'─── Export & Calibration (Phase 4) ──────────────────' \
+		'  make checkpoint-to-safetensors' \
+		'  make export-model' \
+		'  make size-check' \
+		'  make calibrate-dinov3-all       Run weighted + focal DINOv3 calibration' \
+		'  make calibrate-dinov3-compare   Compare saved DINOv3 calibration outputs' \
+		'  make prepare-demo-artifact' \
+		'  make deploy-run-full            Full export pipeline' \
+		'' \
+		'─── Smoke Tests ─────────────────────────────────────' \
+		'  make demo-smoke         Run UI/inference smoke test (non-interactive)' \
 
 sync:
 	uv sync
@@ -516,3 +517,10 @@ demo-web: frontend-build
 demo-gradio:
 	@echo "Launching Gradio demo on http://localhost:7860 ..."
 	uv run python app.py
+
+# ── Download from HuggingFace Hub ────────────────────────
+MODEL ?= dinov3-weighted
+
+download-hf-model:
+	@echo "Downloading model '$(MODEL)' from HuggingFace Hub ..."
+	uv run python scripts/download_from_hf.py --model $(MODEL)
