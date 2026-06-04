@@ -84,7 +84,7 @@ flowchart TD
 **Results (internal_test):**
 
 | Rank | Model | Accuracy | F1-macro | F1-weighted |
-|---|---|---|---||
+|---:|---|---:|---:|---:|
 | 1 | DINOv3 ViT-S/16 (weighted) | **0.9438** | **0.9187** | **0.9442** |
 | 2 | EfficientNet-B2 | 0.9202 | 0.8982 | 0.9201 |
 | 3 | ResNet18 | 0.8968 | 0.8590 | 0.8963 |

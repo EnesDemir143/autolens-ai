@@ -30,7 +30,7 @@ This document presents the final model comparison results for the AutoLens AI pr
 | HATCHBACK | 0.7945 | 0.8722 | 0.8315 | 266 |
 | PICK UP | 0.9018 | 0.9554 | 0.9278 | 269 |
 
-### EfficientNet-Base — Runner-up
+### EfficientNet-B2 — Runner-up
 
 | Class | Precision | Recall | F1-Score | Support |
 |---|---|---|---|---|
