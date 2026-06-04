@@ -46,7 +46,9 @@ Proje kapsamında:
 
 ## Sonuç Özeti
 
-Final seçim **internal_test** split üzerinde **macro F1-score** öncelikli yapıldı.
+Final seçim **internal_test** split (3170 görüntü) üzerinde **macro F1-score** öncelikli yapıldı.
+
+### Model Karşılaştırması (kalibrasyon öncesi)
 
 | Rank | Model | Accuracy | F1-macro | F1-weighted | ONNX Boyutu |
 |---:|---|---:|---:|---:|---:|
@@ -54,6 +56,16 @@ Final seçim **internal_test** split üzerinde **macro F1-score** öncelikli yap
 | 2 | EfficientNet-B2 | 0.9202 | 0.8982 | 0.9201 | 29.4 MB |
 | 3 | ResNet18 | 0.8968 | 0.8590 | 0.8963 | 42.6 MB |
 | 4 | MobileNetV4 | 0.8905 | 0.8510 | 0.8912 | 32.1 MB |
+
+### Nihai Model (Dirichlet kalibrasyon sonrası)
+
+| Metrik | Değer |
+|---|---|
+| Accuracy | **%95.99** |
+| Macro F1 | **0.9537** |
+| Weighted F1 | 0.9598 |
+| ECE | **%0.97** |
+| ONNX Boyutu | 82.6 MB |
 
 Detaylar:
 - [Model karşılaştırması](docs/tr/model-comparison.md)
@@ -157,6 +169,16 @@ Final IEEE rapor: [report/main.pdf](report/main.pdf)
 
 ---
 
+## 📄 IEEE Rapor
+
+Tam IEEE formatındaki akademik rapor derlenmiş PDF olarak sunulmuştur:
+
+📎 **[AutoLens AI — IEEE Teknik Rapor (PDF)](report/main.pdf)**
+
+Rapor; veri seti kurasyonu, model mimarisi karşılaştırması, ablasyon çalışmaları (Weighted CE vs Focal Loss, augmentation etkisi), post-hoc kalibrasyon analizi (Temperature, Vector, Dirichlet) ve deployment detaylarını kapsamaktadır — 9 sayfa, tam referanslarla.
+
+---
+
 ## Repo Yapısı
 
 ```text
@@ -177,16 +199,3 @@ Final IEEE rapor: [report/main.pdf](report/main.pdf)
 
 Büyük model dosyaları (`.onnx`, `.safetensors`) GitHub'a eklenmez; HuggingFace Hub üzerinde tutulur.
 
----
-
-## GitHub About / Topics
-
-Önerilen About metni:
-
-> 8-class vehicle body type classifier using DINOv3, EfficientNet-B2, ResNet18, and MobileNetV4. Custom-curated dataset, ONNX export, HuggingFace models, Gradio and React/FastAPI demos.
-
-Önerilen topics:
-
-```text
-computer-vision image-classification pytorch onnx huggingface gradio dinov3 efficientnet vehicle-classification cnn vision-transformer python uv
-```

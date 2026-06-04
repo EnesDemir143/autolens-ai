@@ -46,7 +46,9 @@ The project includes:
 
 ## Results Summary
 
-Final model selection used the **internal_test** split and prioritized **macro F1-score**.
+Final model selection used the **internal_test** split (3170 images) and prioritized **macro F1-score**.
+
+### Model Comparison (before calibration)
 
 | Rank | Model | Accuracy | F1-macro | F1-weighted | ONNX Size |
 |---:|---|---:|---:|---:|---:|
@@ -54,6 +56,16 @@ Final model selection used the **internal_test** split and prioritized **macro F
 | 2 | EfficientNet-B2 | 0.9202 | 0.8982 | 0.9201 | 29.4 MB |
 | 3 | ResNet18 | 0.8968 | 0.8590 | 0.8963 | 42.6 MB |
 | 4 | MobileNetV4 | 0.8905 | 0.8510 | 0.8912 | 32.1 MB |
+
+### Final Model (after Dirichlet calibration)
+
+| Metric | Value |
+|---|---|
+| Accuracy | **95.99%** |
+| Macro F1 | **0.9537** |
+| Weighted F1 | 0.9598 |
+| ECE | **0.97%** |
+| ONNX Size | 82.6 MB |
 
 Read more:
 - [Model comparison](docs/en/model-comparison.md)
@@ -154,6 +166,16 @@ The React UI is optional but remains part of the repository. It uses the same `O
 | UI / Demo | [docs/en/ui.md](docs/en/ui.md) | [docs/tr/ui.md](docs/tr/ui.md) |
 
 Final IEEE report: [report/main.pdf](report/main.pdf)
+
+---
+
+## 📄 IEEE Report
+
+The full IEEE-format academic report is available as a compiled PDF:
+
+📎 **[AutoLens AI — IEEE Technical Report (PDF)](report/main.pdf)**
+
+The report covers dataset curation, model architecture comparison, ablation studies (Weighted CE vs Focal Loss, augmentation impact), post-hoc calibration analysis (Temperature, Vector, Dirichlet), and deployment details — 9 pages with full references.
 
 ---
 

@@ -25,12 +25,6 @@
 \textit{Kocaeli Üniversitesi}\\
 Kocaeli, Türkiye \\
 230202066@kocaeli.edu.tr}
-\and
-\IEEEauthorblockN{Mert Şengül}
-\IEEEauthorblockA{\textit{Bilgisayar Mühendisliği} \\
-\textit{Kocaeli Üniversitesi}\\
-Kocaeli, Türkiye \\
-230202095@kocaeli.edu.tr}
 }
 
 \maketitle
@@ -54,7 +48,7 @@ Katkılarımız dört ana başlıkta özetlenebilir:
 \item \textbf{Kapsamlı olasılık kalibrasyonu:} Temperature Scaling, Vector Scaling ve Dirichlet (ODIR) yöntemleri grid search ile karşılaştırılmış; Dirichlet kalibrasyonu ile ECE \%10.33'ten \%0.96'ya düşürülerek modelin aşırı güven (overconfidence) sorunu giderilmiştir. Ayrıca farklı modellerin (EfficientNet-B2, DINOv3 baseline) kalibrasyon ihtiyaçları analiz edilmiştir.
 \end{enumerate}
 
-Veri seti Kaggle ve Hugging Face üzerinde yayımlanmış açık veri kümelerinden toplanmış, sınıflar arası dengesizlik sınıf ağırlıklı hata fonksiyonları ile ele alınmıştır. Proje teslim gereksinimleri doğrultusunda model 95 MB altında ONNX formatında paketlenmiş ve canlı demo web arayüzü ile sunulmuştur.
+Veri seti Kaggle ve Hugging Face üzerinde yayımlanmış açık veri kümelerinden toplanmış, sınıflar arası dengesizlik sınıf ağırlıklı hata fonksiyonları ile ele alınmıştır. Belirlenen 95 MB model boyutu kısıtı doğrultusunda ONNX formatında paketlenmiş ve canlı demo web arayüzü ile sunulmuştur.
 
 \section{İlgili Çalışmalar}
 Araç tipi sınıflandırma literatürü, el yapımı özniteliklerden derin öğrenme tabanlı temsillere doğru belirgin bir dönüşüm geçirmiştir. Dong ve arkadaşları, önden görünüşlü araç görüntüleri için yarı denetimli bir CNN önermiş ve 9850 yüksek çözünürlüklü örnekten oluşan BIT-Vehicle veri seti üzerinde araç tipi sınıflandırmasını incelemiştir \cite{dong2015vehicle}. Bu çalışma, sınırlı etiketli veri koşullarında dahi evrişimsel temsillerin HOG, SIFT ve Gabor gibi el yapımı özniteliklere kıyasla daha ayırt edici olabildiğini göstermesi bakımından önemlidir. Krause ve arkadaşlarının Stanford Cars veri seti ise 197 araç kategorisi ve 16185 görüntüyle ince taneli araç tanıma problemini model, yıl ve gövde benzerliği gibi daha zor ayrımlara taşımıştır \cite{krause2013cars}. Gebru ve arkadaşları 50 milyon sokak görünümü görüntüsünden 22 milyon aracı algılayıp marka, model, yıl ve gövde tipi gibi nitelikleri tahmin ederek araç sınıflandırmasının yalnızca trafik sistemlerinde değil, büyük ölçekli görsel analitikte de kullanılabileceğini göstermiştir \cite{gebru2017streetview}.
@@ -435,7 +429,7 @@ Doğrulama kaybının eğitim kaybına paralel seyretmesi, modelin aşırı öğ
 Test setinde en başarılı sınıflar sırasıyla F1 (1.0000), Micro (1.0000) ve VAN (0.9835) olmuştur. Bu sınıfların birbirinden ve diğer sınıflardan morfolojik olarak belirgin şekilde ayrışması (F1'in açık tekerlek yapısı, VAN'ın kutu formu, Micro'un kompakt boyutu) yüksek başarımı açıklamaktadır. SUV sınıfında 670 örneğe karşılık 0.9492 F1 değeri, büyük örnek sayısına rağmen diğer büyük gövdeli araçlarla (Pick Up, Station Wagon) olan benzerlik nedeniyle nispet düşük kalmıştır.
 
 \subsection{Model Çıkarımı ve Web Arayüzü}
-Nihai model PyTorch safetensors (82.4 MB) ve ONNX Runtime (82.6 MB) formatlarına dışa aktarılmıştır \cite{paszke2019pytorch,onnxruntime}. ONNX dönüşümü sırasında modelin hesaplama grafiği optimize edilerek operatörler birleştirilmiş, böylece çıkarım süresi PyTorch'a kıyasla \%12 iyileştirilmiştir. Her iki format da proje teslim şartı olan 95 MB sınırının altındadır; bu nedenle herhangi bir niceleme (quantization) işlemine gerek kalmamıştır.
+Nihai model PyTorch safetensors (82.4 MB) ve ONNX Runtime (82.6 MB) formatlarına dışa aktarılmıştır \cite{paszke2019pytorch,onnxruntime}. ONNX dönüşümü sırasında modelin hesaplama grafiği optimize edilerek operatörler birleştirilmiş, böylece çıkarım süresi PyTorch'a kıyasla \%12 iyileştirilmiştir. Her iki format da belirlenen 95 MB boyut kısıtının altındadır; bu nedenle herhangi bir niceleme (quantization) işlemine gerek kalmamıştır.
 
 Gradio tabanlı web arayüzü, görsel yükleme (sürükle-bırak veya manuel seçim), anlık önizleme, tahmin sonucu ve Dirichlet kalibreli olasılık dağılımlarını çubuk grafik (bar chart) olarak göstermektedir \cite{gradio}. Kullanıcı, modelin en yüksek olasılık atadığı sınıfı, ikinci en yüksek olasılığı ve tüm sınıfların güven dağılımını tek ekranda görebilmektedir. Arayüz, yüklenen orijinal görüntüyü tahmin çıktısıyla aynı ekranda göstererek sunum sırasında verilecek yeni test görsellerinin hızlı kontrolünü desteklemektedir. Tahmin çıktısı, değerlendirme sürecinde ihtiyaç duyulan örnek adı ve kategori bilgisini doğrudan verecek biçimde düzenlenmiştir.
 
