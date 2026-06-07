@@ -286,7 +286,9 @@ True.txt
 # Session documentation files
 docs/session-*.md
 .agents/
-.github/
+.github/*
+!.github/workflows/
+!.github/workflows/**
 test_script/Ek Dosyalar(PredictionScript.txt ve Text.txt)/
 .planning/
 .codegraph/

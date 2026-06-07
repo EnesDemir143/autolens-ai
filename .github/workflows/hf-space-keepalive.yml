@@ -1,0 +1,40 @@
+name: Keep HF Space Alive
+
+on:
+  schedule:
+    - cron: "17 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping-space:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      SPACE_URL: https://morpen1-autolens-ai-demo.hf.space/
+    steps:
+      - name: Ping Hugging Face Space
+        run: |
+          echo "Pinging $SPACE_URL"
+          status=$(curl -L \
+            --silent \
+            --show-error \
+            --max-time 60 \
+            --retry 5 \
+            --retry-delay 20 \
+            --retry-all-errors \
+            --output /dev/null \
+            --write-out "%{http_code}" \
+            "$SPACE_URL" || echo "000")
+          if [[ ! "$status" =~ ^[0-9]{3}$ ]]; then
+            echo "Invalid status code returned: $status"
+            exit 1
+          fi
+          echo "Ping status code: $status"
+          if [ "$status" -lt 200 ] || [ "$status" -ge 400 ]; then
+            echo "Space ping failed with status code: $status"
+            exit 1
+          fi
+          echo "Space ping completed."
