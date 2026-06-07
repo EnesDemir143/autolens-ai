@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Ping Hugging Face Space
         run: |
-          status=$(curl --silent --show-error --fail-with-body --max-time 30 --location --output /dev/null --write-out "%{http_code}" "$SPACE_URL") || {
+          status=$(curl --silent --show-error --fail-with-body --max-time 30 --output /dev/null --write-out "%{http_code}" "$SPACE_URL") || {
             echo "Space ping request failed for $SPACE_URL"
             exit 1
           }
@@ -26,7 +26,7 @@ jobs:
             exit 1
           fi
           echo "Ping status code: $status"
-          if [ "$status" -lt 200 ] || [ "$status" -ge 400 ]; then
+          if [ "$status" -lt 200 ] || [ "$status" -ge 300 ]; then
             echo "Space ping failed for $SPACE_URL"
             exit 1
           fi
