@@ -1,0 +1,20 @@
+name: Keep HF Space Alive
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping-space:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Ping Hugging Face Space
+        run: |
+          curl --fail --silent --show-error --location \
+            "https://huggingface.co/spaces/morpeN1/autolens-ai-demo" \
+            --output /dev/null
