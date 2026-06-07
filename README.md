@@ -165,17 +165,15 @@ The React UI is optional but remains part of the repository. It uses the same `O
 | Calibration | [docs/en/calibration.md](docs/en/calibration.md) | [docs/tr/calibration.md](docs/tr/calibration.md) |
 | UI / Demo | [docs/en/ui.md](docs/en/ui.md) | [docs/tr/ui.md](docs/tr/ui.md) |
 
-Final IEEE report: [report/main.pdf](report/main.pdf)
+Technical Report: [paper/autolens-ai-vehicle-body-type-classification-preprint.pdf](paper/autolens-ai-vehicle-body-type-classification-preprint.pdf)
 
 ---
 
-## 📄 IEEE Report
+## Paper / Technical Report
 
-The full IEEE-format academic report is available as a compiled PDF:
+A technical report describing the AutoLens AI methodology, experiments, calibration results, and deployment pipeline is available here:
 
-📎 **[AutoLens AI — IEEE Technical Report (PDF)](report/main.pdf)**
-
-The report covers dataset curation, model architecture comparison, ablation studies (Weighted CE vs Focal Loss, augmentation impact), post-hoc calibration analysis (Temperature, Vector, Dirichlet), and deployment details — 9 pages with full references.
+[AutoLens AI: Lightweight Vehicle Body Type Classification with Vision Transformers, Calibration, and ONNX Deployment](paper/autolens-ai-vehicle-body-type-classification-preprint.pdf)
 
 ---
 

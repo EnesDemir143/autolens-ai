@@ -165,17 +165,15 @@ React arayüzü opsiyoneldir ama repoda korunur. Aynı `ONNXPredictor` backend'i
 | Kalibrasyon | [docs/tr/calibration.md](docs/tr/calibration.md) | [docs/en/calibration.md](docs/en/calibration.md) |
 | Arayüz | [docs/tr/ui.md](docs/tr/ui.md) | [docs/en/ui.md](docs/en/ui.md) |
 
-Final IEEE rapor: [report/main.pdf](report/main.pdf)
+Teknik Rapor: [paper/autolens-ai-vehicle-body-type-classification-preprint.pdf](paper/autolens-ai-vehicle-body-type-classification-preprint.pdf)
 
 ---
 
-## 📄 IEEE Rapor
+## Paper / Teknik Rapor
 
-Tam IEEE formatındaki akademik rapor derlenmiş PDF olarak sunulmuştur:
+AutoLens AI metodolojisi, deneyler, kalibrasyon sonuçları ve deployment pipeline'ını açıklayan teknik rapor şurada mevcuttur:
 
-📎 **[AutoLens AI — IEEE Teknik Rapor (PDF)](report/main.pdf)**
-
-Rapor; veri seti kurasyonu, model mimarisi karşılaştırması, ablasyon çalışmaları (Weighted CE vs Focal Loss, augmentation etkisi), post-hoc kalibrasyon analizi (Temperature, Vector, Dirichlet) ve deployment detaylarını kapsamaktadır — 9 sayfa, tam referanslarla.
+[AutoLens AI: Lightweight Vehicle Body Type Classification with Vision Transformers, Calibration, and ONNX Deployment](paper/autolens-ai-vehicle-body-type-classification-preprint.pdf)
 
 ---
 
