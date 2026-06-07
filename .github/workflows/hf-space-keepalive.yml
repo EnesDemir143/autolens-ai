@@ -33,7 +33,7 @@ jobs:
             exit 1
           fi
           echo "Ping status code: $status"
-          if [ "$status" -lt 200 ] || [ "$status" -ge 500 ]; then
+          if [ "$status" -lt 200 ] || [ "$status" -ge 400 ]; then
             echo "Space ping failed with status code: $status"
             exit 1
           fi
