@@ -2,7 +2,7 @@ name: Keep HF Space Alive
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "17 0 * * *"
   workflow_dispatch:
 
 permissions:
@@ -13,23 +13,28 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
-      SPACE_URL: https://huggingface.co/spaces/morpeN1/autolens-ai-demo
+      SPACE_URL: https://morpen1-autolens-ai-demo.hf.space/
     steps:
       - name: Ping Hugging Face Space
         run: |
-          err_file=$(mktemp)
-          status=$(curl --silent --show-error --fail-with-body --max-time 30 --output /dev/null --write-out "%{http_code}" "$SPACE_URL" 2>"$err_file") || {
-            echo "Space ping request failed for $SPACE_URL: $(cat "$err_file")"
-            rm -f "$err_file"
-            exit 1
-          }
-          rm -f "$err_file"
+          echo "Pinging $SPACE_URL"
+          status=$(curl -L \
+            --silent \
+            --show-error \
+            --max-time 60 \
+            --retry 5 \
+            --retry-delay 20 \
+            --retry-all-errors \
+            --output /dev/null \
+            --write-out "%{http_code}" \
+            "$SPACE_URL" || echo "000")
           if [[ ! "$status" =~ ^[0-9]{3}$ ]]; then
             echo "Invalid status code returned: $status"
             exit 1
           fi
           echo "Ping status code: $status"
-          if [ "$status" -lt 200 ] || [ "$status" -ge 300 ]; then
-            echo "Space ping failed for $SPACE_URL with status code: $status"
+          if [ "$status" -lt 200 ] || [ "$status" -ge 500 ]; then
+            echo "Space ping failed with status code: $status"
             exit 1
           fi
+          echo "Space ping completed."
