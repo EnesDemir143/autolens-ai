@@ -17,16 +17,19 @@ jobs:
     steps:
       - name: Ping Hugging Face Space
         run: |
-          status=$(curl --silent --show-error --fail-with-body --max-time 30 --output /dev/null --write-out "%{http_code}" "$SPACE_URL") || {
-            echo "Space ping request failed for $SPACE_URL"
+          err_file=$(mktemp)
+          status=$(curl --silent --show-error --fail-with-body --max-time 30 --output /dev/null --write-out "%{http_code}" "$SPACE_URL" 2>"$err_file") || {
+            echo "Space ping request failed for $SPACE_URL: $(cat "$err_file")"
+            rm -f "$err_file"
             exit 1
           }
+          rm -f "$err_file"
           if [[ ! "$status" =~ ^[0-9]{3}$ ]]; then
             echo "Invalid status code returned: $status"
             exit 1
           fi
           echo "Ping status code: $status"
           if [ "$status" -lt 200 ] || [ "$status" -ge 300 ]; then
-            echo "Space ping failed for $SPACE_URL"
+            echo "Space ping failed for $SPACE_URL with status code: $status"
             exit 1
           fi
