@@ -177,6 +177,25 @@ A technical report describing the AutoLens AI methodology, experiments, calibrat
 
 ---
 
+## Citation
+
+If you use this work, please cite it as:
+
+```bibtex
+@misc{demir2026autolens,
+  author       = {Enes Demir},
+  title        = {AutoLens AI: Lightweight Vehicle Body Type Classification with Vision Transformers, Calibration, and ONNX Deployment},
+  year         = {2026},
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.20581125},
+  url          = {https://doi.org/10.5281/zenodo.20581125}
+}
+```
+
+Technical note DOI: https://doi.org/10.5281/zenodo.20581125
+
+---
+
 ## Repository Structure
 
 ```text
