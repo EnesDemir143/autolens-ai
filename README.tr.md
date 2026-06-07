@@ -177,6 +177,25 @@ AutoLens AI metodolojisi, deneyler, kalibrasyon sonuçları ve deployment pipeli
 
 ---
 
+## Atıf / Citation
+
+Bu çalışmayı kullanırsanız lütfen şu şekilde atıf yapın:
+
+```bibtex
+@misc{demir2026autolens,
+  author       = {Enes Demir},
+  title        = {AutoLens AI: Lightweight Vehicle Body Type Classification with Vision Transformers, Calibration, and ONNX Deployment},
+  year         = {2026},
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.20581125},
+  url          = {https://doi.org/10.5281/zenodo.20581125}
+}
+```
+
+Teknik not DOI: https://doi.org/10.5281/zenodo.20581125
+
+---
+
 ## Repo Yapısı
 
 ```text
