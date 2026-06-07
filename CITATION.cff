@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use AutoLens AI, please cite it as below."
+title: "AutoLens AI: Lightweight Vehicle Body Type Classification with Vision Transformers, Calibration, and ONNX Deployment"
+authors:
+  - family-names: "Demir"
+    given-names: "Enes"
+date-released: 2026-06-07
+url: "https://github.com/EnesDemir143/autolens-ai"
+repository-code: "https://github.com/EnesDemir143/autolens-ai"
+keywords:
+  - computer vision
+  - vehicle classification
+  - vision transformers
+  - calibration
+  - ONNX
+license: MIT
